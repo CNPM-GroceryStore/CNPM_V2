@@ -140,7 +140,7 @@ namespace GroceryStore
         }
 
 
-        public void loadProduct(List<DTO_Product> list_products, List<DTO_Product> products, String type)
+        public void loadProduct(List<DTO_Product> list_products, List<DTO_Product> products, String attribute)
         {
             BUS_ListProduct bus_listproduct = new BUS_ListProduct();
             if(typeOfProduct != "")
