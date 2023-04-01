@@ -44,13 +44,10 @@
     <Compile Include="BUS_Cart.cs" />
     <Compile Include="BUS_ListProduct.cs" />
     <Compile Include="BUS_Product.cs" />
-<<<<<<< HEAD
     <Compile Include="BUS_Voucher.cs" />
     <Compile Include="BUS_ListVoucher.cs" />
-=======
-    <Compile Include="BUS_User.cs" />
->>>>>>> 79ae9c76a8725c3f4efd4895f34207b4c467fa79
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BUS_User.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAO\DAO.csproj">

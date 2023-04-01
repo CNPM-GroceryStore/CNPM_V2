@@ -45,11 +45,8 @@
     <Compile Include="DAO_ListProduct.cs" />
     <Compile Include="DAO_ListVoucher.cs" />
     <Compile Include="DAO_Product.cs" />
-<<<<<<< HEAD
     <Compile Include="DAO_Voucher.cs" />
-=======
     <Compile Include="DAO_User.cs" />
->>>>>>> 79ae9c76a8725c3f4efd4895f34207b4c467fa79
     <Compile Include="DataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

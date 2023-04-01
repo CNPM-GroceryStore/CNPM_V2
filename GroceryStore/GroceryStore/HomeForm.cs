@@ -79,10 +79,9 @@ namespace GroceryStore
         }
 
         //Load FlowLayout when switch selector
-        public void loadFlowLayout(String attribute)
+        public void loadFlowLayout(String type)
         {
             flowLayout.Controls.Clear();
-<<<<<<< HEAD
             List<DTO_Product> products = new List<DTO_Product>();
             btn_tatCa.Visible = false;
             btn_maCuaToi.Visible = false;
@@ -94,9 +93,6 @@ namespace GroceryStore
             lb_phoBien.Visible = true;
             pb_muiTen.Visible = true;
             loadProduct(list_product, products, type);
-=======
-            loadProduct(list_product, products, attribute);
->>>>>>> 79ae9c76a8725c3f4efd4895f34207b4c467fa79
             ProductItem[] listProduct = new ProductItem[products.Count];
             for (int i = 0; i < products.Count; i++)
             {
@@ -110,7 +106,6 @@ namespace GroceryStore
                 listProduct[i].Click += new System.EventHandler(this.select_Product);
                 flowLayout.Controls.Add(listProduct[i]);
             }
-<<<<<<< HEAD
         }
 
         public void loadformVoucher()
@@ -145,14 +140,7 @@ namespace GroceryStore
         }
 
 
-        public void loadProduct(List<DTO_Product> list_products, List<DTO_Product> products, String type)
-=======
-
-        }
-
-        //Load product by type
         public void loadProduct(List<DTO_Product> list_products, List<DTO_Product> products, String attribute)
->>>>>>> 79ae9c76a8725c3f4efd4895f34207b4c467fa79
         {
             BUS_ListProduct bus_listproduct = new BUS_ListProduct();
             if(typeOfProduct != "")
@@ -171,15 +159,11 @@ namespace GroceryStore
             }
         }
 
-<<<<<<< HEAD
-
-=======
         //Load product by name
 
 
         //add click event for btn in navigation
         //home page
->>>>>>> 79ae9c76a8725c3f4efd4895f34207b4c467fa79
         private void btn_home_Click(object sender, EventArgs e)
         {
             btn_tatCa.Visible = false;
@@ -320,7 +304,6 @@ namespace GroceryStore
             }
         }
 
-<<<<<<< HEAD
         private void flowLayout_Paint(object sender, PaintEventArgs e)
         {
 
@@ -335,22 +318,5 @@ namespace GroceryStore
         {
 
         }
-=======
-
-        //Add search function 
-        private void btn_search_Click(object sender, EventArgs e)
-        {
-            if(tb_search.Text == "")
-            {
-                HomeForm_Load(sender, e);
-            }
-            else
-            {
-                nameOfProduct = tb_search.Text;
-                loadFlowLayout(nameOfProduct);
-            }
-        }
-
->>>>>>> 79ae9c76a8725c3f4efd4895f34207b4c467fa79
     }
 }
