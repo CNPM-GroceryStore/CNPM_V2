@@ -1,5 +1,6 @@
 ﻿using BUS;
 using DTO;
+using GroceryStore.BUS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,18 +24,22 @@ namespace GroceryStore
             this.user = user;
         }
 
-        ProductItem[] ProductItem;
+
         List<ProductOrderItem> orders = new List<ProductOrderItem>();
         List<DTO_Product> list_product = new List<DTO_Product>();
         List<DTO_Voucher> vouchers = new List<DTO_Voucher>();
-        String typeOfProduct = "";
-        String nameOfProduct = "";
+        String typeOfProduct = "home";
+        //String nameOfProduct = "";
         String[] list_nameProduct;
 
         //Create event when form loaded
         private void HomeForm_Load(object sender, EventArgs e)
         {
-
+            String name = user.NameUser;
+            String[] x = name.Split(' ');
+            name = x[x.Length - 2] + " " + x[x.Length - 1];
+            lb_nameUser2.Text = name;
+            lb_nameUser1.Text = name;
             //gán giá trị cho comboBox
             cbb_payment.SelectedIndex = 0;
             //tạo mảng chưa sản phẩm
@@ -43,24 +48,25 @@ namespace GroceryStore
             flowLayout.Controls.Clear();
 
             List<ProductOrderItem> orders = new List<ProductOrderItem>();
-            loadProduct(products);
-            ProductItem[] listProduct = new ProductItem[products.Count];
-            list_product.Clear();
-            for (int i = 0; i < products.Count; i++)
-            {
-                //thêm dữ liệu lên giao diện
-                listProduct[i] = new ProductItem();
-                listProduct[i].NameProduct = products[i].TenSP;
-                listProduct[i].PriceProduct = (products[i].GiaSP);
+            loadVoucher(vouchers);
+            loadProduct(list_product);
+            ProductItem[] listProduct = new ProductItem[list_product.Count];
+            //list_product.Clear();
+            //for (int i = 0; i < products.Count; i++)
+            //{
+            //    //thêm dữ liệu lên giao diện
+            //    listProduct[i] = new ProductItem();
+            //    listProduct[i].NameProduct = products[i].TenSP;
+            //    listProduct[i].PriceProduct = (products[i].GiaSP);
 
-                listProduct[i].ImageProduct = handleUrlImage(products[i].HinhAnh);
+            //    listProduct[i].ImageProduct = handleUrlImage(products[i].HinhAnh);
 
 
-                listProduct[i].Click += new System.EventHandler(this.select_Product);
-                list_product.Add(products[i]);
-                flowLayout.Controls.Add(listProduct[i]);
-            }
-            ProductItem = listProduct;
+            //    listProduct[i].Click += new System.EventHandler(this.select_Product);
+            //    list_product.Add(products[i]);
+            //    flowLayout.Controls.Add(listProduct[i]);
+            //}
+            loadProductToFlowLayout(list_product);
         }
 
 
@@ -79,7 +85,7 @@ namespace GroceryStore
         }
 
         //Load FlowLayout when switch selector
-        public void loadFlowLayout(String type)
+        public void loadFlowLayout(String attribute)
         {
             flowLayout.Controls.Clear();
             List<DTO_Product> products = new List<DTO_Product>();
@@ -92,7 +98,25 @@ namespace GroceryStore
             lb_tatCa.Visible = true;
             lb_phoBien.Visible = true;
             pb_muiTen.Visible = true;
-            loadProduct(list_product, products, type);
+            loadProduct(list_product, products, attribute);
+            loadProductToFlowLayout(products);
+            //ProductItem[] listProduct = new ProductItem[products.Count];
+            //for (int i = 0; i < products.Count; i++)
+            //{
+            //    //thêm dữ liệu lên giao diện
+            //    listProduct[i] = new ProductItem();
+            //    listProduct[i].NameProduct = products[i].TenSP;
+            //    listProduct[i].PriceProduct = (products[i].GiaSP);
+
+            //    listProduct[i].ImageProduct = handleUrlImage(products[i].HinhAnh);
+
+            //    listProduct[i].Click += new System.EventHandler(this.select_Product);
+            //    flowLayout.Controls.Add(listProduct[i]);
+            //}
+        }
+
+        public void loadProductToFlowLayout(List<DTO_Product> products)
+        {
             ProductItem[] listProduct = new ProductItem[products.Count];
             for (int i = 0; i < products.Count; i++)
             {
@@ -120,14 +144,17 @@ namespace GroceryStore
             lb_tatCa.Visible = false;
             lb_phoBien.Visible = false;
             pb_muiTen.Visible = false;
-            loadVoucher(vouchers);
+            lb_soDiem.Text = user.AccumulatedPointsUser.ToString();
+
             Voucher[] listVoucher = new Voucher[vouchers.Count];
             for (int i = 0; i < vouchers.Count; i++)
             {
                 //thêm dữ liệu lên giao diện
                 listVoucher[i] = new Voucher();
+                listVoucher[i].IdVoucher = vouchers[i].MaVoucher;
                 listVoucher[i].NameVoucher = vouchers[i].TenVoucher;
                 listVoucher[i].PriceVoucher = (vouchers[i].GiaVoucher);
+                listVoucher[i].Click += new System.EventHandler(this.select_Voucher);
                 if (vouchers[i].HinhAnh != "")
                 {
                     listVoucher[i].ImageVoucher = handleUrlImage(vouchers[i].HinhAnh);
@@ -140,19 +167,30 @@ namespace GroceryStore
         }
 
 
-        public void loadProduct(List<DTO_Product> list_products, List<DTO_Product> products, String attribute)
+        public void loadProduct(List<DTO_Product> list_products, List<DTO_Product> products, String nameProduct)
         {
             BUS_ListProduct bus_listproduct = new BUS_ListProduct();
-            if(typeOfProduct != "")
+            if (typeOfProduct != "home")
             {
-                if(bus_listproduct.getProductsByType(list_products, products, attribute) == 0)
+                if (nameProduct != "")
                 {
-                    MessageBox.Show("Xin lỗi, không tìm thấy sản phẩm của bạn!");
+                    if (bus_listproduct.getProductsByTypeAndName(list_products, products, typeOfProduct, nameProduct) == 0)
+                    {
+                        MessageBox.Show("Xin lỗi, không tìm thấy sản phẩm của bạn!");
+                    }
+                }
+                else
+                {
+                    if (bus_listproduct.getProductsByType(list_products, products, typeOfProduct) == 0)
+                    {
+                        MessageBox.Show("Xin lỗi, không tìm thấy sản phẩm của bạn!");
+                    }
                 }
             }
-            else if(nameOfProduct != "")
+            else if (nameProduct != "")
             {
-                if(bus_listproduct.getProductsByName(list_products, products, attribute) == 0)
+                MessageBox.Show("Vao nameProduct");
+                if (bus_listproduct.getProductsByName(list_products, products, nameProduct) == 0)
                 {
                     MessageBox.Show("Xin lỗi, không tìm thấy sản phẩm của bạn!");
                 }
@@ -168,8 +206,11 @@ namespace GroceryStore
         {
             btn_tatCa.Visible = false;
             btn_maCuaToi.Visible = false;
-            typeOfProduct = "";
-            HomeForm_Load(sender, e);
+            typeOfProduct = "home";
+            flowLayout.Controls.Clear();
+            loadProductToFlowLayout(list_product);
+            //loadFlowLayout("");
+            //HomeForm_Load(sender, e);
             Point currentPosition = btn_home.Location;
             pn_choice.Location = new Point(currentPosition.X + 130, currentPosition.Y + 10);
             pn_choice.BringToFront();
@@ -182,14 +223,14 @@ namespace GroceryStore
             pn_choice.Location = new Point(255, 255);
             pn_choice.BringToFront();
             typeOfProduct = "DU";
-            loadFlowLayout(typeOfProduct);
+            loadFlowLayout("");
         }
 
         //fast food page
         private void btn_fast_foods_Click(object sender, EventArgs e)
         {
             typeOfProduct = "DAV";
-            loadFlowLayout(typeOfProduct);
+            loadFlowLayout("");
             Point currentPosition = btn_fast_foods.Location;
             pn_choice.Location = new Point(currentPosition.X + 120, currentPosition.Y + 10);
         }
@@ -198,7 +239,7 @@ namespace GroceryStore
         private void btn_others_Click(object sender, EventArgs e)
         {
             typeOfProduct = "DGD";
-            loadFlowLayout(typeOfProduct);
+            loadFlowLayout("");
             Point currentPosition = btn_others.Location;
             pn_choice.Location = new Point(currentPosition.X + 120, currentPosition.Y + 10);
         }
@@ -317,6 +358,34 @@ namespace GroceryStore
         private void label9_Click(object sender, EventArgs e)
         {
 
+        }
+
+        //Add search function 
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            if (tb_search.Text == "")
+            {
+                HomeForm_Load(sender, e);
+            }
+            else
+            {
+                String nameOfProduct = tb_search.Text;
+                MessageBox.Show(nameOfProduct);
+                loadFlowLayout(nameOfProduct);
+            }
+        }
+
+        private void select_Voucher(object sender, EventArgs e)
+        {
+            Voucher obj = (Voucher)sender;
+            int priceVoucher = obj.PriceVoucher;
+            int accumulatedPointsUser = user.AccumulatedPointsUser;
+            if(accumulatedPointsUser > priceVoucher)
+            {
+                DTO_MyVoucher myVoucher = new DTO_MyVoucher(user.IdUser, obj.IdVoucher);
+                BUS_MyVoucher bus_myVoucher = new BUS_MyVoucher();
+                bus_myVoucher.insertMyVoucher(myVoucher);
+            }
         }
     }
 }

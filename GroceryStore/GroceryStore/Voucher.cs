@@ -19,16 +19,27 @@ namespace GroceryStore
 
 
         #region Properties
+        private int _idVoucher;
         private Image _imageVoucher;
         private String _nameVoucher;
         private int _priceVoucher;
 
         private void Voucher_Load(object sender, EventArgs e)
         {
-            pb_imageVoucher.Click += new System.EventHandler((object sender, EventArgs e) => this.OnClick(e));
+            btn_Doi.Click += new System.EventHandler((object sender, EventArgs e) => this.OnClick(e));
+        }
+
+        private void btn_Doi_Click(object sender, EventArgs e)
+        {
+
         }
 
         [Category("N5")]
+        public int IdVoucher
+        {
+            get { return _idVoucher; }
+            set { _idVoucher = value; }
+        }
         public Image ImageVoucher
         {
             get { return _imageVoucher; }

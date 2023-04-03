@@ -9,7 +9,7 @@ namespace GroceryStore
 {
     public partial class LoginForm : Form
     {
-        String connectionString = "Data Source=DESKTOP-RTQDFRG\\SQLEXPRESS;Initial Catalog=CuaHangTienLoi;Integrated Security=True";
+        //String connectionString = "Data Source=DESKTOP-RTQDFRG\\SQLEXPRESS;Initial Catalog=CuaHangTienLoi;Integrated Security=True";
 
         public LoginForm()
         {

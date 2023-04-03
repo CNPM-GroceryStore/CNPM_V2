@@ -112,6 +112,13 @@ VALUES
 (N'Giảm 40k cho đơn 0đ', 40000, ''),
 (N'Giảm 50k cho đơn 0đ', 50000, '');
 
+INSERT INTO NhanVien (SoDienThoai, Email, HoTen, DiaChi, MatKhau, DiemTichLuy)
+VALUES
+('0387790894', 'lehuynhphat@gmail.com', N'Lê Huỳnh Phát',  N'Bến Tre', '12345678', 1000000);
+
+insert into MyVoucher (SoDienThoai, MaVoucher) values ('0387790894', 1);
+
+delete from MyVoucher where SoDienThoai = '0387790894' and MaVoucher = '1';
 
 select * from NhanVien
 -- Thực thi stored procedure để kiểm tra đăng nhập
@@ -121,3 +128,4 @@ EXECUTE checkLogin '0977756777';
 EXECUTE checkExistAccount '0977756777', '11122222';
 
 select * from MyVoucher
+select * from Voucher

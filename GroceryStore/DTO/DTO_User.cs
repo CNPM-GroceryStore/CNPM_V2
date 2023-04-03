@@ -14,6 +14,7 @@ namespace DTO
         private string emailUser;
         private string addressUser;
         private string passwordUser;
+        private int accumulatedPointsUser;
         private DTO_ListProduct purchaseHistoryUser;
         private DTO_Cart cart;
 
@@ -48,7 +49,10 @@ namespace DTO
         public string NameUser { get { return nameUser; } set {  nameUser = value; } }  
         public string EmailUser { get { return emailUser; } set { emailUser = value; } }
         public string AddressUser { get { return addressUser; } set { addressUser = value; } }
-        public string PasswordUser { get { return passwordUser; } set {  passwordUser = value; } }  
+        public string PasswordUser { get { return passwordUser; } set {  passwordUser = value; } }
+
+        public int AccumulatedPointsUser { get { return accumulatedPointsUser; } set { accumulatedPointsUser = value; } }
+
         public DTO_ListProduct PurchaseHistoryUser { get { return purchaseHistoryUser; } set {  purchaseHistoryUser = value; } }    
         public DTO_Cart Cart { get {  return cart; } set { cart = value; } }
     }

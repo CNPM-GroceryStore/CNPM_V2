@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BUS_Cart.cs" />
     <Compile Include="BUS_ListProduct.cs" />
+    <Compile Include="BUS_MyVoucher.cs" />
     <Compile Include="BUS_Product.cs" />
     <Compile Include="BUS_Voucher.cs" />
     <Compile Include="BUS_ListVoucher.cs" />

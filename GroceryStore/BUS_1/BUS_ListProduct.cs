@@ -96,6 +96,7 @@ namespace BUS
         }
         #endregion
 
+
         #region 6.Show products by type
         public void showProductByType(List<DTO_Product> products, String type)
         {
@@ -117,6 +118,44 @@ namespace BUS
                 DTO_Product product = new DTO_Product((String)row[0], Convert.ToInt32(row[1]), (String)row[2], (String)row[3]);
                 products.Add(product);
             }
+        }
+        #endregion
+
+        #region 8. get products by type and name
+        public int getProductsByTypeAndName(List<DTO_Product> list_products, List<DTO_Product> products, String type, String name)
+        {
+            type = type.ToLower();
+            type = Regex.Replace(type, @"\s+", " ");
+            name = name.ToLower();
+            name = Regex.Replace(name, @"\s+", " ");
+            String[] split_input = name.Split(' ');
+            foreach (DTO_Product product in list_products)
+            {
+                String loaiSP = Regex.Replace(product.LoaiSP, @"\s+", " ");
+                loaiSP = loaiSP.ToLower();
+                if (loaiSP == type)
+                {
+                    String namePro = Regex.Replace(product.TenSP, @"\s+", " ");
+                    namePro = namePro.ToLower();
+                    if (namePro == name)
+                    {
+                        products.Add(product);
+                    }
+                    else
+                    {
+                        foreach (String input_name in split_input)
+                        {
+                            if (namePro.Contains(input_name))
+                            {
+                                products.Add(product);
+                                break;
+                            }
+                        }
+                    }
+
+                }
+            }
+            return products.Count;
         }
         #endregion
     }

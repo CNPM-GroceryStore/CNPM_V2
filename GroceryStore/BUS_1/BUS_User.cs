@@ -46,6 +46,7 @@ namespace BUS
                 user.EmailUser = row[1].ToString();
                 user.NameUser = row[2].ToString();
                 user.AddressUser = row[3].ToString();
+                user.AccumulatedPointsUser = Convert.ToInt32(row[4]);
             }
             return user;
         }
@@ -58,5 +59,13 @@ namespace BUS
             return user2.checkAccount(user);
         }
         #endregion
+        #region 6. Update point user
+        public void updatePoint(DTO_User user, int point)
+        {
+            DAO_User dAO_User = new DAO_User();
+            dAO_User.updatePoint(user, point);
+        }
+        #endregion
     }
+
 }

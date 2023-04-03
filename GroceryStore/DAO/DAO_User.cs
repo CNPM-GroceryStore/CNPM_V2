@@ -13,7 +13,7 @@ namespace DAO
         #region 1. show all info of user
         public DataTable showAllUser()
         {
-            string statement = "SELECT SoDienThoai, Email, HoTen, DiaChi FROM NhanVien";
+            string statement = "SELECT SoDienThoai, Email, HoTen, DiaChi, DiemTichLuy FROM NhanVien";
             return DataProvider.Instance.ExecuteQuery(statement);
         }
         #endregion
@@ -48,7 +48,7 @@ namespace DAO
             DataTable dataTable = new DataTable();
             if (checkAccount(user))
             {
-                string statement = "SELECT SoDienThoai, Email, HoTen, DiaChi FROM NhanVien WHERE SoDienThoai = @SoDienThoai";
+                string statement = "SELECT SoDienThoai, Email, HoTen, DiaChi, DiemTichLuy FROM NhanVien WHERE SoDienThoai = @SoDienThoai";
                 dataTable = DataProvider.Instance.ExecuteQuery(statement, new object[] { user.IdUser});
             }
             return dataTable;
@@ -65,6 +65,14 @@ namespace DAO
                 return true;
             }
             return false;
+        }
+        #endregion
+
+        #region 7. update point for user
+        public void updatePoint(DTO_User user, int point)
+        {
+            string statement = "update NhanVien Set DiemTichLuy = @DiemTichLuy where SoDienThoai = @SoDienThoai;";
+            DataProvider.Instance.ExecuteNonQuery(statement, new object[] { point, user.IdUser});
         }
         #endregion
     }

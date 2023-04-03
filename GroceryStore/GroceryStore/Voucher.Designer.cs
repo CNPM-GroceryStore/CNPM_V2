@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Voucher));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             pb_imageVoucher = new PictureBox();
             lb_nameVoucher = new Label();
             lb_priceVoucher = new Label();
@@ -71,7 +71,8 @@
             // 
             // btn_Doi
             // 
-            btn_Doi.CustomizableEdges = customizableEdges3;
+            btn_Doi.BorderRadius = 10;
+            btn_Doi.CustomizableEdges = customizableEdges1;
             btn_Doi.DisabledState.BorderColor = Color.DarkGray;
             btn_Doi.DisabledState.CustomBorderColor = Color.DarkGray;
             btn_Doi.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -79,13 +80,13 @@
             btn_Doi.FillColor = Color.Red;
             btn_Doi.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             btn_Doi.ForeColor = Color.White;
-            btn_Doi.Location = new Point(390, 22);
+            btn_Doi.Location = new Point(491, 18);
             btn_Doi.Name = "btn_Doi";
-            btn_Doi.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btn_Doi.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btn_Doi.Size = new Size(80, 56);
             btn_Doi.TabIndex = 4;
             btn_Doi.Text = "Đổi";
-            btn_Doi.BorderRadius = 10;
+            btn_Doi.Click += btn_Doi_Click;
             // 
             // Voucher
             // 
@@ -98,7 +99,7 @@
             Controls.Add(pb_imageVoucher);
             Margin = new Padding(17, 4, 3, 4);
             Name = "Voucher";
-            Size = new Size(499, 100);
+            Size = new Size(600, 100);
             Load += Voucher_Load;
             ((System.ComponentModel.ISupportInitialize)pb_imageVoucher).EndInit();
             ResumeLayout(false);
