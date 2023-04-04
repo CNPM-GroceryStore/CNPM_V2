@@ -24,18 +24,52 @@ namespace GroceryStore
         private String _nameMyVoucher;
         private int _priceMyVoucher;
         public event EventHandler UseVoucherClicked;
+        public event EventHandler BoVoucherClicked;
+        public int _ownVoucher;
 
         private void MyVoucher_Load(object sender, EventArgs e)
         {
-            btn_use.Click += new System.EventHandler((object sender, EventArgs e) => this.OnClick(e));
+            _ownVoucher = _quantity;
         }
 
         private void btn_use_Click(object sender, EventArgs e)
         {
             UseVoucherClicked?.Invoke(this, EventArgs.Empty);
+            _quantity -= 1;
+            lb_soLuong.Text = "x" + _quantity.ToString();
+            checkClick();
         }
 
-        public int Quantity { get { return _quantity; } set { _quantity = value; lb_soLuong.Text = value.ToString(); } }
+        private void btn_bo_Click(object sender, EventArgs e)
+        {
+            BoVoucherClicked?.Invoke(this, EventArgs.Empty);
+            _quantity += 1;
+            lb_soLuong.Text = "x" + _quantity.ToString();
+            checkClick();
+        }
+
+        private void checkClick()
+        {
+            if (_quantity == 0)
+            {
+                btn_use.Visible = false;
+                btn_bo.Visible = true;
+            }
+            else
+            {
+                btn_use.Visible = true;
+            }
+            if (_quantity == _ownVoucher)
+            {
+                btn_bo.Visible = false;
+            }
+            else
+            {
+                btn_bo.Visible = true;
+            }
+        }
+
+        public int Quantity { get { return _quantity; } set { _quantity = value; lb_soLuong.Text = "x" + value.ToString(); _ownVoucher = _quantity; } }
 
         public int IdMyVoucher
         {

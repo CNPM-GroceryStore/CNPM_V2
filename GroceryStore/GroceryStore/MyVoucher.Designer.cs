@@ -30,11 +30,14 @@
         {
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             pb_imageMyVoucher = new PictureBox();
             lb_nameMyVoucher = new Label();
             lb_priceMyVoucher = new Label();
             btn_use = new Guna.UI2.WinForms.Guna2Button();
             lb_soLuong = new Label();
+            btn_bo = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)pb_imageMyVoucher).BeginInit();
             SuspendLayout();
             // 
@@ -90,19 +93,43 @@
             // 
             // lb_soLuong
             // 
-            lb_soLuong.AutoSize = true;
             lb_soLuong.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            lb_soLuong.Location = new Point(574, 80);
+            lb_soLuong.Location = new Point(562, 80);
             lb_soLuong.Name = "lb_soLuong";
-            lb_soLuong.Size = new Size(26, 20);
+            lb_soLuong.Size = new Size(38, 20);
             lb_soLuong.TabIndex = 5;
             lb_soLuong.Text = "X1";
+            lb_soLuong.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // btn_bo
+            // 
+            btn_bo.BackColor = SystemColors.ControlLight;
+            btn_bo.BorderColor = Color.LightCoral;
+            btn_bo.BorderRadius = 10;
+            btn_bo.BorderThickness = 1;
+            btn_bo.CustomizableEdges = customizableEdges3;
+            btn_bo.DisabledState.BorderColor = Color.DarkGray;
+            btn_bo.DisabledState.CustomBorderColor = Color.DarkGray;
+            btn_bo.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btn_bo.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btn_bo.FillColor = Color.Silver;
+            btn_bo.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_bo.ForeColor = Color.Red;
+            btn_bo.Location = new Point(406, 26);
+            btn_bo.Name = "btn_bo";
+            btn_bo.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btn_bo.Size = new Size(55, 45);
+            btn_bo.TabIndex = 6;
+            btn_bo.Text = "Bỏ";
+            btn_bo.Visible = false;
+            btn_bo.Click += btn_bo_Click;
             // 
             // MyVoucher
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            Controls.Add(btn_bo);
             Controls.Add(lb_soLuong);
             Controls.Add(btn_use);
             Controls.Add(lb_priceMyVoucher);
@@ -123,5 +150,6 @@
         private Label lb_priceMyVoucher;
         private Guna.UI2.WinForms.Guna2Button btn_use;
         private Label lb_soLuong;
+        private Guna.UI2.WinForms.Guna2Button btn_bo;
     }
 }

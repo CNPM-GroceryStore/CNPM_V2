@@ -23,10 +23,16 @@ namespace GroceryStore
         private Image _imageVoucher;
         private String _nameVoucher;
         private int _priceVoucher;
+        public event EventHandler DoiVoucherClicked;
 
         private void Voucher_Load(object sender, EventArgs e)
         {
-            btn_Doi.Click += new System.EventHandler((object sender, EventArgs e) => this.OnClick(e));
+            //btn_Doi.Click += new System.EventHandler((object sender, EventArgs e) => this.OnClick(e));
+        }
+
+        private void btn_Doi_Click(object sender, EventArgs e)
+        {
+            DoiVoucherClicked?.Invoke(this, EventArgs.Empty);
         }
 
         public int IdVoucher
