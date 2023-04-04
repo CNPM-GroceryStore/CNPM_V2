@@ -8,12 +8,26 @@ namespace DTO
 {
     public class DTO_MyVoucher
     {
-        public String idUser { get; set; }
-        public int idVoucher { get; set; }
+        public String MaUser { get; set; }
+        public int MaMyVoucher { get; set; }
+        public string TenMyVoucher { get; set; }
+        public int GiaMyVoucher { get; set; }
+        public string HinhAnh { get; set; }
+        public int Quantity { get; set; }
         public DTO_MyVoucher(string idUser, int idVoucher)
         {
-            this.idUser = idUser;
-            this.idVoucher = idVoucher;
+            this.MaUser = idUser;
+            this.MaMyVoucher = idVoucher;
+        }
+
+        public DTO_MyVoucher(int maMyVoucher, string tenMyVoucher, int giaMyVoucher, string hinhAnh, int quantity)
+        {
+            this.MaMyVoucher = maMyVoucher;
+            this.TenMyVoucher = tenMyVoucher;
+            this.GiaMyVoucher = giaMyVoucher;
+            this.HinhAnh = hinhAnh;
+            this.Quantity = quantity;
         }
     }
 }
+

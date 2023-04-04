@@ -69,10 +69,10 @@ namespace DAO
         #endregion
 
         #region 7. update point for user
-        public void updatePoint(DTO_User user, int point)
+        public void updatePoint(String idUser, int point)
         {
-            string statement = "update NhanVien Set DiemTichLuy = @DiemTichLuy where SoDienThoai = @SoDienThoai;";
-            DataProvider.Instance.ExecuteNonQuery(statement, new object[] { point, user.IdUser});
+            string statement = "update NhanVien Set DiemTichLuy = @DiemTichLuy where SoDienThoai = @SoDienThoai";
+            DataProvider.Instance.ExecuteNonQuery(statement, new object[] { point, idUser });
         }
         #endregion
     }

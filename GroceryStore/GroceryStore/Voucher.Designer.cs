@@ -86,7 +86,6 @@
             btn_Doi.Size = new Size(80, 56);
             btn_Doi.TabIndex = 4;
             btn_Doi.Text = "Đổi";
-            btn_Doi.Click += btn_Doi_Click;
             // 
             // Voucher
             // 

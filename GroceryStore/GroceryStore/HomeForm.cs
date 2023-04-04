@@ -28,6 +28,7 @@ namespace GroceryStore
         List<ProductOrderItem> orders = new List<ProductOrderItem>();
         List<DTO_Product> list_product = new List<DTO_Product>();
         List<DTO_Voucher> vouchers = new List<DTO_Voucher>();
+        List<DTO_MyVoucher> myVouchers = new List<DTO_MyVoucher>();
         String typeOfProduct = "home";
         //String nameOfProduct = "";
         String[] list_nameProduct;
@@ -91,8 +92,7 @@ namespace GroceryStore
             List<DTO_Product> products = new List<DTO_Product>();
             btn_tatCa.Visible = false;
             btn_maCuaToi.Visible = false;
-            lb_diemTichLuy.Visible = false;
-            lb_soDiem.Visible = false;
+            DiemTichLuy.Visible = false;
             lb_chonDanhMuc.Visible = true;
             lb_danhMucPhu.Visible = true;
             lb_tatCa.Visible = true;
@@ -137,14 +137,13 @@ namespace GroceryStore
             flowLayout.Controls.Clear();
             btn_tatCa.Visible = true;
             btn_maCuaToi.Visible = true;
-            lb_diemTichLuy.Visible = true;
-            lb_soDiem.Visible = true;
+            DiemTichLuy.Visible = true;
             lb_chonDanhMuc.Visible = false;
             lb_danhMucPhu.Visible = false;
             lb_tatCa.Visible = false;
             lb_phoBien.Visible = false;
             pb_muiTen.Visible = false;
-            lb_soDiem.Text = user.AccumulatedPointsUser.ToString();
+            DiemTichLuy.Point = user.AccumulatedPointsUser;
 
             Voucher[] listVoucher = new Voucher[vouchers.Count];
             for (int i = 0; i < vouchers.Count; i++)
@@ -159,13 +158,31 @@ namespace GroceryStore
                 {
                     listVoucher[i].ImageVoucher = handleUrlImage(vouchers[i].HinhAnh);
                 }
-
-
-                //listVoucher[i].Click += new System.EventHandler(this.select_Voucher);
                 flowLayout.Controls.Add(listVoucher[i]);
             }
         }
 
+        public void loadformMyVoucher()
+        {
+            flowLayout.Controls.Clear();
+            MyVoucher[] listMyVoucher = new MyVoucher[myVouchers.Count];
+            for (int i = 0; i < myVouchers.Count; i++)
+            {
+                //thêm dữ liệu lên giao diện
+                listMyVoucher[i] = new MyVoucher();
+                listMyVoucher[i].IdMyVoucher = myVouchers[i].MaMyVoucher;
+                listMyVoucher[i].NameMyVoucher = myVouchers[i].TenMyVoucher;
+                listMyVoucher[i].PriceMyVoucher = myVouchers[i].GiaMyVoucher;
+                listMyVoucher[i].Quantity = myVouchers[i].Quantity;
+                //listMyVoucher[i].Click += new System.EventHandler(this.select_MyVoucher);
+                listMyVoucher[i].UseVoucherClicked += select_MyVoucher;
+                if (myVouchers[i].HinhAnh != "")
+                {
+                    listMyVoucher[i].ImageMyVoucher = handleUrlImage(myVouchers[i].HinhAnh);
+                }
+                flowLayout.Controls.Add(listMyVoucher[i]);
+            }
+        }
 
         public void loadProduct(List<DTO_Product> list_products, List<DTO_Product> products, String nameProduct)
         {
@@ -204,8 +221,14 @@ namespace GroceryStore
         //home page
         private void btn_home_Click(object sender, EventArgs e)
         {
+            lb_chonDanhMuc.Visible = true;
+            lb_danhMucPhu.Visible = true;
+            lb_tatCa.Visible = true;
+            lb_phoBien.Visible = true;
+            pb_muiTen.Visible = true;
             btn_tatCa.Visible = false;
             btn_maCuaToi.Visible = false;
+            DiemTichLuy.Visible = false;
             typeOfProduct = "home";
             flowLayout.Controls.Clear();
             loadProductToFlowLayout(list_product);
@@ -380,12 +403,45 @@ namespace GroceryStore
             Voucher obj = (Voucher)sender;
             int priceVoucher = obj.PriceVoucher;
             int accumulatedPointsUser = user.AccumulatedPointsUser;
-            if(accumulatedPointsUser > priceVoucher)
+            if (accumulatedPointsUser > priceVoucher)
             {
+                MessageBox.Show(obj.IdVoucher.ToString());
                 DTO_MyVoucher myVoucher = new DTO_MyVoucher(user.IdUser, obj.IdVoucher);
                 BUS_MyVoucher bus_myVoucher = new BUS_MyVoucher();
-                bus_myVoucher.insertMyVoucher(myVoucher);
+
+                MessageBox.Show(myVoucher.MaUser);
+                MessageBox.Show(myVoucher.MaMyVoucher.ToString());
+                if (user.AccumulatedPointsUser > obj.PriceVoucher)
+                {
+                    bus_myVoucher.insertMyVoucher(myVoucher);
+                    BUS_User bus_user = new BUS_User();
+                    user.AccumulatedPointsUser -= obj.PriceVoucher;
+                    bus_user.updatePoint(user, user.AccumulatedPointsUser);
+                    DiemTichLuy.Point = user.AccumulatedPointsUser;
+                    //lb_soDiem.Text = user.AccumulatedPointsUser.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Bạn không có đủ điểm tích lũy");
+                }
             }
+        }
+
+
+        private void select_MyVoucher(object sender, EventArgs e)
+        {
+            MessageBox.Show("lv_Voucher: " + lb_voucher.Text);
+            MyVoucher obj = (MyVoucher)sender;
+            int temp = -Convert.ToInt32(lb_voucher.Text) + obj.PriceMyVoucher;
+            lb_voucher.Text = "-" + temp;
+
+        }
+        private void btn_maCuaToi_Click(object sender, EventArgs e)
+        {
+            myVouchers.Clear();
+            BUS_ListMyVoucher bUS_ListMyVoucher = new BUS_ListMyVoucher();
+            bUS_ListMyVoucher.showAllUserVouchers(myVouchers, user.IdUser);
+            loadformMyVoucher();
         }
     }
 }

@@ -96,5 +96,69 @@ namespace DAO
                 }
             }
         }
+
+        public void ExecuteStoredProcedure(string statement, object[] parameters = null)
+        {
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+                string[] paraNames = statement.Split(' ', ',', '@').Where(s => !string.IsNullOrEmpty(s)).ToArray();
+                SqlCommand command = new SqlCommand(paraNames[0], conn);
+                command.CommandType = CommandType.StoredProcedure;
+                if (parameters != null)
+                {
+                    for (int i = 0; i < parameters.Length; i++)
+                    {
+                        command.Parameters.AddWithValue(paraNames[i + 1], parameters[i]);
+                    }
+                }
+
+                try
+                {
+                    conn.Open();
+                    command.ExecuteNonQuery();
+                    conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+            }
+        }
+
+        public DataTable ExecuteStoredProcedureSelect(string statement, object[] parameters = null)
+        {
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+                string[] paraNames = statement.Split(' ', ',', '@').Where(s => !string.IsNullOrEmpty(s)).ToArray();
+                SqlCommand command = new SqlCommand(paraNames[0], conn);
+                command.CommandType = CommandType.StoredProcedure;
+                if (parameters != null)
+                {
+                    for (int i = 0; i < parameters.Length; i++)
+                    {
+                        command.Parameters.AddWithValue(paraNames[i + 1], parameters[i]);
+                    }
+                }
+
+                DataTable results = new DataTable();
+                try
+                {
+                    conn.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        results.Load(reader);
+                    }
+                    conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                return results;
+            }
+        }
+
+
+
     }
 }

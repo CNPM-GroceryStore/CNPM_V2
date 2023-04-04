@@ -63,7 +63,7 @@ namespace BUS
         public void updatePoint(DTO_User user, int point)
         {
             DAO_User dAO_User = new DAO_User();
-            dAO_User.updatePoint(user, point);
+            dAO_User.updatePoint(user.IdUser, point);
         }
         #endregion
     }

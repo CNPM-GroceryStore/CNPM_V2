@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO_Cart.cs" />
+    <Compile Include="DAO_ListMyVoucher.cs" />
     <Compile Include="DAO_ListProduct.cs" />
     <Compile Include="DAO_ListVoucher.cs" />
     <Compile Include="DAO_MyVoucher.cs" />

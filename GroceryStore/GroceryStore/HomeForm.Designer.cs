@@ -70,8 +70,7 @@
             lb_nameUser1 = new Label();
             label1 = new Label();
             panel2 = new Panel();
-            lb_soDiem = new Label();
-            lb_diemTichLuy = new Label();
+            DiemTichLuy = new DiemTichLuy();
             lb_phoBien = new Label();
             lb_danhMucPhu = new Label();
             pb_muiTen = new PictureBox();
@@ -85,7 +84,7 @@
             label15 = new Label();
             label12 = new Label();
             label13 = new Label();
-            label10 = new Label();
+            lb_voucher = new Label();
             label11 = new Label();
             lb_totalMoney = new Label();
             label8 = new Label();
@@ -101,6 +100,8 @@
             lb_oder = new Label();
             pictureBox7 = new PictureBox();
             pictureBox6 = new PictureBox();
+            label2 = new Label();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             guna2ShadowPanel1.SuspendLayout();
@@ -280,6 +281,7 @@
             btn_maCuaToi.TabIndex = 8;
             btn_maCuaToi.Text = "Mã của tôi";
             btn_maCuaToi.Visible = false;
+            btn_maCuaToi.Click += btn_maCuaToi_Click;
             // 
             // btn_tatCa
             // 
@@ -341,6 +343,7 @@
             // 
             guna2ShadowPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             guna2ShadowPanel1.BackColor = Color.Transparent;
+            guna2ShadowPanel1.Controls.Add(label2);
             guna2ShadowPanel1.Controls.Add(pictureBox4);
             guna2ShadowPanel1.Controls.Add(guna2Panel1);
             guna2ShadowPanel1.Controls.Add(btn_search);
@@ -462,8 +465,7 @@
             // 
             panel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel2.BackColor = SystemColors.Control;
-            panel2.Controls.Add(lb_soDiem);
-            panel2.Controls.Add(lb_diemTichLuy);
+            panel2.Controls.Add(DiemTichLuy);
             panel2.Controls.Add(lb_phoBien);
             panel2.Controls.Add(lb_danhMucPhu);
             panel2.Controls.Add(pb_muiTen);
@@ -476,29 +478,15 @@
             panel2.Size = new Size(606, 675);
             panel2.TabIndex = 7;
             // 
-            // lb_soDiem
+            // DiemTichLuy
             // 
-            lb_soDiem.AutoSize = true;
-            lb_soDiem.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_soDiem.Location = new Point(520, 47);
-            lb_soDiem.Name = "lb_soDiem";
-            lb_soDiem.Size = new Size(18, 20);
-            lb_soDiem.TabIndex = 7;
-            lb_soDiem.Text = "0";
-            lb_soDiem.Visible = false;
-            // 
-            // lb_diemTichLuy
-            // 
-            lb_diemTichLuy.AutoSize = true;
-            lb_diemTichLuy.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_diemTichLuy.ForeColor = Color.Red;
-            lb_diemTichLuy.Location = new Point(417, 47);
-            lb_diemTichLuy.Name = "lb_diemTichLuy";
-            lb_diemTichLuy.Size = new Size(105, 20);
-            lb_diemTichLuy.TabIndex = 6;
-            lb_diemTichLuy.Text = "Điểm tích lũy:";
-            lb_diemTichLuy.Visible = false;
-            lb_diemTichLuy.Click += label9_Click;
+            DiemTichLuy.BackColor = Color.Transparent;
+            DiemTichLuy.Location = new Point(420, 45);
+            DiemTichLuy.Name = "DiemTichLuy";
+            DiemTichLuy.Point = 0;
+            DiemTichLuy.Size = new Size(181, 23);
+            DiemTichLuy.TabIndex = 6;
+            DiemTichLuy.Visible = false;
             // 
             // lb_phoBien
             // 
@@ -587,23 +575,24 @@
             guna2ShadowPanel2.AutoSize = true;
             guna2ShadowPanel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             guna2ShadowPanel2.BackColor = Color.Transparent;
+            guna2ShadowPanel2.Controls.Add(label3);
             guna2ShadowPanel2.Controls.Add(guna2Button1);
             guna2ShadowPanel2.Controls.Add(lb_pay);
             guna2ShadowPanel2.Controls.Add(label15);
             guna2ShadowPanel2.Controls.Add(label12);
             guna2ShadowPanel2.Controls.Add(label13);
-            guna2ShadowPanel2.Controls.Add(label10);
+            guna2ShadowPanel2.Controls.Add(lb_voucher);
             guna2ShadowPanel2.Controls.Add(label11);
             guna2ShadowPanel2.Controls.Add(lb_totalMoney);
             guna2ShadowPanel2.Controls.Add(label8);
             guna2ShadowPanel2.FillColor = Color.White;
-            guna2ShadowPanel2.Location = new Point(54, 401);
+            guna2ShadowPanel2.Location = new Point(53, 401);
             guna2ShadowPanel2.Margin = new Padding(3, 4, 3, 4);
             guna2ShadowPanel2.Name = "guna2ShadowPanel2";
             guna2ShadowPanel2.Radius = 7;
             guna2ShadowPanel2.ShadowColor = SystemColors.Control;
             guna2ShadowPanel2.ShadowShift = 1;
-            guna2ShadowPanel2.Size = new Size(388, 257);
+            guna2ShadowPanel2.Size = new Size(389, 257);
             guna2ShadowPanel2.TabIndex = 5;
             // 
             // guna2Button1
@@ -669,16 +658,16 @@
             label13.TabIndex = 4;
             label13.Text = "Điểm tích lũy";
             // 
-            // label10
+            // lb_voucher
             // 
-            label10.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label10.ForeColor = Color.FromArgb(248, 9, 9);
-            label10.Location = new Point(293, 56);
-            label10.Name = "label10";
-            label10.Size = new Size(91, 27);
-            label10.TabIndex = 3;
-            label10.Text = "-0 đ";
-            label10.TextAlign = ContentAlignment.MiddleRight;
+            lb_voucher.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lb_voucher.ForeColor = Color.FromArgb(248, 9, 9);
+            lb_voucher.Location = new Point(274, 56);
+            lb_voucher.Name = "lb_voucher";
+            lb_voucher.Size = new Size(91, 27);
+            lb_voucher.TabIndex = 3;
+            lb_voucher.Text = "0";
+            lb_voucher.TextAlign = ContentAlignment.MiddleRight;
             // 
             // label11
             // 
@@ -852,6 +841,26 @@
             pictureBox6.TabIndex = 0;
             pictureBox6.TabStop = false;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(403, 129);
+            label2.Name = "label2";
+            label2.Size = new Size(50, 20);
+            label2.TabIndex = 12;
+            label2.Text = "label2";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.ForeColor = Color.Red;
+            label3.Location = new Point(363, 58);
+            label3.Name = "label3";
+            label3.Size = new Size(23, 25);
+            label3.TabIndex = 9;
+            label3.Text = "đ";
+            // 
             // HomeForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -859,9 +868,9 @@
             BackColor = SystemColors.Control;
             ClientSize = new Size(1216, 845);
             Controls.Add(panel3);
-            Controls.Add(panel2);
             Controls.Add(guna2ShadowPanel1);
             Controls.Add(panel1);
+            Controls.Add(panel2);
             Margin = new Padding(3, 4, 3, 4);
             MinimumSize = new Size(1232, 808);
             Name = "HomeForm";
@@ -943,13 +952,14 @@
         private Label label15;
         private Label label12;
         private Label label13;
-        private Label label10;
+        private Label lb_voucher;
         private Label label11;
         private Panel pn_choice;
         private Guna.UI2.WinForms.Guna2GradientTileButton btn_voucher;
         private Guna.UI2.WinForms.Guna2Button btn_maCuaToi;
         private Guna.UI2.WinForms.Guna2Button btn_tatCa;
-        private Label lb_diemTichLuy;
-        private Label lb_soDiem;
+        private DiemTichLuy DiemTichLuy;
+        private Label label2;
+        private Label label3;
     }
 }
