@@ -35,6 +35,12 @@ namespace GroceryStore
         //Create event when form loaded
         private void HomeForm_Load(object sender, EventArgs e)
         {
+            HomeLoad(sender, e);
+            loadInfoUser(sender, e);
+        }
+
+        public void HomeLoad(object sender, EventArgs e)
+        {
             String name = user.NameUser;
             String[] x = name.Split(' ');
             name = x[x.Length - 2] + " " + x[x.Length - 1];
@@ -51,22 +57,17 @@ namespace GroceryStore
             loadVoucher(vouchers);
             loadProduct(list_product);
             ProductItem[] listProduct = new ProductItem[list_product.Count];
-            //list_product.Clear();
-            //for (int i = 0; i < products.Count; i++)
-            //{
-            //    //thêm dữ liệu lên giao diện
-            //    listProduct[i] = new ProductItem();
-            //    listProduct[i].NameProduct = products[i].TenSP;
-            //    listProduct[i].PriceProduct = (products[i].GiaSP);
-
-            //    listProduct[i].ImageProduct = handleUrlImage(products[i].HinhAnh);
-
-
-            //    listProduct[i].Click += new System.EventHandler(this.select_Product);
-            //    list_product.Add(products[i]);
-            //    flowLayout.Controls.Add(listProduct[i]);
-            //}
             loadProductToFlowLayout(list_product);
+            calculeteCart();
+        }
+
+
+
+        //Load Info User
+        public void loadInfoUser(object sender, EventArgs e)
+        {
+            lb_nameUser2.Text = user.NameUser;
+            show_product_cart();
         }
 
 
@@ -100,19 +101,6 @@ namespace GroceryStore
             pb_muiTen.Visible = true;
             loadProduct(list_product, products, attribute);
             loadProductToFlowLayout(products);
-            //ProductItem[] listProduct = new ProductItem[products.Count];
-            //for (int i = 0; i < products.Count; i++)
-            //{
-            //    //thêm dữ liệu lên giao diện
-            //    listProduct[i] = new ProductItem();
-            //    listProduct[i].NameProduct = products[i].TenSP;
-            //    listProduct[i].PriceProduct = (products[i].GiaSP);
-
-            //    listProduct[i].ImageProduct = handleUrlImage(products[i].HinhAnh);
-
-            //    listProduct[i].Click += new System.EventHandler(this.select_Product);
-            //    flowLayout.Controls.Add(listProduct[i]);
-            //}
         }
 
         public void loadProductToFlowLayout(List<DTO_Product> products)
@@ -189,7 +177,6 @@ namespace GroceryStore
             }
             else if (nameProduct != "")
             {
-                MessageBox.Show("Vao nameProduct");
                 if (bus_listproduct.getProductsByName(list_products, products, nameProduct) == 0)
                 {
                     MessageBox.Show("Xin lỗi, không tìm thấy sản phẩm của bạn!");
@@ -271,10 +258,25 @@ namespace GroceryStore
         {
             ProductItem obj = (ProductItem)sender;
             ProductOrderItem order = findProductItem(obj);
+            order.NameItemOder = order.NameItemOder;
             order.NumberOfItem += 1;
+            BUS_Cart cart = new BUS_Cart();
+            if (!cart.checkExistCart(user))
+            {
+                cart.createCart(user);
+            }
+            if (order.NumberOfItem == 1)
+            {
+                DTO_ProductCart productCard = new DTO_ProductCart(order.NameItemOder, order.NameItemOder, order.PriceItemOder, order.NumberOfItem);
+                cart.addProductInCart(user, productCard);
+            }
+            else
+            {
+
+                cart.updateProductFromCart(user, checkExistProductInCart(order));
+            }
             order.Click += new System.EventHandler(this.select_Product_Cart);
-            orders.Add(order);
-            flowLayoutItemOder.Controls.Add(order);
+            show_product_cart();
             calculeteCart();
         }
 
@@ -294,16 +296,38 @@ namespace GroceryStore
             return order;
         }
 
+        //Check product exist in Cart
+        DTO_ProductCart checkExistProductInCart(ProductOrderItem productOrder)
+        {
+            BUS_Cart bus_cart = new BUS_Cart();
+            foreach(DTO_ProductCart productCart in bus_cart.getProducts(user))
+            {
+                if (productOrder.NameItemOder == productCart.Name)
+                {
+                    
+                    productCart.Quantity = productOrder.NumberOfItem;
+                    return productCart;
+                }
+            }
+            return new DTO_ProductCart(productOrder.NameItemOder, productOrder.NameItemOder, productOrder.PriceItemOder, productOrder.NumberOfItem);
+        }
 
         void select_Product_Cart(object sender, EventArgs e)
         {
             ProductOrderItem obj = (ProductOrderItem)sender;
             obj.NumberOfItem = obj.NumberOfItem;
+            obj.NameItemOder = obj.NameItemOder;
+            BUS_Cart cart = new BUS_Cart();
             if (obj.NumberOfItem <= 0)
             {
+                cart.deleteProductFromCart(user, checkExistProductInCart(obj));
                 orders.Remove(obj);
-                show_product_cart();
             }
+            else
+            {
+                cart.updateProductFromCart(user, checkExistProductInCart(obj));
+            }
+            show_product_cart();
             calculeteCart();
         }
 
@@ -311,10 +335,11 @@ namespace GroceryStore
         //Calculate total money of user's cart
         void calculeteCart()
         {
+            BUS_Cart bus_cart = new BUS_Cart();
             double totalMoney = 0;
-            foreach (var item in orders)
+            foreach (DTO_ProductCart item in bus_cart.getProducts(user))
             {
-                totalMoney += item.PriceItemOder * item.NumberOfItem;
+                totalMoney += item.Price * item.Quantity;
             }
             lb_totalMoney.Text = totalMoney.ToString() + " đ";
             lb_pay.Text = totalMoney.ToString() + " đ";
@@ -324,6 +349,18 @@ namespace GroceryStore
         void show_product_cart()
         {
             flowLayoutItemOder.Controls.Clear();
+            orders.Clear();
+            BUS_Cart cart = new BUS_Cart();
+
+            foreach (DTO_ProductCart pro in cart.getProducts(user))
+            {
+                ProductOrderItem productItem = new ProductOrderItem();
+                productItem.NameItemOder = pro.Name;
+                productItem.PriceItemOder = pro.Price;
+                productItem.NumberOfItem = pro.Quantity;
+                productItem.Click += new System.EventHandler(this.select_Product_Cart);
+                orders.Add(productItem);
+            }
             foreach (var item in orders)
             {
                 flowLayoutItemOder.Controls.Add(item);
@@ -333,15 +370,15 @@ namespace GroceryStore
         //Responsive for homepage when change size of form
         private void HomeForm_SizeChanged(object sender, EventArgs e)
         {
-            if (this.Width > 1440)
+            if (this.Width > 1234 && this.Height > 892)
             {
-                panel2.Size = new Size((int)(0.7 * this.Width), (int)(0.78 * this.Height));
-                flowLayout.Size = new Size((int)(0.7 * this.Width), (int)(0.78 * this.Height));
+                panel2.Size = new Size((int)(0.7 * this.Width), (int)(0.75 * this.Height));
+                flowLayout.Size = new Size((int)(0.67 * this.Width), (int)(0.68 * this.Height));
             }
             else
             {
                 panel2.Size = new Size((int)(0.5 * this.Width), (int)(0.78 * this.Height));
-                flowLayout.Size = new Size((int)(0.5 * this.Width), (int)(0.78 * this.Height));
+                flowLayout.Size = new Size((int)(0.5 * this.Width), (int)(0.68 * this.Height));
             }
         }
 
@@ -370,7 +407,6 @@ namespace GroceryStore
             else
             {
                 String nameOfProduct = tb_search.Text;
-                MessageBox.Show(nameOfProduct);
                 loadFlowLayout(nameOfProduct);
             }
         }

@@ -9,8 +9,6 @@ namespace GroceryStore
 {
     public partial class LoginForm : Form
     {
-        //String connectionString = "Data Source=DESKTOP-RTQDFRG\\SQLEXPRESS;Initial Catalog=CuaHangTienLoi;Integrated Security=True";
-
         public LoginForm()
         {
             InitializeComponent();
@@ -76,18 +74,19 @@ namespace GroceryStore
 
         }
 
-        private void lb_forgetPassword_Click(object sender, EventArgs e)
-        {
-            //xử lý sự kiện forgot password
-
-
-        }
-
         private void lb_signUp_Click(object sender, EventArgs e)
         {
             this.Hide();
             RegisterForm registerForm = new RegisterForm();
             registerForm.Show();
+        }
+
+        private void lb_forgetPassword_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            //xử lý sự kiện forgot password
+            MessageForm messageForm = new MessageForm(tb_sdt.Text);
+            messageForm.Show();
         }
     }
 }

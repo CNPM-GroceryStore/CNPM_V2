@@ -22,6 +22,7 @@ namespace GroceryStore
         private String _nameProduct;
         private int _priceProduct;
 
+
         private void Item_Load(object sender, EventArgs e)
         {
             pb_imageProduct.Click += new System.EventHandler((object sender, EventArgs e) => this.OnClick(e));

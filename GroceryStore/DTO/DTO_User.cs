@@ -29,7 +29,7 @@ namespace DTO
             this.cart = cart;
         }
 
-        public DTO_User(string idUser, string nameUser, string passwordUser, string emailUser, string addressUsser)
+        public DTO_User(string idUser, string emailUser, string nameUser, string passwordUser, string addressUsser)
         {
             this.idUser = idUser;
             this.nameUser = nameUser;

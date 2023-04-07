@@ -134,6 +134,7 @@
             lb_forgetPassword.Size = new Size(111, 16);
             lb_forgetPassword.TabIndex = 14;
             lb_forgetPassword.Text = "Quên mật khẩu";
+            lb_forgetPassword.Click += lb_forgetPassword_Click_1;
             // 
             // label2
             // 

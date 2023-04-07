@@ -8,25 +8,6 @@ GO
 USE CuaHangTienLoi;
 GO
 
--- Tạo stored procedure để kiểm tra tài khoản đăng nhập
-CREATE PROCEDURE checkLogin
-    @SoDienThoai VARCHAR(50)
-AS
-BEGIN 
-    SELECT SoDienThoai, MatKhau FROM NhanVien WHERE SoDienThoai = @SoDienThoai
-END
-GO
-
--- Tạo stored procedure để kiểm tra sự tồn tại của tài khoản
-CREATE PROCEDURE checkExistAccount
-    @sdt VARCHAR(20),
-    @password VARCHAR(20)
-AS
-BEGIN
-    SELECT COUNT(*) AS 'Tontai' FROM NhanVien WHERE SoDienThoai LIKE @sdt AND MatKhau LIKE @password
-END
-GO
-
 
 -- Tạo bảng nhân viên
 CREATE TABLE NhanVien (
@@ -51,6 +32,24 @@ CREATE TABLE SanPham (
 );
 GO
 
+--Tạo bản GIỏ hàng và Sản phẩm giỏ hàng
+CREATE TABLE Cart (
+  idUser VARCHAR(15) PRIMARY KEY,
+  FOREIGN KEY (idUser) REFERENCES NhanVien(SoDienThoai)
+);
+
+--drop table cart_item
+
+CREATE TABLE cart_item (
+  item_id VARCHAR(50) PRIMARY KEY,
+  cart_id VARCHAR(15),
+  item_name NVARCHAR(255),
+  item_price INt,
+  quantity INT,
+  FOREIGN KEY (cart_id) REFERENCES Cart(idUser)
+);
+GO
+
 --Tạo bảng voucher
 CREATE TABLE Voucher (
 	MaVoucher INT IDENTITY(1,1) PRIMARY KEY,
@@ -68,6 +67,60 @@ CREATE TABLE MyVoucher (
     CONSTRAINT FK_MyVoucher_NhanVien FOREIGN KEY (SoDienThoai) REFERENCES NhanVien(SoDienThoai),
     CONSTRAINT FK_MyVoucher_Voucher FOREIGN KEY (MaVoucher) REFERENCES Voucher(MaVoucher)
 );
+GO
+
+
+-- Tạo stored procedure để kiểm tra tài khoản đăng nhập
+CREATE PROCEDURE checkLogin
+    @SoDienThoai VARCHAR(50)
+AS
+BEGIN 
+    SELECT SoDienThoai, MatKhau FROM NhanVien WHERE SoDienThoai = @SoDienThoai
+END
+GO
+
+-- Tạo stored procedure để kiểm tra sự tồn tại của tài khoản
+CREATE PROCEDURE checkExistAccount
+    @sdt VARCHAR(20),
+    @password VARCHAR(20)
+AS
+BEGIN
+    SELECT COUNT(*) AS 'Tontai' FROM NhanVien WHERE SoDienThoai LIKE @sdt AND MatKhau LIKE @password
+END
+GO
+
+
+CREATE PROCEDURE loadCart
+	@idUser VARCHAR(20)
+AS
+BEGIN 
+	SELECT item_id, item_name, item_price, quantity FROM cart_item WHERE cart_id = @idUser
+END
+GO
+
+
+--tạo prodcedure select toàn bộ sản phẩm
+CREATE PROCEDURE GetAllProducts
+AS
+BEGIN
+    SELECT * FROM SanPham;
+END
+GO
+
+--procude insert Nhanvien
+CREATE PROCEDURE InsertNhanVien
+    @SoDienThoai nvarchar(50),
+    @Email nvarchar(50),
+    @HoTen nvarchar(50),
+    @DiaChi nvarchar(50),
+    @MatKhau nvarchar(50)
+AS
+BEGIN
+    INSERT INTO NhanVien (SoDienThoai, Email, HoTen, DiaChi, MatKhau)
+    VALUES (@SoDienThoai, @Email, @HoTen, @DiaChi, @MatKhau)
+END
+GO
+
 
 
 
@@ -129,3 +182,6 @@ EXECUTE checkExistAccount '0977756777', '11122222';
 
 select * from MyVoucher
 select * from Voucher
+
+select * from Cart
+select * from cart_item

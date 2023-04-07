@@ -18,8 +18,8 @@ namespace DAO
             set { instance = value; }
         }
 
-        //String connectString = @"Data Source=MSI;Initial Catalog=CuaHangTienLoi;Integrated Security=True";
-        String connectString = @"Data Source = LAPTOP-VVRRVKK8; Initial Catalog = CuaHangTienLoi; Integrated Security = True";
+        String connectString = @"Data Source=MSI;Initial Catalog=CuaHangTienLoi;Integrated Security=True";
+        //String connectString = @"Data Source = LAPTOP-VVRRVKK8; Initial Catalog = CuaHangTienLoi; Integrated Security = True";
 
         //String conn = $"{}"
         public DataTable ExecuteQuery(string query, object[] parameters = null)

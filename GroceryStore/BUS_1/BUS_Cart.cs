@@ -2,6 +2,7 @@
 using DTO;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,38 +12,54 @@ namespace BUS
     public class BUS_Cart
     {
 
-        #region 1.Calculate bill
-        public int calculateBill(DTO_Cart cart)
+        DAO_Cart cart = new DAO_Cart();
+
+        #region 1. Create Cart for user
+        public void createCart(DTO_User user)
         {
-            int sumMoney = 0;
-            foreach(DTO_Product product in cart.Products.GetAll())
-            {
-                sumMoney += product.GiaSP;
-            }
-            return sumMoney;
+            cart.createCart(user);
         }
         #endregion
 
         #region 2. Add product
-        public void addProduct(DTO_Cart cart, DTO_Product product)
+        public void addProductInCart(DTO_User user, DTO_ProductCart productCart)
         {
-            cart.Products.Add(product);
+            cart.insertProductIntoCart(user, productCart);
         }
         #endregion
 
         #region 3. Delete products
-        public void deleteProduct(DTO_Cart cart, DTO_Product product)
+        public void deleteProductFromCart(DTO_User user, DTO_ProductCart productCart)
         {
-            cart.Products.Remove(product);
+            cart.deleteProductFromCart(user, productCart);
         }
         #endregion
 
-
-        #region 4. convert price from int to string
-
-        public string convertPrice(int price)
+        #region 4. Show products in cart
+        public List<DTO_ProductCart> getProducts(DTO_User user)
         {
-            return price + " đ";
+            List<DTO_ProductCart> products = new List<DTO_ProductCart>();
+            foreach (DataRow row in cart.getAllProductInCart(user).Rows)
+            {
+                DTO_ProductCart productCard = new DTO_ProductCart(row[0].ToString(), row[1].ToString(), Convert.ToInt32(row[2]), Convert.ToInt32(row[3]));
+                products.Add(productCard);
+
+            }
+            return products;
+        }
+        #endregion
+
+        #region 5. Update number of products
+        public void updateProductFromCart(DTO_User user, DTO_ProductCart productCart)
+        {
+            cart.updateProductFromCart(user, productCart);
+        }
+        #endregion
+
+        #region 6. Check exist Cart
+        public bool checkExistCart(DTO_User user)
+        {
+            return cart.checkExistCart(user);
         }
         #endregion
     }
