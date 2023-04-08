@@ -252,6 +252,12 @@ namespace GroceryStore
                 }
             }
         }
+        //Load image throught link
+        private Image LoadImageFromStorage(string type, string urlImage)
+        {
+            string src = $"..\\..\\..\\Resources\\Product\\{type}\\{urlImage}";
+            return Image.FromFile(src);
+        }
 
         //function to choose product which is showed in User Interface
         void select_Product(object sender, EventArgs e)
