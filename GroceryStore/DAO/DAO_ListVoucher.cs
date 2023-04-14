@@ -13,7 +13,7 @@ namespace DAO
         #region 1. Show all voucher
         public DataTable showAllVouchers()
         {
-            string statement = "SELECT TenVoucher, GiaVoucher, HinhAnh FROM Voucher";
+            string statement = "SELECT MaVoucher, TenVoucher, GiaVoucher, HinhAnh FROM Voucher";
             return DataProvider.Instance.ExecuteQuery(statement);
         }
         #endregion
@@ -25,6 +25,14 @@ namespace DAO
             return DataProvider.Instance.ExecuteQuery(statement, new object[] { name });
 
         }
-        #endregion 
+        #endregion
+
+        #region 3. Show all MyVoucher
+        public DataTable showAllMyVouchers(String idUser)
+        {
+            string statement = "listMyVoucher @SoDienThoai";
+            return DataProvider.Instance.ExecuteStoredProcedureSelect(statement, new object[] { idUser });
+        }
+        #endregion
     }
 }

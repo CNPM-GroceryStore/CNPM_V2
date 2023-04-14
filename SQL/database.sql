@@ -9,6 +9,42 @@ USE CuaHangTienLoi;
 GO
 
 
+-- tạo procedure thêm dữ liệu vào MyVoucher
+CREATE PROCEDURE InsertToMyVoucher
+    @soDienThoai VARCHAR(15),
+    @maVoucher INT
+AS
+BEGIN
+    IF EXISTS(SELECT * FROM MyVoucher WHERE SoDienThoai = @soDienThoai AND MaVoucher = @maVoucher)
+    BEGIN
+        UPDATE MyVoucher SET SoLuong = SoLuong + 1 WHERE SoDienThoai = @soDienThoai AND MaVoucher = @maVoucher;
+    END
+    ELSE
+    BEGIN
+        INSERT INTO MyVoucher(SoDienThoai, MaVoucher) VALUES(@soDienThoai, @maVoucher);
+    END
+END
+go
+
+-- procedure liet ke voucher theo ma user
+CREATE PROCEDURE listMyVoucher 
+    @SoDienThoai VARCHAR(15)
+AS
+BEGIN
+    SELECT 
+        V.MaVoucher,
+        V.TenVoucher,
+        V.GiaVoucher,
+        V.HinhAnh,
+		MV.SoLuong
+    FROM 
+        MyVoucher MV
+        JOIN Voucher V ON MV.MaVoucher = V.MaVoucher
+    WHERE 
+        MV.SoDienThoai = @SoDienThoai
+END
+go
+
 -- Tạo bảng nhân viên
 CREATE TABLE NhanVien (
     SoDienThoai VARCHAR(15) PRIMARY KEY,
@@ -63,6 +99,7 @@ GO
 CREATE TABLE MyVoucher (
     SoDienThoai VARCHAR(15) NOT NULL,
     MaVoucher INT NOT NULL,
+	SoLuong int default 1,
     CONSTRAINT PK_MyVoucher PRIMARY KEY (SoDienThoai, MaVoucher),
     CONSTRAINT FK_MyVoucher_NhanVien FOREIGN KEY (SoDienThoai) REFERENCES NhanVien(SoDienThoai),
     CONSTRAINT FK_MyVoucher_Voucher FOREIGN KEY (MaVoucher) REFERENCES Voucher(MaVoucher)
@@ -173,15 +210,21 @@ insert into MyVoucher (SoDienThoai, MaVoucher) values ('0387790894', 1);
 
 delete from MyVoucher where SoDienThoai = '0387790894' and MaVoucher = '1';
 
-select * from NhanVien
 -- Thực thi stored procedure để kiểm tra đăng nhập
 EXECUTE checkLogin '0977756777';
 
 -- Thực thi stored procedure để kiểm tra sự tồn tại của tài khoản
 EXECUTE checkExistAccount '0977756777', '11122222';
 
+Execute InsertToMyVoucher '0387790894', '1';
+
+select * from NhanVien
+select * from Voucher
 select * from MyVoucher
 select * from Voucher
 
 select * from Cart
 select * from cart_item
+	
+exec listMyVoucher '0387790894'
+

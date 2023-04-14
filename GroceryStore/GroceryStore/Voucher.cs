@@ -23,18 +23,18 @@ namespace GroceryStore
         private Image _imageVoucher;
         private String _nameVoucher;
         private int _priceVoucher;
+        public event EventHandler DoiVoucherClicked;
 
         private void Voucher_Load(object sender, EventArgs e)
         {
-            btn_Doi.Click += new System.EventHandler((object sender, EventArgs e) => this.OnClick(e));
+            //btn_Doi.Click += new System.EventHandler((object sender, EventArgs e) => this.OnClick(e));
         }
 
         private void btn_Doi_Click(object sender, EventArgs e)
         {
-
+            DoiVoucherClicked?.Invoke(this, EventArgs.Empty);
         }
 
-        [Category("N5")]
         public int IdVoucher
         {
             get { return _idVoucher; }
@@ -46,14 +46,12 @@ namespace GroceryStore
             set { _imageVoucher = value; pb_imageVoucher.Image = value; }
         }
 
-        [Category("N5")]
         public String NameVoucher
         {
             get { return _nameVoucher; }
             set { _nameVoucher = value; lb_nameVoucher.Text = value; }
         }
 
-        [Category("N5")]
         public int PriceVoucher
         {
             get { return _priceVoucher; }

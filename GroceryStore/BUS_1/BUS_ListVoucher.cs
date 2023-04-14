@@ -40,7 +40,7 @@ namespace BUS
             DAO_ListVoucher dAO_listVoucher = new DAO_ListVoucher();
             foreach (DataRow row in dAO_listVoucher.showAllVouchers().Rows)
             {
-                DTO_Voucher voucher = new DTO_Voucher((String)row[0], Convert.ToInt32(row[1]), (String)row[2]);
+                DTO_Voucher voucher = new DTO_Voucher(Convert.ToInt32(row[0]), (String)row[1], Convert.ToInt32(row[2]), (String)row[3]);
                 vouchers.Add(voucher);
             }
         }
