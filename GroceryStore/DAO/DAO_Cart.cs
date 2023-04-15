@@ -63,5 +63,13 @@ namespace DAO
             return false;
         }
         #endregion
+
+        #region 6. Delete Cart
+        public void deleteCart(DTO_User user)
+        {
+            string statement = "DELETE FROM cart_item WHERE cart_id = @id";
+            DataProvider.Instance.ExecuteNonQuery(statement, new object[] { user.IdUser });
+        }
+        #endregion
     }
 }

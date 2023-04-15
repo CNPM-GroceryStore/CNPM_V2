@@ -46,6 +46,7 @@
     <Compile Include="DAO_ListProduct.cs" />
     <Compile Include="DAO_ListVoucher.cs" />
     <Compile Include="DAO_MyVoucher.cs" />
+    <Compile Include="DAO_OrderHistory.cs" />
     <Compile Include="DAO_Product.cs" />
     <Compile Include="DAO_Voucher.cs" />
     <Compile Include="DAO_User.cs" />

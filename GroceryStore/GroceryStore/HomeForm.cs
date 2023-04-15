@@ -1,4 +1,6 @@
 ﻿using BUS;
+using BUS_1;
+using DAO;
 using DTO;
 using GroceryStore.BUS;
 using System;
@@ -12,6 +14,8 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static TheArtOfDevHtmlRenderer.Adapters.RGraphicsPath;
 
 namespace GroceryStore
 {
@@ -59,6 +63,12 @@ namespace GroceryStore
             ProductItem[] listProduct = new ProductItem[list_product.Count];
             loadProductToFlowLayout(list_product);
             calculeteCart();
+            ThanhToan.Mua_Clicked += this.select_Mua;
+        }
+
+        private void ThanhToan_Mua_Clicked(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
 
@@ -99,7 +109,6 @@ namespace GroceryStore
             }
             else if (nameProduct != "")
             {
-                MessageBox.Show("Vao nameProduct");
                 if (bus_listproduct.getProductsByName(list_products, products, nameProduct) == 0)
                 {
                     MessageBox.Show("Xin lỗi, không tìm thấy sản phẩm của bạn!");
@@ -134,7 +143,7 @@ namespace GroceryStore
                 listProduct[i].NameProduct = products[i].TenSP;
                 listProduct[i].PriceProduct = (products[i].GiaSP);
 
-                listProduct[i].ImageProduct = handleUrlImage(products[i].HinhAnh);
+                listProduct[i].ImageProduct = LoadImageFromStorage(products[i].LoaiSP, products[i].HinhAnh);
 
                 listProduct[i].Click += new System.EventHandler(this.select_Product);
                 flowLayout.Controls.Add(listProduct[i]);
@@ -288,7 +297,6 @@ namespace GroceryStore
         {
             ProductItem obj = (ProductItem)sender;
             ProductOrderItem order = findProductItem(obj);
-            order.NameItemOder = order.NameItemOder;
             order.NumberOfItem += 1;
             BUS_Cart cart = new BUS_Cart();
             if (!cart.checkExistCart(user))
@@ -298,14 +306,20 @@ namespace GroceryStore
             if (order.NumberOfItem == 1)
             {
                 DTO_ProductCart productCard = new DTO_ProductCart(order.NameItemOder, order.NameItemOder, order.PriceItemOder, order.NumberOfItem);
-                cart.addProductInCart(user, productCard);
+                if (isExistsInCart(order))
+                {
+                    cart.updateProductFromCart(user, checkExistProductInCart(order));
+                }
+                else
+                {
+                    cart.addProductInCart(user, productCard);
+                }
             }
             else
             {
-
                 cart.updateProductFromCart(user, checkExistProductInCart(order));
             }
-            order.Click += new System.EventHandler(this.select_Product_Cart);
+            //order.Click += new System.EventHandler(this.select_Product_Cart);
             show_product_cart();
             calculeteCart();
         }
@@ -319,18 +333,22 @@ namespace GroceryStore
                     return item;
                 }
             }
-            return null;
+            ProductOrderItem order = new ProductOrderItem();
+            order.NameItemOder = obj.NameProduct;
+            order.PriceItemOder = obj.PriceProduct;
+            order.NumberOfItem = 0;
+            return order;
         }
 
         //Check product exist in Cart
         DTO_ProductCart checkExistProductInCart(ProductOrderItem productOrder)
         {
             BUS_Cart bus_cart = new BUS_Cart();
-            foreach(DTO_ProductCart productCart in bus_cart.getProducts(user))
+            foreach (DTO_ProductCart productCart in bus_cart.getProducts(user))
             {
                 if (productOrder.NameItemOder == productCart.Name)
                 {
-                    
+
                     productCart.Quantity = productOrder.NumberOfItem;
                     return productCart;
                 }
@@ -338,14 +356,27 @@ namespace GroceryStore
             return new DTO_ProductCart(productOrder.NameItemOder, productOrder.NameItemOder, productOrder.PriceItemOder, productOrder.NumberOfItem);
         }
 
-        void select_MinusProduct_Cart(object sender, EventArgs e)
+        //Check product is in cart 
+        private bool isExistsInCart(ProductOrderItem productOrder)
+        {
+            BUS_Cart bus_cart = new BUS_Cart();
+            foreach (DTO_ProductCart productCart in bus_cart.getProducts(user))
+            {
+                if (productOrder.NameItemOder == productCart.Name)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        void select_Product_Cart(object sender, EventArgs e)
         {
             ProductOrderItem obj = (ProductOrderItem)sender;
-            obj.NumberOfItem = obj.NumberOfItem;
-            obj.NameItemOder = obj.NameItemOder;
             BUS_Cart cart = new BUS_Cart();
             if (obj.NumberOfItem <= 0)
             {
+                flowLayoutItemOder.Controls.Remove(obj);
                 cart.deleteProductFromCart(user, checkExistProductInCart(obj));
                 orders.Remove(obj);
             }
@@ -362,13 +393,14 @@ namespace GroceryStore
         void calculeteCart()
         {
             BUS_Cart bus_cart = new BUS_Cart();
-            double totalMoney = 0;
+            int totalMoney = 0;
             foreach (DTO_ProductCart item in bus_cart.getProducts(user))
             {
                 totalMoney += item.Price * item.Quantity;
             }
-            lb_totalMoney.Text = totalMoney.ToString() + " đ";
-            lb_pay.Text = totalMoney.ToString() + " đ";
+            ThanhToan.TongTien = totalMoney;
+            //lb_totalMoney.Text = totalMoney.ToString() + " đ";
+            //lb_pay.Text = totalMoney.ToString() + " đ";
         }
 
         //Show product in user's cart
@@ -384,7 +416,9 @@ namespace GroceryStore
                 productItem.NameItemOder = pro.Name;
                 productItem.PriceItemOder = pro.Price;
                 productItem.NumberOfItem = pro.Quantity;
-                productItem.Click += new System.EventHandler(this.select_Product_Cart);
+                //productItem.Click += new System.EventHandler(this.select_Product_Cart);
+                productItem.pb_minusClicked += this.select_Product_Cart;
+                productItem.pb_plusClicked += this.select_Product_Cart;
                 orders.Add(productItem);
             }
             foreach (var item in orders)
@@ -400,6 +434,7 @@ namespace GroceryStore
             {
                 panel2.Size = new Size((int)(0.7 * this.Width), (int)(0.75 * this.Height));
                 flowLayout.Size = new Size((int)(0.67 * this.Width), (int)(0.68 * this.Height));
+                flowpanel_order_history.Size = new Size((int)(0.3 * this.Width), (int)(0.68 * this.Height));
             }
             else
             {
@@ -470,7 +505,7 @@ namespace GroceryStore
         private void select_UseMyVoucher(object sender, EventArgs e)
         {
             MyVoucher obj = (MyVoucher)sender;
-            if(obj.Quantity > 0) 
+            if (obj.Quantity > 0)
             {
                 ThanhToan.TienVoucher += obj.PriceMyVoucher;
             }
@@ -494,7 +529,58 @@ namespace GroceryStore
 
         private void select_Mua(object sender, EventArgs e)
         {
+            //MessageBox.Show($"Khách hàng đã thanh toán {ThanhToan.TienThanhToan}");
+            ////DialogResult dialog = new DialogResult();
 
+            BUS_OrderHistory order = new BUS_OrderHistory();
+            DialogResult dialog = MessageBox.Show($"Khách hàng đã thanh toán {ThanhToan.TienThanhToan}", "Thông báo", MessageBoxButtons.YesNo);
+            BUS_Cart cart = new BUS_Cart();
+            BUS_User bUS_User = new BUS_User();
+            bUS_User.updatePoint(user, ThanhToan.DiemTichLuy);
+            int price = ThanhToan.TienThanhToan;
+            int amount = cart.getProducts(user).Count;
+            string paymethod = cbb_payment.Text;
+            string paydate = lb_paydate.Text;
+            string status = "";
+            if (dialog == DialogResult.Yes)
+            {
+                status = "Hoàn thành";
+                cart.deleteCart(user);
+                flowLayoutItemOder.Controls.Clear();
+                ThanhToan.clear();
+            }
+            else
+            {
+                status = "Chưa hoàn thành";
+            }
+
+            DTO_OrderHistory orderHistoryItem = new DTO_OrderHistory(price, amount, paymethod, paydate, status);
+            order.insertOrderHistory(user, orderHistoryItem);
+
+        }
+
+        //CLick Order History
+        private void click_orderHistory(object sender, EventArgs e)
+        {
+            flowpanel_order_history.Visible = true;
+            BUS_OrderHistory orderHistory = new BUS_OrderHistory();
+            foreach (DTO_OrderHistory dTO_OrderHistory in orderHistory.showALl(user))
+            {
+                string id = dTO_OrderHistory.id;
+                int price = dTO_OrderHistory.price;
+                int amount = dTO_OrderHistory.amount;
+                string paymethod = dTO_OrderHistory.paymethod;
+                string paydate = dTO_OrderHistory.paydate;
+                string status = dTO_OrderHistory.status;
+                OrderHistoryItem orderHistoryItem = new OrderHistoryItem(id, price, amount, paymethod, paydate, status);
+                flowpanel_order_history.Controls.Add(orderHistoryItem);
+
+            }
+        }
+
+        private void click_order(object sender, EventArgs e)
+        {
+            flowpanel_order_history.Visible = false;
         }
     }
 }

@@ -59,5 +59,10 @@ namespace GroceryStore
         {
             Mua_Clicked?.Invoke(this, EventArgs.Empty);
         }
+
+        public void clear()
+        {
+            this.Controls.Clear();
+        }
     }
 }

@@ -45,6 +45,7 @@
     <Compile Include="Bus_ListMyVoucher.cs" />
     <Compile Include="BUS_ListProduct.cs" />
     <Compile Include="BUS_MyVoucher.cs" />
+    <Compile Include="BUS_OrderHistory.cs" />
     <Compile Include="BUS_Product.cs" />
     <Compile Include="BUS_Voucher.cs" />
     <Compile Include="BUS_ListVoucher.cs" />

@@ -43,7 +43,7 @@
             // 
             // pb_imageMyVoucher
             // 
-            pb_imageMyVoucher.Image = Properties.Resources.icon_item_voucher;
+            pb_imageMyVoucher.Image = Properties.Resources.checklist;
             pb_imageMyVoucher.Location = new Point(6, 8);
             pb_imageMyVoucher.Margin = new Padding(3, 4, 3, 4);
             pb_imageMyVoucher.Name = "pb_imageMyVoucher";

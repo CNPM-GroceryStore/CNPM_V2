@@ -62,5 +62,12 @@ namespace BUS
             return cart.checkExistCart(user);
         }
         #endregion
+
+        #region 7. Delete cart
+        public void deleteCart(DTO_User user)
+        {
+            cart.deleteCart(user);
+        }
+        #endregion
     }
 }

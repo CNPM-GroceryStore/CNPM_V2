@@ -76,12 +76,13 @@
             lb_tatCa = new Label();
             lb_chonDanhMuc = new Label();
             flowLayout = new FlowLayoutPanel();
+            flowpanel_order_history = new FlowLayoutPanel();
             panel3 = new Panel();
-            ThanhToan = new ThanhToan();
             flowLayoutItemOder = new FlowLayoutPanel();
+            ThanhToan = new ThanhToan();
             guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             pictureBox9 = new PictureBox();
-            label7 = new Label();
+            lb_paydate = new Label();
             label6 = new Label();
             cbb_payment = new Guna.UI2.WinForms.Guna2ComboBox();
             panel4 = new Panel();
@@ -99,6 +100,7 @@
             ((System.ComponentModel.ISupportInitialize)btn_search).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pb_muiTen).BeginInit();
+            flowLayout.SuspendLayout();
             panel3.SuspendLayout();
             guna2Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox9).BeginInit();
@@ -261,10 +263,10 @@
             btn_maCuaToi.FillColor = Color.Gray;
             btn_maCuaToi.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             btn_maCuaToi.ForeColor = Color.White;
-            btn_maCuaToi.Location = new Point(15, 798);
+            btn_maCuaToi.Location = new Point(15, 797);
             btn_maCuaToi.Name = "btn_maCuaToi";
             btn_maCuaToi.ShadowDecoration.CustomizableEdges = customizableEdges30;
-            btn_maCuaToi.Size = new Size(100, 30);
+            btn_maCuaToi.Size = new Size(101, 29);
             btn_maCuaToi.TabIndex = 8;
             btn_maCuaToi.Text = "Mã của tôi";
             btn_maCuaToi.Visible = false;
@@ -284,7 +286,7 @@
             btn_tatCa.Location = new Point(15, 763);
             btn_tatCa.Name = "btn_tatCa";
             btn_tatCa.ShadowDecoration.CustomizableEdges = customizableEdges32;
-            btn_tatCa.Size = new Size(100, 30);
+            btn_tatCa.Size = new Size(101, 29);
             btn_tatCa.TabIndex = 7;
             btn_tatCa.Text = "Tất cả";
             btn_tatCa.Visible = false;
@@ -321,9 +323,9 @@
             // pn_choice
             // 
             pn_choice.BackColor = Color.Red;
-            pn_choice.Location = new Point(124, 205);
+            pn_choice.Location = new Point(123, 205);
             pn_choice.Name = "pn_choice";
-            pn_choice.Size = new Size(5, 70);
+            pn_choice.Size = new Size(5, 69);
             pn_choice.TabIndex = 5;
             // 
             // guna2ShadowPanel1
@@ -477,7 +479,7 @@
             // DiemTichLuy
             // 
             DiemTichLuy.BackColor = Color.Transparent;
-            DiemTichLuy.Location = new Point(420, 45);
+            DiemTichLuy.Location = new Point(421, 45);
             DiemTichLuy.Name = "DiemTichLuy";
             DiemTichLuy.Point = 0;
             DiemTichLuy.Size = new Size(181, 23);
@@ -543,6 +545,7 @@
             // 
             flowLayout.AutoScroll = true;
             flowLayout.BackColor = SystemColors.Control;
+            flowLayout.Controls.Add(flowpanel_order_history);
             flowLayout.Location = new Point(0, 75);
             flowLayout.Margin = new Padding(3, 4, 3, 4);
             flowLayout.Name = "flowLayout";
@@ -550,12 +553,21 @@
             flowLayout.TabIndex = 5;
             flowLayout.Paint += flowLayout_Paint;
             // 
+            // flowpanel_order_history
+            // 
+            flowpanel_order_history.BackColor = SystemColors.ActiveCaption;
+            flowpanel_order_history.Location = new Point(3, 3);
+            flowpanel_order_history.Name = "flowpanel_order_history";
+            flowpanel_order_history.Size = new Size(472, 504);
+            flowpanel_order_history.TabIndex = 5;
+            flowpanel_order_history.Visible = false;
+            // 
             // panel3
             // 
             panel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             panel3.BackColor = SystemColors.Control;
-            panel3.Controls.Add(ThanhToan);
             panel3.Controls.Add(flowLayoutItemOder);
+            panel3.Controls.Add(ThanhToan);
             panel3.Controls.Add(guna2Panel2);
             panel3.Controls.Add(cbb_payment);
             panel3.Controls.Add(panel4);
@@ -564,17 +576,6 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(478, 675);
             panel3.TabIndex = 6;
-            // 
-            // ThanhToan
-            // 
-            ThanhToan.DiemTichLuy = 0;
-            ThanhToan.Location = new Point(53, 401);
-            ThanhToan.Name = "ThanhToan";
-            ThanhToan.Size = new Size(389, 257);
-            ThanhToan.TabIndex = 5;
-            ThanhToan.TienThanhToan = 0;
-            ThanhToan.TienVoucher = 0;
-            ThanhToan.TongTien = 0;
             // 
             // flowLayoutItemOder
             // 
@@ -585,6 +586,19 @@
             flowLayoutItemOder.Size = new Size(469, 212);
             flowLayoutItemOder.TabIndex = 4;
             // 
+            // ThanhToan
+            // 
+            ThanhToan.DiemTichLuy = 0;
+            ThanhToan.Location = new Point(8, 397);
+            ThanhToan.Margin = new Padding(0);
+            ThanhToan.Name = "ThanhToan";
+            ThanhToan.Size = new Size(458, 332);
+            ThanhToan.TabIndex = 0;
+            ThanhToan.TienThanhToan = 0;
+            ThanhToan.TienVoucher = 0;
+            ThanhToan.TongTien = 0;
+            ThanhToan.Click += select_Mua;
+            // 
             // guna2Panel2
             // 
             guna2Panel2.BackColor = Color.FromArgb(248, 9, 9);
@@ -592,7 +606,7 @@
             guna2Panel2.BorderRadius = 10;
             guna2Panel2.BorderThickness = 1;
             guna2Panel2.Controls.Add(pictureBox9);
-            guna2Panel2.Controls.Add(label7);
+            guna2Panel2.Controls.Add(lb_paydate);
             guna2Panel2.Controls.Add(label6);
             guna2Panel2.CustomizableEdges = customizableEdges37;
             guna2Panel2.Location = new Point(23, 91);
@@ -612,16 +626,16 @@
             pictureBox9.TabIndex = 2;
             pictureBox9.TabStop = false;
             // 
-            // label7
+            // lb_paydate
             // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.ForeColor = Color.White;
-            label7.Location = new Point(39, 47);
-            label7.Name = "label7";
-            label7.Size = new Size(96, 23);
-            label7.TabIndex = 1;
-            label7.Text = "18/08/2023";
+            lb_paydate.AutoSize = true;
+            lb_paydate.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lb_paydate.ForeColor = Color.White;
+            lb_paydate.Location = new Point(39, 47);
+            lb_paydate.Name = "lb_paydate";
+            lb_paydate.Size = new Size(96, 23);
+            lb_paydate.TabIndex = 1;
+            lb_paydate.Text = "18/08/2023";
             // 
             // label6
             // 
@@ -675,6 +689,7 @@
             lb_history.Size = new Size(58, 20);
             lb_history.TabIndex = 4;
             lb_history.Text = "Lịch sử";
+            lb_history.Click += click_orderHistory;
             // 
             // pictureBox8
             // 
@@ -685,6 +700,7 @@
             pictureBox8.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox8.TabIndex = 3;
             pictureBox8.TabStop = false;
+            pictureBox8.Click += click_orderHistory;
             // 
             // lb_oder
             // 
@@ -695,6 +711,7 @@
             lb_oder.Size = new Size(77, 20);
             lb_oder.TabIndex = 2;
             lb_oder.Text = "Đơn hàng";
+            lb_oder.Click += click_order;
             // 
             // pictureBox7
             // 
@@ -705,6 +722,7 @@
             pictureBox7.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox7.TabIndex = 1;
             pictureBox7.TabStop = false;
+            pictureBox7.Click += click_order;
             // 
             // pictureBox6
             // 
@@ -727,7 +745,7 @@
             Controls.Add(panel1);
             Controls.Add(panel2);
             Margin = new Padding(3, 4, 3, 4);
-            MinimumSize = new Size(1232, 808);
+            MinimumSize = new Size(1232, 806);
             Name = "HomeForm";
             Text = "+";
             Load += HomeForm_Load;
@@ -744,6 +762,7 @@
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pb_muiTen).EndInit();
+            flowLayout.ResumeLayout(false);
             panel3.ResumeLayout(false);
             guna2Panel2.ResumeLayout(false);
             guna2Panel2.PerformLayout();
@@ -793,7 +812,7 @@
         private PictureBox pictureBox8;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private PictureBox pictureBox9;
-        private Label label7;
+        private Label lb_paydate;
         private Label label6;
         private FlowLayoutPanel flowLayoutItemOder;
         private Panel pn_choice;
@@ -803,5 +822,6 @@
         private DiemTichLuy DiemTichLuy;
         private Label label2;
         private ThanhToan ThanhToan;
+        private FlowLayoutPanel flowpanel_order_history;
     }
 }
