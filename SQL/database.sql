@@ -9,61 +9,25 @@ USE CuaHangTienLoi;
 GO
 
 
--- tạo procedure thêm dữ liệu vào MyVoucher
-CREATE PROCEDURE InsertToMyVoucher
-    @soDienThoai VARCHAR(15),
-    @maVoucher INT
-AS
-BEGIN
-    IF EXISTS(SELECT * FROM MyVoucher WHERE SoDienThoai = @soDienThoai AND MaVoucher = @maVoucher)
-    BEGIN
-        UPDATE MyVoucher SET SoLuong = SoLuong + 1 WHERE SoDienThoai = @soDienThoai AND MaVoucher = @maVoucher;
-    END
-    ELSE
-    BEGIN
-        INSERT INTO MyVoucher(SoDienThoai, MaVoucher) VALUES(@soDienThoai, @maVoucher);
-    END
-END
-go
-
--- procedure liet ke voucher theo ma user
-CREATE PROCEDURE listMyVoucher 
-    @SoDienThoai VARCHAR(15)
-AS
-BEGIN
-    SELECT 
-        V.MaVoucher,
-        V.TenVoucher,
-        V.GiaVoucher,
-        V.HinhAnh,
-		MV.SoLuong
-    FROM 
-        MyVoucher MV
-        JOIN Voucher V ON MV.MaVoucher = V.MaVoucher
-    WHERE 
-        MV.SoDienThoai = @SoDienThoai
-END
-go
-
 -- Tạo bảng nhân viên
 CREATE TABLE NhanVien (
-    SoDienThoai VARCHAR(15) PRIMARY KEY,
+    numberPhone VARCHAR(15) PRIMARY KEY,
     Email VARCHAR(50) NOT NULL,
-    HoTen NVARCHAR(50) NOT NULL,
-    DiaChi NVARCHAR(200) NOT NULL,
-    MatKhau NVARCHAR(20) NOT NULL,
+    name NVARCHAR(50) NOT NULL,
+    address NVARCHAR(200) NOT NULL,
+    password NVARCHAR(20) NOT NULL,
 	DiemTichLuy Int Default 0
 );
 GO
 
 
 --Tạo bảng sản phẩm
-CREATE TABLE SanPham (
-	MaSp INT IDENTITY(1,1) PRIMARY KEY,
-	TenSp NVARCHAR(100) NOT NULL,
-	GiaSP INT NOT NULL,
-	HinhAnh VARCHAR(300) NOT NULL,
-	LoaiSp VARCHAR(10) NOT NULL
+CREATE TABLE Product (
+	idProduct INT IDENTITY(1,1) PRIMARY KEY,
+	nameProduct NVARCHAR(100) NOT NULL,
+	priceProduct INT NOT NULL,
+	imageProduct VARCHAR(300) NOT NULL,
+	typeProduct VARCHAR(10) NOT NULL
 
 );
 GO
@@ -71,13 +35,13 @@ GO
 --Tạo bản GIỏ hàng và Sản phẩm giỏ hàng
 CREATE TABLE Cart (
   idUser VARCHAR(15) PRIMARY KEY,
-  FOREIGN KEY (idUser) REFERENCES NhanVien(SoDienThoai)
+  FOREIGN KEY (idUser) REFERENCES NhanVien(numberPhone)
 );
 
 --drop table cart_item
 
 CREATE TABLE cart_item (
-  item_id VARCHAR(50) PRIMARY KEY,
+  item_id NVARCHAR(255) PRIMARY KEY,
   cart_id VARCHAR(15),
   item_name NVARCHAR(255),
   item_price INt,
@@ -97,11 +61,11 @@ GO
 
 --Tạo bảng MyVoucher
 CREATE TABLE MyVoucher (
-    SoDienThoai VARCHAR(15) NOT NULL,
+    numberPhone VARCHAR(15) NOT NULL,
     MaVoucher INT NOT NULL,
 	SoLuong int default 1,
-    CONSTRAINT PK_MyVoucher PRIMARY KEY (SoDienThoai, MaVoucher),
-    CONSTRAINT FK_MyVoucher_NhanVien FOREIGN KEY (SoDienThoai) REFERENCES NhanVien(SoDienThoai),
+    CONSTRAINT PK_MyVoucher PRIMARY KEY (numberPhone, MaVoucher),
+    CONSTRAINT FK_MyVoucher_NhanVien FOREIGN KEY (numberPhone) REFERENCES NhanVien(numberPhone),
     CONSTRAINT FK_MyVoucher_Voucher FOREIGN KEY (MaVoucher) REFERENCES Voucher(MaVoucher)
 );
 
@@ -114,7 +78,7 @@ CREATE TABLE OrderHistory(
 	paymethod VARCHAR(20),
 	paydate VARCHAR(20),
 	status VARCHAR(20),
-	FOREIGN KEY (idUser) REFERENCES NhanVien(SoDienThoai)
+	FOREIGN KEY (idUser) REFERENCES NhanVien(numberPhone)
 )
 
 GO
@@ -122,10 +86,10 @@ GO
 
 -- Tạo stored procedure để kiểm tra tài khoản đăng nhập
 CREATE PROCEDURE checkLogin
-    @SoDienThoai VARCHAR(50)
+    @numberPhone VARCHAR(50)
 AS
 BEGIN 
-    SELECT SoDienThoai, MatKhau FROM NhanVien WHERE SoDienThoai = @SoDienThoai
+    SELECT numberPhone, password FROM NhanVien WHERE numberPhone = @numberPhone
 END
 GO
 
@@ -135,7 +99,7 @@ CREATE PROCEDURE checkExistAccount
     @password VARCHAR(20)
 AS
 BEGIN
-    SELECT COUNT(*) AS 'Tontai' FROM NhanVien WHERE SoDienThoai LIKE @sdt AND MatKhau LIKE @password
+    SELECT COUNT(*) AS 'Tontai' FROM NhanVien WHERE numberPhone LIKE @sdt AND password LIKE @password
 END
 GO
 
@@ -153,38 +117,113 @@ GO
 CREATE PROCEDURE GetAllProducts
 AS
 BEGIN
-    SELECT * FROM SanPham;
+    SELECT * FROM Product;
 END
 GO
 
 --procude insert Nhanvien
 CREATE PROCEDURE InsertNhanVien
-    @SoDienThoai nvarchar(50),
+    @numberPhone nvarchar(50),
     @Email nvarchar(50),
     @HoTen nvarchar(50),
     @DiaChi nvarchar(50),
-    @MatKhau nvarchar(50)
+    @password nvarchar(50)
 AS
 BEGIN
-    INSERT INTO NhanVien (SoDienThoai, Email, HoTen, DiaChi, MatKhau)
-    VALUES (@SoDienThoai, @Email, @HoTen, @DiaChi, @MatKhau)
+    INSERT INTO NhanVien (numberPhone, Email, name, address, password)
+    VALUES (@numberPhone, @Email, @HoTen, @DiaChi, @password)
 END
 GO
+go
+-- tạo procedure thêm dữ liệu vào MyVoucher
+CREATE PROCEDURE InsertToMyVoucher
+    @numberPhone VARCHAR(15),
+    @maVoucher INT
+AS
+BEGIN
+    IF EXISTS(SELECT * FROM MyVoucher WHERE numberPhone = @numberPhone AND MaVoucher = @maVoucher)
+    BEGIN
+        UPDATE MyVoucher SET SoLuong = SoLuong + 1 WHERE numberPhone = @numberPhone AND MaVoucher = @maVoucher;
+    END
+    ELSE
+    BEGIN
+        INSERT INTO MyVoucher(numberPhone, MaVoucher) VALUES(@numberPhone, @maVoucher);
+    END
+END
+go
+
+-- procedure liet ke voucher theo ma user
+CREATE PROCEDURE listMyVoucher 
+    @numberPhone VARCHAR(15)
+AS
+BEGIN
+    SELECT 
+        V.MaVoucher,
+        V.TenVoucher,
+        V.GiaVoucher,
+        V.HinhAnh,
+		MV.SoLuong
+    FROM 
+        MyVoucher MV
+        JOIN Voucher V ON MV.MaVoucher = V.MaVoucher
+    WHERE 
+        MV.numberPhone = @numberPhone
+END
+
+
+go
+
+
+-- tạo procedure thêm dữ liệu vào MyVoucher
+CREATE PROCEDURE InsertToMyVoucher
+    @numberPhone VARCHAR(15),
+    @maVoucher INT
+AS
+BEGIN
+    IF EXISTS(SELECT * FROM MyVoucher WHERE numberPhone = @numberPhone AND MaVoucher = @maVoucher)
+    BEGIN
+        UPDATE MyVoucher SET SoLuong = SoLuong + 1 WHERE numberPhone = @numberPhone AND MaVoucher = @maVoucher;
+    END
+    ELSE
+    BEGIN
+        INSERT INTO MyVoucher(numberPhone, MaVoucher) VALUES(@numberPhone, @maVoucher);
+    END
+END
+go
+
+-- procedure liet ke voucher theo ma user
+CREATE PROCEDURE listMyVoucher 
+    @numberPhone VARCHAR(15)
+AS
+BEGIN
+    SELECT 
+        V.MaVoucher,
+        V.TenVoucher,
+        V.GiaVoucher,
+        V.HinhAnh,
+		MV.SoLuong
+    FROM 
+        MyVoucher MV
+        JOIN Voucher V ON MV.MaVoucher = V.MaVoucher
+    WHERE 
+        MV.numberPhone = @numberPhone
+END
+go
 
 
 
 
 -- Thêm dữ liệu vào bảng NhanVien
-INSERT INTO NhanVien (SoDienThoai, Email, HoTen, DiaChi, MatKhau)
+INSERT INTO NhanVien (numberPhone, Email, name, address, password)
 VALUES
 ('0977756777', 'LeVanC@gmail.com', N'Lê Văn X',  N'Hồ Chí Minh', '11122222'),
 ('0987654321', 'NguyenVanA@gmail.com', N'Nguyễn Văn A', N'Hà Nội', '123456'),
 ('0912345678', 'TranThiB@gmail.com', N'Trần Thị B', N'Hải Phòng', 'abcdef'),
 ('0977777777', 'LeVanC@gmail.com', N'Lê Văn C', N'Hồ Chí Minh', '111222');
 
---Thêm dữ liệu vào bảng SanPham
+--Thêm dữ liệu vào bảng Product
 
-INSERT INTO SanPham(TenSp, GiaSP, HinhAnh, LoaiSp)
+INSERT INTO Product(nameProduct, priceProduct, imageProduct, typeProduct)
 VALUES
 (N'Bánh Bắp Ngọt Oishi', 14000, 'bno.jpeg', 'DAV'),
 (N'Khoai Tây Chiên Vị Kim Chi OStar ', 17000, 'kco.jpeg', 'DAV'),
@@ -215,13 +254,13 @@ VALUES
 (N'Giảm 40k cho đơn 0đ', 40000, ''),
 (N'Giảm 50k cho đơn 0đ', 50000, '');
 
-INSERT INTO NhanVien (SoDienThoai, Email, HoTen, DiaChi, MatKhau, DiemTichLuy)
+INSERT INTO NhanVien (numberPhone, Email, name, address, password, DiemTichLuy)
 VALUES
 ('0387790894', 'lehuynhphat@gmail.com', N'Lê Huỳnh Phát',  N'Bến Tre', '12345678', 1000000);
 
-insert into MyVoucher (SoDienThoai, MaVoucher) values ('0387790894', 1);
+insert into MyVoucher (numberPhone, MaVoucher) values ('0387790894', 1);
 
-delete from MyVoucher where SoDienThoai = '0387790894' and MaVoucher = '1';
+delete from MyVoucher where numberPhone = '0387790894' and MaVoucher = '1';
 
 -- Thực thi stored procedure để kiểm tra đăng nhập
 EXECUTE checkLogin '0977756777';
@@ -235,11 +274,13 @@ select * from NhanVien
 select * from Voucher
 select * from MyVoucher
 select * from Voucher
-
+select * from Product
 select * from Cart
 select * from cart_item
 delete from OrderHistory
 select * from OrderHistory
+
+update NhanVien set DiemTichLuy = 1000000000 where numberPhone = '0387790894'
 	
 exec listMyVoucher '0387790894'
 

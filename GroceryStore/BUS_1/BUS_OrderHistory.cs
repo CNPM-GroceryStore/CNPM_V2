@@ -12,6 +12,7 @@ namespace BUS_1
     public class BUS_OrderHistory
     {
         DAO_OrderHistory orderHistory = new DAO_OrderHistory();
+
         #region 1. Insert Order History
         public void insertOrderHistory(DTO_User user, DTO_OrderHistory order)
         {
@@ -33,6 +34,11 @@ namespace BUS_1
         }
         #endregion
 
-
+        #region 3. get 5 most recent order
+        public DataTable getRecemtOrder()
+        {
+            return orderHistory.getRecentOrder();
+        }
+        #endregion
     }
 }

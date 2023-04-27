@@ -25,20 +25,31 @@ namespace GroceryStore
         private string status;
 
 
+        [Category("N5")]
         public int Price
         {
             get { return price; }
             set { price = value; lb_price.Text = value.ToString() + "đ"; }
         }
 
-        public string ID { get { return id; } set { id = value; lb_id.Text = value.ToString(); } }
 
-        public string Paymethod { get { return paymethod; } set { paymethod = value; lb_paymethod.Text = value.ToString(); } }
+        [Category("N5")]
+        public String ID { get { return id; } set { id = value; lb_id.Text = value.ToString(); } }
 
-        public string Paydate { get { return paydate; } set { paydate = value; lb_paydate.Text = value.ToString(); } }
 
-        public string Status { get { return status; } set { status = value; lb_status.Text = value.ToString(); } }
+        [Category("N5")]
+        public String Paymethod { get { return paymethod; } set { paymethod = value; lb_paymethod.Text = value.ToString(); } }
 
+
+        [Category("N5")]
+        public String Paydate { get { return paydate; } set { paydate = value; lb_paydate.Text = value.ToString(); } }
+
+
+        [Category("N5")]
+        public String Status { get { return status; } set { status = value; lb_status.Text = value.ToString(); } }
+
+
+        [Category("N5")]
         public int Amount { get { return amount; } set { amount = value; lb_amount.Text = value.ToString(); } }
 
         private void label3_Click(object sender, EventArgs e)

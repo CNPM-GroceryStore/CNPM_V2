@@ -62,7 +62,9 @@ namespace GroceryStore
 
         public void clear()
         {
-            this.Controls.Clear();
+            TienThanhToan = 0;
+            DiemTichLuy = 0;
+            TongTien = 0;
         }
     }
 }

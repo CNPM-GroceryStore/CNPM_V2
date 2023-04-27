@@ -9,7 +9,7 @@ namespace DTO
     public class DTO_Voucher
     {
         public int MaVoucher { get; set; }
-        public string TenVoucher { get; set; }
+        public string TenVoucher { get; set; }  
         public int GiaVoucher { get; set; }
         public string HinhAnh { get; set; }
 

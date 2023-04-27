@@ -399,8 +399,6 @@ namespace GroceryStore
                 totalMoney += item.Price * item.Quantity;
             }
             ThanhToan.TongTien = totalMoney;
-            //lb_totalMoney.Text = totalMoney.ToString() + " đ";
-            //lb_pay.Text = totalMoney.ToString() + " đ";
         }
 
         //Show product in user's cart
@@ -435,6 +433,7 @@ namespace GroceryStore
                 panel2.Size = new Size((int)(0.7 * this.Width), (int)(0.75 * this.Height));
                 flowLayout.Size = new Size((int)(0.67 * this.Width), (int)(0.68 * this.Height));
                 flowpanel_order_history.Size = new Size((int)(0.3 * this.Width), (int)(0.68 * this.Height));
+                //flowLayoutItemOder.Size = new Size((int)(0.3 * this.Width), (int)(0.32 * this.Height));
             }
             else
             {
@@ -562,7 +561,7 @@ namespace GroceryStore
         //CLick Order History
         private void click_orderHistory(object sender, EventArgs e)
         {
-            flowpanel_order_history.Visible = true;
+            flowpanel_order_history.Controls.Clear();
             BUS_OrderHistory orderHistory = new BUS_OrderHistory();
             foreach (DTO_OrderHistory dTO_OrderHistory in orderHistory.showALl(user))
             {
@@ -572,7 +571,13 @@ namespace GroceryStore
                 string paymethod = dTO_OrderHistory.paymethod;
                 string paydate = dTO_OrderHistory.paydate;
                 string status = dTO_OrderHistory.status;
-                OrderHistoryItem orderHistoryItem = new OrderHistoryItem(id, price, amount, paymethod, paydate, status);
+                OrderHistoryItem orderHistoryItem = new OrderHistoryItem();
+                orderHistoryItem.ID = id;
+                orderHistoryItem.Price = price;
+                orderHistoryItem.Amount = amount;
+                orderHistoryItem.Paymethod = paymethod;
+                orderHistoryItem.Paydate = paydate;
+                orderHistoryItem.Status = status;
                 flowpanel_order_history.Controls.Add(orderHistoryItem);
 
             }
@@ -581,6 +586,12 @@ namespace GroceryStore
         private void click_order(object sender, EventArgs e)
         {
             flowpanel_order_history.Visible = false;
+        }
+
+        private void showOrderHistory(object sender, EventArgs e)
+        {
+            flowpanel_order_history.Visible = true;
+            click_orderHistory(sender, e);
         }
     }
 }
