@@ -13,16 +13,16 @@ namespace DAO
         #region 1. Show all products 
         public DataTable showAllProducts()
         {
-            string statement = "SELECT nameProduct, priceProduct, imageProduct, typeProduct FROM Product";
-            return DataProvider.Instance.ExecuteQuery(statement);
+            string statement = "usp_ShowAllProducts";
+            return DataProvider.Instance.ExecuteStoredProcedureSelect(statement);
         }
         #endregion
 
         #region 2. show products by type
         public DataTable getProductsByType(String type)
         {
-            string statement = $"SELECT nameProduct, priceProduct, imageProduct, typeProduct FROM Product WHERE typeProduct = @typeProduct";
-            return DataProvider.Instance.ExecuteQuery(statement, new object[] { type });
+            string statement = $"getProductsByType @typeProduct";
+            return DataProvider.Instance.ExecuteStoredProcedureSelect(statement, new object[] { type });
             
         }
         #endregion 
@@ -30,8 +30,8 @@ namespace DAO
         #region 3. show products by name
         public DataTable getProductsByName(String name)
         {
-            string statement = $"SELECT * FROM Product WHERE nameProduct = @nameProduct";
-            return DataProvider.Instance.ExecuteQuery(statement, new object[] { name });
+            string statement = $"getProductsByName @nameProduct";
+            return DataProvider.Instance.ExecuteStoredProcedureSelect(statement, new object[] { name });
 
         }
         #endregion 

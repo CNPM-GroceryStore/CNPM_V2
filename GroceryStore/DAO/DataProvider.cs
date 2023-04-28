@@ -18,9 +18,8 @@ namespace DAO
             set { instance = value; }
         }
 
-        String connectString = @"Data Source=MSI;Initial Catalog=CuaHangTienLoi;Integrated Security=True";
-        //String connectString = @"Data Source = LAPTOP-VVRRVKK8; Initial Catalog = CuaHangTienLoi; Integrated Security = True";
-
+        //String connectString = @"Data Source=MSI;Initial Catalog=CuaHangTienLoi;Integrated Security=True";
+        String connectString = @"Data Source = LAPTOP-VVRRVKK8; Initial Catalog = CuaHangTienLoi; Integrated Security = True";
         //String conn = $"{}"
         public DataTable ExecuteQuery(string query, object[] parameters = null)
         {
@@ -109,17 +108,20 @@ namespace DAO
                     for (int i = 0; i < parameters.Length; i++)
                     {
                         command.Parameters.AddWithValue(paraNames[i + 1], parameters[i]);
+
                     }
                 }
 
                 try
                 {
                     conn.Open();
+                    System.Diagnostics.Debug.Print(command.CommandText);
                     command.ExecuteNonQuery();
                     conn.Close();
                 }
                 catch (Exception ex)
                 {
+                    System.Diagnostics.Debug.Print("Error: " + ex.Message);
                     Console.WriteLine("Error: " + ex.Message);
                 }
             }
@@ -152,13 +154,47 @@ namespace DAO
                 }
                 catch (Exception ex)
                 {
+                    System.Diagnostics.Debug.Print("Error: " + ex.Message);
                     Console.WriteLine("Error: " + ex.Message);
                 }
                 return results;
             }
         }
 
+        public double ExecuteStoredProcedureScalar(string statement, object[] parameters = null)
+        {
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+                string[] paraNames = statement.Split(' ', ',', '@').Where(s => !string.IsNullOrEmpty(s)).ToArray();
+                SqlCommand command = new SqlCommand(paraNames[0], conn);
+                command.CommandType = CommandType.StoredProcedure;
+                if (parameters != null)
+                {
+                    for (int i = 0; i < parameters.Length; i++)
+                    {
+                        command.Parameters.AddWithValue(paraNames[i + 1], parameters[i]);
+                    }
+                }
 
+                double result = 0;
+                try
+                {
+                    conn.Open();
+                    object scalarResult = command.ExecuteScalar();
+                    if (scalarResult != null)
+                    {
+                        result = Convert.ToDouble(scalarResult);
+                    }
+                    conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.Print("Error: " + ex.Message);
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                return result;
+            }
+        }
 
     }
 }

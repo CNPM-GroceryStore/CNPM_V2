@@ -13,7 +13,7 @@ namespace DAO
         #region 1. Show all Voucher of User
         public DataTable showAllUserVouchers(String idUser)
         {
-            string statement = "listMyVoucher @SoDienThoai";
+            string statement = "listMyVoucher @numberPhone";
             return DataProvider.Instance.ExecuteStoredProcedureSelect(statement, new object[] { idUser });
         }
         #endregion

@@ -13,8 +13,8 @@ namespace DAO
         #region 1. Insert product
         public void insertProduct(DTO_Product product)
         {
-            string statement = "INSERT INTO Product (nameProduct, priceProduct, imageProduct, typeProduct) VALUES ( @nameProduct , @priceProduct , @imageProduct , @typeProduct )";
-            DataProvider.Instance.ExecuteNonQuery(statement, new object[] { product.TenSP, product.GiaSP, product.HinhAnh , product.LoaiSP});
+            string statement = "insertProduct @nameProduct , @priceProduct , @imageProduct , @typeProduct";
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { product.TenSP, product.GiaSP, product.HinhAnh , product.LoaiSP});
         }
         #endregion
 
@@ -22,8 +22,8 @@ namespace DAO
         #region 2. Delete product
         public void deleteProduct(DTO_Product product)
         {
-            string statement = "DELETE FROM Product WHERE idProduct = @idProduct";
-            DataProvider.Instance.ExecuteNonQuery(statement, new object[] {product.MaSP});
+            string statement = "deleteProduct @idProduct";
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] {product.MaSP});
         }
         #endregion
 
@@ -31,8 +31,8 @@ namespace DAO
         #region 3. Update product
         public void updateProduct(DTO_Product product)
         {
-            string statement = "UPDATE Product SET nameProduct = @nameProduct , priceProduct = @priceProduct , imageProduct = @imageProduct , typeProduct = @typeProduct";
-            DataProvider.Instance.ExecuteNonQuery(statement, new object[] { product.TenSP, product.GiaSP, product.HinhAnh , product.LoaiSP});
+            string statement = "updateProduct @nameProduct , @priceProduct , @imageProduct , @typeProduct, @idProduct";
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { product.TenSP, product.GiaSP, product.HinhAnh , product.LoaiSP});
         }
         #endregion
 
@@ -40,8 +40,9 @@ namespace DAO
 
         public bool checkExistsProduct(DTO_Product product)
         {
-            string statement = "SELECT nameProduct , priceProduct , imageProduct FROM Product WHERE nameProduct = @nameProduct , priceProduct = @priceProduct , imageProduct = @imageProduct , typeProduct = @typeProduct";
-            if (DataProvider.Instance.ExecuteNonQuery(statement, new object[] { product.TenSP, product.LoaiSP }) > 0)
+            string statement = "checkExistsProduct @nameProduct, @priceProduct, @imageProduct, @typeProduct";
+            int count = (Int32)DataProvider.Instance.ExecuteStoredProcedureScalar(statement, new object[] { product.TenSP, product.GiaSP, product.HinhAnh, product.LoaiSP });
+            if (count > 0)
             {
                 return true;
             }

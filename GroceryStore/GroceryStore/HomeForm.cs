@@ -299,8 +299,9 @@ namespace GroceryStore
             ProductOrderItem order = findProductItem(obj);
             order.NumberOfItem += 1;
             BUS_Cart cart = new BUS_Cart();
-            if (!cart.checkExistCart(user))
+            if (cart.checkExistCart(user) == false)
             {
+                MessageBox.Show("aaaaaaaaaaaaaaaaaaa");
                 cart.createCart(user);
             }
             if (order.NumberOfItem == 1)
@@ -471,6 +472,7 @@ namespace GroceryStore
             }
         }
 
+        // click doi voucher
         private void select_DoiVoucher(object sender, EventArgs e)
         {
             Voucher obj = (Voucher)sender;
@@ -500,7 +502,7 @@ namespace GroceryStore
             }
         }
 
-
+        //click use my voucher
         private void select_UseMyVoucher(object sender, EventArgs e)
         {
             MyVoucher obj = (MyVoucher)sender;
@@ -510,6 +512,7 @@ namespace GroceryStore
             }
         }
 
+        //click bo MyVoucher
         private void select_BoMyVoucher(object sender, EventArgs e)
         {
             MyVoucher obj = (MyVoucher)sender;
@@ -518,6 +521,7 @@ namespace GroceryStore
         }
 
 
+        // Click ma cua toi
         private void btn_maCuaToi_Click(object sender, EventArgs e)
         {
             myVouchers.Clear();
@@ -526,6 +530,7 @@ namespace GroceryStore
             loadformMyVoucher();
         }
 
+        // click mua
         private void select_Mua(object sender, EventArgs e)
         {
             //MessageBox.Show($"Khách hàng đã thanh toán {ThanhToan.TienThanhToan}");
@@ -583,11 +588,13 @@ namespace GroceryStore
             }
         }
 
+        // click gio hang
         private void click_order(object sender, EventArgs e)
         {
             flowpanel_order_history.Visible = false;
         }
 
+        // click lich su gio hang
         private void showOrderHistory(object sender, EventArgs e)
         {
             flowpanel_order_history.Visible = true;

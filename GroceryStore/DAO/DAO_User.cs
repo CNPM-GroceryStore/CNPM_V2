@@ -13,32 +13,32 @@ namespace DAO
         #region 1. show all info of user
         public DataTable showAllUser()
         {
-            string statement = "SELECT numberPhone, Email, name, address, DiemTichLuy FROM NhanVien";
-            return DataProvider.Instance.ExecuteQuery(statement);
+            string statement = "showAllUser";
+            return DataProvider.Instance.ExecuteStoredProcedureSelect(statement);
         }
         #endregion
 
         #region 2. create account for user
         public void registerAccount(DTO_User user)
         {
-            string statement = "INSERT INTO NhanVien (numberPhone, Email, name, address, password) VALUES ( @Phone , @Email , @Name , @Address , @Password )";
-            DataProvider.Instance.ExecuteNonQuery(statement, new object[] { user.IdUser, user.EmailUser, user.NameUser, user.AddressUser, user.PasswordUser });
+            string statement = "registerAccount @Phone , @Email , @Name , @Address , @Password";
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { user.IdUser, user.EmailUser, user.NameUser, user.AddressUser, user.PasswordUser });
         }
         #endregion
 
         #region 3. update account for user
         public void updateAccount(DTO_User user)
         {
-            string statement = "UPDATE NhanVien SET numberPhone = @numberPhone , Email = @Email , name = @name , address = @address , password = @password";
-            DataProvider.Instance.ExecuteNonQuery(statement, new object[] { user.IdUser, user.EmailUser, user.NameUser, user.AddressUser, user.PasswordUser});
+            string statement = "updateAccount @Phone , @Email , @Name , @Address , @Password, @numberPhone";
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { user.IdUser, user.EmailUser, user.NameUser, user.AddressUser, user.PasswordUser});
         }
         #endregion
 
         #region 4. delete account for user
         public void deleteAccount(DTO_User user)
         {
-            string statement = "DELETE FROM NhanVien WHERE numberPhone = @numberPhone";
-            DataProvider.Instance.ExecuteNonQuery(statement, new object[] { user.IdUser });
+            string statement = "deleteAccount @numberPhone";
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { user.IdUser });
         }
         #endregion
 
@@ -48,8 +48,8 @@ namespace DAO
             DataTable dataTable = new DataTable();
             if (checkAccount(user))
             {
-                string statement = "SELECT numberPhone, Email, name, address, DiemTichLuy FROM NhanVien WHERE numberPhone = @numberPhone";
-                dataTable = DataProvider.Instance.ExecuteQuery(statement, new object[] { user.IdUser});
+                string statement = "loginAccount @numberPhone";
+                dataTable = DataProvider.Instance.ExecuteStoredProcedureSelect(statement, new object[] { user.IdUser});
             }
             return dataTable;
         }
@@ -58,8 +58,8 @@ namespace DAO
         #region 6. Check account exist
         public bool checkAccount(DTO_User user)
         {
-            string statement = "SELECT COUNT(numberPhone) AS 'Tontai' FROM NhanVien WHERE numberPhone LIKE @sdt";
-            int count = Convert.ToInt32(DataProvider.Instance.ExecuteScalar(statement, new object[] { user.IdUser}));
+            string statement = "checkAccount @numberPhone";
+            int count = Convert.ToInt32(DataProvider.Instance.ExecuteStoredProcedureScalar(statement, new object[] { user.IdUser}));
             if (count > 0)
             {
                 return true;
@@ -71,8 +71,8 @@ namespace DAO
         #region 7. update point for user
         public void updatePoint(String idUser, int point)
         {
-            string statement = "update NhanVien Set DiemTichLuy = @DiemTichLuy where numberPhone = @numberPhone";
-            DataProvider.Instance.ExecuteNonQuery(statement, new object[] { point, idUser });
+            string statement = "updatePoint @numberPhone, @DiemTichLuy";
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { idUser, point });
         }
         #endregion
     }
