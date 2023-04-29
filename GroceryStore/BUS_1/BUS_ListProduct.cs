@@ -12,36 +12,13 @@ namespace BUS
 {
     public class BUS_ListProduct
     {
-        #region 1. Insert products
-        public void insertProduct(DTO_ListProduct products)
-        {
-            foreach (DTO_Product product in products.GetAll())
-            {
-                DAO_Product dAO_Product = new DAO_Product();
-                dAO_Product.insertProduct(product);
-            }
-        }
-        #endregion
-
-
-        #region 2.Delete products
-        public void deleteProducts(DTO_ListProduct products)
-        {
-            foreach (DTO_Product product in products.GetAll())
-            {
-                DAO_Product dAO_Product = new DAO_Product();
-                dAO_Product.deleteProduct(product);
-            }
-        }
-        #endregion
-
         #region 3. Show all products
         public void showAllProduct(List<DTO_Product> products)
         {
             DAO_ListProduct dAO_listProduct = new DAO_ListProduct();
             foreach (DataRow row in dAO_listProduct.showAllProducts().Rows)
             {
-                DTO_Product product = new DTO_Product((String)row[0], Convert.ToInt32(row[1]), (String)row[2], (String)row[3]);
+                DTO_Product product = new DTO_Product((int)row[0], (String)row[1], Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), (String)row[4], (String)row[5], (string)row[6], row[7].ToString());
                 products.Add(product);
             }
         }
@@ -109,7 +86,7 @@ namespace BUS
         }
         #endregion
 
-        #region 7.Show products by type
+        #region 7.Show products by name
         public void showProductByName(List<DTO_Product> products, String name)
         {
             DAO_ListProduct dAO_listProduct = new DAO_ListProduct();

@@ -52,6 +52,7 @@ namespace GroceryStore
             lb_nameUser1.Text = name;
             //gán giá trị cho comboBox
             cbb_payment.SelectedIndex = 0;
+            lb_paydate.Text = DateTime.Now.ToString();
             //tạo mảng chưa sản phẩm
 
             List<DTO_Product> products = new List<DTO_Product>();
@@ -207,6 +208,14 @@ namespace GroceryStore
                 }
                 flowLayout.Controls.Add(listMyVoucher[i]);
             }
+        }
+
+        //Go to admin form
+        private void btn_settings_Click(object sender, EventArgs e)
+        {
+            Form adminForm = new AdminForm();
+            adminForm.Show();
+            this.Hide();
         }
 
 
@@ -432,13 +441,14 @@ namespace GroceryStore
             {
                 panel2.Size = new Size((int)(0.7 * this.Width), (int)(0.75 * this.Height));
                 flowLayout.Size = new Size((int)(0.67 * this.Width), (int)(0.68 * this.Height));
-                flowpanel_order_history.Size = new Size((int)(0.3 * this.Width), (int)(0.68 * this.Height));
+                flowpanel_order_history.Size = new Size((int)(0.3 * this.Width), (int)(0.64 * this.Height));
                 //flowLayoutItemOder.Size = new Size((int)(0.3 * this.Width), (int)(0.32 * this.Height));
             }
             else
             {
                 panel2.Size = new Size((int)(0.5 * this.Width), (int)(0.78 * this.Height));
                 flowLayout.Size = new Size((int)(0.5 * this.Width), (int)(0.68 * this.Height));
+                flowpanel_order_history.Size = new Size((int)(0.45 * this.Width), (int)(0.57 * this.Height));
             }
         }
 
@@ -532,7 +542,6 @@ namespace GroceryStore
             ////DialogResult dialog = new DialogResult();
 
             BUS_OrderHistory order = new BUS_OrderHistory();
-            DialogResult dialog = MessageBox.Show($"Khách hàng đã thanh toán {ThanhToan.TienThanhToan}", "Thông báo", MessageBoxButtons.YesNo);
             BUS_Cart cart = new BUS_Cart();
             BUS_User bUS_User = new BUS_User();
             bUS_User.updatePoint(user, ThanhToan.DiemTichLuy);
@@ -541,20 +550,28 @@ namespace GroceryStore
             string paymethod = cbb_payment.Text;
             string paydate = lb_paydate.Text;
             string status = "";
-            if (dialog == DialogResult.Yes)
+            if (amount > 0 && paymethod != "Thanh toán")
             {
-                status = "Hoàn thành";
-                cart.deleteCart(user);
-                flowLayoutItemOder.Controls.Clear();
-                ThanhToan.clear();
+                DialogResult dialog = MessageBox.Show($"Khách hàng đã thanh toán {ThanhToan.TienThanhToan}", "Thông báo", MessageBoxButtons.YesNo);
+                if (dialog == DialogResult.Yes)
+                {
+                    status = "Hoàn thành";
+                    cart.deleteCart(user);
+                    flowLayoutItemOder.Controls.Clear();
+                    ThanhToan.clear();
+                }
+                else
+                {
+                    status = "Chưa hoàn thành";
+                }
+
+                DTO_OrderHistory orderHistoryItem = new DTO_OrderHistory(price, amount, paymethod, status, paydate);
+                order.insertOrderHistory(user, orderHistoryItem);
             }
             else
             {
-                status = "Chưa hoàn thành";
+                MessageBox.Show("Chưa có sản phẩm nào được chọn hoặc chưa chọn phương thức thanh toán");
             }
-
-            DTO_OrderHistory orderHistoryItem = new DTO_OrderHistory(price, amount, paymethod, paydate, status);
-            order.insertOrderHistory(user, orderHistoryItem);
 
         }
 

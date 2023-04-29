@@ -21,7 +21,7 @@ namespace BUS_1
         #endregion
 
         #region 2. Show all OrderHistory
-        public List<DTO_OrderHistory> showALl(DTO_User user)
+        public List<DTO_OrderHistory> showALl(DTO_User user=null)
         {
             List<DTO_OrderHistory> orders = new List<DTO_OrderHistory>();
             foreach (DataRow row in orderHistory.showAll(user).Rows)
@@ -35,9 +35,16 @@ namespace BUS_1
         #endregion
 
         #region 3. get 5 most recent order
-        public DataTable getRecemtOrder()
+        public DataTable getRecentOrder()
         {
             return orderHistory.getRecentOrder();
+        }
+        #endregion
+
+        #region
+        public double getTurnover()
+        {
+            return orderHistory.getTurnover();
         }
         #endregion
     }

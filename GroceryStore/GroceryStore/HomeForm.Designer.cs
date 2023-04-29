@@ -60,7 +60,7 @@
             pn_choice = new Panel();
             guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             label2 = new Label();
-            pictureBox4 = new PictureBox();
+            pt_settings = new PictureBox();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             lb_nameUser2 = new Label();
             pictureBox3 = new PictureBox();
@@ -94,7 +94,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             guna2ShadowPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pt_settings).BeginInit();
             guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btn_search).BeginInit();
@@ -332,7 +332,7 @@
             guna2ShadowPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             guna2ShadowPanel1.BackColor = Color.Transparent;
             guna2ShadowPanel1.Controls.Add(label2);
-            guna2ShadowPanel1.Controls.Add(pictureBox4);
+            guna2ShadowPanel1.Controls.Add(pt_settings);
             guna2ShadowPanel1.Controls.Add(guna2Panel1);
             guna2ShadowPanel1.Controls.Add(btn_search);
             guna2ShadowPanel1.Controls.Add(tb_search);
@@ -356,17 +356,18 @@
             label2.TabIndex = 12;
             label2.Text = "label2";
             // 
-            // pictureBox4
+            // pt_settings
             // 
-            pictureBox4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            pictureBox4.Image = Properties.Resources.settings;
-            pictureBox4.Location = new Point(907, 43);
-            pictureBox4.Margin = new Padding(3, 4, 3, 4);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(47, 55);
-            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox4.TabIndex = 11;
-            pictureBox4.TabStop = false;
+            pt_settings.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pt_settings.Image = Properties.Resources.settings;
+            pt_settings.Location = new Point(907, 43);
+            pt_settings.Margin = new Padding(3, 4, 3, 4);
+            pt_settings.Name = "pt_settings";
+            pt_settings.Size = new Size(47, 55);
+            pt_settings.SizeMode = PictureBoxSizeMode.Zoom;
+            pt_settings.TabIndex = 11;
+            pt_settings.TabStop = false;
+            pt_settings.Click += btn_settings_Click;
             // 
             // guna2Panel1
             // 
@@ -557,7 +558,7 @@
             flowpanel_order_history.BackColor = SystemColors.Control;
             flowpanel_order_history.Location = new Point(6, 171);
             flowpanel_order_history.Name = "flowpanel_order_history";
-            flowpanel_order_history.Size = new Size(472, 504);
+            flowpanel_order_history.Size = new Size(472, 501);
             flowpanel_order_history.TabIndex = 5;
             flowpanel_order_history.Visible = false;
             // 
@@ -755,7 +756,7 @@
             panel1.ResumeLayout(false);
             guna2ShadowPanel1.ResumeLayout(false);
             guna2ShadowPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pt_settings).EndInit();
             guna2Panel1.ResumeLayout(false);
             guna2Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
@@ -792,7 +793,7 @@
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Label lb_nameUser2;
         private PictureBox pictureBox3;
-        private PictureBox pictureBox4;
+        private PictureBox pt_settings;
         private Panel panel2;
         private Label lb_chonDanhMuc;
         private FlowLayoutPanel flowLayout;

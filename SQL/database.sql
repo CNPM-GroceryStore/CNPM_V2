@@ -25,10 +25,12 @@ GO
 CREATE TABLE Product (
 	idProduct INT IDENTITY(1,1) PRIMARY KEY,
 	nameProduct NVARCHAR(100) NOT NULL,
+	amountProduct INT NOT NULL, 
 	priceProduct INT NOT NULL,
-	imageProduct VARCHAR(300) NOT NULL,
-	typeProduct VARCHAR(10) NOT NULL
-
+	imageProduct NVARCHAR(300) NOT NULL,
+	typeProduct VARCHAR(10) NOT NULL,
+	shipment VARCHAR(20) NOT NULL,
+	shelflife date NOT NULL
 );
 GO
 
@@ -75,8 +77,8 @@ CREATE TABLE OrderHistory(
 	idUser VARCHAR(15),
 	price INT,
 	amount INT,
-	paymethod VARCHAR(20),
-	paydate VARCHAR(20),
+	paymethod NVARCHAR(20),
+	paydate date,
 	status VARCHAR(20),
 	FOREIGN KEY (idUser) REFERENCES NhanVien(numberPhone)
 )
@@ -134,6 +136,8 @@ BEGIN
     VALUES (@numberPhone, @Email, @HoTen, @DiaChi, @password)
 END
 GO
+
+
 go
 -- tạo procedure thêm dữ liệu vào MyVoucher
 CREATE PROCEDURE InsertToMyVoucher
@@ -152,44 +156,7 @@ BEGIN
 END
 go
 
--- procedure liet ke voucher theo ma user
-CREATE PROCEDURE listMyVoucher 
-    @numberPhone VARCHAR(15)
-AS
-BEGIN
-    SELECT 
-        V.MaVoucher,
-        V.TenVoucher,
-        V.GiaVoucher,
-        V.HinhAnh,
-		MV.SoLuong
-    FROM 
-        MyVoucher MV
-        JOIN Voucher V ON MV.MaVoucher = V.MaVoucher
-    WHERE 
-        MV.numberPhone = @numberPhone
-END
 
-
-go
-
-
--- tạo procedure thêm dữ liệu vào MyVoucher
-CREATE PROCEDURE InsertToMyVoucher
-    @numberPhone VARCHAR(15),
-    @maVoucher INT
-AS
-BEGIN
-    IF EXISTS(SELECT * FROM MyVoucher WHERE numberPhone = @numberPhone AND MaVoucher = @maVoucher)
-    BEGIN
-        UPDATE MyVoucher SET SoLuong = SoLuong + 1 WHERE numberPhone = @numberPhone AND MaVoucher = @maVoucher;
-    END
-    ELSE
-    BEGIN
-        INSERT INTO MyVoucher(numberPhone, MaVoucher) VALUES(@numberPhone, @maVoucher);
-    END
-END
-go
 
 -- procedure liet ke voucher theo ma user
 CREATE PROCEDURE listMyVoucher 
@@ -211,6 +178,12 @@ END
 go
 
 
+CREATE PROC showTurnover
+AS 
+BEGIN
+	SELECT SUM(price) FROM OrderHistory WHERE MONTH(paydate) = MONTH(CURRENT_TIMESTAMP)
+END
+GO
 
 
 -- Thêm dữ liệu vào bảng NhanVien
@@ -223,26 +196,26 @@ VALUES
 
 --Thêm dữ liệu vào bảng Product
 
-INSERT INTO Product(nameProduct, priceProduct, imageProduct, typeProduct)
+INSERT INTO Product(nameProduct, amountProduct, priceProduct, imageProduct, typeProduct, shipment, shelflife)
 VALUES
-(N'Bánh Bắp Ngọt Oishi', 14000, 'bno.jpeg', 'DAV'),
-(N'Khoai Tây Chiên Vị Kim Chi OStar ', 17000, 'kco.jpeg', 'DAV'),
-(N'Khoai Tây Chiên Vị Bò Bít Tết Swing', 28000, 'bts.jpeg', 'DAV'),
-(N'Khoai Tây Chiên Vị Rong Biển OStar', 17000, 'rbo.jpeg', 'DAV'),
-(N'Mì Trộn Xúc Xích Trứng Chiên', 34000, 'ccdc.jpeg', 'DA'),
-(N'Mì Hảo Hảo', 5000, 'mhh.jpg', 'DA'),
-(N'Bánh Mì Ốp La 2 Trứng', 19000, 'mtxxt.png', 'DA'),
-(N'Xúc Xích', 20000, 'xx.png', 'DA'),
-(N'Bông Tẩy Trang Jomi', 37000, 'jomi.jpeg', 'DGD'),
-(N'Bật Lửa J3 Bic', 16000, 'j3.jpeg', 'DGD'),
-(N'Sữa tắm nước hoa Romano Classic sạch sảng khoái 650g', 175000, 'romano.jpeg', 'DGD'),
-(N'Nước Súc Miệng Listerine Bạc Hà 250ml', 90000, 'bh.jpeg', 'DGD'),
-(N'Khăn Giấy Ướt Yuniku Lài 90 Miếng', 37000, 'yuni.jpeg', 'DGD'),
-(N'Sữa tươi cà phê', 25000, 'cps.png', 'DU'),
-(N'Trà đào', 30000, 'td.png', 'DU'),
-(N'Cà phê đen đá', 15000, 'cpd.png', 'DU'),
-(N'Trà sữa thái', 18000, 'ol.jpeg', 'DU'),
-(N'Cà phê phin sữa đá', 18000, 'psd.png', 'DU');
+(N'Bánh Bắp Ngọt Oishi', 10,  14000, 'bno.jpeg', 'DAV', '290','4/28/2023'),
+(N'Khoai Tây Chiên Vị Kim Chi OStar ', 10, 17000, 'kco.jpeg', 'DAV', '290','4/28/2023'),
+(N'Khoai Tây Chiên Vị Bò Bít Tết Swing', 10, 28000, 'bts.jpeg', 'DAV', '290','4/28/2023'),
+(N'Khoai Tây Chiên Vị Rong Biển OStar', 10, 17000, 'rbo.jpeg', 'DAV', '290','4/28/2023'),
+(N'Mì Trộn Xúc Xích Trứng Chiên', 10, 34000, 'ccdc.jpeg', 'DA', '290','4/28/2023'),
+(N'Mì Hảo Hảo', 10, 5000, 'mhh.jpg', 'DA', '290','4/28/2023'),
+(N'Bánh Mì Ốp La 2 Trứng', 10, 19000, 'mtxxt.png', 'DA', '290','4/28/2023'),
+(N'Xúc Xích', 10, 20000, 'xx.png', 'DA', '290','4/28/2023'),
+(N'Bông Tẩy Trang Jomi', 10, 37000, 'jomi.jpeg', 'DGD', '290','4/28/2023'),
+(N'Bật Lửa J3 Bic', 10, 16000, 'j3.jpeg', 'DGD', '290','4/28/2023'),
+(N'Sữa tắm nước hoa Romano Classic sạch sảng khoái 650g', 10, 175000, 'romano.jpeg', 'DGD', '290','4/28/2023'),
+(N'Nước Súc Miệng Listerine Bạc Hà 250ml', 10, 90000, 'bh.jpeg', 'DGD', '290','4/28/2023'),
+(N'Khăn Giấy Ướt Yuniku Lài 90 Miếng', 10, 37000, 'yuni.jpeg', 'DGD', '290','4/28/2023'),
+(N'Sữa tươi cà phê', 10, 25000, 'cps.png', 'DU', '290','4/28/2023'),
+(N'Trà đào', 10, 30000, 'td.png', 'DU', '290','4/28/2023'),
+(N'Cà phê đen đá', 10, 15000, 'cpd.png', 'DU', '290','4/28/2023'),
+(N'Trà sữa thái', 10, 18000, 'ol.jpeg', 'DU', '290','4/28/2023'),
+(N'Cà phê phin sữa đá', 10, 18000, 'psd.png', 'DU', '290','4/28/2023');
 
 
 --Thêm dữ liệu vào bảng Voucher
@@ -276,11 +249,12 @@ select * from MyVoucher
 select * from Voucher
 select * from Product
 select * from Cart
-select * from cart_item
-delete from OrderHistory
+select* from cart_item
 select * from OrderHistory
 
 update NhanVien set DiemTichLuy = 1000000000 where numberPhone = '0387790894'
 	
 exec listMyVoucher '0387790894'
+exec showTurnover
+
 

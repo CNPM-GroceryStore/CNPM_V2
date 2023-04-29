@@ -13,7 +13,7 @@ namespace DAO
         #region 1. Show all products 
         public DataTable showAllProducts()
         {
-            string statement = "SELECT nameProduct, priceProduct, imageProduct, typeProduct FROM Product";
+            string statement = "SELECT idProduct, nameProduct, amountProduct, priceProduct, imageProduct, typeProduct, shipment, shelflife FROM Product";
             return DataProvider.Instance.ExecuteQuery(statement);
         }
         #endregion

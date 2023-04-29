@@ -158,7 +158,39 @@ namespace DAO
             }
         }
 
+        public double ExecuteStoredProcedureScalar(string statement, object[] parameters = null)
+        {
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+                string[] paraNames = statement.Split(' ', ',', '@').Where(s => !string.IsNullOrEmpty(s)).ToArray();
+                SqlCommand command = new SqlCommand(paraNames[0], conn);
+                command.CommandType = CommandType.StoredProcedure;
+                if (parameters != null)
+                {
+                    for (int i = 0; i < parameters.Length; i++)
+                    {
+                        command.Parameters.AddWithValue(paraNames[i + 1], parameters[i]);
+                    }
+                }
 
+                double result = 0;
+                try
+                {
+                    conn.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        result = command.ExecuteNonQuery();
+                    }
+                    conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.Print("Error: " + ex.Message);
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                return result;
+            }
+        }
 
     }
 }

@@ -146,7 +146,7 @@
             // 
             lb_paydate.AutoSize = true;
             lb_paydate.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            lb_paydate.Location = new Point(344, 31);
+            lb_paydate.Location = new Point(252, 31);
             lb_paydate.Name = "lb_paydate";
             lb_paydate.Size = new Size(87, 23);
             lb_paydate.TabIndex = 9;

@@ -15,12 +15,9 @@ namespace GroceryStore.BUS
         public bool insertProduct(DTO_Product product)
         {
             DAO_Product dAO_Product = new DAO_Product();
-            if(!dAO_Product.checkExistsProduct(product))
-            {
-                dAO_Product.insertProduct(product);
-                return true;
-            }
-            return false;
+
+            dAO_Product.insertProduct(product);
+            return true;
         }
         #endregion
 
