@@ -14,7 +14,7 @@ namespace DAO
         public void insertProduct(DTO_Product product)
         {
             string statement = "insertProduct @nameProduct , @amountProduct , @priceProduct , @imageProduct , @typeProduct , @shipment , @shelflife ";
-            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { product.TenSP, product.Amount, product.GiaSP, product.HinhAnh , product.LoaiSP, produt.Shipment, DateTime.Parse(product.Shelflife) });
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { product.TenSP, product.Amount, product.GiaSP, product.HinhAnh , product.LoaiSP, product.Shipment, DateTime.Parse(product.Shelflife) });
         }
         #endregion
 
