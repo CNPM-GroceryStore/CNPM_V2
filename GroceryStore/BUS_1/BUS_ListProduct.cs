@@ -16,6 +16,7 @@ namespace BUS
         public void showAllProduct(List<DTO_Product> products)
         {
             DAO_ListProduct dAO_listProduct = new DAO_ListProduct();
+            products.Clear();
             foreach (DataRow row in dAO_listProduct.showAllProducts().Rows)
             {
                 DTO_Product product = new DTO_Product((int)row[0], (String)row[1], Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), (String)row[4], (String)row[5], (string)row[6], row[7].ToString());

@@ -54,7 +54,9 @@ namespace GroceryStore
         {
             lb_titilePage.Text = titlePage;
             currPage.Visible = false;
+            MessageBox.Show(currPage.Name);
             currPage = nextPage;
+            MessageBox.Show(currPage.Name);
             currPage.Visible = true;
         }
 

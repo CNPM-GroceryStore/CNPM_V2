@@ -1,4 +1,6 @@
-﻿-- Tạo database mới
+﻿use master 
+go
+-- Tạo database mới
 CREATE DATABASE CuaHangTienLoi;
 GO
 
@@ -256,7 +258,7 @@ go
 
 -- procedure show products by name 
 create PROCEDURE getProductsByName
-	@nameProduct varchar(255)
+	@nameProduct nvarchar(255)
 AS
 BEGIN
     SELECT * FROM Product WHERE nameProduct = @nameProduct
@@ -282,11 +284,11 @@ go
 
 -- procedure Delete MyVoucher 
 create PROCEDURE deleteMyVoucher
-	@SoDienThoai varchar(255),
+	@numberPhone varchar(255),
 	@MaVoucher varchar(255)
 AS
 BEGIN
-	delete from MyVoucher where SoDienThoai = @SoDienThoai and MaVoucher = @MaVoucher
+	delete from MyVoucher where numberPhone = @numberPhone and MaVoucher = @MaVoucher
 END
 go
 
@@ -295,9 +297,9 @@ create PROCEDURE insertOrderHistory
 	@idUser varchar(255), 
 	@price int, 
 	@amount int, 
-	@paymethod varchar(255), 
-	@status varchar(255), 
-	@paydate varchar(255)
+	@paymethod nvarchar(255), 
+	@status nvarchar(255), 
+	@paydate date
 AS
 BEGIN
 	INSERT INTO OrderHistory (idUser, price, amount, paymethod, status, paydate) VALUES ( @idUser , @price , @amount , @paymethod , @status , @paydate )
@@ -314,7 +316,7 @@ END
 go
 
 -- procedure show all history order 
-create PROCEDURE showAllHistoryOrder
+create PROCEDURE showAllHistoryOrderNoUser
 AS
 BEGIN
 	SELECT id as 'ID', price as 'Giá', amount as 'Số lượng', paymethod as 'Phương thức thanh toán', status as 'Trạng thái', paydate as 'Ngày thanh toán' FROM OrderHistory 
@@ -331,16 +333,16 @@ go
 
 -- procedure Insert product 
 create PROCEDURE insertProduct
-@nameProduct varchar(255), 
-#amountProduct int, 
+@nameProduct nvarchar(255), 
+@amountProduct int, 
 @priceProduct int, 
-@imageProduct varchar(255), 
+@imageProduct nvarchar(255), 
 @typeProduct varchar(255), 
 @shipment varchar(255), 
 @shelflife date
 AS
 BEGIN
-	INSERT INTO Product (nameProduct, amountProduct, priceProduct, imageProduct, typeProduct) VALUES ( @nameProduct , @amountProduct , @priceProduct , @imageProduct , @typeProduct , @shipment , @shelflife)
+	INSERT INTO Product (nameProduct, amountProduct, priceProduct, imageProduct, typeProduct, shipment, shelflife) VALUES ( @nameProduct , @amountProduct , @priceProduct , @imageProduct , @typeProduct , @shipment , @shelflife)
 END
 go
 
@@ -483,6 +485,13 @@ BEGIN
 	SELECT count(MaVoucher) FROM Voucher WHERE TenVoucher = @TenVoucher and GiaVoucher = @GiaVoucher and HinhAnh = @HinhAnh
 END
 go
+
+CREATE PROC showTurnover
+AS
+BEGIN
+	SELECT SUM(price) FROM OrderHistory WHERE MONTH(paydate) = MONTH(CURRENT_TIMESTAMP)
+END
+GO
 
 -- Thêm dữ liệu vào bảng NhanVien
 INSERT INTO NhanVien (numberPhone, Email, name, address, password)

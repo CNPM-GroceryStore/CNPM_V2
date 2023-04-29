@@ -43,19 +43,15 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges41 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges42 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges37 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges39 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges40 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges41 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges42 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -74,6 +70,10 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges37 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges39 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges40 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
@@ -97,14 +97,10 @@
             pn_choice = new Panel();
             pictureBox1 = new PictureBox();
             panel2 = new Panel();
-            pn_mgmProduct = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            pt_searchPro = new PictureBox();
-            txb_searchProduct = new Guna.UI2.WinForms.Guna2TextBox();
-            btn_addProduct = new Guna.UI2.WinForms.Guna2Button();
-            panel4 = new Panel();
-            pn_addProduct = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             pn_orders = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             dgv_orders = new Guna.UI2.WinForms.Guna2DataGridView();
+            pn_mgmProduct = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            pn_addProduct = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             panel5 = new Panel();
             label9 = new Label();
             txb_shipment = new Guna.UI2.WinForms.Guna2TextBox();
@@ -123,6 +119,10 @@
             txb_addAmount = new Guna.UI2.WinForms.Guna2TextBox();
             label1 = new Label();
             txb_addNamePro = new Guna.UI2.WinForms.Guna2TextBox();
+            pt_searchPro = new PictureBox();
+            txb_searchProduct = new Guna.UI2.WinForms.Guna2TextBox();
+            btn_addProduct = new Guna.UI2.WinForms.Guna2Button();
+            panel4 = new Panel();
             dgv_mgmProduct = new Guna.UI2.WinForms.Guna2DataGridView();
             lb_titilePage = new Label();
             pn_homepage = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
@@ -139,14 +139,14 @@
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
-            pn_mgmProduct.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pt_searchPro).BeginInit();
-            panel4.SuspendLayout();
-            pn_addProduct.SuspendLayout();
             pn_orders.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_orders).BeginInit();
+            pn_mgmProduct.SuspendLayout();
+            pn_addProduct.SuspendLayout();
             panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptb_addImagePro).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pt_searchPro).BeginInit();
+            panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_mgmProduct).BeginInit();
             pn_homepage.SuspendLayout();
             panel3.SuspendLayout();
@@ -347,7 +347,7 @@
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(248, 9, 9);
-            panel2.Controls.Add(pn_addProduct);
+            panel2.Controls.Add(pn_orders);
             panel2.Controls.Add(pn_mgmProduct);
             panel2.Controls.Add(lb_titilePage);
             panel2.Controls.Add(pn_homepage);
@@ -357,109 +357,13 @@
             panel2.Size = new Size(1011, 841);
             panel2.TabIndex = 7;
             // 
-            // pn_mgmProduct
-            // 
-            pn_mgmProduct.BorderRadius = 30;
-            pn_mgmProduct.BorderThickness = 1;
-            pn_mgmProduct.Controls.Add(pt_searchPro);
-            pn_mgmProduct.Controls.Add(txb_searchProduct);
-            pn_mgmProduct.Controls.Add(btn_addProduct);
-            pn_mgmProduct.Controls.Add(panel4);
-            pn_mgmProduct.CustomizableEdges = customizableEdges41;
-            pn_mgmProduct.Location = new Point(24, 100);
-            pn_mgmProduct.Name = "pn_mgmProduct";
-            pn_mgmProduct.ShadowDecoration.CustomizableEdges = customizableEdges42;
-            pn_mgmProduct.Size = new Size(968, 725);
-            pn_mgmProduct.TabIndex = 14;
-            pn_mgmProduct.Visible = false;
-            // 
-            // pt_searchPro
-            // 
-            pt_searchPro.BackColor = Color.White;
-            pt_searchPro.Image = Properties.Resources.search1;
-            pt_searchPro.Location = new Point(417, 17);
-            pt_searchPro.Name = "pt_searchPro";
-            pt_searchPro.Size = new Size(65, 54);
-            pt_searchPro.SizeMode = PictureBoxSizeMode.CenterImage;
-            pt_searchPro.TabIndex = 5;
-            pt_searchPro.TabStop = false;
-            pt_searchPro.Click += pt_searchPro_Click;
-            // 
-            // txb_searchProduct
-            // 
-            txb_searchProduct.BackColor = Color.White;
-            txb_searchProduct.BorderColor = Color.Black;
-            txb_searchProduct.BorderRadius = 10;
-            txb_searchProduct.CustomizableEdges = customizableEdges37;
-            txb_searchProduct.DefaultText = "";
-            txb_searchProduct.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            txb_searchProduct.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            txb_searchProduct.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            txb_searchProduct.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txb_searchProduct.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            txb_searchProduct.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            txb_searchProduct.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txb_searchProduct.Location = new Point(17, 17);
-            txb_searchProduct.Name = "txb_searchProduct";
-            txb_searchProduct.PasswordChar = '\0';
-            txb_searchProduct.PlaceholderText = "";
-            txb_searchProduct.SelectedText = "";
-            txb_searchProduct.ShadowDecoration.CustomizableEdges = customizableEdges38;
-            txb_searchProduct.Size = new Size(409, 54);
-            txb_searchProduct.TabIndex = 4;
-            // 
-            // btn_addProduct
-            // 
-            btn_addProduct.BackColor = Color.White;
-            btn_addProduct.BorderColor = Color.White;
-            btn_addProduct.BorderRadius = 10;
-            btn_addProduct.BorderThickness = 1;
-            btn_addProduct.CustomizableEdges = customizableEdges39;
-            btn_addProduct.DisabledState.BorderColor = Color.DarkGray;
-            btn_addProduct.DisabledState.CustomBorderColor = Color.DarkGray;
-            btn_addProduct.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btn_addProduct.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btn_addProduct.FillColor = Color.FromArgb(248, 9, 9);
-            btn_addProduct.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_addProduct.ForeColor = Color.White;
-            btn_addProduct.Location = new Point(646, 17);
-            btn_addProduct.Name = "btn_addProduct";
-            btn_addProduct.ShadowDecoration.CustomizableEdges = customizableEdges40;
-            btn_addProduct.Size = new Size(225, 56);
-            btn_addProduct.TabIndex = 3;
-            btn_addProduct.Text = "Thêm sản phẩm";
-            btn_addProduct.Click += btn_addProduct_Click;
-            // 
-            // panel4
-            // 
-            panel4.BackColor = Color.White;
-            panel4.Controls.Add(dgv_mgmProduct);
-            panel4.Location = new Point(17, 79);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(930, 627);
-            panel4.TabIndex = 2;
-            // 
-            // pn_addProduct
-            // 
-            pn_addProduct.BorderRadius = 30;
-            pn_addProduct.BorderThickness = 1;
-            pn_addProduct.Controls.Add(pn_orders);
-            pn_addProduct.Controls.Add(panel5);
-            pn_addProduct.CustomizableEdges = customizableEdges35;
-            pn_addProduct.Location = new Point(24, 100);
-            pn_addProduct.Name = "pn_addProduct";
-            pn_addProduct.ShadowDecoration.CustomizableEdges = customizableEdges36;
-            pn_addProduct.Size = new Size(968, 725);
-            pn_addProduct.TabIndex = 15;
-            pn_addProduct.Visible = false;
-            // 
             // pn_orders
             // 
             pn_orders.BorderRadius = 30;
             pn_orders.BorderThickness = 1;
             pn_orders.Controls.Add(dgv_orders);
             pn_orders.CustomizableEdges = customizableEdges15;
-            pn_orders.Location = new Point(0, 0);
+            pn_orders.Location = new Point(24, 100);
             pn_orders.Name = "pn_orders";
             pn_orders.ShadowDecoration.CustomizableEdges = customizableEdges16;
             pn_orders.Size = new Size(968, 725);
@@ -517,6 +421,36 @@
             dgv_orders.ThemeStyle.RowsStyle.Height = 29;
             dgv_orders.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dgv_orders.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            // 
+            // pn_mgmProduct
+            // 
+            pn_mgmProduct.BorderRadius = 30;
+            pn_mgmProduct.BorderThickness = 1;
+            pn_mgmProduct.Controls.Add(pn_addProduct);
+            pn_mgmProduct.Controls.Add(pt_searchPro);
+            pn_mgmProduct.Controls.Add(txb_searchProduct);
+            pn_mgmProduct.Controls.Add(btn_addProduct);
+            pn_mgmProduct.Controls.Add(panel4);
+            pn_mgmProduct.CustomizableEdges = customizableEdges41;
+            pn_mgmProduct.Location = new Point(24, 100);
+            pn_mgmProduct.Name = "pn_mgmProduct";
+            pn_mgmProduct.ShadowDecoration.CustomizableEdges = customizableEdges42;
+            pn_mgmProduct.Size = new Size(968, 725);
+            pn_mgmProduct.TabIndex = 14;
+            pn_mgmProduct.Visible = false;
+            // 
+            // pn_addProduct
+            // 
+            pn_addProduct.BorderRadius = 30;
+            pn_addProduct.BorderThickness = 1;
+            pn_addProduct.Controls.Add(panel5);
+            pn_addProduct.CustomizableEdges = customizableEdges35;
+            pn_addProduct.Location = new Point(0, 0);
+            pn_addProduct.Name = "pn_addProduct";
+            pn_addProduct.ShadowDecoration.CustomizableEdges = customizableEdges36;
+            pn_addProduct.Size = new Size(968, 725);
+            pn_addProduct.TabIndex = 15;
+            pn_addProduct.Visible = false;
             // 
             // panel5
             // 
@@ -814,6 +748,72 @@
             txb_addNamePro.Size = new Size(328, 45);
             txb_addNamePro.TabIndex = 0;
             // 
+            // pt_searchPro
+            // 
+            pt_searchPro.BackColor = Color.White;
+            pt_searchPro.Image = Properties.Resources.search1;
+            pt_searchPro.Location = new Point(373, 26);
+            pt_searchPro.Name = "pt_searchPro";
+            pt_searchPro.Size = new Size(39, 36);
+            pt_searchPro.SizeMode = PictureBoxSizeMode.CenterImage;
+            pt_searchPro.TabIndex = 5;
+            pt_searchPro.TabStop = false;
+            pt_searchPro.Click += pt_searchPro_Click;
+            // 
+            // txb_searchProduct
+            // 
+            txb_searchProduct.BackColor = Color.White;
+            txb_searchProduct.BorderColor = Color.Black;
+            txb_searchProduct.BorderRadius = 10;
+            txb_searchProduct.CustomizableEdges = customizableEdges37;
+            txb_searchProduct.DefaultText = "";
+            txb_searchProduct.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txb_searchProduct.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txb_searchProduct.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txb_searchProduct.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txb_searchProduct.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txb_searchProduct.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txb_searchProduct.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txb_searchProduct.Location = new Point(17, 17);
+            txb_searchProduct.Name = "txb_searchProduct";
+            txb_searchProduct.PasswordChar = '\0';
+            txb_searchProduct.PlaceholderText = "";
+            txb_searchProduct.SelectedText = "";
+            txb_searchProduct.ShadowDecoration.CustomizableEdges = customizableEdges38;
+            txb_searchProduct.Size = new Size(409, 54);
+            txb_searchProduct.TabIndex = 4;
+            // 
+            // btn_addProduct
+            // 
+            btn_addProduct.BackColor = Color.White;
+            btn_addProduct.BorderColor = Color.White;
+            btn_addProduct.BorderRadius = 10;
+            btn_addProduct.BorderThickness = 1;
+            btn_addProduct.CustomizableEdges = customizableEdges39;
+            btn_addProduct.DisabledState.BorderColor = Color.DarkGray;
+            btn_addProduct.DisabledState.CustomBorderColor = Color.DarkGray;
+            btn_addProduct.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btn_addProduct.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btn_addProduct.FillColor = Color.FromArgb(248, 9, 9);
+            btn_addProduct.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_addProduct.ForeColor = Color.White;
+            btn_addProduct.Location = new Point(646, 17);
+            btn_addProduct.Name = "btn_addProduct";
+            btn_addProduct.ShadowDecoration.CustomizableEdges = customizableEdges40;
+            btn_addProduct.Size = new Size(225, 56);
+            btn_addProduct.TabIndex = 3;
+            btn_addProduct.Text = "Thêm sản phẩm";
+            btn_addProduct.Click += btn_addProduct_Click;
+            // 
+            // panel4
+            // 
+            panel4.BackColor = Color.White;
+            panel4.Controls.Add(dgv_mgmProduct);
+            panel4.Location = new Point(17, 79);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(930, 627);
+            panel4.TabIndex = 2;
+            // 
             // dgv_mgmProduct
             // 
             dataGridViewCellStyle4.BackColor = Color.White;
@@ -1069,15 +1069,15 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            pn_mgmProduct.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pt_searchPro).EndInit();
-            panel4.ResumeLayout(false);
-            pn_addProduct.ResumeLayout(false);
             pn_orders.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgv_orders).EndInit();
+            pn_mgmProduct.ResumeLayout(false);
+            pn_addProduct.ResumeLayout(false);
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)ptb_addImagePro).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pt_searchPro).EndInit();
+            panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgv_mgmProduct).EndInit();
             pn_homepage.ResumeLayout(false);
             panel3.ResumeLayout(false);
