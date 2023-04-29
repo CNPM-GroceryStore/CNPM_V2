@@ -20,7 +20,6 @@ namespace DAO
 
         String connectString = @"Data Source=MSI;Initial Catalog=CuaHangTienLoi;Integrated Security=True";
         //String connectString = @"Data Source = LAPTOP-VVRRVKK8; Initial Catalog = CuaHangTienLoi; Integrated Security = True";
-
         //String conn = $"{}"
         public DataTable ExecuteQuery(string query, object[] parameters = null)
         {
@@ -109,17 +108,20 @@ namespace DAO
                     for (int i = 0; i < parameters.Length; i++)
                     {
                         command.Parameters.AddWithValue(paraNames[i + 1], parameters[i]);
+
                     }
                 }
 
                 try
                 {
                     conn.Open();
+                    System.Diagnostics.Debug.Print(command.CommandText);
                     command.ExecuteNonQuery();
                     conn.Close();
                 }
                 catch (Exception ex)
                 {
+                    System.Diagnostics.Debug.Print("Error: " + ex.Message);
                     Console.WriteLine("Error: " + ex.Message);
                 }
             }
@@ -152,6 +154,7 @@ namespace DAO
                 }
                 catch (Exception ex)
                 {
+                    System.Diagnostics.Debug.Print("Error: " + ex.Message);
                     Console.WriteLine("Error: " + ex.Message);
                 }
                 return results;
@@ -177,9 +180,10 @@ namespace DAO
                 try
                 {
                     conn.Open();
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    object scalarResult = command.ExecuteScalar();
+                    if (scalarResult != null)
                     {
-                        result = command.ExecuteNonQuery();
+                        result = Convert.ToDouble(scalarResult);
                     }
                     conn.Close();
                 }

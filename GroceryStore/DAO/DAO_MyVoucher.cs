@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace DAO
         #region 1. Insert MyVoucher
         public void insertMyVoucher(DTO_MyVoucher myVoucher)
         {
-            string statement = "InsertToMyVoucher @soDienThoai, @maVoucher";
+            string statement = "InsertToMyVoucher @numberPhone, @maVoucher";
             DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { myVoucher.MaUser, myVoucher.MaMyVoucher });
         }
         #endregion
@@ -22,8 +23,8 @@ namespace DAO
         #region 2. Delete MyVoucher
         public void deleteMyVoucher(DTO_MyVoucher myVoucher)
         {
-            string statement = "delete from MyVoucher where SoDienThoai = @SoDienThoai and MaVoucher = @MaVoucher";
-            DataProvider.Instance.ExecuteNonQuery(statement, new object[] { myVoucher.MaUser, myVoucher.MaMyVoucher });
+            string statement = "deleteMyVoucher @SoDienThoai @MaVoucher";
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { myVoucher.MaUser, myVoucher.MaMyVoucher });
         }
         #endregion
     }

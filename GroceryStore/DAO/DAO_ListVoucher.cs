@@ -13,15 +13,15 @@ namespace DAO
         #region 1. Show all voucher
         public DataTable showAllVouchers()
         {
-            string statement = "SELECT MaVoucher, TenVoucher, GiaVoucher, HinhAnh FROM Voucher";
-            return DataProvider.Instance.ExecuteQuery(statement);
+            string statement = "showAllVouchers";
+            return DataProvider.Instance.ExecuteStoredProcedureSelect(statement);
         }
         #endregion
 
         #region 2. show vouchers by name
         public DataTable getVouchersByName(String name)
         {
-            string statement = $"SELECT * FROM Voucher WHERE TenVoucher = @TenVoucher";
+            string statement = $"getVouchersByName";
             return DataProvider.Instance.ExecuteQuery(statement, new object[] { name });
 
         }

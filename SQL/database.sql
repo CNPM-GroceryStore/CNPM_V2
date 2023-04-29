@@ -1,6 +1,4 @@
-﻿use master
-drop database CuaHangTienLoi
--- Tạo database mới
+﻿-- Tạo database mới
 CREATE DATABASE CuaHangTienLoi;
 GO
 
@@ -177,14 +175,314 @@ BEGIN
 END
 go
 
-
-CREATE PROC showTurnover
-AS 
+-- procedure insert cart
+create PROCEDURE usp_InsertProductIntoCart
+    @item_id varchar(255),
+    @idUser varchar(255),
+    @nameProduct NVARCHAR(100),
+    @priceProduct Int,
+    @quantity INT
+AS
 BEGIN
-	SELECT SUM(price) FROM OrderHistory WHERE MONTH(paydate) = MONTH(CURRENT_TIMESTAMP)
+    INSERT INTO cart_item (item_id, cart_id, item_name, item_price, quantity)
+    VALUES (@item_id, @idUser, @nameProduct, @priceProduct, @quantity)
 END
-GO
+Go
 
+-- procedure delete cart item
+create PROCEDURE usp_DeleteProductIntoCart
+    @item_id varchar(255),
+	@cart_id varchar(255)
+AS
+BEGIN
+    DELETE FROM cart_item WHERE item_id = @item_id AND cart_id = @cart_id
+END
+Go
+
+-- procedure update cart item
+create PROCEDURE usp_UpdateProductIntoCart
+	@quantity varchar(255),
+	@cart_id varchar(255),
+    @item_id varchar(255)
+AS
+BEGIN
+    UPDATE cart_item SET quantity = @quantity WHERE cart_id = @cart_id and item_id = @item_id
+END
+Go
+
+-- procedure create cart
+create PROCEDURE usp_CreateCart
+	@cart_id varchar(255)
+AS
+BEGIN
+    INSERT INTO Cart VALUES (@cart_id);
+END
+Go
+
+-- procedure check Exitst Cart
+create PROCEDURE usp_CheckExistCart
+	@cart_id varchar(255)
+AS
+BEGIN
+    SELECT COUNT(idUser) FROM Cart WHERE idUser = @cart_id
+END
+Go
+
+-- procedure delete Cart
+create PROCEDURE usp_DeleteCart
+	@cart_id varchar(255)
+AS
+BEGIN
+    DELETE FROM cart_item WHERE cart_id = @cart_id
+END
+Go
+
+-- procedure Show all products 
+create PROCEDURE usp_ShowAllProducts
+AS
+BEGIN
+    SELECT idProduct, nameProduct, amountProduct, priceProduct, imageProduct, typeProduct, shipment, shelflife FROM Product
+END
+go
+
+-- procedure show products by type 
+create PROCEDURE getProductsByType
+	@typeProduct varchar(255)
+AS
+BEGIN
+    SELECT nameProduct, priceProduct, imageProduct, typeProduct FROM Product WHERE typeProduct = @typeProduct
+END
+go
+
+-- procedure show products by name 
+create PROCEDURE getProductsByName
+	@nameProduct varchar(255)
+AS
+BEGIN
+    SELECT * FROM Product WHERE nameProduct = @nameProduct
+END
+go
+
+-- procedure Show all voucher 
+create PROCEDURE showAllVouchers
+AS
+BEGIN
+    SELECT MaVoucher, TenVoucher, GiaVoucher, HinhAnh FROM Voucher
+END
+go
+
+-- procedure show vouchers by name 
+create PROCEDURE getVouchersByName
+	@TenVoucher varchar(255)
+AS
+BEGIN
+    SELECT * FROM Voucher WHERE TenVoucher = @TenVoucher
+END
+go
+
+-- procedure Delete MyVoucher 
+create PROCEDURE deleteMyVoucher
+	@SoDienThoai varchar(255),
+	@MaVoucher varchar(255)
+AS
+BEGIN
+	delete from MyVoucher where SoDienThoai = @SoDienThoai and MaVoucher = @MaVoucher
+END
+go
+
+-- procedure add history order 
+create PROCEDURE insertOrderHistory
+	@idUser varchar(255), 
+	@price int, 
+	@amount int, 
+	@paymethod varchar(255), 
+	@status varchar(255), 
+	@paydate varchar(255)
+AS
+BEGIN
+	INSERT INTO OrderHistory (idUser, price, amount, paymethod, status, paydate) VALUES ( @idUser , @price , @amount , @paymethod , @status , @paydate )
+END
+go
+
+-- procedure show all history order 
+create PROCEDURE showAllHistoryOrder
+	@idUser varchar(255)
+AS
+BEGIN
+	SELECT id as 'ID', price as 'Giá', amount as 'Số lượng', paymethod as 'Phương thức thanh toán', status as 'Trạng thái', paydate as 'Ngày thanh toán' FROM OrderHistory WHERE idUser = @idUser
+END
+go
+
+-- procedure show all history order 
+create PROCEDURE showAllHistoryOrder
+AS
+BEGIN
+	SELECT id as 'ID', price as 'Giá', amount as 'Số lượng', paymethod as 'Phương thức thanh toán', status as 'Trạng thái', paydate as 'Ngày thanh toán' FROM OrderHistory 
+END
+go
+
+-- procedure get most recent 
+create PROCEDURE getRecentOrder
+AS
+BEGIN
+	SELECT TOP 5 id as 'ID', price as 'Giá', amount as 'Số lượng', paymethod as 'Phương thức thanh toán', status as 'Trạng thái', paydate as 'Ngày thanh toán' FROM OrderHistory ORDER BY paydate
+END
+go
+
+-- procedure Insert product 
+create PROCEDURE insertProduct
+@nameProduct varchar(255), 
+#amountProduct int, 
+@priceProduct int, 
+@imageProduct varchar(255), 
+@typeProduct varchar(255), 
+@shipment varchar(255), 
+@shelflife date
+AS
+BEGIN
+	INSERT INTO Product (nameProduct, amountProduct, priceProduct, imageProduct, typeProduct) VALUES ( @nameProduct , @amountProduct , @priceProduct , @imageProduct , @typeProduct , @shipment , @shelflife)
+END
+go
+
+-- procedure Delete product 
+create PROCEDURE deleteProduct
+@idProduct varchar(255)
+AS
+BEGIN
+	DELETE FROM Product WHERE idProduct = @idProduct
+END
+go
+
+-- procedure Update product 
+create PROCEDURE updateProduct
+@nameProduct varchar(255), 
+@priceProduct int, 
+@imageProduct varchar(255), 
+@typeProduct varchar(255),
+@idProduct varchar(255)
+AS
+BEGIN
+	UPDATE Product SET nameProduct = @nameProduct , priceProduct = @priceProduct , imageProduct = @imageProduct , typeProduct = @typeProduct WHERE idProduct = @idProduct
+END
+go
+
+-- procedure Check exists Product 
+create PROCEDURE checkExistsProduct
+@nameProduct varchar(255), 
+@priceProduct int, 
+@imageProduct varchar(255), 
+@typeProduct varchar(255)
+AS
+BEGIN
+	SELECT count(idProduct) FROM Product WHERE nameProduct = @nameProduct and priceProduct = @priceProduct and imageProduct = @imageProduct and typeProduct = @typeProduct
+END
+go
+
+-- procedure show all info of user 
+create PROCEDURE showAllUser
+AS
+BEGIN
+	SELECT numberPhone, Email, name, address, DiemTichLuy FROM NhanVien
+END
+go
+
+-- procedure create account for user 
+create PROCEDURE registerAccount
+@Phone varchar(255), @Email varchar(255), @Name varchar(255), @Address varchar(255), @Password varchar(255)
+AS
+BEGIN
+	INSERT INTO NhanVien (numberPhone, Email, name, address, password) VALUES ( @Phone , @Email , @Name , @Address , @Password )
+END
+go
+
+-- procedure update account for user 
+create PROCEDURE updateAccount
+@Phone varchar(255), @Email varchar(255), @Name varchar(255), @Address varchar(255), @Password varchar(255), @numberPhone varchar(255)
+AS
+BEGIN
+	UPDATE NhanVien SET numberPhone = @numberPhone , Email = @Email , name = @name , address = @address , password = @password where numberPhone = @numberPhone
+END
+go
+
+-- procedure delete account for user 
+create PROCEDURE deleteAccount
+	@numberPhone varchar(255)
+AS
+BEGIN
+	DELETE FROM NhanVien WHERE numberPhone = @numberPhone
+END
+go
+
+-- procedure Login Account User 
+create PROCEDURE loginAccount
+	@numberPhone varchar(255)
+AS
+BEGIN
+	SELECT numberPhone, Email, name, address, DiemTichLuy FROM NhanVien WHERE numberPhone = @numberPhone
+END
+go
+
+-- procedure Check account exist 
+create PROCEDURE checkAccount
+	@numberPhone varchar(255)
+AS
+BEGIN
+	SELECT COUNT(numberPhone) AS 'Tontai' FROM NhanVien WHERE numberPhone LIKE @numberPhone
+END
+go
+
+-- procedure update point for user 
+create PROCEDURE updatePoint
+	@numberPhone varchar(255),
+	@DiemTichLuy int
+AS
+BEGIN
+	update NhanVien Set DiemTichLuy = @DiemTichLuy where numberPhone = @numberPhone
+END
+go
+
+-- procedure Insert Voucher 
+create PROCEDURE insertVoucher
+	@TenVoucher varchar(255), 
+	@GiaVoucher int, 
+	@HinhAnh varchar(255)
+AS
+BEGIN
+	INSERT INTO Voucher (TenVoucher, GiaVoucher, HinhAnh) VALUES ( @TenVoucher , @GiaVoucher , @HinhAnh)
+END
+go
+
+-- procedure Delete Voucher 
+create PROCEDURE deleteVoucher
+	@mavoucher varchar(255)
+AS
+BEGIN
+	DELETE FROM Voucher WHERE MaVoucher = @mavoucher
+END
+go
+
+-- procedure Update Voucher 
+create PROCEDURE updateVoucher
+	@TenVoucher varchar(255), 
+	@GiaVoucher int, 
+	@HinhAnh varchar(255),
+	@mavoucher varchar(255)
+AS
+BEGIN
+	UPDATE Voucher SET TenVoucher = @TenVoucher , GiaVoucher = @GiaVoucher , HinhAnh = @HinhAnh where MaVoucher = @mavoucher
+END
+go
+
+-- procedure Check exists Voucher 
+create PROCEDURE checkExistsVoucher
+	@TenVoucher varchar(255), 
+	@GiaVoucher int, 
+	@HinhAnh varchar(255)
+AS
+BEGIN
+	SELECT count(MaVoucher) FROM Voucher WHERE TenVoucher = @TenVoucher and GiaVoucher = @GiaVoucher and HinhAnh = @HinhAnh
+END
+go
 
 -- Thêm dữ liệu vào bảng NhanVien
 INSERT INTO NhanVien (numberPhone, Email, name, address, password)
@@ -258,3 +556,6 @@ exec listMyVoucher '0387790894'
 exec showTurnover
 
 
+exec usp_CheckExistCart '0387790894'
+
+exec updatePoint '0387790894' , 1000000
