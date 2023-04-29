@@ -43,15 +43,13 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges41 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges42 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -70,6 +68,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges41 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges42 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges37 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges39 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -97,10 +97,9 @@
             pn_choice = new Panel();
             pictureBox1 = new PictureBox();
             panel2 = new Panel();
+            pn_addProduct = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             pn_orders = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             dgv_orders = new Guna.UI2.WinForms.Guna2DataGridView();
-            pn_mgmProduct = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            pn_addProduct = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             panel5 = new Panel();
             label9 = new Label();
             txb_shipment = new Guna.UI2.WinForms.Guna2TextBox();
@@ -119,6 +118,7 @@
             txb_addAmount = new Guna.UI2.WinForms.Guna2TextBox();
             label1 = new Label();
             txb_addNamePro = new Guna.UI2.WinForms.Guna2TextBox();
+            pn_mgmProduct = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             pt_searchPro = new PictureBox();
             txb_searchProduct = new Guna.UI2.WinForms.Guna2TextBox();
             btn_addProduct = new Guna.UI2.WinForms.Guna2Button();
@@ -139,12 +139,12 @@
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
+            pn_addProduct.SuspendLayout();
             pn_orders.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_orders).BeginInit();
-            pn_mgmProduct.SuspendLayout();
-            pn_addProduct.SuspendLayout();
             panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ptb_addImagePro).BeginInit();
+            pn_mgmProduct.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pt_searchPro).BeginInit();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_mgmProduct).BeginInit();
@@ -348,6 +348,7 @@
             // 
             panel2.BackColor = Color.FromArgb(248, 9, 9);
             panel2.Controls.Add(pn_orders);
+            panel2.Controls.Add(pn_addProduct);
             panel2.Controls.Add(pn_mgmProduct);
             panel2.Controls.Add(lb_titilePage);
             panel2.Controls.Add(pn_homepage);
@@ -356,6 +357,19 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1011, 841);
             panel2.TabIndex = 7;
+            // 
+            // pn_addProduct
+            // 
+            pn_addProduct.BorderRadius = 30;
+            pn_addProduct.BorderThickness = 1;
+            pn_addProduct.Controls.Add(panel5);
+            pn_addProduct.CustomizableEdges = customizableEdges35;
+            pn_addProduct.Location = new Point(24, 100);
+            pn_addProduct.Name = "pn_addProduct";
+            pn_addProduct.ShadowDecoration.CustomizableEdges = customizableEdges36;
+            pn_addProduct.Size = new Size(968, 725);
+            pn_addProduct.TabIndex = 15;
+            pn_addProduct.Visible = false;
             // 
             // pn_orders
             // 
@@ -421,36 +435,6 @@
             dgv_orders.ThemeStyle.RowsStyle.Height = 29;
             dgv_orders.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dgv_orders.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            // 
-            // pn_mgmProduct
-            // 
-            pn_mgmProduct.BorderRadius = 30;
-            pn_mgmProduct.BorderThickness = 1;
-            pn_mgmProduct.Controls.Add(pn_addProduct);
-            pn_mgmProduct.Controls.Add(pt_searchPro);
-            pn_mgmProduct.Controls.Add(txb_searchProduct);
-            pn_mgmProduct.Controls.Add(btn_addProduct);
-            pn_mgmProduct.Controls.Add(panel4);
-            pn_mgmProduct.CustomizableEdges = customizableEdges41;
-            pn_mgmProduct.Location = new Point(24, 100);
-            pn_mgmProduct.Name = "pn_mgmProduct";
-            pn_mgmProduct.ShadowDecoration.CustomizableEdges = customizableEdges42;
-            pn_mgmProduct.Size = new Size(968, 725);
-            pn_mgmProduct.TabIndex = 14;
-            pn_mgmProduct.Visible = false;
-            // 
-            // pn_addProduct
-            // 
-            pn_addProduct.BorderRadius = 30;
-            pn_addProduct.BorderThickness = 1;
-            pn_addProduct.Controls.Add(panel5);
-            pn_addProduct.CustomizableEdges = customizableEdges35;
-            pn_addProduct.Location = new Point(0, 0);
-            pn_addProduct.Name = "pn_addProduct";
-            pn_addProduct.ShadowDecoration.CustomizableEdges = customizableEdges36;
-            pn_addProduct.Size = new Size(968, 725);
-            pn_addProduct.TabIndex = 15;
-            pn_addProduct.Visible = false;
             // 
             // panel5
             // 
@@ -747,6 +731,22 @@
             txb_addNamePro.ShadowDecoration.CustomizableEdges = customizableEdges34;
             txb_addNamePro.Size = new Size(328, 45);
             txb_addNamePro.TabIndex = 0;
+            // 
+            // pn_mgmProduct
+            // 
+            pn_mgmProduct.BorderRadius = 30;
+            pn_mgmProduct.BorderThickness = 1;
+            pn_mgmProduct.Controls.Add(pt_searchPro);
+            pn_mgmProduct.Controls.Add(txb_searchProduct);
+            pn_mgmProduct.Controls.Add(btn_addProduct);
+            pn_mgmProduct.Controls.Add(panel4);
+            pn_mgmProduct.CustomizableEdges = customizableEdges41;
+            pn_mgmProduct.Location = new Point(24, 100);
+            pn_mgmProduct.Name = "pn_mgmProduct";
+            pn_mgmProduct.ShadowDecoration.CustomizableEdges = customizableEdges42;
+            pn_mgmProduct.Size = new Size(968, 725);
+            pn_mgmProduct.TabIndex = 14;
+            pn_mgmProduct.Visible = false;
             // 
             // pt_searchPro
             // 
@@ -1069,13 +1069,13 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            pn_addProduct.ResumeLayout(false);
             pn_orders.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgv_orders).EndInit();
-            pn_mgmProduct.ResumeLayout(false);
-            pn_addProduct.ResumeLayout(false);
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)ptb_addImagePro).EndInit();
+            pn_mgmProduct.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pt_searchPro).EndInit();
             panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgv_mgmProduct).EndInit();
