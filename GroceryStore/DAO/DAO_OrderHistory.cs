@@ -24,7 +24,7 @@ namespace DAO
         {
             if(user == null)
             {
-                string statement = "showAllHistoryOrder";
+                string statement = "showAllHistoryOrderNoUser";
                 return DataProvider.Instance.ExecuteStoredProcedureSelect(statement);
             }
             else
@@ -43,12 +43,18 @@ namespace DAO
         }
         #endregion
 
-        #region
+        #region 4.get turnover
         public double getTurnover()
         {
-            string statement = "EXEC showTurnover";
+            string statement = "showTurnover";
             return DataProvider.Instance.ExecuteStoredProcedureScalar(statement);
         }
         #endregion
+
+        public int getTurnoverByDate(DateTime date)
+        {
+            string statement = "getTurnoverByDate @date";
+            return (int)DataProvider.Instance.ExecuteStoredProcedureScalar(statement, new object[] {date});
+        }
     }
 }

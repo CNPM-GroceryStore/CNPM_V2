@@ -47,5 +47,33 @@ namespace BUS_1
             return orderHistory.getTurnover();
         }
         #endregion
+
+        public DataTable getDataTurnoverOfMonth()
+        {
+            DataTable data = new DataTable();
+            data.Columns.Add("Date", typeof(int));
+            data.Columns.Add("Turnover", typeof(int));
+            int[] month_30 = { 4, 6, 9, 11 };
+            int lastDate = 31;
+            int currMonth = int.Parse(DateTime.Now.Month.ToString());
+            if(Array.IndexOf(month_30, currMonth) > 0)
+            {
+                lastDate = 30;
+            }
+            else if(currMonth == 2 && DateTime.IsLeapYear(DateTime.Now.Year))
+            {
+                lastDate = 29;
+            }
+            else if (currMonth == 2)
+            {
+                lastDate = 38;
+            }
+            for(int i = 1; i < lastDate; i++)
+            {
+                DateTime currTime = DateTime.Parse(DateTime.Now.Month + "/" + i + "/" + DateTime.Now.Year);
+                data.Rows.Add(i, orderHistory.getTurnoverByDate(currTime));
+            }
+            return data;
+        }
     }
 }

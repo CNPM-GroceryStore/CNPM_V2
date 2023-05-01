@@ -322,7 +322,15 @@ namespace GroceryStore
                 }
                 else
                 {
-                    cart.addProductInCart(user, productCard);
+                    BUS_Product currentProduct = new BUS_Product();
+                    if (currentProduct.checkAmount(order.NumberOfItem, order.NameItemOder))
+                    {
+                        cart.addProductInCart(user, productCard);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Số lượng hiện tại không đủ!");
+                    }
                 }
             }
             else

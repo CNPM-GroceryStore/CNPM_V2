@@ -8,10 +8,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Xml.Linq;
 using TheArtOfDevHtmlRenderer.Adapters;
 
 namespace GroceryStore
@@ -32,6 +36,7 @@ namespace GroceryStore
         {
             showRecentOrder(sender, e);
             showTurnover(sender, e);
+            buildChart(sender, e);
             currPage = pn_homepage;
             lb_titilePage.Text = "Trang chủ";
             currPage.Visible = true;
@@ -54,9 +59,7 @@ namespace GroceryStore
         {
             lb_titilePage.Text = titlePage;
             currPage.Visible = false;
-            MessageBox.Show(currPage.Name);
             currPage = nextPage;
-            MessageBox.Show(currPage.Name);
             currPage.Visible = true;
         }
 
@@ -64,12 +67,35 @@ namespace GroceryStore
         {
             switchPage(sender, e, pn_homepage, "Trang chủ");
             showTurnover(sender, e);
+            buildChart(sender, e);
+        }
+
+        // build chart by current month
+        private void buildChart(Object sender, EventArgs e)
+        {
+            DataTable data = bus_OrderHistory.getDataTurnoverOfMonth();
+            chart_turnover.Titles.Clear();
+            chart_turnover.DataSource = data;
+            chart_turnover.Titles.Add("Doanh thu tháng " + DateTime.Now.Month);
+            chart_turnover.Series["Doanh thu"].XValueMember = "Date";
+            chart_turnover.Series["Doanh thu"].YValueMembers = "Turnover";
+
+            chart_turnover.Series["Doanh thu"].ChartType = SeriesChartType.Line;
+
+            //Set the X and Y axis titles
+            chart_turnover.ChartAreas[0].AxisX.Title = "Ngày";
+            chart_turnover.ChartAreas[0].AxisY.Title = "Doanh thu";
+
+            // Bind the data to the chart
+            chart_turnover.DataBind();
         }
 
         private void mgmProductPage_Click(object sender, EventArgs e)
         {
             switchPage(sender, e, pn_mgmProduct, "Quản lý sản phẩm");
+            MessageBox.Show(products.Count().ToString());
             list_product.showAllProduct(products);
+            MessageBox.Show(products.Count().ToString());
             dgv_mgmProduct.DataSource = products;
         }
 
@@ -90,10 +116,19 @@ namespace GroceryStore
             string name = txb_addNamePro.Text;
             int amount = int.Parse(txb_addAmount.Text);
             int price = int.Parse(txb_addPrice.Text);
-            string type = txb_addType.Text;
+            string type = cbb_addtype.Text;
             string shelflife = dtp_addPro.Value.ToString();
             string shipment = txb_shipment.Text;
-            string image = $"{name}_{shipment}.jpg";
+            StringBuilder sb = new StringBuilder();
+
+            foreach (char c in name.Normalize(NormalizationForm.FormD))
+            {
+                if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+                    sb.Append(c);
+            }
+
+            string newName = sb.ToString().Normalize(NormalizationForm.FormC).ToLower();
+            string image = $"{newName}_{shipment}.jpg";
             image = image.Replace(" ", "_");
             MessageBox.Show(image);
 
@@ -110,10 +145,18 @@ namespace GroceryStore
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 Bitmap image = new Bitmap(openFileDialog1.FileName);
-                ptb_addImagePro.Image = image;
+                ptb_addImagePro.Image = image; StringBuilder sb = new StringBuilder();
 
-                string fileName = $"{txb_addNamePro.Text}_{txb_shipment.Text}.jpg";
-                string savePath = @"..\\..\\..\\Resources\Product\" + txb_addType.Text + "\\" + fileName;
+                foreach (char c in txb_addNamePro.Text.Normalize(NormalizationForm.FormD))
+                {
+                    if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+                        sb.Append(c);
+                }
+
+                string newName = sb.ToString().Normalize(NormalizationForm.FormC).ToLower();
+                newName = newName.Replace(" ", "_");
+                string fileName = $"{newName}_{txb_shipment.Text}.jpg";
+                string savePath = @"..\\..\\..\\Resources\Product\" + cbb_addtype.Text + "\\" + fileName;
                 image.Save(savePath, System.Drawing.Imaging.ImageFormat.Jpeg);
             }
         }
@@ -127,5 +170,9 @@ namespace GroceryStore
             dgv_mgmProduct.DataSource = list_pro;
         }
 
+        private void btn_cancelAddPro_Click(object sender, EventArgs e)
+        {
+            mgmProductPage_Click(sender, e);
+        }
     }
 }

@@ -1,5 +1,7 @@
 ﻿use master 
 go
+drop database CuaHangTienLoi
+Go
 -- Tạo database mới
 CREATE DATABASE CuaHangTienLoi;
 GO
@@ -486,12 +488,32 @@ BEGIN
 END
 go
 
+--show turnover of current month
 CREATE PROC showTurnover
 AS
 BEGIN
 	SELECT SUM(price) FROM OrderHistory WHERE MONTH(paydate) = MONTH(CURRENT_TIMESTAMP)
 END
 GO
+
+--get amount of rest product
+CREATE PROC getAmount
+	@nameProduct NVARCHAR(255)
+AS
+BEGIN
+	SELECT amountProduct FROM Product WHERE @nameProduct LIKE nameProduct
+END
+GO
+
+--get turnovr of date
+CREATE PROC getTurnoverByDate
+	@date date
+AS 
+BEGIN
+	SELECT SUM(price) FROM OrderHistory WHERE paydate = @date 
+END
+GO
+
 
 -- Thêm dữ liệu vào bảng NhanVien
 INSERT INTO NhanVien (numberPhone, Email, name, address, password)
@@ -563,6 +585,8 @@ update NhanVien set DiemTichLuy = 1000000000 where numberPhone = '0387790894'
 	
 exec listMyVoucher '0387790894'
 exec showTurnover
+exec getAmount N'Cà phê phin sữa đá'
+exec getTurnoverByDate N'4/29/2023'
 
 
 exec usp_CheckExistCart '0387790894'

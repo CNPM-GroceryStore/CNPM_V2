@@ -49,5 +49,13 @@ namespace DAO
             return false;
         }
         #endregion
+
+        #region
+        public int getAmount(string nameProduct)
+        {
+            string statement = "getAmount @nameProduct";
+            return (int)DataProvider.Instance.ExecuteStoredProcedureScalar(statement, new object[] { nameProduct });
+        }
+        #endregion 
     }
 }
