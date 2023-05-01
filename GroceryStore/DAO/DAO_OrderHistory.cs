@@ -11,26 +11,26 @@ namespace DAO
     public class DAO_OrderHistory
     {
         #region 1.add history order
-        public void insertOrderHistory(DTO_User user, DTO_OrderHistory orderHistory)
+        public void insertOrderHistory(DTO_Staff staff, DTO_OrderHistory orderHistory)
         {
 
-            string statement = "insertOrderHistory @idUser, @price, @amount, @paymethod, @status, @paydate";
-            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { user.IdUser, orderHistory.price, orderHistory.amount, orderHistory.paymethod, orderHistory.status, orderHistory.paydate });
+            string statement = "insertOrderHistory @idStaff, @price, @amount, @paymethod, @status, @paydate";
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { staff.IdStaff, orderHistory.price, orderHistory.amount, orderHistory.paymethod, orderHistory.status, orderHistory.paydate });
         }
         #endregion
 
         #region 2. show all history order
-        public DataTable showAll(DTO_User user=null)
+        public DataTable showAll(DTO_Staff staff=null)
         {
-            if(user == null)
+            if(staff == null)
             {
                 string statement = "showAllHistoryOrder";
                 return DataProvider.Instance.ExecuteStoredProcedureSelect(statement);
             }
             else
             {
-                string statement = "showAllHistoryOrder @idUser";
-                return DataProvider.Instance.ExecuteStoredProcedureSelect(statement, new object[] { user.IdUser });
+                string statement = "showAllHistoryOrder @idStaff";
+                return DataProvider.Instance.ExecuteStoredProcedureSelect(statement, new object[] { staff.IdStaff });
             }
         }
         #endregion

@@ -63,6 +63,7 @@ namespace GroceryStore
         public void clear()
         {
             TienThanhToan = 0;
+            TienVoucher = 0;
             DiemTichLuy = 0;
             TongTien = 0;
         }

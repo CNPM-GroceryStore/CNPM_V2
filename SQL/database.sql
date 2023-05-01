@@ -17,10 +17,18 @@ CREATE TABLE NhanVien (
     name NVARCHAR(50) NOT NULL,
     address NVARCHAR(200) NOT NULL,
     password NVARCHAR(20) NOT NULL,
+);
+GO
+-- Tạo bảng Khach Hang
+CREATE TABLE KhachHang (
+    numberPhone VARCHAR(15) PRIMARY KEY,
+    Email VARCHAR(50) NOT NULL,
+    name NVARCHAR(50) NOT NULL,
+    address NVARCHAR(200) NOT NULL,
+    password NVARCHAR(20) NOT NULL,
 	DiemTichLuy Int Default 0
 );
 GO
-
 
 --Tạo bảng sản phẩm
 CREATE TABLE Product (
@@ -108,10 +116,10 @@ GO
 
 
 CREATE PROCEDURE loadCart
-	@idUser VARCHAR(20)
+	@idStaff VARCHAR(20)
 AS
 BEGIN 
-	SELECT item_id, item_name, item_price, quantity FROM cart_item WHERE cart_id = @idUser
+	SELECT item_id, item_name, item_price, quantity FROM cart_item WHERE cart_id = @idStaff
 END
 GO
 
@@ -181,14 +189,14 @@ go
 -- procedure insert cart
 create PROCEDURE usp_InsertProductIntoCart
     @item_id varchar(255),
-    @idUser varchar(255),
+    @idStaff varchar(255),
     @nameProduct NVARCHAR(100),
     @priceProduct Int,
     @quantity INT
 AS
 BEGIN
     INSERT INTO cart_item (item_id, cart_id, item_name, item_price, quantity)
-    VALUES (@item_id, @idUser, @nameProduct, @priceProduct, @quantity)
+    VALUES (@item_id, @idStaff, @nameProduct, @priceProduct, @quantity)
 END
 Go
 
@@ -284,18 +292,27 @@ END
 go
 
 -- procedure Delete MyVoucher 
-create PROCEDURE deleteMyVoucher
+CREATE PROCEDURE deleteMyVoucher
 	@numberPhone varchar(255),
-	@MaVoucher varchar(255)
+	@MaVoucher varchar(255),
+	@SoLuong int
 AS
 BEGIN
-	delete from MyVoucher where numberPhone = @numberPhone and MaVoucher = @MaVoucher
+    IF (SELECT SoLuong FROM MyVoucher WHERE numberPhone = @numberPhone AND MaVoucher = @maVoucher) > @SoLuong
+		BEGIN
+			UPDATE MyVoucher SET SoLuong = SoLuong - @SoLuong WHERE numberPhone = @numberPhone AND MaVoucher = @maVoucher;
+		END
+    ELSE
+		BEGIN
+			delete from MyVoucher where numberPhone = @numberPhone and MaVoucher = @MaVoucher
+		END
+	
 END
 go
 
 -- procedure add history order 
 create PROCEDURE insertOrderHistory
-	@idUser varchar(255), 
+	@idStaff varchar(255), 
 	@price int, 
 	@amount int, 
 	@paymethod nvarchar(255), 
@@ -303,16 +320,16 @@ create PROCEDURE insertOrderHistory
 	@paydate date
 AS
 BEGIN
-	INSERT INTO OrderHistory (idUser, price, amount, paymethod, status, paydate) VALUES ( @idUser , @price , @amount , @paymethod , @status , @paydate )
+	INSERT INTO OrderHistory (idUser, price, amount, paymethod, status, paydate) VALUES ( @idStaff , @price , @amount , @paymethod , @status , @paydate )
 END
 go
 
 -- procedure show all history order 
 create PROCEDURE showAllHistoryOrder
-	@idUser varchar(255)
+	@idStaff varchar(255)
 AS
 BEGIN
-	SELECT id as 'ID', price as 'Giá', amount as 'Số lượng', paymethod as 'Phương thức thanh toán', status as 'Trạng thái', paydate as 'Ngày thanh toán' FROM OrderHistory WHERE idUser = @idUser
+	SELECT id as 'ID', price as 'Giá', amount as 'Số lượng', paymethod as 'Phương thức thanh toán', status as 'Trạng thái', paydate as 'Ngày thanh toán' FROM OrderHistory WHERE idUser = @idStaff
 END
 go
 
@@ -385,7 +402,7 @@ go
 create PROCEDURE showAllUser
 AS
 BEGIN
-	SELECT numberPhone, Email, name, address, DiemTichLuy FROM NhanVien
+	SELECT numberPhone, Email, name, address, DiemTichLuy FROM KhachHang
 END
 go
 
@@ -421,16 +438,36 @@ create PROCEDURE loginAccount
 	@numberPhone varchar(255)
 AS
 BEGIN
-	SELECT numberPhone, Email, name, address, DiemTichLuy FROM NhanVien WHERE numberPhone = @numberPhone
+	SELECT numberPhone, Email, name, address, DiemTichLuy FROM KhachHang WHERE numberPhone = @numberPhone
 END
 go
 
--- procedure Check account exist 
-create PROCEDURE checkAccount
+-- procedure Login Account Staff 
+create PROCEDURE loginAccountStaff
 	@numberPhone varchar(255)
 AS
 BEGIN
-	SELECT COUNT(numberPhone) AS 'Tontai' FROM NhanVien WHERE numberPhone LIKE @numberPhone
+	SELECT numberPhone, Email, name, address FROM NhanVien WHERE numberPhone = @numberPhone
+END
+go
+
+-- procedure Check account user exist 
+create PROCEDURE checkAccount
+	@numberPhone varchar(255),
+	@password varchar(255)
+AS
+BEGIN
+	SELECT COUNT(numberPhone) AS 'Tontai' FROM KhachHang WHERE numberPhone = @numberPhone and password = @password
+END
+go
+
+-- procedure Check account staff exist 
+create PROCEDURE checkAccountStaff
+	@numberPhone varchar(255),
+	@password varchar(255)
+AS
+BEGIN
+	SELECT COUNT(numberPhone) AS 'Tontai' FROM NhanVien WHERE numberPhone = @numberPhone and password = @password
 END
 go
 
@@ -440,7 +477,7 @@ create PROCEDURE updatePoint
 	@DiemTichLuy int
 AS
 BEGIN
-	update NhanVien Set DiemTichLuy = @DiemTichLuy where numberPhone = @numberPhone
+	update KhachHang Set DiemTichLuy = @DiemTichLuy where numberPhone = @numberPhone
 END
 go
 
@@ -535,9 +572,15 @@ VALUES
 (N'Giảm 40k cho đơn 0đ', 40000, ''),
 (N'Giảm 50k cho đơn 0đ', 50000, '');
 
-INSERT INTO NhanVien (numberPhone, Email, name, address, password, DiemTichLuy)
+INSERT INTO NhanVien (numberPhone, Email, name, address, password)
+VALUES
+('0387790894', 'lehuynhphat@gmail.com', N'Lê Huỳnh Phát',  N'Bến Tre', '12345678');
+go
+
+INSERT INTO KhachHang(numberPhone, Email, name, address, password, DiemTichLuy)
 VALUES
 ('0387790894', 'lehuynhphat@gmail.com', N'Lê Huỳnh Phát',  N'Bến Tre', '12345678', 1000000);
+go
 
 insert into MyVoucher (numberPhone, MaVoucher) values ('0387790894', 1);
 
@@ -560,7 +603,7 @@ select * from Cart
 select* from cart_item
 select * from OrderHistory
 
-update NhanVien set DiemTichLuy = 1000000000 where numberPhone = '0387790894'
+update KhachHang set DiemTichLuy = 1000000000 where numberPhone = '0387790894'
 	
 exec listMyVoucher '0387790894'
 exec showTurnover

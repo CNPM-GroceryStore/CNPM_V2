@@ -55,11 +55,11 @@ namespace DAO
         }
         #endregion
 
-        #region 6. Check account exist
+        #region 6. Check account
         public bool checkAccount(DTO_User user)
         {
-            string statement = "checkAccount @numberPhone";
-            int count = Convert.ToInt32(DataProvider.Instance.ExecuteStoredProcedureScalar(statement, new object[] { user.IdUser}));
+            string statement = "checkAccount @numberPhone @password";
+            int count = Convert.ToInt32(DataProvider.Instance.ExecuteStoredProcedureScalar(statement, new object[] { user.IdUser, user.PasswordUser}));
             if (count > 0)
             {
                 return true;

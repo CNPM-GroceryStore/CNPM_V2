@@ -59,7 +59,6 @@
             btn_voucher = new Guna.UI2.WinForms.Guna2GradientTileButton();
             pn_choice = new Panel();
             guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
-            label2 = new Label();
             pt_settings = new PictureBox();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             lb_nameUser2 = new Label();
@@ -69,6 +68,7 @@
             lb_nameUser1 = new Label();
             label1 = new Label();
             panel2 = new Panel();
+            lbl_username = new MetroSet_UI.Controls.MetroSetLabel();
             DiemTichLuy = new DiemTichLuy();
             lb_phoBien = new Label();
             lb_danhMucPhu = new Label();
@@ -317,6 +317,7 @@
             btn_voucher.Size = new Size(111, 111);
             btn_voucher.TabIndex = 4;
             btn_voucher.Text = "Mã giảm giá";
+            btn_voucher.Visible = false;
             btn_voucher.Click += btn_voucher_Click;
             // 
             // pn_choice
@@ -331,7 +332,6 @@
             // 
             guna2ShadowPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             guna2ShadowPanel1.BackColor = Color.Transparent;
-            guna2ShadowPanel1.Controls.Add(label2);
             guna2ShadowPanel1.Controls.Add(pt_settings);
             guna2ShadowPanel1.Controls.Add(guna2Panel1);
             guna2ShadowPanel1.Controls.Add(btn_search);
@@ -346,15 +346,6 @@
             guna2ShadowPanel1.ShadowColor = Color.Black;
             guna2ShadowPanel1.Size = new Size(998, 136);
             guna2ShadowPanel1.TabIndex = 6;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(403, 129);
-            label2.Name = "label2";
-            label2.Size = new Size(50, 20);
-            label2.TabIndex = 12;
-            label2.Text = "label2";
             // 
             // pt_settings
             // 
@@ -463,6 +454,7 @@
             // 
             panel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel2.BackColor = SystemColors.Control;
+            panel2.Controls.Add(lbl_username);
             panel2.Controls.Add(DiemTichLuy);
             panel2.Controls.Add(lb_phoBien);
             panel2.Controls.Add(lb_danhMucPhu);
@@ -475,6 +467,22 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(606, 675);
             panel2.TabIndex = 7;
+            // 
+            // lbl_username
+            // 
+            lbl_username.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            lbl_username.IsDerivedStyle = true;
+            lbl_username.Location = new Point(0, 0);
+            lbl_username.Name = "lbl_username";
+            lbl_username.Size = new Size(201, 36);
+            lbl_username.Style = MetroSet_UI.Enums.Style.Light;
+            lbl_username.StyleManager = null;
+            lbl_username.TabIndex = 7;
+            lbl_username.Text = "UserName";
+            lbl_username.ThemeAuthor = "Narwin";
+            lbl_username.ThemeName = "MetroLite";
+            lbl_username.Visible = false;
+            lbl_username.Click += lbl_username_Click;
             // 
             // DiemTichLuy
             // 
@@ -594,7 +602,7 @@
             ThanhToan.Location = new Point(8, 397);
             ThanhToan.Margin = new Padding(0);
             ThanhToan.Name = "ThanhToan";
-            ThanhToan.Size = new Size(458, 333);
+            ThanhToan.Size = new Size(458, 443);
             ThanhToan.TabIndex = 0;
             ThanhToan.TienThanhToan = 0;
             ThanhToan.TienVoucher = 0;
@@ -747,7 +755,7 @@
             Controls.Add(panel1);
             Controls.Add(panel2);
             Margin = new Padding(3, 4, 3, 4);
-            MinimumSize = new Size(1232, 806);
+            MinimumSize = new Size(1232, 803);
             Name = "HomeForm";
             Text = "+";
             Load += HomeForm_Load;
@@ -822,8 +830,8 @@
         private Guna.UI2.WinForms.Guna2Button btn_maCuaToi;
         private Guna.UI2.WinForms.Guna2Button btn_tatCa;
         private DiemTichLuy DiemTichLuy;
-        private Label label2;
         private ThanhToan ThanhToan;
         private FlowLayoutPanel flowpanel_order_history;
+        private MetroSet_UI.Controls.MetroSetLabel lbl_username;
     }
 }

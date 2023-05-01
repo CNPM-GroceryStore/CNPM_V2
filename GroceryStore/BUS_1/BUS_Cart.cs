@@ -14,32 +14,32 @@ namespace BUS
 
         DAO_Cart cart = new DAO_Cart();
 
-        #region 1. Create Cart for user
-        public void createCart(DTO_User user)
+        #region 1. Create Cart for staff
+        public void createCart(DTO_Staff staff)
         {
-            cart.createCart(user);
+            cart.createCart(staff);
         }
         #endregion
 
         #region 2. Add product
-        public void addProductInCart(DTO_User user, DTO_ProductCart productCart)
+        public void addProductInCart(DTO_Staff staff, DTO_ProductCart productCart)
         {
-            cart.insertProductIntoCart(user, productCart);
+            cart.insertProductIntoCart(staff, productCart);
         }
         #endregion
 
         #region 3. Delete products
-        public void deleteProductFromCart(DTO_User user, DTO_ProductCart productCart)
+        public void deleteProductFromCart(DTO_Staff staff, DTO_ProductCart productCart)
         {
-            cart.deleteProductFromCart(user, productCart);
+            cart.deleteProductFromCart(staff, productCart);
         }
         #endregion
 
         #region 4. Show products in cart
-        public List<DTO_ProductCart> getProducts(DTO_User user)
+        public List<DTO_ProductCart> getProducts(DTO_Staff staff)
         {
             List<DTO_ProductCart> products = new List<DTO_ProductCart>();
-            foreach (DataRow row in cart.getAllProductInCart(user).Rows)
+            foreach (DataRow row in cart.getAllProductInCart(staff).Rows)
             {
                 DTO_ProductCart productCard = new DTO_ProductCart(row[0].ToString(), row[1].ToString(), Convert.ToInt32(row[2]), Convert.ToInt32(row[3]));
                 products.Add(productCard);
@@ -50,23 +50,23 @@ namespace BUS
         #endregion
 
         #region 5. Update number of products
-        public void updateProductFromCart(DTO_User user, DTO_ProductCart productCart)
+        public void updateProductFromCart(DTO_Staff staff, DTO_ProductCart productCart)
         {
-            cart.updateProductFromCart(user, productCart);
+            cart.updateProductFromCart(staff, productCart);
         }
         #endregion
 
         #region 6. Check exist Cart
-        public bool checkExistCart(DTO_User user)
+        public bool checkExistCart(DTO_Staff staff)
         {
-            return cart.checkExistCart(user);
+            return cart.checkExistCart(staff);
         }
         #endregion
 
         #region 7. Delete cart
-        public void deleteCart(DTO_User user)
+        public void deleteCart(DTO_Staff staff)
         {
-            cart.deleteCart(user);
+            cart.deleteCart(staff);
         }
         #endregion
     }
