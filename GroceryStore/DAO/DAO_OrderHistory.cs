@@ -56,5 +56,13 @@ namespace DAO
             string statement = "getTurnoverByDate @date";
             return (int)DataProvider.Instance.ExecuteStoredProcedureScalar(statement, new object[] {date});
         }
+
+        #region 6. Get orders in date
+        public DataTable getOrdersInDate()
+        {
+            string statement = "getOrdersInDate";
+            return DataProvider.Instance.ExecuteStoredProcedureSelect(statement);
+        }
+        #endregion
     }
 }

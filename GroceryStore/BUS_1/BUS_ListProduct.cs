@@ -19,7 +19,7 @@ namespace BUS
             products.Clear();
             foreach (DataRow row in dAO_listProduct.showAllProducts().Rows)
             {
-                DTO_Product product = new DTO_Product((int)row[0], (String)row[1], Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), (String)row[4], (String)row[5], (string)row[6], row[7].ToString());
+                DTO_Product product = new DTO_Product(Convert.ToInt32(row[0]), (String)row[1], Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), (String)row[4], (String)row[5], (string)row[6], row[7].ToString());
                 products.Add(product);
             }
         }
@@ -134,6 +134,27 @@ namespace BUS
                 }
             }
             return products.Count;
+        }
+        #endregion
+
+        #region 9. usp_ShowAllProductsAdmin
+        public void showAllProductAdmin(List<DTO_Product> products)
+        {
+            DAO_ListProduct dAO_listProduct = new DAO_ListProduct();
+            products.Clear();
+            foreach (DataRow row in dAO_listProduct.showAllProductAdmin().Rows)
+            {
+                DTO_Product product = new DTO_Product(Convert.ToInt32(row[0]), (String)row[1], Convert.ToInt32(row[2]), Convert.ToInt32(row[3]), (String)row[4], (String)row[5], (string)row[6], row[7].ToString());
+                products.Add(product);
+            }
+        }
+        #endregion
+
+        #region 10. Show product in manage page
+        public DataTable showProductsManagePage()
+        {
+            DAO_ListProduct dAO_listProduct = new DAO_ListProduct();
+            return dAO_listProduct.showAllProductAdmin();
         }
         #endregion
     }

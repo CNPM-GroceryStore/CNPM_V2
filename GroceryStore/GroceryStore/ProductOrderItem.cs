@@ -18,10 +18,11 @@ namespace GroceryStore
         }
 
         #region Properties
+        private int _idItemOder;
         private String _nameItemOder;
         private int _priceItemOder;
         private int _lb_totalItem;
-        public event EventHandler pb_plusClicked;
+        public event EventHandler pb_plusClicked;       
         public event EventHandler pb_minusClicked;
         private void ItemOder_Load(object sender, EventArgs e)
         {
@@ -46,6 +47,13 @@ namespace GroceryStore
             this.lb_nameItemOder.Text = name;
             this.lb_priceItemOder.Text = price;
             this.lb_totalItem.Text = number.ToString();
+        }
+
+        [Category("N5")]
+        public int IdItemOder
+        {
+            get { return _idItemOder; }
+            set { _idItemOder = value;}
         }
 
         [Category("N5")]

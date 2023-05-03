@@ -18,6 +18,7 @@ namespace GroceryStore
         }
 
         #region Properties
+        private int _idProduct;
         private Image _imageProduct;
         private String _nameProduct;
         private int _priceProduct;
@@ -41,6 +42,13 @@ namespace GroceryStore
             {
                 timer_border.Enabled = false;
             }
+        }
+
+        [Category("N5")]
+        public int IdProduct
+        {
+            get { return _idProduct; }
+            set { _idProduct = value;}
         }
 
         [Category("N5")]

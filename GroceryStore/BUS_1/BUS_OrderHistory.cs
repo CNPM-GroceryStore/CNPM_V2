@@ -42,6 +42,13 @@ namespace BUS_1
         #endregion
 
         #region
+        public DataTable getOrdersInDate()
+        {
+            return orderHistory.getOrdersInDate();
+        }
+        #endregion
+
+        #region
         public double getTurnover()
         {
             return orderHistory.getTurnover();

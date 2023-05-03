@@ -31,21 +31,28 @@ namespace GroceryStore.BUS
         #endregion
 
         #region 3. Update product
-        public DTO_Product updateProduct(DTO_Product product)
+        public DTO_Product updateAmount(DTO_Product product, int value)
         {
-            dAO_Product.updateProduct(product);
+            dAO_Product.updateAmount(product, value);
             return product;
         }
         #endregion
 
         #region 
-        public bool checkAmount(int amount, string nameProduct)
+        public bool checkAmount(int amount, int idProduct)
         {
-            if (amount > dAO_Product.getAmount(nameProduct))
+            if (amount > dAO_Product.getAmount(idProduct))
             {
                 return false;
             }
             return true;
+        }
+        #endregion
+
+        #region 5. update Product
+        public void updateProduct(DTO_Product product)
+        {
+            dAO_Product.updateProduct(product);
         }
         #endregion
     }

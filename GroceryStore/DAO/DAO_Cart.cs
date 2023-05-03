@@ -23,23 +23,23 @@ namespace DAO
         public void insertProductIntoCart(DTO_Staff staff, DTO_ProductCart productCard)
         {
             string statement = "usp_InsertProductIntoCart @item_id, @idStaff, @nameProduct, @priceProduct, @quantity ";
-            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { productCard.ID, staff.IdStaff, productCard.Name, productCard.Price, productCard.Quantity });
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { productCard.ID.ToString(), staff.IdStaff, productCard.Name, productCard.Price, productCard.Quantity });
         }
         #endregion
 
         #region 2. Delete product from Cart
         public void deleteProductFromCart(DTO_Staff staff, DTO_ProductCart productCard)
         {
-            string statement = "usp_DeleteProductIntoCart @item_id, @cart_id ";
-            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { productCard.ID, staff.IdStaff});
+            string statement = "usp_DeleteProductIntoCart @item_id , @cart_id ";
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { productCard.ID.ToString(), staff.IdStaff});
         }
         #endregion
 
         #region 3. update product from Cart
         public void updateProductFromCart(DTO_Staff staff, DTO_ProductCart productCard)
         {
-            string statement = "usp_UpdateProductIntoCart @quantity,@cart_id, @item_id ";
-            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { productCard.Quantity, staff.IdStaff, productCard.ID}) ;
+            string statement = "usp_UpdateProductIntoCart @quantity , @cart_id , @item_id ";
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { productCard.Quantity, staff.IdStaff, productCard.ID.ToString()}) ;
         }
         #endregion
 

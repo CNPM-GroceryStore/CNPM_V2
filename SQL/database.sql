@@ -1,7 +1,5 @@
 ﻿use master 
 drop database CuaHangTienLoi
-go
-drop database CuaHangTienLoi
 Go
 -- Tạo database mới
 CREATE DATABASE CuaHangTienLoi;
@@ -223,6 +221,16 @@ BEGIN
 END
 Go
 
+
+CREATE PROCEDURE updateAmount
+@idProduct INT, 
+@value INT
+AS
+BEGIN		
+	UPDATE Product SET amountProduct = amountProduct + @value WHERE idProduct = @idProduct
+END
+GO
+
 -- procedure create cart
 create PROCEDURE usp_CreateCart
 	@cart_id varchar(255)
@@ -254,7 +262,17 @@ Go
 create PROCEDURE usp_ShowAllProducts
 AS
 BEGIN
-    SELECT idProduct, nameProduct, amountProduct, priceProduct, imageProduct, typeProduct, shipment, shelflife FROM Product
+    SELECT idProduct, nameProduct, amountProduct, priceProduct, imageProduct, typeProduct, shipment, shelflife FROM Product WHERE amountProduct > 0
+END
+go
+
+drop proc usp_ShowAllProductsAdmin
+go
+create PROCEDURE usp_ShowAllProductsAdmin
+AS
+BEGIN
+    SELECT idProduct as N'Mã', nameProduct as N'Tên', amountProduct as N'Số lượng', priceProduct as N'Giá', 
+	imageProduct as N'Hình ảnh', typeProduct as N'Loại', shipment as N'Lô', shelflife as N'Hạn sử dụng' FROM Product
 END
 go
 
@@ -335,6 +353,7 @@ BEGIN
 END
 go
 
+
 -- procedure show all history order 
 create PROCEDURE showAllHistoryOrderNoUser
 AS
@@ -375,16 +394,22 @@ BEGIN
 END
 go
 
+drop proc updateProduct
 -- procedure Update product 
 create PROCEDURE updateProduct
+@idProduct varchar(255),
 @nameProduct varchar(255), 
+@amountProduct INT,	
 @priceProduct int, 
 @imageProduct varchar(255), 
 @typeProduct varchar(255),
-@idProduct varchar(255)
+@shipment varchar(255),
+@shelflife date
 AS
 BEGIN
-	UPDATE Product SET nameProduct = @nameProduct , priceProduct = @priceProduct , imageProduct = @imageProduct , typeProduct = @typeProduct WHERE idProduct = @idProduct
+	UPDATE Product SET nameProduct = @nameProduct , amountProduct = @amountProduct ,priceProduct = @priceProduct , 
+	imageProduct = @imageProduct , typeProduct = @typeProduct , shipment = @shipment, shelflife = @shelflife
+	WHERE idProduct = @idProduct
 END
 go
 
@@ -534,14 +559,16 @@ BEGIN
 END
 GO
 
+drop proc getAmount
+go
 --get amount of rest product
 CREATE PROC getAmount
-	@nameProduct NVARCHAR(255)
+	@idProduct INT	
 AS
 BEGIN
-	SELECT amountProduct FROM Product WHERE @nameProduct LIKE nameProduct
+	SELECT amountProduct FROM Product WHERE idProduct  = @idProduct 
 END
-GO
+GO	
 
 --get turnovr of date
 CREATE PROC getTurnoverByDate
@@ -551,6 +578,15 @@ BEGIN
 	SELECT SUM(price) FROM OrderHistory WHERE paydate = @date 
 END
 GO
+
+CREATE PROC getOrdersInDate
+AS
+BEGIN
+	SELECT id as 'ID', price as 'Giá', amount as 'Số lượng', 
+			paymethod as 'Phương thức thanh toán', status as 'Trạng thái', paydate as 'Ngày thanh toán' 
+	FROM OrderHistory	
+	WHERE DAY(paydate) = DAY(CURRENT_TIMESTAMP)	
+END
 
 
 -- Thêm dữ liệu vào bảng NhanVien
@@ -599,9 +635,19 @@ VALUES
 ('0387790894', 'lehuynhphat@gmail.com', N'Lê Huỳnh Phát',  N'Bến Tre', '12345678');
 go
 
+INSERT INTO NhanVien (numberPhone, Email, name, address, password)
+VALUES
+('0967671065', 'nguyenhuutin@gmail.com', N'Nguyễn Hữu Tín',  N'Bình Định', '12345678');
+go
+
 INSERT INTO KhachHang(numberPhone, Email, name, address, password, DiemTichLuy)
 VALUES
 ('0387790894', 'lehuynhphat@gmail.com', N'Lê Huỳnh Phát',  N'Bến Tre', '12345678', 1000000);
+go
+
+INSERT INTO KhachHang(numberPhone, Email, name, address, password, DiemTichLuy)
+VALUES
+('0967671065', 'nguyenhuutin@gmail.com', N'Nguyễn Hữu Tín',  N'Bình Định', '12345678', 1000000);
 go
 
 insert into MyVoucher (numberPhone, MaVoucher) values ('0387790894', 1);
@@ -620,19 +666,21 @@ select * from NhanVien
 select * from Voucher
 select * from MyVoucher
 select * from Voucher
+delete from Product 
 select * from Product
 select * from Cart
+delete from cart_item where cart_id = '0387790894'
 select* from cart_item
-select * from OrderHistory
+select * from OrderHistory	
 
 update KhachHang set DiemTichLuy = 1000000000 where numberPhone = '0387790894'
-	
+
 exec listMyVoucher '0387790894'
 exec showTurnover
-exec getAmount N'Cà phê phin sữa đá'
+exec getAmount 3
 exec getTurnoverByDate N'4/29/2023'
 
 
 exec usp_CheckExistCart '0387790894'
-
+		
 exec updatePoint '0387790894' , 1000000
