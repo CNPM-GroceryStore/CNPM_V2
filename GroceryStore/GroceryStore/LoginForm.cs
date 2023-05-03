@@ -59,18 +59,18 @@ namespace GroceryStore
 
         private void btn_login_Click(object sender, EventArgs e)
         {
-            DTO_User user = new DTO_User(tb_sdt.Text, tb_password.Text);
-            BUS_User bUS_User = new BUS_User();
-            //MessageBox.Show(bUS_User.checkAccount(user).ToString());
-            if (bUS_User.checkAccount(user))
+            DTO_Staff staff = new DTO_Staff(tb_sdt.Text, tb_password.Text);
+            BUS_Staff bUS_Staff = new BUS_Staff();
+            //MessageBox.Show(bUS_Staff.checkAccount(staff).ToString());
+            if (bUS_Staff.checkAccountStaff(staff))
             {
-                bUS_User.loginAccount(user);
+                bUS_Staff.loginAccountStaff(staff);
                 MessageBox.Show("Đăng nhập thành công");
                 this.Hide();
-                HomeForm home = new HomeForm(user);
+                HomeForm home = new HomeForm(staff);
                 home.Show();
             }
-            else { errorLogin.SetError(tb_sdt, "Tài khoản không tồn tại"); }
+            else { errorLogin.SetError(tb_sdt, "Tài khoản hoặc mật khẩu không đúng"); }
 
         }
 

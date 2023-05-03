@@ -47,6 +47,7 @@
     <Compile Include="DTO_OrderHistory.cs" />
     <Compile Include="DTO_Product.cs" />
     <Compile Include="DTO_ProductCart.cs" />
+    <Compile Include="DTO_Staff.cs" />
     <Compile Include="DTO_User.cs" />
     <Compile Include="DTO_Voucher.cs" />
     <Compile Include="DTO_MyVoucher.cs" />

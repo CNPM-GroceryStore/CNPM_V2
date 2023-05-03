@@ -12,7 +12,7 @@ namespace GroceryStore
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new LoginForm());
-            //Application.Run( new AdminForm());
+            //Application.Run(new AdminForm());
         }
     }
 }

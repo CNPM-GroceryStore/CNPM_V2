@@ -28,6 +28,14 @@ namespace DTO
             this.HinhAnh = hinhAnh;
             this.Quantity = quantity;
         }
+
+        public DTO_MyVoucher(string idUser, int maMyVoucher, int giaMyVoucher, int quantity)
+        {
+            this.MaUser = idUser;
+            this.MaMyVoucher = maMyVoucher;
+            this.GiaMyVoucher = giaMyVoucher;
+            this.Quantity = quantity;
+        }
     }
 }
 

@@ -48,6 +48,7 @@
     <Compile Include="DAO_MyVoucher.cs" />
     <Compile Include="DAO_OrderHistory.cs" />
     <Compile Include="DAO_Product.cs" />
+    <Compile Include="DAO_Staff.cs" />
     <Compile Include="DAO_Voucher.cs" />
     <Compile Include="DAO_User.cs" />
     <Compile Include="DataProvider.cs" />

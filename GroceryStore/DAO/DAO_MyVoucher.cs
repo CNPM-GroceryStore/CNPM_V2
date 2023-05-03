@@ -23,8 +23,8 @@ namespace DAO
         #region 2. Delete MyVoucher
         public void deleteMyVoucher(DTO_MyVoucher myVoucher)
         {
-            string statement = "deleteMyVoucher @SoDienThoai @MaVoucher";
-            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { myVoucher.MaUser, myVoucher.MaMyVoucher });
+            string statement = "deleteMyVoucher @numberPhone, @MaVoucher, @SoLuong";
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { myVoucher.MaUser, myVoucher.MaMyVoucher, myVoucher.Quantity });
         }
         #endregion
     }

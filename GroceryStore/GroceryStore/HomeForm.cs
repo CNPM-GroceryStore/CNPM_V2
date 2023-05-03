@@ -3,6 +3,7 @@ using BUS_1;
 using DAO;
 using DTO;
 using GroceryStore.BUS;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,17 +16,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using static TheArtOfDevHtmlRenderer.Adapters.RGraphicsPath;
+using Button = System.Windows.Forms.Button;
+using TextBox = System.Windows.Forms.TextBox;
 
 namespace GroceryStore
 {
     public partial class HomeForm : Form
     {
+        private DTO_Staff staff;
         private DTO_User user;
-        public HomeForm(DTO_User user)
+        public HomeForm(DTO_Staff staff)
         {
             InitializeComponent();
-            this.user = user;
+            this.staff = staff;
         }
 
 
@@ -33,6 +38,7 @@ namespace GroceryStore
         List<DTO_Product> list_product = new List<DTO_Product>();
         List<DTO_Voucher> vouchers = new List<DTO_Voucher>();
         List<DTO_MyVoucher> myVouchers = new List<DTO_MyVoucher>();
+        List<DTO_MyVoucher> usedMyVouchers = new List<DTO_MyVoucher>();
         String typeOfProduct = "home";
         String[] list_nameProduct;
 
@@ -45,7 +51,7 @@ namespace GroceryStore
 
         public void HomeLoad(object sender, EventArgs e)
         {
-            String name = user.NameUser;
+            String name = staff.NameStaff;
             String[] x = name.Split(' ');
             name = x[x.Length - 2] + " " + x[x.Length - 1];
             lb_nameUser2.Text = name;
@@ -77,7 +83,7 @@ namespace GroceryStore
         //Load Info User
         public void loadInfoUser(object sender, EventArgs e)
         {
-            lb_nameUser2.Text = user.NameUser;
+            lb_nameUser2.Text = staff.NameStaff;
             show_product_cart();
         }
 
@@ -168,6 +174,8 @@ namespace GroceryStore
             lb_tatCa.Visible = false;
             lb_phoBien.Visible = false;
             pb_muiTen.Visible = false;
+            lbl_username.Visible = true;
+            lbl_username.Text = user.NameUser;
             DiemTichLuy.Point = user.AccumulatedPointsUser;
 
             Voucher[] listVoucher = new Voucher[vouchers.Count];
@@ -234,6 +242,8 @@ namespace GroceryStore
             pb_muiTen.Visible = true;
             btn_tatCa.Visible = false;
             btn_maCuaToi.Visible = false;
+            lbl_username.Visible = false;
+            btn_voucher.Visible = false;
             DiemTichLuy.Visible = false;
             typeOfProduct = "home";
             flowLayout.Controls.Clear();
@@ -308,24 +318,24 @@ namespace GroceryStore
             ProductOrderItem order = findProductItem(obj);
             order.NumberOfItem += 1;
             BUS_Cart cart = new BUS_Cart();
-            if (cart.checkExistCart(user) == false)
+            if (cart.checkExistCart(staff) == false)
             {
                 MessageBox.Show("aaaaaaaaaaaaaaaaaaa");
-                cart.createCart(user);
+                cart.createCart(staff);
             }
             if (order.NumberOfItem == 1)
             {
                 DTO_ProductCart productCard = new DTO_ProductCart(order.NameItemOder, order.NameItemOder, order.PriceItemOder, order.NumberOfItem);
                 if (isExistsInCart(order))
                 {
-                    cart.updateProductFromCart(user, checkExistProductInCart(order));
+                    cart.updateProductFromCart(staff, checkExistProductInCart(order));
                 }
                 else
                 {
                     BUS_Product currentProduct = new BUS_Product();
                     if (currentProduct.checkAmount(order.NumberOfItem, order.NameItemOder))
                     {
-                        cart.addProductInCart(user, productCard);
+                        cart.addProductInCart(staff, productCard);
                     }
                     else
                     {
@@ -335,7 +345,7 @@ namespace GroceryStore
             }
             else
             {
-                cart.updateProductFromCart(user, checkExistProductInCart(order));
+                cart.updateProductFromCart(staff, checkExistProductInCart(order));
             }
             //order.Click += new System.EventHandler(this.select_Product_Cart);
             show_product_cart();
@@ -362,7 +372,7 @@ namespace GroceryStore
         DTO_ProductCart checkExistProductInCart(ProductOrderItem productOrder)
         {
             BUS_Cart bus_cart = new BUS_Cart();
-            foreach (DTO_ProductCart productCart in bus_cart.getProducts(user))
+            foreach (DTO_ProductCart productCart in bus_cart.getProducts(staff))
             {
                 if (productOrder.NameItemOder == productCart.Name)
                 {
@@ -378,7 +388,7 @@ namespace GroceryStore
         private bool isExistsInCart(ProductOrderItem productOrder)
         {
             BUS_Cart bus_cart = new BUS_Cart();
-            foreach (DTO_ProductCart productCart in bus_cart.getProducts(user))
+            foreach (DTO_ProductCart productCart in bus_cart.getProducts(staff))
             {
                 if (productOrder.NameItemOder == productCart.Name)
                 {
@@ -395,38 +405,38 @@ namespace GroceryStore
             if (obj.NumberOfItem <= 0)
             {
                 flowLayoutItemOder.Controls.Remove(obj);
-                cart.deleteProductFromCart(user, checkExistProductInCart(obj));
+                cart.deleteProductFromCart(staff, checkExistProductInCart(obj));
                 orders.Remove(obj);
             }
             else
             {
-                cart.updateProductFromCart(user, checkExistProductInCart(obj));
+                cart.updateProductFromCart(staff, checkExistProductInCart(obj));
             }
             show_product_cart();
             calculeteCart();
         }
 
 
-        //Calculate total money of user's cart
+        //Calculate total money of staff's cart
         void calculeteCart()
         {
             BUS_Cart bus_cart = new BUS_Cart();
             int totalMoney = 0;
-            foreach (DTO_ProductCart item in bus_cart.getProducts(user))
+            foreach (DTO_ProductCart item in bus_cart.getProducts(staff))
             {
                 totalMoney += item.Price * item.Quantity;
             }
             ThanhToan.TongTien = totalMoney;
         }
 
-        //Show product in user's cart
+        //Show product in staff's cart
         void show_product_cart()
         {
             flowLayoutItemOder.Controls.Clear();
             orders.Clear();
             BUS_Cart cart = new BUS_Cart();
 
-            foreach (DTO_ProductCart pro in cart.getProducts(user))
+            foreach (DTO_ProductCart pro in cart.getProducts(staff))
             {
                 ProductOrderItem productItem = new ProductOrderItem();
                 productItem.NameItemOder = pro.Name;
@@ -526,6 +536,17 @@ namespace GroceryStore
             MyVoucher obj = (MyVoucher)sender;
             if (obj.Quantity > 0)
             {
+                DTO_MyVoucher myVoucher = myVouchers.Find(mv => mv.MaMyVoucher == obj.IdMyVoucher);
+                myVoucher.Quantity -= 1;
+                DTO_MyVoucher usedMyVoucher = usedMyVouchers.Find(mv => mv.MaMyVoucher == obj.IdMyVoucher);
+                if (usedMyVoucher == null)
+                {
+                    usedMyVouchers.Add(new DTO_MyVoucher(user.IdUser, myVoucher.MaMyVoucher, myVoucher.GiaMyVoucher, 1));
+                }
+                else
+                {
+                    usedMyVoucher.Quantity += 1;
+                }
                 ThanhToan.TienVoucher += obj.PriceMyVoucher;
             }
         }
@@ -534,6 +555,10 @@ namespace GroceryStore
         private void select_BoMyVoucher(object sender, EventArgs e)
         {
             MyVoucher obj = (MyVoucher)sender;
+            DTO_MyVoucher myVoucher = myVouchers.Find(mv => mv.MaMyVoucher == obj.IdMyVoucher);
+            myVoucher.Quantity += 1;
+            DTO_MyVoucher usedMyVoucher = usedMyVouchers.Find(mv => mv.MaMyVoucher == obj.IdMyVoucher);
+            usedMyVoucher.Quantity -= 1;
             ThanhToan.TienVoucher -= obj.PriceMyVoucher;
 
         }
@@ -543,23 +568,86 @@ namespace GroceryStore
         private void btn_maCuaToi_Click(object sender, EventArgs e)
         {
             myVouchers.Clear();
+            ThanhToan.TienVoucher = 0;
             BUS_ListMyVoucher bUS_ListMyVoucher = new BUS_ListMyVoucher();
             bUS_ListMyVoucher.showAllUserVouchers(myVouchers, user.IdUser);
             loadformMyVoucher();
         }
 
+        private void ShowLoginDialog()
+        {
+            var inputForm = new Form();
+            inputForm.Text = "Nhập thông tin";
+            inputForm.StartPosition = FormStartPosition.CenterScreen;
+
+            var phoneLabel = new Label() { Left = 50, Top = 20, Text = "Số điện thoại:" };
+            var phoneTextBox = new TextBox() { Left = 150, Top = 20, Width = 200 };
+            var passwordLabel = new Label() { Left = 50, Top = 50, Text = "Mật khẩu:" };
+            var passwordTextBox = new TextBox() { Left = 150, Top = 50, Width = 200 };
+
+            var okButton = new Button() { Text = "OK", Left = 150, Width = 100, Top = 80 };
+            okButton.Click += (sender, e) => { inputForm.DialogResult = DialogResult.OK; };
+            var cancelButton = new Button() { Text = "Cancel", Left = 260, Width = 100, Top = 80 };
+            cancelButton.Click += (sender, e) => { inputForm.DialogResult = DialogResult.Cancel; };
+
+            inputForm.Controls.Add(phoneLabel);
+            inputForm.Controls.Add(phoneTextBox);
+            inputForm.Controls.Add(passwordLabel);
+            inputForm.Controls.Add(passwordTextBox);
+            inputForm.Controls.Add(okButton);
+            inputForm.Controls.Add(cancelButton);
+
+            var result = inputForm.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                MessageBox.Show(phoneTextBox.Text);
+                user = new DTO_User(phoneTextBox.Text, passwordTextBox.Text);
+                BUS_User bUS_User = new BUS_User();
+                if (bUS_User.checkAccount(user))
+                {
+                    bUS_User.loginAccount(user);
+                    MessageBox.Show("Đăng nhập thành công");
+                    btn_voucher.Visible = true;
+                    btn_voucher.PerformClick();
+                }
+                else
+                {
+                    MessageBox.Show("Sai tài khoản hoặc mật khẩu, vui lòng nhập lại!");
+                    //ShowLoginDialog();
+                }
+
+            }
+        }
+
+
         // click mua
         private void select_Mua(object sender, EventArgs e)
         {
+            DialogResult dialogUser = new DialogResult();
+            if (user == null)
+            {
+                dialogUser = MessageBox.Show($"Bạn có muốn dùng tài khoản thành viên?", "Thông báo", MessageBoxButtons.YesNo);
+                if (dialogUser == DialogResult.Yes)
+                {
+                    ShowLoginDialog();
+                    return;
+                }
+            }
+
             //MessageBox.Show($"Khách hàng đã thanh toán {ThanhToan.TienThanhToan}");
             ////DialogResult dialog = new DialogResult();
 
             BUS_OrderHistory order = new BUS_OrderHistory();
             BUS_Cart cart = new BUS_Cart();
             BUS_User bUS_User = new BUS_User();
-            bUS_User.updatePoint(user, ThanhToan.DiemTichLuy);
+            if (user != null)
+            {
+                user.AccumulatedPointsUser += ThanhToan.DiemTichLuy;
+                bUS_User.updatePoint(user, user.AccumulatedPointsUser);
+            }
             int price = ThanhToan.TienThanhToan;
-            int amount = cart.getProducts(user).Count;
+            int amount = cart.getProducts(staff).Count;
             string paymethod = cbb_payment.Text;
             string paydate = lb_paydate.Text;
             string status = "";
@@ -569,9 +657,20 @@ namespace GroceryStore
                 if (dialog == DialogResult.Yes)
                 {
                     status = "Hoàn thành";
-                    cart.deleteCart(user);
+                    if (user != null)
+                    {
+                        BUS_MyVoucher bUS_MyVoucher = new BUS_MyVoucher();
+                        usedMyVouchers.ForEach(umv =>
+                        {
+                            bUS_MyVoucher.deleteMyVoucher(umv);
+                        });
+                    }
+                    myVouchers.Clear();
+                    usedMyVouchers.Clear();
+                    cart.deleteCart(staff);
                     flowLayoutItemOder.Controls.Clear();
                     ThanhToan.clear();
+                    user = null;
                 }
                 else
                 {
@@ -579,7 +678,8 @@ namespace GroceryStore
                 }
 
                 DTO_OrderHistory orderHistoryItem = new DTO_OrderHistory(price, amount, paymethod, status, paydate);
-                order.insertOrderHistory(user, orderHistoryItem);
+                order.insertOrderHistory(staff, orderHistoryItem);
+                btn_home.PerformClick();
             }
             else
             {
@@ -593,7 +693,7 @@ namespace GroceryStore
         {
             flowpanel_order_history.Controls.Clear();
             BUS_OrderHistory orderHistory = new BUS_OrderHistory();
-            foreach (DTO_OrderHistory dTO_OrderHistory in orderHistory.showALl(user))
+            foreach (DTO_OrderHistory dTO_OrderHistory in orderHistory.showALl(staff))
             {
                 string id = dTO_OrderHistory.id;
                 int price = dTO_OrderHistory.price;
@@ -624,6 +724,17 @@ namespace GroceryStore
         {
             flowpanel_order_history.Visible = true;
             click_orderHistory(sender, e);
+        }
+
+        private void lbl_username_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogSignOut = MessageBox.Show($"Bạn có muốn đăng xuất tài khoản khách hàng?", "Thông báo", MessageBoxButtons.YesNo);
+            if(dialogSignOut == DialogResult.Yes)
+            {
+                user = null;
+                lbl_username.Text = "Username";
+                lbl_username.Visible = false;
+            }
         }
     }
 }
