@@ -3,6 +3,7 @@ using BUS_1;
 using DAO;
 using DTO;
 using GroceryStore.BUS;
+using Guna.UI2.WinForms;
 using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,7 @@ namespace GroceryStore
         List<DTO_MyVoucher> myVouchers = new List<DTO_MyVoucher>();
         List<DTO_MyVoucher> usedMyVouchers = new List<DTO_MyVoucher>();
         String typeOfProduct = "home";
+        Guna2GradientTileButton currButton = new Guna2GradientTileButton();
         String[] list_nameProduct;
 
         //Create event when form loaded
@@ -47,6 +49,7 @@ namespace GroceryStore
         {
             HomeLoad(sender, e);
             loadInfoUser(sender, e);
+            switchButton(btn_home);
         }
 
         public void HomeLoad(object sender, EventArgs e)
@@ -59,7 +62,7 @@ namespace GroceryStore
             //gán giá trị cho comboBox
             cbb_payment.SelectedIndex = 0;
             lb_paydate.Text = DateTime.Now.ToString();
-            //tạo mảng chưa sản phẩm
+            //tạo mảng chứa sản phẩm
 
             List<DTO_Product> products = new List<DTO_Product>();
             flowLayout.Controls.Clear();
@@ -78,7 +81,15 @@ namespace GroceryStore
             throw new NotImplementedException();
         }
 
-
+        //Switch button
+        private void switchButton(Guna2GradientTileButton nextButton)
+        {
+            currButton.FillColor = Color.White;
+            currButton.FillColor2 = Color.White;
+            currButton = nextButton;
+            currButton.FillColor = ColorTranslator.FromHtml("#F80909");
+            currButton.FillColor2 = ColorTranslator.FromHtml("#F80909");
+        }
 
         //Load Info User
         public void loadInfoUser(object sender, EventArgs e)
@@ -147,6 +158,7 @@ namespace GroceryStore
             {
                 //thêm dữ liệu lên giao diện
                 listProduct[i] = new ProductItem();
+                listProduct[i].IdProduct = products[i].MaSP;
                 listProduct[i].NameProduct = products[i].TenSP;
                 listProduct[i].PriceProduct = (products[i].GiaSP);
 
@@ -253,6 +265,7 @@ namespace GroceryStore
             Point currentPosition = btn_home.Location;
             pn_choice.Location = new Point(currentPosition.X + 130, currentPosition.Y + 10);
             pn_choice.BringToFront();
+            switchButton(btn_home);
         }
 
         //drink page
@@ -263,6 +276,7 @@ namespace GroceryStore
             pn_choice.BringToFront();
             typeOfProduct = "DU";
             loadFlowLayout("");
+            switchButton(btn_drinks);
         }
 
         //fast food page
@@ -272,6 +286,7 @@ namespace GroceryStore
             loadFlowLayout("");
             Point currentPosition = btn_fast_foods.Location;
             pn_choice.Location = new Point(currentPosition.X + 120, currentPosition.Y + 10);
+            switchButton(btn_fast_foods);
         }
 
         //others page
@@ -281,6 +296,7 @@ namespace GroceryStore
             loadFlowLayout("");
             Point currentPosition = btn_others.Location;
             pn_choice.Location = new Point(currentPosition.X + 120, currentPosition.Y + 10);
+            switchButton(btn_others);
         }
 
         private void btn_voucher_Click(object sender, EventArgs e)
@@ -320,24 +336,45 @@ namespace GroceryStore
             BUS_Cart cart = new BUS_Cart();
             if (cart.checkExistCart(staff) == false)
             {
-                MessageBox.Show("aaaaaaaaaaaaaaaaaaa");
                 cart.createCart(staff);
             }
             if (order.NumberOfItem == 1)
             {
-                DTO_ProductCart productCard = new DTO_ProductCart(order.NameItemOder, order.NameItemOder, order.PriceItemOder, order.NumberOfItem);
+                DTO_ProductCart productCard = new DTO_ProductCart(order.IdItemOder, order.NameItemOder, order.PriceItemOder, order.NumberOfItem);
                 if (isExistsInCart(order))
                 {
-                    cart.updateProductFromCart(staff, checkExistProductInCart(order));
+                    BUS_Product currentProduct = new BUS_Product();
+                    if (currentProduct.checkAmount(order.NumberOfItem, order.IdItemOder))
+                    {
+                        cart.updateProductFromCart(staff, checkExistProductInCart(order));
+                        BUS_Product product = new BUS_Product();
+                        product.updateAmount(new DTO_Product(order.IdItemOder), -1);
+                    }   
+                    else
+                    {
+                        MessageBox.Show("Số lượng hiện tại không đủ!");
+                    }
                 }
                 else
                 {
+                    BUS_Product product = new BUS_Product();
                     cart.addProductInCart(staff, productCard);
+                    product.updateAmount(new DTO_Product(order.IdItemOder), -1);
                 }
             }
             else
             {
-                cart.updateProductFromCart(staff, checkExistProductInCart(order));
+                BUS_Product currentProduct = new BUS_Product();
+                if (currentProduct.checkAmount(order.NumberOfItem, order.IdItemOder))
+                {
+                    cart.updateProductFromCart(staff, checkExistProductInCart(order));
+                    BUS_Product product = new BUS_Product();
+                    product.updateAmount(new DTO_Product(order.IdItemOder), -1);
+                }
+                else
+                {
+                    MessageBox.Show("Số lượng hiện tại không đủ!");
+                }
             }
             //order.Click += new System.EventHandler(this.select_Product_Cart);
             show_product_cart();
@@ -348,12 +385,13 @@ namespace GroceryStore
         {
             foreach (ProductOrderItem item in orders)
             {
-                if (item.NameItemOder == obj.NameProduct)
+                if (item.IdItemOder == obj.IdProduct)
                 {
                     return item;
                 }
             }
             ProductOrderItem order = new ProductOrderItem();
+            order.IdItemOder = obj.IdProduct;
             order.NameItemOder = obj.NameProduct;
             order.PriceItemOder = obj.PriceProduct;
             order.NumberOfItem = 0;
@@ -366,14 +404,13 @@ namespace GroceryStore
             BUS_Cart bus_cart = new BUS_Cart();
             foreach (DTO_ProductCart productCart in bus_cart.getProducts(staff))
             {
-                if (productOrder.NameItemOder == productCart.Name)
+                if (productOrder.IdItemOder == productCart.ID)
                 {
-
                     productCart.Quantity = productOrder.NumberOfItem;
                     return productCart;
                 }
             }
-            return new DTO_ProductCart(productOrder.NameItemOder, productOrder.NameItemOder, productOrder.PriceItemOder, productOrder.NumberOfItem);
+            return new DTO_ProductCart(productOrder.IdItemOder, productOrder.NameItemOder, productOrder.PriceItemOder, productOrder.NumberOfItem);
         }
 
         //Check product is in cart 
@@ -382,7 +419,7 @@ namespace GroceryStore
             BUS_Cart bus_cart = new BUS_Cart();
             foreach (DTO_ProductCart productCart in bus_cart.getProducts(staff))
             {
-                if (productOrder.NameItemOder == productCart.Name)
+                if (productOrder.IdItemOder == productCart.ID)
                 {
                     return true;
                 }
@@ -403,6 +440,8 @@ namespace GroceryStore
             else
             {
                 cart.updateProductFromCart(staff, checkExistProductInCart(obj));
+                BUS_Product product = new BUS_Product();
+                product.updateAmount(new DTO_Product(obj.IdItemOder), 1);
             }
             show_product_cart();
             calculeteCart();
@@ -431,6 +470,7 @@ namespace GroceryStore
             foreach (DTO_ProductCart pro in cart.getProducts(staff))
             {
                 ProductOrderItem productItem = new ProductOrderItem();
+                productItem.IdItemOder = pro.ID;
                 productItem.NameItemOder = pro.Name;
                 productItem.PriceItemOder = pro.Price;
                 productItem.NumberOfItem = pro.Quantity;
@@ -606,7 +646,7 @@ namespace GroceryStore
                 }
                 else
                 {
-                    MessageBox.Show("Sai tài khoản hoặc mật khẩu");
+                    MessageBox.Show("Sai tài khoản hoặc mật khẩu, vui lòng nhập lại!");
                     //ShowLoginDialog();
                 }
 

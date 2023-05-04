@@ -31,8 +31,8 @@ namespace DAO
         #region 3. Update product
         public void updateProduct(DTO_Product product)
         {
-            string statement = "updateProduct @nameProduct , @priceProduct , @imageProduct , @typeProduct, @idProduct";
-            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { product.TenSP, product.GiaSP, product.HinhAnh , product.LoaiSP});
+            string statement = "updateProduct @idProduct , @nameProduct , @amountProduct, @priceProduct , @imageProduct , @typeProduct , @shipment , @shelflife";
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { product.MaSP.ToString(), product.TenSP, product.Amount, product.GiaSP, product.HinhAnh , product.LoaiSP, product.Shipment, DateTime.Parse(product.Shelflife)});
         }
         #endregion
 
@@ -47,6 +47,23 @@ namespace DAO
                 return true;
             }
             return false;
+        }
+        #endregion
+
+        #region
+        public int getAmount(int idProduct)
+        {
+            string statement = "getAmount @idProduct";  
+            return (int)DataProvider.Instance.ExecuteStoredProcedureScalar(statement, new object[] {idProduct});
+        }
+        #endregion
+
+        #region 
+
+        public void updateAmount(DTO_Product product, int value)
+        {
+            string statement = "updateAmount @idProduct , @value";
+            DataProvider.Instance.ExecuteStoredProcedure(statement , new object[] { product.MaSP, value });
         }
         #endregion
     }

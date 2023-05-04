@@ -43,6 +43,11 @@ namespace DTO
             HinhAnh = hinhAnh;
         }
 
+        public DTO_Product(int MaSp)
+        {
+            this.MaSP = MaSp;
+        }
+
         public DTO_Product(string tenSP, int amount, int giaSP, string hinhAnh, string loaiSP, string shipment, string shelflife)
         {
             TenSP = tenSP;

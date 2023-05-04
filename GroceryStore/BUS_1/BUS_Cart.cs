@@ -41,7 +41,7 @@ namespace BUS
             List<DTO_ProductCart> products = new List<DTO_ProductCart>();
             foreach (DataRow row in cart.getAllProductInCart(staff).Rows)
             {
-                DTO_ProductCart productCard = new DTO_ProductCart(row[0].ToString(), row[1].ToString(), Convert.ToInt32(row[2]), Convert.ToInt32(row[3]));
+                DTO_ProductCart productCard = new DTO_ProductCart(Convert.ToInt32(row[0]), row[1].ToString(), Convert.ToInt32(row[2]), Convert.ToInt32(row[3]));
                 products.Add(productCard);
 
             }

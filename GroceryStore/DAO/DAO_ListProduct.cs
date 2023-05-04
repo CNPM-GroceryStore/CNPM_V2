@@ -34,6 +34,15 @@ namespace DAO
             return DataProvider.Instance.ExecuteStoredProcedureSelect(statement, new object[] { name });
 
         }
-        #endregion 
+        #endregion
+
+        #region 4. usp_ShowAllProductsAdmin
+        public DataTable showAllProductAdmin()
+        {
+            string statement = "usp_ShowAllProductsAdmin";
+            return DataProvider.Instance.ExecuteStoredProcedureSelect(statement);
+        }
+
+        #endregion
     }
 }
