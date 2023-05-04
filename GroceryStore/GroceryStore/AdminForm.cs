@@ -103,6 +103,27 @@ namespace GroceryStore
 
 
         //------------------------------------------------------------------------------------------------------------
+
+        //Go to orders page -- orders in date
+        private void ordersPage_Click(object sender, EventArgs e)
+        {
+            switchPage(sender, e, pn_ordersInDate, btn_ordersPage, "Đơn hàng");
+            BUS_OrderHistory bUS_OrderHistory = new BUS_OrderHistory();
+            dgv_orders.DataSource = bUS_OrderHistory.getOrdersInDate();
+        }
+        //-----------------------------------------------------------------------------------------------------------------
+
+        //Go to static page -- all orders
+        private void btn_staticpage_Click(object sender, EventArgs e)
+        {
+            switchPage(sender, e, pn_staticPage, btn_staticpage, "Thống kê đơn hàng");
+            BUS_OrderHistory bUS_OrderHistory = new BUS_OrderHistory();
+            dgv_staticByMonth.DataSource = bUS_OrderHistory.getOrdersByMonth(dtp_choseTime.Value.Month);
+        }
+
+        //------------------------------------------------------------------------------------------------------------
+
+        //Go to managing product page
         private void mgmProductPage_Click(object sender, EventArgs e)
         {
             switchPage(sender, e, pn_mgmProduct, btn_mgmProductPage, "Quản lý sản phẩm");
@@ -219,19 +240,6 @@ namespace GroceryStore
 
             dgv_mgmProduct.Columns.Insert(dgv_mgmProduct.Columns.Count, column_remove);
         }
-
-        //------------------------------------------------------------------------------------------------------------
-
-        //Go to orders page -- orders in date
-        private void ordersPage_Click(object sender, EventArgs e)
-        {
-            switchPage(sender, e, pn_ordersInDate, btn_ordersPage, "Đơn hàng");
-            BUS_OrderHistory bUS_OrderHistory = new BUS_OrderHistory();
-            dgv_orders.DataSource = bUS_OrderHistory.getOrdersInDate();
-        }
-
-
-        //Go to static page -- all orders
 
     }
 }

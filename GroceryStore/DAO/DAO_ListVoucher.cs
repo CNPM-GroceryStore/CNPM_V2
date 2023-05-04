@@ -26,13 +26,5 @@ namespace DAO
 
         }
         #endregion
-
-        #region 3. Show all MyVoucher
-        public DataTable showAllMyVouchers(String idUser)
-        {
-            string statement = "listMyVoucher @SoDienThoai";
-            return DataProvider.Instance.ExecuteStoredProcedureSelect(statement, new object[] { idUser });
-        }
-        #endregion
     }
 }

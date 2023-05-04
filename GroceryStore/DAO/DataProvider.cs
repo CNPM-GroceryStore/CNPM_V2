@@ -181,7 +181,7 @@ namespace DAO
                 {
                     conn.Open();
                     object scalarResult = command.ExecuteScalar();
-                    if (scalarResult != null)
+                    if (scalarResult != DBNull.Value)
                     {
                         result = Convert.ToDouble(scalarResult);
                     }

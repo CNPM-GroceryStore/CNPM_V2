@@ -32,7 +32,7 @@ namespace BUS
             type = Regex.Replace(type, @"\s+", " ");
             foreach (DTO_Product product in list_products)
             {
-                String loaiSP = Regex.Replace(product.LoaiSP, @"\s+", " ");
+                String loaiSP = Regex.Replace(product.TypeProduct, @"\s+", " ");
                 loaiSP = loaiSP.ToLower();
                 if (loaiSP == type)
                 {
@@ -51,7 +51,7 @@ namespace BUS
             String[] split_input = name.Split(' ');
             foreach (DTO_Product product in list_products)
             {
-                String namePro = Regex.Replace(product.TenSP, @"\s+", " ");
+                String namePro = Regex.Replace(product.NameProduct, @"\s+", " ");
                 namePro = namePro.ToLower();
                 if (namePro == name)
                 {
@@ -109,11 +109,11 @@ namespace BUS
             String[] split_input = name.Split(' ');
             foreach (DTO_Product product in list_products)
             {
-                String loaiSP = Regex.Replace(product.LoaiSP, @"\s+", " ");
+                String loaiSP = Regex.Replace(product.TypeProduct, @"\s+", " ");
                 loaiSP = loaiSP.ToLower();
                 if (loaiSP == type)
                 {
-                    String namePro = Regex.Replace(product.TenSP, @"\s+", " ");
+                    String namePro = Regex.Replace(product.NameProduct, @"\s+", " ");
                     namePro = namePro.ToLower();
                     if (namePro == name)
                     {

@@ -757,7 +757,7 @@
             Margin = new Padding(3, 4, 3, 4);
             MinimumSize = new Size(1232, 803);
             Name = "HomeForm";
-            Text = "+";
+            Text = "Circle K";
             Load += HomeForm_Load;
             SizeChanged += HomeForm_SizeChanged;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
