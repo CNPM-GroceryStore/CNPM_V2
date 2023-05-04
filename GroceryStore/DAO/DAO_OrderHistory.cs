@@ -24,7 +24,7 @@ namespace DAO
         {
             if(staff == null)
             {
-                string statement = "showAllHistoryOrder";
+                string statement = "showAllHistoryOrderNoUser";
                 return DataProvider.Instance.ExecuteStoredProcedureSelect(statement);
             }
             else
@@ -46,7 +46,7 @@ namespace DAO
         #region
         public double getTurnover()
         {
-            string statement = "EXEC showTurnover";
+            string statement = "showTurnover";
             return DataProvider.Instance.ExecuteStoredProcedureScalar(statement);
         }
         #endregion

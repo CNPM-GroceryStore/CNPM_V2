@@ -569,6 +569,7 @@ namespace GroceryStore
         private void ShowLoginDialog()
         {
             var inputForm = new Form();
+            inputForm.Size = new Size(500, 200);
             inputForm.Text = "Nhập thông tin";
             inputForm.StartPosition = FormStartPosition.CenterScreen;
 
@@ -577,9 +578,9 @@ namespace GroceryStore
             var passwordLabel = new Label() { Left = 50, Top = 50, Text = "Mật khẩu:" };
             var passwordTextBox = new TextBox() { Left = 150, Top = 50, Width = 200 };
 
-            var okButton = new Button() { Text = "OK", Left = 150, Width = 100, Top = 80 };
+            var okButton = new Button() { Text = "OK", Left = 150, Width = 100, Top = 80, Height = 35 };
             okButton.Click += (sender, e) => { inputForm.DialogResult = DialogResult.OK; };
-            var cancelButton = new Button() { Text = "Cancel", Left = 260, Width = 100, Top = 80 };
+            var cancelButton = new Button() { Text = "Cancel", Left = 260, Width = 100, Top = 80, Height = 35 };
             cancelButton.Click += (sender, e) => { inputForm.DialogResult = DialogResult.Cancel; };
 
             inputForm.Controls.Add(phoneLabel);
@@ -721,7 +722,7 @@ namespace GroceryStore
         private void lbl_username_Click(object sender, EventArgs e)
         {
             DialogResult dialogSignOut = MessageBox.Show($"Bạn có muốn đăng xuất tài khoản khách hàng?", "Thông báo", MessageBoxButtons.YesNo);
-            if(dialogSignOut == DialogResult.Yes)
+            if (dialogSignOut == DialogResult.Yes)
             {
                 user = null;
                 lbl_username.Text = "Username";
