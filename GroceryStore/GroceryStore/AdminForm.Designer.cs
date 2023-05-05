@@ -115,8 +115,6 @@
             pictureBox1 = new PictureBox();
             panel2 = new Panel();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            btn_luu = new Button();
-            btn_xoa = new Button();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             dgv_statisByMonth = new Guna.UI2.WinForms.Guna2DataGridView();
             pn_printOrder = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
@@ -396,8 +394,6 @@
             // 
             guna2CustomGradientPanel1.BorderRadius = 30;
             guna2CustomGradientPanel1.BorderThickness = 1;
-            guna2CustomGradientPanel1.Controls.Add(btn_luu);
-            guna2CustomGradientPanel1.Controls.Add(btn_xoa);
             guna2CustomGradientPanel1.Controls.Add(guna2Button2);
             guna2CustomGradientPanel1.Controls.Add(dgv_statisByMonth);
             guna2CustomGradientPanel1.CustomizableEdges = customizableEdges17;
@@ -407,26 +403,6 @@
             guna2CustomGradientPanel1.Size = new Size(968, 725);
             guna2CustomGradientPanel1.TabIndex = 18;
             guna2CustomGradientPanel1.Visible = false;
-            // 
-            // btn_luu
-            // 
-            btn_luu.Location = new Point(750, 694);
-            btn_luu.Name = "btn_luu";
-            btn_luu.Size = new Size(94, 29);
-            btn_luu.TabIndex = 5;
-            btn_luu.Text = "Lưu";
-            btn_luu.UseVisualStyleBackColor = true;
-            btn_luu.Visible = false;
-            // 
-            // btn_xoa
-            // 
-            btn_xoa.Location = new Point(853, 694);
-            btn_xoa.Name = "btn_xoa";
-            btn_xoa.Size = new Size(94, 29);
-            btn_xoa.TabIndex = 4;
-            btn_xoa.Text = "Xóa";
-            btn_xoa.UseVisualStyleBackColor = true;
-            btn_xoa.Visible = false;
             // 
             // guna2Button2
             // 
@@ -1398,7 +1374,5 @@
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Guna.UI2.WinForms.Guna2DataGridView dgv_statisByMonth;
-        private Button btn_luu;
-        private Button btn_xoa;
     }
 }
