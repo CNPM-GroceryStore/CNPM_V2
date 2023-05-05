@@ -572,6 +572,7 @@ BEGIN
 END
 GO
 
+--get orders in date
 CREATE PROC getOrdersInDate
 AS
 BEGIN
@@ -581,6 +582,20 @@ BEGIN
 	WHERE DAY(paydate) = DAY(CURRENT_TIMESTAMP)	
 END
 go
+
+DROP PROCEDURE getOrdersByMonth
+Go
+--get orders by month
+CREATE PROCEDURE getOrdersByMonth
+@month int
+AS 
+BEGIN
+	SELECT SUM(price) as 'Giá', SUM(amount) as 'Số lượng', paydate as 'Ngày thanh toán' 
+	FROM OrderHistory
+	WHERE MONTH(paydate) = @month
+	GROUP BY paydate
+END	
+GO
 
 
 -- Thêm dữ liệu vào bảng NhanVien
@@ -668,6 +683,7 @@ exec listMyVoucher '0387790894'
 exec showTurnover
 exec getAmount 3
 exec getTurnoverByDate N'4/29/2023'
+exec getOrdersByMonth 5
 
 
 exec usp_CheckExistCart '0387790894'

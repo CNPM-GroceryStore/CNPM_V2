@@ -749,7 +749,7 @@
             Controls.Add(panel2);
             MinimumSize = new Size(1080, 612);
             Name = "HomeForm";
-            Text = "+";
+            Text = "Circle K";
             Load += HomeForm_Load;
             SizeChanged += HomeForm_SizeChanged;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

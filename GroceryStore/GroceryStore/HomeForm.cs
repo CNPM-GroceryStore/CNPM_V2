@@ -76,11 +76,6 @@ namespace GroceryStore
             ThanhToan.Mua_Clicked += this.select_Mua;
         }
 
-        private void ThanhToan_Mua_Clicked(object? sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         //Switch button
         private void switchButton(Guna2GradientTileButton nextButton)
         {
@@ -158,11 +153,11 @@ namespace GroceryStore
             {
                 //thêm dữ liệu lên giao diện
                 listProduct[i] = new ProductItem();
-                listProduct[i].IdProduct = products[i].MaSP;
-                listProduct[i].NameProduct = products[i].TenSP;
-                listProduct[i].PriceProduct = (products[i].GiaSP);
+                listProduct[i].IdProduct = products[i].IdProduct;
+                listProduct[i].NameProduct = products[i].NameProduct;
+                listProduct[i].PriceProduct = (products[i].PriceProduct);
 
-                listProduct[i].ImageProduct = LoadImageFromStorage(products[i].LoaiSP, products[i].HinhAnh);
+                listProduct[i].ImageProduct = LoadImageFromStorage(products[i].TypeProduct, products[i].ImageProduct);
 
                 listProduct[i].Click += new System.EventHandler(this.select_Product);
                 flowLayout.Controls.Add(listProduct[i]);
@@ -511,11 +506,6 @@ namespace GroceryStore
         private void btn_tatCa_Click(object sender, EventArgs e)
         {
             loadformVoucher();
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
         }
 
         //Add search function 

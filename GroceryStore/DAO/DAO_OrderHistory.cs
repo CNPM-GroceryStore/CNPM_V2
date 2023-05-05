@@ -64,5 +64,13 @@ namespace DAO
             return DataProvider.Instance.ExecuteStoredProcedureSelect(statement);
         }
         #endregion
+
+        #region
+        public DataTable getOrdersByMonth(int month)
+        {
+            string statement = "getOrdersByMonth @month";
+            return DataProvider.Instance.ExecuteStoredProcedureSelect(statement, new object[] { month });
+        }
+        #endregion 
     }
 }

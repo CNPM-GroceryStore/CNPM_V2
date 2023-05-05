@@ -82,5 +82,12 @@ namespace BUS_1
             }
             return data;
         }
+
+        #region
+        public DataTable getOrdersByMonth(int month)
+        {
+            return orderHistory.getOrdersByMonth(month);
+        }
+        #endregion
     }
 }

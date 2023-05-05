@@ -1,4 +1,4 @@
-﻿using DTO;
+﻿    using DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,7 +14,7 @@ namespace DAO
         public void insertProduct(DTO_Product product)
         {
             string statement = "insertProduct @nameProduct , @amountProduct , @priceProduct , @imageProduct , @typeProduct , @shipment , @shelflife ";
-            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { product.TenSP, product.Amount, product.GiaSP, product.HinhAnh , product.LoaiSP, product.Shipment, DateTime.Parse(product.Shelflife) });
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { product.NameProduct, product.Amount, product.PriceProduct, product.ImageProduct , product.TypeProduct, product.Shipment, DateTime.Parse(product.Shelflife) });
         }
         #endregion
 
@@ -23,7 +23,7 @@ namespace DAO
         public void deleteProduct(DTO_Product product)
         {
             string statement = "deleteProduct @idProduct";
-            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] {product.MaSP});
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] {product.IdProduct});
         }
         #endregion
 
@@ -32,7 +32,7 @@ namespace DAO
         public void updateProduct(DTO_Product product)
         {
             string statement = "updateProduct @idProduct , @nameProduct , @amountProduct, @priceProduct , @imageProduct , @typeProduct , @shipment , @shelflife";
-            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { product.MaSP.ToString(), product.TenSP, product.Amount, product.GiaSP, product.HinhAnh , product.LoaiSP, product.Shipment, DateTime.Parse(product.Shelflife)});
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { product.IdProduct.ToString(), product.NameProduct, product.Amount, product.PriceProduct, product.ImageProduct , product.TypeProduct, product.Shipment, DateTime.Parse(product.Shelflife)});
         }
         #endregion
 
@@ -41,7 +41,7 @@ namespace DAO
         public bool checkExistsProduct(DTO_Product product)
         {
             string statement = "checkExistsProduct @nameProduct, @priceProduct, @imageProduct, @typeProduct";
-            int count = (Int32)DataProvider.Instance.ExecuteStoredProcedureScalar(statement, new object[] { product.TenSP, product.GiaSP, product.HinhAnh, product.LoaiSP });
+            int count = (Int32)DataProvider.Instance.ExecuteStoredProcedureScalar(statement, new object[] { product.NameProduct, product.PriceProduct, product.ImageProduct, product.TypeProduct });
             if (count > 0)
             {
                 return true;
@@ -63,7 +63,7 @@ namespace DAO
         public void updateAmount(DTO_Product product, int value)
         {
             string statement = "updateAmount @idProduct , @value";
-            DataProvider.Instance.ExecuteStoredProcedure(statement , new object[] { product.MaSP, value });
+            DataProvider.Instance.ExecuteStoredProcedure(statement , new object[] { product.IdProduct, value });
         }
         #endregion
     }

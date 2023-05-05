@@ -8,60 +8,55 @@ namespace DTO
 {
     public class DTO_Product
     {
-        public int MaSP { get; set; }
-        public string TenSP { get; set; }
-        public int GiaSP { get; set; }
+        public int IdProduct { get; set; }
+        public string NameProduct { get; set; }
+        public int PriceProduct { get; set; }
         public int Amount { get; set; }
-        public string HinhAnh { get; set; }
-        public string LoaiSP { get; set; }
+        public string ImageProduct { get; set; }
+        public string TypeProduct { get; set; }
 
         public string Shipment { get; set; }
         public string Shelflife { get; set; }
 
-        public DTO_Product(int MaSp, string tenSP, int amount, int giaSP, string hinhAnh, string loaiSP, string shipment, string shelflife)
+        public DTO_Product(int idProduct, string nameProduct, int amount, int priceProduct, string imageProduct, string typeProduct, string shipment, string shelflife)
         {
-            MaSP = MaSp;
-            TenSP = tenSP;
+            IdProduct = idProduct;
+            NameProduct = nameProduct;
             Amount = amount;
-            GiaSP = giaSP;
-            HinhAnh = hinhAnh;
-            LoaiSP = loaiSP;
+            PriceProduct = priceProduct;
+            ImageProduct = imageProduct;
+            TypeProduct = typeProduct;
             Shipment = shipment;
             Shelflife = shelflife;
         }
-        public DTO_Product(string tenSP, int giaSP, string hinhAnh, string loaiSP)
+        public DTO_Product(string nameProduct, int priceProduct, string imageProduct, string typeProduct)
         {
-            TenSP = tenSP;
-            GiaSP = giaSP;
-            HinhAnh = hinhAnh;
-            LoaiSP = loaiSP;
+            NameProduct = nameProduct;
+            PriceProduct = priceProduct;
+            ImageProduct = imageProduct;
+            TypeProduct = typeProduct;
         }
-        public DTO_Product(string tenSP, int giaSP, string hinhAnh)
+        public DTO_Product(string nameProduct, int priceProduct, string imageProduct)
         {
-            TenSP = tenSP;
-            GiaSP = giaSP;
-            HinhAnh = hinhAnh;
-        }
-
-        public DTO_Product(int MaSp)
-        {
-            this.MaSP = MaSp;
+            NameProduct = nameProduct;
+            PriceProduct = priceProduct;
+            ImageProduct = imageProduct;
         }
 
-        public DTO_Product(string tenSP, int amount, int giaSP, string hinhAnh, string loaiSP, string shipment, string shelflife)
+        public DTO_Product(int idProduct)
         {
-            TenSP = tenSP;
+            this.IdProduct = idProduct;
+        }
+
+        public DTO_Product(string nameProduct, int amount, int priceProduct, string imageProduct, string typeProduct, string shipment, string shelflife)
+        {
+            NameProduct = nameProduct;
             Amount = amount;
-            GiaSP = giaSP;
-            HinhAnh = hinhAnh;
-            LoaiSP = loaiSP;
+            PriceProduct = priceProduct;
+            ImageProduct = imageProduct;
+            TypeProduct = typeProduct;
             Shipment = shipment;
             Shelflife = shelflife;
-        }
-
-        public String ToString()
-        {
-            return this.TenSP+", "+Amount+", "+GiaSP+", "+HinhAnh+", "+LoaiSP+", "+Shipment+", "+", "+Shelflife;
         }
     }
 }
