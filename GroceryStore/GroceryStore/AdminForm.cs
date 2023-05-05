@@ -32,6 +32,8 @@ namespace GroceryStore
         Guna2CustomGradientPanel currPage = new Guna2CustomGradientPanel();
         Guna2GradientButton currButton = new Guna2GradientButton();
         List<DTO_Product> products = new List<DTO_Product>();
+        DTO_Product selectedProduct = null;
+        Bitmap selectedImage = null;
 
         private void AdminForm_Load(object sender, EventArgs e)
         {
@@ -103,47 +105,86 @@ namespace GroceryStore
 
 
         //------------------------------------------------------------------------------------------------------------
+        //Go to Add product page
+        private void btn_addProduct_Click(object sender, EventArgs e)
+        {
+            switchPage(sender, e, pn_addProduct, btn_mgmProductPage, "Thêm sản phẩm");
+        }
         private void mgmProductPage_Click(object sender, EventArgs e)
         {
             switchPage(sender, e, pn_mgmProduct, btn_mgmProductPage, "Quản lý sản phẩm");
             list_product.showAllProductAdmin(products);
             dgv_mgmProduct.DataSource = null;
 
-            // remove any existing columns
+            // Remove any existing columns
             dgv_mgmProduct.Columns.Clear();
+            dgv_mgmProduct.ReadOnly = true;
+
+
+            // Khóa từng cột trong DataGridView
+            foreach (DataGridViewColumn col in dgv_mgmProduct.Columns)
+            {
+                col.ReadOnly = true;
+            }
+
+            // Add columns for product information
             dgv_mgmProduct.DataSource = list_product.showProductsManagePage();
+
+            // Add "Edit", "Save" and "Cancel" buttons for each row
+            DataGridViewButtonColumn column_edit = new DataGridViewButtonColumn();
+            column_edit.Name = "Sửa";
+            column_edit.HeaderText = "Sửa";
+            column_edit.Text = "Sửa";
+            column_edit.UseColumnTextForButtonValue = true;
+            dgv_mgmProduct.Columns.Insert(dgv_mgmProduct.Columns.Count, column_edit);
+
             DataGridViewButtonColumn column_remove = new DataGridViewButtonColumn();
-            column_remove.Name = "Thao tác";
-            column_remove.HeaderText = "Thao tác";
+            column_remove.Name = "Xóa";
+            column_remove.HeaderText = "Xóa";
             column_remove.Text = "Xóa";
             column_remove.UseColumnTextForButtonValue = true;
 
             dgv_mgmProduct.Columns.Insert(dgv_mgmProduct.Columns.Count, column_remove);
         }
 
-        //Go to Add product page
-        private void btn_addProduct_Click(object sender, EventArgs e)
-        {
-            switchPage(sender, e, pn_addProduct, btn_mgmProductPage, "Thêm sản phẩm");
-        }
-
         //Remove Product
         private void dgv_mgmProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
             DataGridViewRow currentRow = dgv_mgmProduct.Rows[e.RowIndex];
             DataGridViewCell currentCell = currentRow.Cells[e.ColumnIndex];
-
             if (currentCell == currentRow.Cells[currentRow.Cells.Count - 1])
             {
                 DialogResult dialog = MessageBox.Show("Bạn có chắc chắn muốn xóa sản phẩm này khỏi danh sách!", "Thông báo", MessageBoxButtons.YesNo);
                 if (dialog == DialogResult.Yes)
                 {
                     BUS_Product bUS_Product = new BUS_Product();
+                    string filePath = @"..\\..\\..\\Resources\Product\" + currentRow.Cells[5].Value + "\\" + currentRow.Cells[4].Value;
+                    MessageBox.Show(filePath);
+                    if (File.Exists(filePath)) // kiểm tra xem file có tồn tại không
+                    {
+                        File.Delete(filePath); // xóa file nếu tồn tại
+                        MessageBox.Show("Xóa trong folder");
+                    }
                     bUS_Product.deleteProduct(products[e.RowIndex]);
                     mgmProductPage_Click(sender, e);
                 }
             }
+            else if (dgv_mgmProduct.Columns[e.ColumnIndex].Name == "Sửa")
+            {
+                DataGridViewRow selectedRow = dgv_mgmProduct.CurrentRow;
+                selectedProduct = products[e.RowIndex];
+                switchPage(sender, e, pn_addProduct, btn_mgmProductPage, "Sửa sản phẩm");
+                txb_addNamePro.Text = selectedProduct.TenSP;
+                txb_addPrice.Text = selectedProduct.GiaSP.ToString();
+                cbb_addtype.Text = selectedProduct.LoaiSP;
+                dtp_addPro.Text = selectedProduct.Shelflife;
+                txb_shipment.Text = selectedProduct.Shipment;
+                txb_addAmount.Text = selectedProduct.Amount.ToString();
+                MessageBox.Show("click Sửa");
+            }
         }
+
 
         //Confirm add product
         private void btn_comfirm_Click(object sender, EventArgs e)
@@ -154,21 +195,43 @@ namespace GroceryStore
             string type = cbb_addtype.Text;
             string shelflife = dtp_addPro.Value.ToString();
             string shipment = txb_shipment.Text;
-            StringBuilder sb = new StringBuilder();
-
-            foreach (char c in name.Normalize(NormalizationForm.FormD))
+            string image = null;
+            if (ptb_addImagePro.Image == null)
             {
-                if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
-                    sb.Append(c);
+                image = selectedProduct.HinhAnh;
+            }
+            else
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (char c in name.Normalize(NormalizationForm.FormD))
+                {
+                    if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+                        sb.Append(c);
+                }
+                string newName = sb.ToString().Normalize(NormalizationForm.FormC).ToLower();
+                newName = newName.Replace(" ", "_");
+                image = $"{newName}_{shipment}.jpg";
+                image = image.Replace(" ", "_");
+                string fileName = $"{newName}_{txb_shipment.Text}.jpg";
+                string savePath = @"..\\..\\..\\Resources\Product\" + cbb_addtype.Text + "\\" + fileName;
+                selectedImage.Save(savePath, System.Drawing.Imaging.ImageFormat.Jpeg);
+            }
+            if (lb_titilePage.Text == "Thêm sản phẩm")
+            {
+                BUS_Product bUS_Product = new BUS_Product();
+                DTO_Product product = new DTO_Product(name, amount, price, image, type, shipment, shelflife);
+                bUS_Product.insertProduct(product);
+                MessageBox.Show("Thêm sản phẩm thành công");
+            }
+            else if (lb_titilePage.Text == "Sửa sản phẩm")
+            {
+                BUS_Product bUS_Product = new BUS_Product();
+                DTO_Product product = new DTO_Product(selectedProduct.MaSP, name, amount, price, image, type, shipment, shelflife);
+                MessageBox.Show(product.TenSP);
+                bUS_Product.updateProduct(product);
+                MessageBox.Show("Sửa sản phẩm thành công");
             }
 
-            string newName = sb.ToString().Normalize(NormalizationForm.FormC).ToLower();
-            string image = $"{newName}_{shipment}.jpg";
-            image = image.Replace(" ", "_");
-
-            BUS_Product bUS_Product = new BUS_Product();
-            DTO_Product product = new DTO_Product(name, amount, price, image, type, shipment, shelflife);
-            bUS_Product.insertProduct(product);
         }
 
         //upload image product
@@ -178,20 +241,8 @@ namespace GroceryStore
             openFileDialog1.Filter = "Image Files (*.bmp;*.jpg;*.jpeg,*.png)|*.BMP;*.JPG;*.JPEG;*.PNG";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                Bitmap image = new Bitmap(openFileDialog1.FileName);
-                ptb_addImagePro.Image = image; StringBuilder sb = new StringBuilder();
-
-                foreach (char c in txb_addNamePro.Text.Normalize(NormalizationForm.FormD))
-                {
-                    if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
-                        sb.Append(c);
-                }
-
-                string newName = sb.ToString().Normalize(NormalizationForm.FormC).ToLower();
-                newName = newName.Replace(" ", "_");
-                string fileName = $"{newName}_{txb_shipment.Text}.jpg";
-                string savePath = @"..\\..\\..\\Resources\Product\" + cbb_addtype.Text + "\\" + fileName;
-                image.Save(savePath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                selectedImage = new Bitmap(openFileDialog1.FileName);
+                ptb_addImagePro.Image = selectedImage;
             }
         }
 

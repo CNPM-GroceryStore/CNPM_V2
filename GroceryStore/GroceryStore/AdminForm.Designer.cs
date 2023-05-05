@@ -43,6 +43,13 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -96,13 +103,6 @@
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges55 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges56 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             panel1 = new Panel();
             btn_mngProvider = new Guna.UI2.WinForms.Guna2GradientButton();
             btn_ordersPage = new Guna.UI2.WinForms.Guna2GradientButton();
@@ -114,6 +114,11 @@
             pn_choice = new Panel();
             pictureBox1 = new PictureBox();
             panel2 = new Panel();
+            guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            btn_luu = new Button();
+            btn_xoa = new Button();
+            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            dgv_statisByMonth = new Guna.UI2.WinForms.Guna2DataGridView();
             pn_printOrder = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             dgv_printOrder = new Guna.UI2.WinForms.Guna2DataGridView();
@@ -157,12 +162,11 @@
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             lb_nameUser2 = new Label();
             pictureBox3 = new PictureBox();
-            guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            dgv_statisByMonth = new Guna.UI2.WinForms.Guna2DataGridView();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
+            guna2CustomGradientPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv_statisByMonth).BeginInit();
             pn_printOrder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_printOrder).BeginInit();
             pn_ordersInDate.SuspendLayout();
@@ -182,8 +186,6 @@
             ((System.ComponentModel.ISupportInitialize)chart_turnover).BeginInit();
             guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            guna2CustomGradientPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgv_statisByMonth).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -389,6 +391,113 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1011, 841);
             panel2.TabIndex = 7;
+            // 
+            // guna2CustomGradientPanel1
+            // 
+            guna2CustomGradientPanel1.BorderRadius = 30;
+            guna2CustomGradientPanel1.BorderThickness = 1;
+            guna2CustomGradientPanel1.Controls.Add(btn_luu);
+            guna2CustomGradientPanel1.Controls.Add(btn_xoa);
+            guna2CustomGradientPanel1.Controls.Add(guna2Button2);
+            guna2CustomGradientPanel1.Controls.Add(dgv_statisByMonth);
+            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges17;
+            guna2CustomGradientPanel1.Location = new Point(24, 100);
+            guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
+            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            guna2CustomGradientPanel1.Size = new Size(968, 725);
+            guna2CustomGradientPanel1.TabIndex = 18;
+            guna2CustomGradientPanel1.Visible = false;
+            // 
+            // btn_luu
+            // 
+            btn_luu.Location = new Point(750, 694);
+            btn_luu.Name = "btn_luu";
+            btn_luu.Size = new Size(94, 29);
+            btn_luu.TabIndex = 5;
+            btn_luu.Text = "Lưu";
+            btn_luu.UseVisualStyleBackColor = true;
+            btn_luu.Visible = false;
+            // 
+            // btn_xoa
+            // 
+            btn_xoa.Location = new Point(853, 694);
+            btn_xoa.Name = "btn_xoa";
+            btn_xoa.Size = new Size(94, 29);
+            btn_xoa.TabIndex = 4;
+            btn_xoa.Text = "Xóa";
+            btn_xoa.UseVisualStyleBackColor = true;
+            btn_xoa.Visible = false;
+            // 
+            // guna2Button2
+            // 
+            guna2Button2.BackColor = Color.White;
+            guna2Button2.BorderRadius = 10;
+            guna2Button2.CustomizableEdges = customizableEdges15;
+            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button2.FillColor = Color.FromArgb(248, 9, 9);
+            guna2Button2.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            guna2Button2.ForeColor = Color.White;
+            guna2Button2.Location = new Point(37, 15);
+            guna2Button2.Name = "guna2Button2";
+            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            guna2Button2.Size = new Size(225, 56);
+            guna2Button2.TabIndex = 3;
+            guna2Button2.Text = "in số liệu thống kê";
+            // 
+            // dgv_statisByMonth
+            // 
+            dataGridViewCellStyle1.BackColor = Color.White;
+            dgv_statisByMonth.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(238, 236, 236);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = Color.Red;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgv_statisByMonth.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dgv_statisByMonth.ColumnHeadersHeight = 50;
+            dgv_statisByMonth.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = Color.White;
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dgv_statisByMonth.DefaultCellStyle = dataGridViewCellStyle3;
+            dgv_statisByMonth.GridColor = Color.FromArgb(231, 229, 255);
+            dgv_statisByMonth.Location = new Point(25, 91);
+            dgv_statisByMonth.Name = "dgv_statisByMonth";
+            dgv_statisByMonth.RowHeadersVisible = false;
+            dgv_statisByMonth.RowHeadersWidth = 51;
+            dgv_statisByMonth.RowTemplate.Height = 29;
+            dgv_statisByMonth.Size = new Size(918, 601);
+            dgv_statisByMonth.TabIndex = 2;
+            dgv_statisByMonth.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
+            dgv_statisByMonth.ThemeStyle.AlternatingRowsStyle.Font = null;
+            dgv_statisByMonth.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
+            dgv_statisByMonth.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
+            dgv_statisByMonth.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
+            dgv_statisByMonth.ThemeStyle.BackColor = Color.White;
+            dgv_statisByMonth.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
+            dgv_statisByMonth.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
+            dgv_statisByMonth.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgv_statisByMonth.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dgv_statisByMonth.ThemeStyle.HeaderStyle.ForeColor = Color.White;
+            dgv_statisByMonth.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dgv_statisByMonth.ThemeStyle.HeaderStyle.Height = 50;
+            dgv_statisByMonth.ThemeStyle.ReadOnly = false;
+            dgv_statisByMonth.ThemeStyle.RowsStyle.BackColor = Color.White;
+            dgv_statisByMonth.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgv_statisByMonth.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dgv_statisByMonth.ThemeStyle.RowsStyle.ForeColor = Color.Transparent;
+            dgv_statisByMonth.ThemeStyle.RowsStyle.Height = 29;
+            dgv_statisByMonth.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dgv_statisByMonth.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
             // 
             // pn_printOrder
             // 
@@ -1188,91 +1297,6 @@
             pictureBox3.TabIndex = 0;
             pictureBox3.TabStop = false;
             // 
-            // guna2CustomGradientPanel1
-            // 
-            guna2CustomGradientPanel1.BorderRadius = 30;
-            guna2CustomGradientPanel1.BorderThickness = 1;
-            guna2CustomGradientPanel1.Controls.Add(guna2Button2);
-            guna2CustomGradientPanel1.Controls.Add(dgv_statisByMonth);
-            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges17;
-            guna2CustomGradientPanel1.Location = new Point(24, 100);
-            guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
-            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges18;
-            guna2CustomGradientPanel1.Size = new Size(968, 725);
-            guna2CustomGradientPanel1.TabIndex = 18;
-            guna2CustomGradientPanel1.Visible = false;
-            // 
-            // guna2Button2
-            // 
-            guna2Button2.BackColor = Color.White;
-            guna2Button2.BorderRadius = 10;
-            guna2Button2.CustomizableEdges = customizableEdges15;
-            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button2.FillColor = Color.FromArgb(248, 9, 9);
-            guna2Button2.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            guna2Button2.ForeColor = Color.White;
-            guna2Button2.Location = new Point(37, 15);
-            guna2Button2.Name = "guna2Button2";
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            guna2Button2.Size = new Size(225, 56);
-            guna2Button2.TabIndex = 3;
-            guna2Button2.Text = "in số liệu thống kê";
-            // 
-            // dgv_statisByMonth
-            // 
-            dataGridViewCellStyle1.BackColor = Color.White;
-            dgv_statisByMonth.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(238, 236, 236);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = Color.Red;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgv_statisByMonth.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            dgv_statisByMonth.ColumnHeadersHeight = 50;
-            dgv_statisByMonth.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = Color.White;
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgv_statisByMonth.DefaultCellStyle = dataGridViewCellStyle3;
-            dgv_statisByMonth.GridColor = Color.FromArgb(231, 229, 255);
-            dgv_statisByMonth.Location = new Point(25, 91);
-            dgv_statisByMonth.Name = "dgv_statisByMonth";
-            dgv_statisByMonth.RowHeadersVisible = false;
-            dgv_statisByMonth.RowHeadersWidth = 51;
-            dgv_statisByMonth.RowTemplate.Height = 29;
-            dgv_statisByMonth.Size = new Size(918, 612);
-            dgv_statisByMonth.TabIndex = 2;
-            dgv_statisByMonth.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            dgv_statisByMonth.ThemeStyle.AlternatingRowsStyle.Font = null;
-            dgv_statisByMonth.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            dgv_statisByMonth.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            dgv_statisByMonth.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            dgv_statisByMonth.ThemeStyle.BackColor = Color.White;
-            dgv_statisByMonth.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
-            dgv_statisByMonth.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            dgv_statisByMonth.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgv_statisByMonth.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dgv_statisByMonth.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            dgv_statisByMonth.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dgv_statisByMonth.ThemeStyle.HeaderStyle.Height = 50;
-            dgv_statisByMonth.ThemeStyle.ReadOnly = false;
-            dgv_statisByMonth.ThemeStyle.RowsStyle.BackColor = Color.White;
-            dgv_statisByMonth.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgv_statisByMonth.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dgv_statisByMonth.ThemeStyle.RowsStyle.ForeColor = Color.Transparent;
-            dgv_statisByMonth.ThemeStyle.RowsStyle.Height = 29;
-            dgv_statisByMonth.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dgv_statisByMonth.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            // 
             // AdminForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -1287,6 +1311,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            guna2CustomGradientPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgv_statisByMonth).EndInit();
             pn_printOrder.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgv_printOrder).EndInit();
             pn_ordersInDate.ResumeLayout(false);
@@ -1310,8 +1336,6 @@
             guna2Panel1.ResumeLayout(false);
             guna2Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            guna2CustomGradientPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgv_statisByMonth).EndInit();
             ResumeLayout(false);
         }
 
@@ -1374,5 +1398,7 @@
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Guna.UI2.WinForms.Guna2DataGridView dgv_statisByMonth;
+        private Button btn_luu;
+        private Button btn_xoa;
     }
 }
