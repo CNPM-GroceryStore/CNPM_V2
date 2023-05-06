@@ -66,6 +66,14 @@ namespace BUS
             dAO_User.updatePoint(user.IdUser, point);
         }
         #endregion
+
+        #region
+        public DataTable showAllUser()
+        {
+            DAO_User dAO_User = new DAO_User();
+            return dAO_User.showAllUser();
+        }
+        #endregion
     }
 
 }

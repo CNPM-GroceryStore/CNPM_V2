@@ -30,6 +30,15 @@ CREATE TABLE KhachHang (
 );
 GO
 
+CREATE TABLE Supplier(
+	idSupplier INT Identity(1, 1) PRIMARY KEY,
+	nameSupplier NVARCHAR(255) NOT NULL,
+	numberphone VARCHAR(30) NOT NULL,
+	address NVARCHAR(255) NOT NULL,
+	numberOfTransaction INT default 0
+)
+GO
+
 --Tạo bảng sản phẩm
 CREATE TABLE Product (
 	idProduct INT IDENTITY(1,1) PRIMARY KEY,
@@ -39,7 +48,8 @@ CREATE TABLE Product (
 	imageProduct NVARCHAR(300) NOT NULL,
 	typeProduct VARCHAR(10) NOT NULL,
 	shipment VARCHAR(20) NOT NULL,
-	shelflife date NOT NULL
+	shelflife date NOT NULL,
+	nameSupplier NVARCHAR(255) NOT NULL
 );
 GO
 
@@ -262,7 +272,10 @@ Go
 create PROCEDURE usp_ShowAllProducts
 AS
 BEGIN
-    SELECT idProduct, nameProduct, amountProduct, priceProduct, imageProduct, typeProduct, shipment, shelflife FROM Product WHERE amountProduct > 0
+    SELECT idProduct as N'Mã', nameProduct as N'Tên', amountProduct as N'Số lượng', priceProduct as N'Giá', 
+	imageProduct as N'Hình ảnh', typeProduct as N'Loại', shipment as N'Lô', shelflife as N'Hạn sử dụng'
+	FROM Product 
+	WHERE amountProduct > 0
 END
 go
 
@@ -281,7 +294,8 @@ create PROCEDURE getProductsByType
 	@typeProduct varchar(255)
 AS
 BEGIN
-    SELECT nameProduct, priceProduct, imageProduct, typeProduct FROM Product WHERE typeProduct = @typeProduct
+    SELECT nameProduct as N'Tên', priceProduct as N'Giá', imageProduct as N'Hình ảnh', typeProduct as N'Loại' 
+	FROM Product WHERE typeProduct = @typeProduct
 END
 go
 
@@ -290,7 +304,8 @@ create PROCEDURE getProductsByName
 	@nameProduct nvarchar(255)
 AS
 BEGIN
-    SELECT * FROM Product WHERE nameProduct = @nameProduct
+    SELECT nameProduct as N'Tên', priceProduct as N'Giá', imageProduct as N'Hình ảnh', typeProduct as N'Loại' 
+	FROM Product WHERE nameProduct = @nameProduct
 END
 go
 
@@ -378,10 +393,14 @@ create PROCEDURE insertProduct
 @imageProduct nvarchar(255), 
 @typeProduct varchar(255), 
 @shipment varchar(255), 
-@shelflife date
+@shelflife date,	
+@supplier NVARCHAR(255)
 AS
 BEGIN
-	INSERT INTO Product (nameProduct, amountProduct, priceProduct, imageProduct, typeProduct, shipment, shelflife) VALUES ( @nameProduct , @amountProduct , @priceProduct , @imageProduct , @typeProduct , @shipment , @shelflife)
+	INSERT INTO Product (nameProduct, amountProduct, priceProduct, imageProduct, typeProduct, shipment, shelflife, nameSupplier) 
+	VALUES ( @nameProduct , @amountProduct , @priceProduct , @imageProduct , @typeProduct , @shipment , @shelflife, @supplier)
+	--INCREASE NUMBER OF TRANSACTION OF SUPPLIER
+	UPDATE Supplier SET numberOfTransaction = numberOfTransaction + 1 WHERE nameSupplier LIKE @supplier
 END
 go
 
@@ -429,7 +448,7 @@ go
 create PROCEDURE showAllUser
 AS
 BEGIN
-	SELECT numberPhone, Email, name, address, DiemTichLuy FROM KhachHang
+	SELECT numberPhone as N'Số điện thoại', Email, name as N'Họ tên', address as N'Địa chỉ', DiemTichLuy as N'Điểm tích lũy' FROM KhachHang
 END
 go
 
@@ -590,8 +609,6 @@ BEGIN
 END
 go
 
-DROP PROCEDURE getOrdersByMonth
-Go
 --get orders by month
 CREATE PROCEDURE getOrdersByMonth
 @month int
@@ -604,6 +621,16 @@ BEGIN
 END	
 GO
 
+--get list supplier
+CREATE PROC getSupplier
+AS
+BEGIN
+	SELECT idSupplier as N'Mã số', nameSupplier as N'Nhà cung cấp', numberphone as N'Số điện thoại', address as N'Địa chỉ', numberOfTransaction as N'Số lần giao dịch' 
+	FROM Supplier
+END
+GO
+
+
 
 -- Thêm dữ liệu vào bảng NhanVien
 INSERT INTO NhanVien (numberPhone, Email, name, address, password)
@@ -615,27 +642,35 @@ VALUES
 
 --Thêm dữ liệu vào bảng Product
 
-INSERT INTO Product(nameProduct, amountProduct, priceProduct, imageProduct, typeProduct, shipment, shelflife)
+INSERT INTO Product(nameProduct, amountProduct, priceProduct, imageProduct, typeProduct, shipment, shelflife, nameSupplier)
 VALUES
-(N'Bánh Bắp Ngọt Oishi', 10,  14000, 'bno.jpeg', 'DAV', '290','4/28/2023'),
-(N'Khoai Tây Chiên Vị Kim Chi OStar ', 10, 17000, 'kco.jpeg', 'DAV', '290','4/28/2023'),
-(N'Khoai Tây Chiên Vị Bò Bít Tết Swing', 10, 28000, 'bts.jpeg', 'DAV', '290','4/28/2023'),
-(N'Khoai Tây Chiên Vị Rong Biển OStar', 10, 17000, 'rbo.jpeg', 'DAV', '290','4/28/2023'),
-(N'Mì Trộn Xúc Xích Trứng Chiên', 10, 34000, 'ccdc.jpeg', 'DA', '290','4/28/2023'),
-(N'Mì Hảo Hảo', 10, 5000, 'mhh.jpg', 'DA', '290','4/28/2023'),
-(N'Bánh Mì Ốp La 2 Trứng', 10, 19000, 'mtxxt.png', 'DA', '290','4/28/2023'),
-(N'Xúc Xích', 10, 20000, 'xx.png', 'DA', '290','4/28/2023'),
-(N'Bông Tẩy Trang Jomi', 10, 37000, 'jomi.jpeg', 'DGD', '290','4/28/2023'),
-(N'Bật Lửa J3 Bic', 10, 16000, 'j3.jpeg', 'DGD', '290','4/28/2023'),
-(N'Sữa tắm nước hoa Romano Classic sạch sảng khoái 650g', 10, 175000, 'romano.jpeg', 'DGD', '290','4/28/2023'),
-(N'Nước Súc Miệng Listerine Bạc Hà 250ml', 10, 90000, 'bh.jpeg', 'DGD', '290','4/28/2023'),
-(N'Khăn Giấy Ướt Yuniku Lài 90 Miếng', 10, 37000, 'yuni.jpeg', 'DGD', '290','4/28/2023'),
-(N'Sữa tươi cà phê', 10, 25000, 'cps.png', 'DU', '290','4/28/2023'),
-(N'Trà đào', 10, 30000, 'td.png', 'DU', '290','4/28/2023'),
-(N'Cà phê đen đá', 10, 15000, 'cpd.png', 'DU', '290','4/28/2023'),
-(N'Trà sữa thái', 10, 18000, 'ol.jpeg', 'DU', '290','4/28/2023'),
-(N'Cà phê phin sữa đá', 10, 18000, 'psd.png', 'DU', '290','4/28/2023');
+(N'Bánh Bắp Ngọt Oishi', 10,  14000, 'bno.jpeg', 'DAV', '290','4/28/2023', N'Circle K'),
+(N'Khoai Tây Chiên Vị Kim Chi OStar ', 10, 17000, 'kco.jpeg', 'DAV', '290','4/28/2023', N'Circle K'),
+(N'Khoai Tây Chiên Vị Bò Bít Tết Swing', 10, 28000, 'bts.jpeg', 'DAV', '290','4/28/2023', N'Circle K'),
+(N'Khoai Tây Chiên Vị Rong Biển OStar', 10, 17000, 'rbo.jpeg', 'DAV', '290','4/28/2023', N'Circle K'),
+(N'Mì Trộn Xúc Xích Trứng Chiên', 10, 34000, 'ccdc.jpeg', 'DA', '290','4/28/2023', N'Circle K'),
+(N'Mì Hảo Hảo', 10, 5000, 'mhh.jpg', 'DA', '290','4/28/2023', N'Circle K'),
+(N'Bánh Mì Ốp La 2 Trứng', 10, 19000, 'mtxxt.png', 'DA', '290','4/28/2023', N'Circle K'),
+(N'Xúc Xích', 10, 20000, 'xx.png', 'DA', '290','4/28/2023', N'Circle K'),
+(N'Bông Tẩy Trang Jomi', 10, 37000, 'jomi.jpeg', 'DGD', '290','4/28/2023', N'Circle K'),
+(N'Bật Lửa J3 Bic', 10, 16000, 'j3.jpeg', 'DGD', '290','4/28/2023', N'Circle K'),
+(N'Sữa tắm nước hoa Romano Classic sạch sảng khoái 650g', 10, 175000, 'romano.jpeg', 'DGD', '290','4/28/2023', N'Circle K'),
+(N'Nước Súc Miệng Listerine Bạc Hà 250ml', 10, 90000, 'bh.jpeg', 'DGD', '290','4/28/2023', N'Circle K'),
+(N'Khăn Giấy Ướt Yuniku Lài 90 Miếng', 10, 37000, 'yuni.jpeg', 'DGD', '290','4/28/2023', N'Circle K'),
+(N'Sữa tươi cà phê', 10, 25000, 'cps.png', 'DU', '290','4/28/2023', N'Circle K'),
+(N'Trà đào', 10, 30000, 'td.png', 'DU', '290','4/28/2023', N'Circle K'),
+(N'Cà phê đen đá', 10, 15000, 'cpd.png', 'DU', '290','4/28/2023', N'Circle K'),
+(N'Trà sữa thái', 10, 18000, 'ol.jpeg', 'DU', '290','4/28/2023', N'Circle K'),
+(N'Cà phê phin sữa đá', 10, 18000, 'psd.png', 'DU', '290','4/28/2023', N'Circle K');
 
+
+--Thêm dữ liệu vào bảng Supplier
+INSERT INTO Supplier (nameSupplier, numberphone, address) 
+VALUES 
+(N'Cocacola', '0912345678', N'19 Nguyễn Hữu Thọ, TP Hồ Chí Minh'),
+(N'Oishi', '0912345678', N'19 Nguyễn Hữu Thọ, TP Hồ Chí Minh'),
+(N'NumberOne', '0912345678', N'19 Nguyễn Hữu Thọ, TP Hồ Chí Minh'),
+(N'Pepsi', '0912345678', N'19 Nguyễn Hữu Thọ, TP Hồ Chí Minh')
 
 --Thêm dữ liệu vào bảng Voucher
 INSERT INTO Voucher(TenVoucher, GiaVoucher, HinhAnh)
@@ -682,7 +717,7 @@ select * from NhanVien
 select * from Voucher
 select * from MyVoucher
 select * from Voucher
-delete from Product 
+--delete from Product
 select * from Product
 select * from Cart
 delete from cart_item where cart_id = '0387790894'
@@ -690,7 +725,6 @@ select* from cart_item
 select * from OrderHistory	
 
 update KhachHang set DiemTichLuy = 1000000000 where numberPhone = '0387790894'
-
 exec listMyVoucher '0387790894'
 exec showTurnover
 exec getAmount 3
@@ -701,3 +735,4 @@ exec getOrdersByMonth 5
 exec usp_CheckExistCart '0387790894'
 		
 exec updatePoint '0387790894' , 1000000
+exec getSupplier

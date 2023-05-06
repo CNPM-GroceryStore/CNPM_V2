@@ -17,6 +17,7 @@ namespace DTO
 
         public string Shipment { get; set; }
         public string Shelflife { get; set; }
+        public string NameSupplier { get; set; }    
 
         public DTO_Product(int idProduct, string nameProduct, int amount, int priceProduct, string imageProduct, string typeProduct, string shipment, string shelflife)
         {
@@ -48,7 +49,7 @@ namespace DTO
             this.IdProduct = idProduct;
         }
 
-        public DTO_Product(string nameProduct, int amount, int priceProduct, string imageProduct, string typeProduct, string shipment, string shelflife)
+        public DTO_Product(string nameProduct, int amount, int priceProduct, string imageProduct, string typeProduct, string shipment, string shelflife, string nameSupplier)
         {
             NameProduct = nameProduct;
             Amount = amount;
@@ -57,6 +58,7 @@ namespace DTO
             TypeProduct = typeProduct;
             Shipment = shipment;
             Shelflife = shelflife;
+            NameSupplier = nameSupplier;
         }
     }
 }

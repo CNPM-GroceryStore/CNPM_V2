@@ -35,13 +35,7 @@ namespace GroceryStore
 
         private void AdminForm_Load(object sender, EventArgs e)
         {
-            showRecentOrder(sender, e);
-            showTurnover(sender, e);
-            buildChart(sender, e);
-            currPage = pn_homepage;
-            lb_titilePage.Text = "Trang chủ";
-            currPage.Visible = true;
-            switchPage(sender, e, pn_homepage, btn_homepage, "Trang chủ");
+            homepage_Click(sender, e);
         }
 
         //show 5 most recent order
@@ -79,6 +73,7 @@ namespace GroceryStore
             switchPage(sender, e, pn_homepage, btn_homepage, "Trang chủ");
             showTurnover(sender, e);
             buildChart(sender, e);
+            showRecentOrder(sender, e);
         }
 
         // build chart by current month
@@ -151,17 +146,20 @@ namespace GroceryStore
         //Remove Product
         private void dgv_mgmProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow currentRow = dgv_mgmProduct.Rows[e.RowIndex];
-            DataGridViewCell currentCell = currentRow.Cells[e.ColumnIndex];
-
-            if (currentCell == currentRow.Cells[currentRow.Cells.Count - 1])
+            if (e.RowIndex >= 0)
             {
-                DialogResult dialog = MessageBox.Show("Bạn có chắc chắn muốn xóa sản phẩm này khỏi danh sách!", "Thông báo", MessageBoxButtons.YesNo);
-                if (dialog == DialogResult.Yes)
+                DataGridViewRow currentRow = dgv_mgmProduct.Rows[e.RowIndex];
+                DataGridViewCell currentCell = currentRow.Cells[e.ColumnIndex];
+
+                if (currentCell == currentRow.Cells[currentRow.Cells.Count - 1])
                 {
-                    BUS_Product bUS_Product = new BUS_Product();
-                    bUS_Product.deleteProduct(products[e.RowIndex]);
-                    mgmProductPage_Click(sender, e);
+                    DialogResult dialog = MessageBox.Show("Bạn có chắc chắn muốn xóa sản phẩm này khỏi danh sách!", "Thông báo", MessageBoxButtons.YesNo);
+                    if (dialog == DialogResult.Yes)
+                    {
+                        BUS_Product bUS_Product = new BUS_Product();
+                        bUS_Product.deleteProduct(products[e.RowIndex]);
+                        mgmProductPage_Click(sender, e);
+                    }
                 }
             }
         }
@@ -175,6 +173,7 @@ namespace GroceryStore
             string type = cbb_addtype.Text;
             string shelflife = dtp_addPro.Value.ToString();
             string shipment = txb_shipment.Text;
+            string supplier = cbb_supplier.Text;
             StringBuilder sb = new StringBuilder();
 
             foreach (char c in name.Normalize(NormalizationForm.FormD))
@@ -187,9 +186,45 @@ namespace GroceryStore
             string image = $"{newName}_{shipment}.jpg";
             image = image.Replace(" ", "_");
 
-            BUS_Product bUS_Product = new BUS_Product();
-            DTO_Product product = new DTO_Product(name, amount, price, image, type, shipment, shelflife);
-            bUS_Product.insertProduct(product);
+            string[] checkString = { name, type, shelflife, shipment, supplier, image };
+            int[] checkInt = { amount, price };
+            if (this.checkIntInput(checkInt) && this.checkStringInput(checkString))
+            {
+
+                BUS_Product bUS_Product = new BUS_Product();
+                DTO_Product product = new DTO_Product(name, amount, price, image, type, shipment, shelflife, supplier);
+                bUS_Product.insertProduct(product);
+            }
+            else
+            {
+                MessageBox.Show("Nhập sai quy định, vui lòng nhập lại!");
+            }
+        }
+
+        //Check string input
+        private bool checkStringInput(string[] str)
+        {
+            foreach (string str2 in str)
+            {
+                if (str2 == "")
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        //check int input
+        private bool checkIntInput(int[] lst_int)
+        {
+            foreach (int i in lst_int)
+            {
+                if (i == 0 || i == null)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         //upload image product
@@ -241,5 +276,24 @@ namespace GroceryStore
             dgv_mgmProduct.Columns.Insert(dgv_mgmProduct.Columns.Count, column_remove);
         }
 
+        //------------------------------------------------------------------------------------------------------------
+
+        //Go to managing client page
+        private void btn_mngClient_Click(object sender, EventArgs e)
+        {
+            switchPage(sender, e, pn_mngClient, btn_mngClient, "Quán lí khách hàng");
+            BUS_User user = new BUS_User();
+            dgv_mngClient.DataSource = user.showAllUser();
+        }
+
+        //------------------------------------------------------------------------------------------------------------
+
+        //Go to managing suppllier page
+        private void btn_mngSupplier_Click(object sender, EventArgs e)
+        {
+            switchPage(sender, e, pn_supplier, btn_mngSupplier, "Nhà cung cấp");
+            BUS_Supplier bUS_Supplier = new BUS_Supplier();
+            dgv_supplier.DataSource = bUS_Supplier.getSupplier();
+        }
     }
 }

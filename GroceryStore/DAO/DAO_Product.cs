@@ -13,8 +13,8 @@ namespace DAO
         #region 1. Insert product
         public void insertProduct(DTO_Product product)
         {
-            string statement = "insertProduct @nameProduct , @amountProduct , @priceProduct , @imageProduct , @typeProduct , @shipment , @shelflife ";
-            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { product.NameProduct, product.Amount, product.PriceProduct, product.ImageProduct , product.TypeProduct, product.Shipment, DateTime.Parse(product.Shelflife) });
+            string statement = "insertProduct @nameProduct , @amountProduct , @priceProduct , @imageProduct , @typeProduct , @shipment , @shelflife , @supplier";
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { product.NameProduct, product.Amount, product.PriceProduct, product.ImageProduct , product.TypeProduct, product.Shipment, DateTime.Parse(product.Shelflife) , product.NameSupplier});
         }
         #endregion
 
