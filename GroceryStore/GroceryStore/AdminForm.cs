@@ -167,15 +167,20 @@ namespace GroceryStore
         //Remove Product
         private void dgv_mgmProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
-            DataGridViewRow currentRow = dgv_mgmProduct.Rows[e.RowIndex];
-            DataGridViewCell currentCell = currentRow.Cells[e.ColumnIndex];
-            if (currentCell == currentRow.Cells[currentRow.Cells.Count - 1])
+            if (e.RowIndex >= 0)
             {
-                DialogResult dialog = MessageBox.Show("Bạn có chắc chắn muốn xóa sản phẩm này khỏi danh sách!", "Thông báo", MessageBoxButtons.YesNo);
-                if (dialog == DialogResult.Yes)
+                DataGridViewRow currentRow = dgv_mgmProduct.Rows[e.RowIndex];
+                DataGridViewCell currentCell = currentRow.Cells[e.ColumnIndex];
+
+                if (currentCell == currentRow.Cells[currentRow.Cells.Count - 1])
                 {
+                    DialogResult dialog = MessageBox.Show("Bạn có chắc chắn muốn xóa sản phẩm này khỏi danh sách!", "Thông báo", MessageBoxButtons.YesNo);
                     BUS_Product bUS_Product = new BUS_Product();
+                    if (dialog == DialogResult.Yes)
+                    {
+                        bUS_Product.deleteProduct(products[e.RowIndex]);
+                        mgmProductPage_Click(sender, e);
+                    }
                     string filePath = @"..\\..\\..\\Resources\Product\" + currentRow.Cells[5].Value + "\\" + currentRow.Cells[4].Value;
                     MessageBox.Show(filePath);
                     if (File.Exists(filePath)) // kiểm tra xem file có tồn tại không
@@ -186,20 +191,21 @@ namespace GroceryStore
                     bUS_Product.deleteProduct(products[e.RowIndex]);
                     mgmProductPage_Click(sender, e);
                 }
+                else if (dgv_mgmProduct.Columns[e.ColumnIndex].Name == "Sửa")
+                {
+                    DataGridViewRow selectedRow = dgv_mgmProduct.CurrentRow;
+                    selectedProduct = products[e.RowIndex];
+                    switchPage(sender, e, pn_addProduct, btn_mgmProductPage, "Sửa sản phẩm");
+                    txb_addNamePro.Text = selectedProduct.NameProduct;
+                    txb_addPrice.Text = selectedProduct.PriceProduct.ToString();
+                    cbb_addtype.Text = selectedProduct.TypeProduct;
+                    dtp_addPro.Text = selectedProduct.Shelflife;
+                    txb_shipment.Text = selectedProduct.Shipment;
+                    txb_addAmount.Text = selectedProduct.Amount.ToString();
+                }
+
             }
-            else if (dgv_mgmProduct.Columns[e.ColumnIndex].Name == "Sửa")
-            {
-                DataGridViewRow selectedRow = dgv_mgmProduct.CurrentRow;
-                selectedProduct = products[e.RowIndex];
-                switchPage(sender, e, pn_addProduct, btn_mgmProductPage, "Sửa sản phẩm");
-                txb_addNamePro.Text = selectedProduct.NameProduct;
-                txb_addPrice.Text = selectedProduct.PriceProduct.ToString();
-                cbb_addtype.Text = selectedProduct.TypeProduct;
-                dtp_addPro.Text = selectedProduct.Shelflife;
-                txb_shipment.Text = selectedProduct.Shipment;
-                txb_addAmount.Text = selectedProduct.Amount.ToString();
-                MessageBox.Show("click Sửa");
-            }
+
         }
 
 
@@ -211,8 +217,9 @@ namespace GroceryStore
             int price = int.Parse(txb_addPrice.Text);
             string type = cbb_addtype.Text;
             string shelflife = dtp_addPro.Value.ToString();
-            string shipment = txb_shipment.Text; 
+            string shipment = txb_shipment.Text;
             string supplier = cbb_supplier.Text;
+
             string image = null;
             if (ptb_addImagePro.Image == null)
             {
@@ -250,6 +257,45 @@ namespace GroceryStore
                 MessageBox.Show("Sửa sản phẩm thành công");
             }
 
+            string[] checkString = { name, type, shelflife, shipment, supplier, image };
+            int[] checkInt = { amount, price };
+            if (this.checkIntInput(checkInt) && this.checkStringInput(checkString))
+            {
+
+                BUS_Product bUS_Product = new BUS_Product();
+                DTO_Product product = new DTO_Product(name, amount, price, image, type, shipment, shelflife, supplier);
+                bUS_Product.insertProduct(product);
+            }
+            else
+            {
+                MessageBox.Show("Nhập sai quy định, vui lòng nhập lại!");
+            }
+        }
+
+        //Check string input
+        private bool checkStringInput(string[] str)
+        {
+            foreach (string str2 in str)
+            {
+                if (str2 == "")
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        //check int input
+        private bool checkIntInput(int[] lst_int)
+        {
+            foreach (int i in lst_int)
+            {
+                if (i == 0 || i == null)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         //upload image product
