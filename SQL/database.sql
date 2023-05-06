@@ -603,14 +603,14 @@ END
 go
 
 --get orders by month
-CREATE PROCEDURE getOrdersByMonth
+CREATE PROCEDURE getOrdersByMonth	
 @month int
 AS 
 BEGIN
-	SELECT SUM(price) as 'Giá', SUM(amount) as 'Số lượng', paydate as 'Ngày thanh toán' 
-	FROM OrderHistory
-	WHERE MONTH(paydate) = @month
-	GROUP BY paydate
+	SELECT name as N'Nhân viên', SUM(price) as 'Tổng tiền', SUM(amount) as 'Số lượng', paydate as 'Ngày thanh toán' 
+	FROM OrderHistory, NhanVien
+	WHERE MONTH(paydate) = @month AND numberPhone = idUser
+	GROUP BY paydate, name
 END	
 GO
 

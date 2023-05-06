@@ -1187,6 +1187,7 @@
             btn_printStatic.Size = new Size(225, 55);
             btn_printStatic.TabIndex = 3;
             btn_printStatic.Text = "In số liệu thống kê";
+            btn_printStatic.Click += btn_printStatic_Click;
             // 
             // pn_homepage
             // 
