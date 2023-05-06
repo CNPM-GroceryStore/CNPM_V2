@@ -60,5 +60,12 @@ namespace DTO
             Shelflife = shelflife;
             NameSupplier = nameSupplier;
         }
+
+        public DTO_Product(string nameProduct, int priceProduct, int amount)
+        {
+            NameProduct = nameProduct;
+            PriceProduct = priceProduct;
+            Amount = amount;
+        }
     }
 }

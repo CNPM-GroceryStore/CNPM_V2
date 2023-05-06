@@ -21,6 +21,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using static TheArtOfDevHtmlRenderer.Adapters.RGraphicsPath;
 using Button = System.Windows.Forms.Button;
 using TextBox = System.Windows.Forms.TextBox;
+using System.Drawing.Printing;
 
 namespace GroceryStore
 {
@@ -43,6 +44,8 @@ namespace GroceryStore
         String typeOfProduct = "home";
         Guna2GradientTileButton currButton = new Guna2GradientTileButton();
         String[] list_nameProduct;
+        int amountReceived = 0;
+        int habitualAmount = 0;
 
         //Create event when form loaded
         private void HomeForm_Load(object sender, EventArgs e)
@@ -647,6 +650,139 @@ namespace GroceryStore
             }
         }
 
+        private int ShowLoginDialogInputMoney()
+        {
+            var inputForm = new Form();
+            inputForm.Size = new Size(400, 150);
+            inputForm.Text = "Nhập số tiền đã nhận";
+            inputForm.StartPosition = FormStartPosition.CenterScreen;
+
+            var inputMoneyLable = new Label() { Left = 260, Top = 22, Text = "VNĐ" };
+            var inputMoney = new TextBox() { Left = 50, Top = 20, Width = 200 };
+
+            var okButton = new Button() { Text = "OK", Left = 50, Width = 100, Top = 50, Height = 35 };
+            okButton.Click += (sender, e) => { inputForm.DialogResult = DialogResult.OK; };
+            var cancelButton = new Button() { Text = "Cancel", Left = 160, Width = 100, Top = 50, Height = 35 };
+            cancelButton.Click += (sender, e) => { inputForm.DialogResult = DialogResult.Cancel; };
+
+            inputForm.Controls.Add(inputMoneyLable);
+            inputForm.Controls.Add(inputMoney);
+            inputForm.Controls.Add(okButton);
+            inputForm.Controls.Add(cancelButton);
+
+            var result = inputForm.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                return Convert.ToInt32(inputMoney.Text);
+            }
+            return 0;
+        }
+        // Phương thức cắt chuỗi cho tên sản phẩm
+        private string[] SplitString(string str, Font font, float maxWidth, Graphics g)
+        {
+            string[] words = str.Split(' ');
+            List<string> lines = new List<string>();
+            string currentLine = "";
+            for (int i = 0; i < words.Length; i++)
+            {
+                SizeF size = g.MeasureString(currentLine + words[i], font);
+                if (size.Width > maxWidth) // Nếu độ dài dòng hiện tại vượt quá chiều rộng tối đa, tạo một dòng mới
+                {
+                    lines.Add(currentLine);
+                    currentLine = words[i] + " ";
+                }
+                else
+                {
+                    currentLine += words[i] + " ";
+                }
+            }
+            if (currentLine != "") lines.Add(currentLine); // Thêm dòng cuối cùng
+            return lines.ToArray();
+        }
+        //In hóa đơn
+        private void printBill(object sender, PrintPageEventArgs e)
+        {
+            // Vẽ thông tin hóa đơn lên trang in
+            Graphics g = e.Graphics;
+            Font font = new Font("Arial", 12);
+            Font boldFont = new Font("Arial", 12, FontStyle.Bold);
+            Brush brush = Brushes.Black;
+            int startX = 10;
+            int startY = 10;
+            int offset = 40;
+            int sumNumber = 0;
+            int sumMoney = 0;
+            int addOffset = 0;
+
+            g.DrawString("HÓA ĐƠN BÁN HÀNG", new Font("Arial", 18), brush, startX + 200, startY);
+
+            // Vẽ thông tin khách hàng
+            if(user != null)
+            {
+                g.DrawString("Khách hàng: " + user.NameUser, font, brush, startX, startY + offset);
+                offset += 20;
+            }
+
+            // Vẽ thông tin sản phẩm
+            g.DrawString("Tên sản phẩm", boldFont, brush, startX + 50, startY + offset);
+            g.DrawString("Số lượng" , boldFont, brush, startX + 300, startY + offset);
+            g.DrawString("Giá", boldFont, brush, startX + 450, startY + offset);
+            g.DrawString("Thành tiền", boldFont, brush, startX + 550, startY + offset);
+            offset += 20;
+            foreach (ProductOrderItem order in orders)
+            {
+                string name = order.NameItemOder;
+                SizeF size = g.MeasureString(name, font);
+                if (size.Width > 300) // Nếu tên sản phẩm dài hơn kích thước trang in, tách thành nhiều dòng
+                {
+                    string[] nameLines = SplitString(name, font, 300, g);
+                    for (int i = 0; i < nameLines.Length; i++)
+                    {
+                        g.DrawString(nameLines[i], font, brush, startX, startY + offset);
+                        addOffset += 20;
+                        offset += 20;
+                    }
+                    offset -= addOffset;
+                }
+                else // Nếu tên sản phẩm ngắn, in trên một dòng
+                {
+                    g.DrawString(name, font, brush, startX, startY + offset);
+                }
+
+                g.DrawString(order.NumberOfItem.ToString(), font, brush, startX + 300, startY + offset);
+                g.DrawString(order.PriceItemOder.ToString(), font, brush, startX + 450, startY + offset);
+                g.DrawString((order.PriceItemOder * order.NumberOfItem).ToString(), font, brush, startX + 550, startY + offset);
+                offset += 20 + addOffset;
+                addOffset = 0;
+                sumNumber += order.NumberOfItem;
+                sumMoney += order.PriceItemOder * order.NumberOfItem;
+            }
+
+            // Tính tổng tiền
+            int tongTien = ThanhToan.TienThanhToan;
+
+            // Vẽ thông tin tổng tiền
+            g.DrawString("Tổng số/Tổng cộng:", boldFont, brush, startX, startY + offset);
+            g.DrawString(sumNumber.ToString(), font, brush, startX + 300, startY + offset);
+            g.DrawString(sumMoney.ToString(), font, brush, startX + 550, startY + offset);
+            offset += 30;
+            // Tiền nhận
+            g.DrawString("Khách trả", boldFont, brush, startX, startY + offset);
+            g.DrawString(amountReceived.ToString(), font, brush, startX + 550, startY + offset);
+            offset += 30;
+            //Tiền thói
+            g.DrawString("Trả lại", boldFont, brush, startX, startY + offset);
+            g.DrawString(habitualAmount.ToString(), font, brush, startX + 550, startY + offset);
+            offset += 30;
+            // Vẽ thông tin ngày in
+            g.DrawString("Ngày in: " + DateTime.Now.ToString(), font, brush, startX, startY + offset);
+            offset += 50;
+            //Cảm ơn quý khách
+            g.DrawString("Xin cảm ơn quý khách!", boldFont, brush, startX, startY + offset);
+
+        }
+
 
         // click mua
         private void select_Mua(object sender, EventArgs e)
@@ -680,9 +816,15 @@ namespace GroceryStore
             string status = "";
             if (amount > 0 && paymethod != "Thanh toán")
             {
-                DialogResult dialog = MessageBox.Show($"Khách hàng đã thanh toán {ThanhToan.TienThanhToan}", "Thông báo", MessageBoxButtons.YesNo);
+                DialogResult dialog = MessageBox.Show($"Khách hàng đã thanh toán?", "Thông báo", MessageBoxButtons.YesNo);
                 if (dialog == DialogResult.Yes)
                 {
+                    if (paymethod == "Tiền mặt")
+                    {
+                        amountReceived = ShowLoginDialogInputMoney();
+                        habitualAmount = amountReceived - ThanhToan.TienThanhToan;
+                        MessageBox.Show("Số tiền thói: " + habitualAmount, "Thông báo");
+                    }
                     status = "Hoàn thành";
                     if (user != null)
                     {
@@ -692,6 +834,16 @@ namespace GroceryStore
                             bUS_MyVoucher.deleteMyVoucher(umv);
                         });
                     }
+
+
+                    // In hóa đơn
+                    PrintDocument pd = new PrintDocument();
+                    pd.PrintPage += new PrintPageEventHandler(printBill);
+                    PrintPreviewDialog ppd = new PrintPreviewDialog();
+                    ppd.Document = pd;
+                    ppd.ShowDialog();
+
+                    // Reset dữ liệu mua hàng
                     myVouchers.Clear();
                     usedMyVouchers.Clear();
                     cart.deleteCart(staff);
