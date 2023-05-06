@@ -15,7 +15,7 @@ namespace DAO
         public void insertMyVoucher(DTO_MyVoucher myVoucher)
         {
             string statement = "InsertToMyVoucher @numberPhone, @maVoucher";
-            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { myVoucher.MaUser, myVoucher.MaMyVoucher });
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { myVoucher.IdUser, myVoucher.IdMyVoucher });
         }
         #endregion
 
@@ -24,7 +24,7 @@ namespace DAO
         public void deleteMyVoucher(DTO_MyVoucher myVoucher)
         {
             string statement = "deleteMyVoucher @numberPhone, @MaVoucher, @SoLuong";
-            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { myVoucher.MaUser, myVoucher.MaMyVoucher, myVoucher.Quantity });
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { myVoucher.IdUser, myVoucher.IdMyVoucher, myVoucher.QuantityMyVoucher });
         }
         #endregion
     }

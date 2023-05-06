@@ -163,6 +163,12 @@ namespace GroceryStore
             dgv_mgmProduct.Columns.Insert(dgv_mgmProduct.Columns.Count, column_remove);
         }
 
+        //Go to Add product page
+        private void btn_addProduct_Click(object sender, EventArgs e)
+        {
+            switchPage(sender, e, pn_addProduct, btn_mgmProductPage, "Thêm sản phẩm");
+        }
+
         //Remove Product
         private void dgv_mgmProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -191,9 +197,9 @@ namespace GroceryStore
                 DataGridViewRow selectedRow = dgv_mgmProduct.CurrentRow;
                 selectedProduct = products[e.RowIndex];
                 switchPage(sender, e, pn_addProduct, btn_mgmProductPage, "Sửa sản phẩm");
-                txb_addNamePro.Text = selectedProduct.TenSP;
-                txb_addPrice.Text = selectedProduct.GiaSP.ToString();
-                cbb_addtype.Text = selectedProduct.LoaiSP;
+                txb_addNamePro.Text = selectedProduct.NameProduct;
+                txb_addPrice.Text = selectedProduct.PriceProduct.ToString();
+                cbb_addtype.Text = selectedProduct.TypeProduct;
                 dtp_addPro.Text = selectedProduct.Shelflife;
                 txb_shipment.Text = selectedProduct.Shipment;
                 txb_addAmount.Text = selectedProduct.Amount.ToString();
@@ -214,7 +220,7 @@ namespace GroceryStore
             string image = null;
             if (ptb_addImagePro.Image == null)
             {
-                image = selectedProduct.HinhAnh;
+                image = selectedProduct.ImageProduct;
             }
             else
             {
@@ -242,8 +248,8 @@ namespace GroceryStore
             else if (lb_titilePage.Text == "Sửa sản phẩm")
             {
                 BUS_Product bUS_Product = new BUS_Product();
-                DTO_Product product = new DTO_Product(selectedProduct.MaSP, name, amount, price, image, type, shipment, shelflife);
-                MessageBox.Show(product.TenSP);
+                DTO_Product product = new DTO_Product(selectedProduct.IdProduct, name, amount, price, image, type, shipment, shelflife);
+                MessageBox.Show(product.NameProduct);
                 bUS_Product.updateProduct(product);
                 MessageBox.Show("Sửa sản phẩm thành công");
             }

@@ -59,11 +59,12 @@
             guna2ShadowPanel2.Controls.Add(lb_TongTien);
             guna2ShadowPanel2.FillColor = Color.White;
             guna2ShadowPanel2.Location = new Point(0, 0);
+            guna2ShadowPanel2.Margin = new Padding(3, 4, 3, 4);
             guna2ShadowPanel2.Name = "guna2ShadowPanel2";
             guna2ShadowPanel2.Radius = 7;
             guna2ShadowPanel2.ShadowColor = SystemColors.Control;
             guna2ShadowPanel2.ShadowShift = 1;
-            guna2ShadowPanel2.Size = new Size(401, 210);
+            guna2ShadowPanel2.Size = new Size(458, 361);
             guna2ShadowPanel2.TabIndex = 0;
             // 
             // btn_Mua
@@ -77,10 +78,11 @@
             btn_Mua.FillColor = Color.FromArgb(248, 9, 9);
             btn_Mua.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btn_Mua.ForeColor = Color.White;
-            btn_Mua.Location = new Point(96, 152);
+            btn_Mua.Location = new Point(110, 203);
+            btn_Mua.Margin = new Padding(3, 4, 3, 4);
             btn_Mua.Name = "btn_Mua";
             btn_Mua.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btn_Mua.Size = new Size(180, 45);
+            btn_Mua.Size = new Size(206, 60);
             btn_Mua.TabIndex = 8;
             btn_Mua.Text = "Mua ngay";
             btn_Mua.Click += btn_Mua_Click;
@@ -89,9 +91,9 @@
             // 
             lb_pay.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lb_pay.ForeColor = Color.FromArgb(248, 9, 9);
-            lb_pay.Location = new Point(298, 116);
+            lb_pay.Location = new Point(341, 155);
             lb_pay.Name = "lb_pay";
-            lb_pay.Size = new Size(80, 20);
+            lb_pay.Size = new Size(91, 27);
             lb_pay.TabIndex = 7;
             lb_pay.Text = "0 đ";
             lb_pay.TextAlign = ContentAlignment.MiddleRight;
@@ -101,9 +103,9 @@
             label15.AutoSize = true;
             label15.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label15.ForeColor = Color.Black;
-            label15.Location = new Point(23, 114);
+            label15.Location = new Point(26, 152);
             label15.Name = "label15";
-            label15.Size = new Size(91, 21);
+            label15.Size = new Size(116, 28);
             label15.TabIndex = 6;
             label15.Text = "Thanh toán";
             // 
@@ -111,9 +113,9 @@
             // 
             lb_soDiemTichLuy.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             lb_soDiemTichLuy.ForeColor = Color.FromArgb(248, 9, 9);
-            lb_soDiemTichLuy.Location = new Point(298, 85);
+            lb_soDiemTichLuy.Location = new Point(341, 113);
             lb_soDiemTichLuy.Name = "lb_soDiemTichLuy";
-            lb_soDiemTichLuy.Size = new Size(80, 20);
+            lb_soDiemTichLuy.Size = new Size(91, 27);
             lb_soDiemTichLuy.TabIndex = 5;
             lb_soDiemTichLuy.Text = "0 đ";
             lb_soDiemTichLuy.TextAlign = ContentAlignment.MiddleRight;
@@ -123,9 +125,9 @@
             label13.AutoSize = true;
             label13.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label13.ForeColor = Color.Black;
-            label13.Location = new Point(23, 83);
+            label13.Location = new Point(26, 111);
             label13.Name = "label13";
-            label13.Size = new Size(104, 21);
+            label13.Size = new Size(132, 28);
             label13.TabIndex = 4;
             label13.Text = "Điểm tích lũy";
             // 
@@ -133,9 +135,9 @@
             // 
             lb_voucher.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             lb_voucher.ForeColor = Color.FromArgb(248, 9, 9);
-            lb_voucher.Location = new Point(298, 52);
+            lb_voucher.Location = new Point(341, 69);
             lb_voucher.Name = "lb_voucher";
-            lb_voucher.Size = new Size(80, 20);
+            lb_voucher.Size = new Size(91, 27);
             lb_voucher.TabIndex = 3;
             lb_voucher.Text = "0 đ";
             lb_voucher.TextAlign = ContentAlignment.MiddleRight;
@@ -145,18 +147,18 @@
             lb_maGiamgia.AutoSize = true;
             lb_maGiamgia.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lb_maGiamgia.ForeColor = Color.Black;
-            lb_maGiamgia.Location = new Point(23, 50);
+            lb_maGiamgia.Location = new Point(26, 67);
             lb_maGiamgia.Name = "lb_maGiamgia";
-            lb_maGiamgia.Size = new Size(99, 21);
+            lb_maGiamgia.Size = new Size(124, 28);
             lb_maGiamgia.TabIndex = 2;
             lb_maGiamgia.Text = "Mã giảm giá";
             // 
             // lb_totalMoney
             // 
             lb_totalMoney.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lb_totalMoney.Location = new Point(298, 22);
+            lb_totalMoney.Location = new Point(341, 29);
             lb_totalMoney.Name = "lb_totalMoney";
-            lb_totalMoney.Size = new Size(80, 20);
+            lb_totalMoney.Size = new Size(91, 27);
             lb_totalMoney.TabIndex = 1;
             lb_totalMoney.Text = "0 đ";
             lb_totalMoney.TextAlign = ContentAlignment.MiddleRight;
@@ -166,20 +168,19 @@
             lb_TongTien.AutoSize = true;
             lb_TongTien.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lb_TongTien.ForeColor = Color.Black;
-            lb_TongTien.Location = new Point(23, 20);
+            lb_TongTien.Location = new Point(26, 27);
             lb_TongTien.Name = "lb_TongTien";
-            lb_TongTien.Size = new Size(80, 21);
+            lb_TongTien.Size = new Size(100, 28);
             lb_TongTien.TabIndex = 0;
             lb_TongTien.Text = "Tổng tiền";
             // 
             // ThanhToan
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(guna2ShadowPanel2);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "ThanhToan";
-            Size = new Size(401, 210);
+            Size = new Size(458, 361);
             guna2ShadowPanel2.ResumeLayout(false);
             guna2ShadowPanel2.PerformLayout();
             ResumeLayout(false);

@@ -14,7 +14,7 @@ namespace DAO
         public void insertVoucher(DTO_Voucher voucher)
         {
             string statement = "insertVoucher @TenVoucher, @GiaVoucher, @HinhAnh";
-            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { voucher.TenVoucher, voucher.GiaVoucher, voucher.HinhAnh });
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { voucher.NameVoucher, voucher.PriceVoucher, voucher.ImageVoucher });
         }
         #endregion
 
@@ -23,7 +23,7 @@ namespace DAO
         public void deleteVoucher(DTO_Voucher voucher)
         {
             string statement = "deleteVoucher @mavoucher";
-            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { voucher.MaVoucher });
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { voucher.IdVoucher });
         }
         #endregion
 
@@ -32,7 +32,7 @@ namespace DAO
         public void updateVoucher(DTO_Voucher voucher)
         {
             string statement = "updateVoucher @TenVoucher, @GiaVoucher, @HinhAnh, @mavoucher";
-            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { voucher.MaVoucher, voucher.GiaVoucher, voucher.HinhAnh });
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { voucher.NameVoucher, voucher.PriceVoucher, voucher.ImageVoucher, voucher.IdVoucher });
         }
         #endregion
 
@@ -41,7 +41,7 @@ namespace DAO
         public bool checkExistsVoucher(DTO_Voucher voucher)
         {
             string statement = "checkExistsVoucher @TenVoucher, @GiaVoucher, @HinhAnh";
-            if (DataProvider.Instance.ExecuteStoredProcedureScalar(statement, new object[] { voucher.TenVoucher}) > 0)
+            if (DataProvider.Instance.ExecuteStoredProcedureScalar(statement, new object[] { voucher.NameVoucher}) > 0)
             {
                 return true;
             }
