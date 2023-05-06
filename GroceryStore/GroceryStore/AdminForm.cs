@@ -17,6 +17,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Xml.Linq;
 using TheArtOfDevHtmlRenderer.Adapters;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace GroceryStore
 {
@@ -354,5 +355,6 @@ namespace GroceryStore
             BUS_Supplier bUS_Supplier = new BUS_Supplier();
             dgv_supplier.DataSource = bUS_Supplier.getSupplier();
         }
+
     }
 }

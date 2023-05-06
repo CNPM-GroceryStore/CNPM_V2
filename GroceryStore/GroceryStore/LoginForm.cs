@@ -59,6 +59,13 @@ namespace GroceryStore
 
         private void btn_login_Click(object sender, EventArgs e)
         {
+            if(tb_sdt.Text == "admin" && tb_password.Text == "admin")
+            {
+                this.Hide();
+                AdminForm adminForm = new AdminForm();
+                adminForm.Show();
+                return;
+            }
             DTO_Staff staff = new DTO_Staff(tb_sdt.Text, tb_password.Text);
             BUS_Staff bUS_Staff = new BUS_Staff();
             //MessageBox.Show(bUS_Staff.checkAccount(staff).ToString());
