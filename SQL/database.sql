@@ -86,7 +86,7 @@ CREATE TABLE MyVoucher (
     MaVoucher INT NOT NULL,
 	SoLuong int default 1,
     CONSTRAINT PK_MyVoucher PRIMARY KEY (numberPhone, MaVoucher),
-    CONSTRAINT FK_MyVoucher_NhanVien FOREIGN KEY (numberPhone) REFERENCES NhanVien(numberPhone),
+    CONSTRAINT FK_MyVoucher_KhachHang FOREIGN KEY (numberPhone) REFERENCES KhachHang(numberPhone),
     CONSTRAINT FK_MyVoucher_Voucher FOREIGN KEY (MaVoucher) REFERENCES Voucher(MaVoucher)
 );
 
@@ -156,8 +156,6 @@ BEGIN
 END
 GO
 
-
-go
 -- tạo procedure thêm dữ liệu vào MyVoucher
 CREATE PROCEDURE InsertToMyVoucher
     @numberPhone VARCHAR(15),
@@ -279,8 +277,6 @@ BEGIN
 END
 go
 
-drop proc usp_ShowAllProductsAdmin
-go
 create PROCEDURE usp_ShowAllProductsAdmin
 AS
 BEGIN
@@ -413,7 +409,6 @@ BEGIN
 END
 go
 
-drop proc updateProduct
 -- procedure Update product 
 create PROCEDURE updateProduct
 @idProduct varchar(255),
@@ -578,8 +573,6 @@ BEGIN
 END
 GO
 
-drop proc getAmount
-go
 --get amount of rest product
 CREATE PROC getAmount
 	@idProduct INT	
@@ -639,6 +632,7 @@ VALUES
 ('0987654321', 'NguyenVanA@gmail.com', N'Nguyễn Văn A', N'Hà Nội', '123456'),
 ('0912345678', 'TranThiB@gmail.com', N'Trần Thị B', N'Hải Phòng', 'abcdef'),
 ('0977777777', 'LeVanC@gmail.com', N'Lê Văn C', N'Hồ Chí Minh', '111222');
+go
 
 --Thêm dữ liệu vào bảng Product
 
@@ -680,28 +674,22 @@ VALUES
 (N'Giảm 30k cho đơn 0đ', 30000, ''),
 (N'Giảm 40k cho đơn 0đ', 40000, ''),
 (N'Giảm 50k cho đơn 0đ', 50000, '');
-
-INSERT INTO NhanVien (numberPhone, Email, name, address, password)
-VALUES
-('0387790894', 'lehuynhphat@gmail.com', N'Lê Huỳnh Phát',  N'Bến Tre', '12345678');
 go
 
 INSERT INTO NhanVien (numberPhone, Email, name, address, password)
 VALUES
+('0387790894', 'lehuynhphat@gmail.com', N'Lê Huỳnh Phát',  N'Bến Tre', '12345678'),
 ('0967671065', 'nguyenhuutin@gmail.com', N'Nguyễn Hữu Tín',  N'Bình Định', '12345678');
 go
 
+
 INSERT INTO KhachHang(numberPhone, Email, name, address, password, DiemTichLuy)
 VALUES
+('0967671065', 'nguyenhuutin@gmail.com', N'Nguyễn Hữu Tín',  N'Bình Định', '12345678', 1000000),
 ('0387790894', 'lehuynhphat@gmail.com', N'Lê Huỳnh Phát',  N'Bến Tre', '12345678', 1000000);
 go
 
-INSERT INTO KhachHang(numberPhone, Email, name, address, password, DiemTichLuy)
-VALUES
-('0967671065', 'nguyenhuutin@gmail.com', N'Nguyễn Hữu Tín',  N'Bình Định', '12345678', 1000000);
-go
 
-insert into MyVoucher (numberPhone, MaVoucher) values ('0387790894', 1);
 
 delete from MyVoucher where numberPhone = '0387790894' and MaVoucher = '1';
 
@@ -711,13 +699,13 @@ EXECUTE checkLogin '0977756777';
 -- Thực thi stored procedure để kiểm tra sự tồn tại của tài khoản
 EXECUTE checkExistAccount '0977756777', '11122222';
 
-Execute InsertToMyVoucher '0387790894', '1';
+Execute InsertToMyVoucher '0387790894', 1;
 
 select * from NhanVien
+select * from KhachHang
 select * from Voucher
 select * from MyVoucher
 select * from Voucher
---delete from Product
 select * from Product
 select * from Cart
 delete from cart_item where cart_id = '0387790894'

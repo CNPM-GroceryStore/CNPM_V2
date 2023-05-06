@@ -190,13 +190,13 @@ namespace GroceryStore
             {
                 //thêm dữ liệu lên giao diện
                 listVoucher[i] = new Voucher();
-                listVoucher[i].IdVoucher = vouchers[i].MaVoucher;
-                listVoucher[i].NameVoucher = vouchers[i].TenVoucher;
-                listVoucher[i].PriceVoucher = (vouchers[i].GiaVoucher);
+                listVoucher[i].IdVoucher = vouchers[i].IdVoucher;
+                listVoucher[i].NameVoucher = vouchers[i].NameVoucher;
+                listVoucher[i].PriceVoucher = (vouchers[i].PriceVoucher);
                 listVoucher[i].DoiVoucherClicked += this.select_DoiVoucher;
-                if (vouchers[i].HinhAnh != "")
+                if (vouchers[i].ImageVoucher != "")
                 {
-                    listVoucher[i].ImageVoucher = handleUrlImage(vouchers[i].HinhAnh);
+                    listVoucher[i].ImageVoucher = handleUrlImage(vouchers[i].ImageVoucher);
                 }
                 flowLayout.Controls.Add(listVoucher[i]);
             }
@@ -210,16 +210,16 @@ namespace GroceryStore
             {
                 //thêm dữ liệu lên giao diện
                 listMyVoucher[i] = new MyVoucher();
-                listMyVoucher[i].IdMyVoucher = myVouchers[i].MaMyVoucher;
-                listMyVoucher[i].NameMyVoucher = myVouchers[i].TenMyVoucher;
-                listMyVoucher[i].PriceMyVoucher = myVouchers[i].GiaMyVoucher;
-                listMyVoucher[i].Quantity = myVouchers[i].Quantity;
+                listMyVoucher[i].IdMyVoucher = myVouchers[i].IdMyVoucher;
+                listMyVoucher[i].NameMyVoucher = myVouchers[i].NameMyVoucher;
+                listMyVoucher[i].PriceMyVoucher = myVouchers[i].PriceMyVoucher;
+                listMyVoucher[i].Quantity = myVouchers[i].QuantityMyVoucher;
                 //listMyVoucher[i].Click += new System.EventHandler(this.select_MyVoucher);
                 listMyVoucher[i].UseVoucherClicked += select_UseMyVoucher;
                 listMyVoucher[i].BoVoucherClicked += select_BoMyVoucher;
-                if (myVouchers[i].HinhAnh != "")
+                if (myVouchers[i].ImageMyVoucher != "")
                 {
-                    listMyVoucher[i].ImageMyVoucher = handleUrlImage(myVouchers[i].HinhAnh);
+                    listMyVoucher[i].ImageMyVoucher = handleUrlImage(myVouchers[i].ImageMyVoucher);
                 }
                 flowLayout.Controls.Add(listMyVoucher[i]);
             }
@@ -319,7 +319,11 @@ namespace GroceryStore
         private Image LoadImageFromStorage(string type, string urlImage)
         {
             string src = $"..\\..\\..\\Resources\\Product\\{type}\\{urlImage}";
-            return Image.FromFile(src);
+            if (File.Exists(src)) // kiểm tra xem file có tồn tại không
+            {
+                return Image.FromFile(src);
+            }
+            return null;
         }
 
         //function to choose product which is showed in User Interface
@@ -344,7 +348,7 @@ namespace GroceryStore
                         cart.updateProductFromCart(staff, checkExistProductInCart(order));
                         BUS_Product product = new BUS_Product();
                         product.updateAmount(new DTO_Product(order.IdItemOder), -1);
-                    }   
+                    }
                     else
                     {
                         MessageBox.Show("Số lượng hiện tại không đủ!");
@@ -534,8 +538,8 @@ namespace GroceryStore
                 DTO_MyVoucher myVoucher = new DTO_MyVoucher(user.IdUser, obj.IdVoucher);
                 BUS_MyVoucher bus_myVoucher = new BUS_MyVoucher();
 
-                MessageBox.Show(myVoucher.MaUser);
-                MessageBox.Show(myVoucher.MaMyVoucher.ToString());
+                MessageBox.Show(myVoucher.IdUser);
+                MessageBox.Show(myVoucher.IdMyVoucher.ToString());
                 if (user.AccumulatedPointsUser > obj.PriceVoucher)
                 {
                     bus_myVoucher.insertMyVoucher(myVoucher);
@@ -558,16 +562,16 @@ namespace GroceryStore
             MyVoucher obj = (MyVoucher)sender;
             if (obj.Quantity > 0)
             {
-                DTO_MyVoucher myVoucher = myVouchers.Find(mv => mv.MaMyVoucher == obj.IdMyVoucher);
-                myVoucher.Quantity -= 1;
-                DTO_MyVoucher usedMyVoucher = usedMyVouchers.Find(mv => mv.MaMyVoucher == obj.IdMyVoucher);
+                DTO_MyVoucher myVoucher = myVouchers.Find(mv => mv.IdMyVoucher == obj.IdMyVoucher);
+                myVoucher.QuantityMyVoucher -= 1;
+                DTO_MyVoucher usedMyVoucher = usedMyVouchers.Find(mv => mv.IdMyVoucher == obj.IdMyVoucher);
                 if (usedMyVoucher == null)
                 {
-                    usedMyVouchers.Add(new DTO_MyVoucher(user.IdUser, myVoucher.MaMyVoucher, myVoucher.GiaMyVoucher, 1));
+                    usedMyVouchers.Add(new DTO_MyVoucher(user.IdUser, myVoucher.IdMyVoucher, myVoucher.PriceMyVoucher, 1));
                 }
                 else
                 {
-                    usedMyVoucher.Quantity += 1;
+                    usedMyVoucher.QuantityMyVoucher += 1;
                 }
                 ThanhToan.TienVoucher += obj.PriceMyVoucher;
             }
@@ -577,10 +581,10 @@ namespace GroceryStore
         private void select_BoMyVoucher(object sender, EventArgs e)
         {
             MyVoucher obj = (MyVoucher)sender;
-            DTO_MyVoucher myVoucher = myVouchers.Find(mv => mv.MaMyVoucher == obj.IdMyVoucher);
-            myVoucher.Quantity += 1;
-            DTO_MyVoucher usedMyVoucher = usedMyVouchers.Find(mv => mv.MaMyVoucher == obj.IdMyVoucher);
-            usedMyVoucher.Quantity -= 1;
+            DTO_MyVoucher myVoucher = myVouchers.Find(mv => mv.IdMyVoucher == obj.IdMyVoucher);
+            myVoucher.QuantityMyVoucher += 1;
+            DTO_MyVoucher usedMyVoucher = usedMyVouchers.Find(mv => mv.IdMyVoucher == obj.IdMyVoucher);
+            usedMyVoucher.QuantityMyVoucher -= 1;
             ThanhToan.TienVoucher -= obj.PriceMyVoucher;
 
         }
@@ -599,6 +603,7 @@ namespace GroceryStore
         private void ShowLoginDialog()
         {
             var inputForm = new Form();
+            inputForm.Size = new Size(500, 200);
             inputForm.Text = "Nhập thông tin";
             inputForm.StartPosition = FormStartPosition.CenterScreen;
 
@@ -607,9 +612,9 @@ namespace GroceryStore
             var passwordLabel = new Label() { Left = 50, Top = 50, Text = "Mật khẩu:" };
             var passwordTextBox = new TextBox() { Left = 150, Top = 50, Width = 200 };
 
-            var okButton = new Button() { Text = "OK", Left = 150, Width = 100, Top = 80 };
+            var okButton = new Button() { Text = "OK", Left = 150, Width = 100, Top = 80, Height = 35 };
             okButton.Click += (sender, e) => { inputForm.DialogResult = DialogResult.OK; };
-            var cancelButton = new Button() { Text = "Cancel", Left = 260, Width = 100, Top = 80 };
+            var cancelButton = new Button() { Text = "Cancel", Left = 260, Width = 100, Top = 80, Height = 35 };
             cancelButton.Click += (sender, e) => { inputForm.DialogResult = DialogResult.Cancel; };
 
             inputForm.Controls.Add(phoneLabel);
@@ -751,7 +756,7 @@ namespace GroceryStore
         private void lbl_username_Click(object sender, EventArgs e)
         {
             DialogResult dialogSignOut = MessageBox.Show($"Bạn có muốn đăng xuất tài khoản khách hàng?", "Thông báo", MessageBoxButtons.YesNo);
-            if(dialogSignOut == DialogResult.Yes)
+            if (dialogSignOut == DialogResult.Yes)
             {
                 user = null;
                 lbl_username.Text = "Username";

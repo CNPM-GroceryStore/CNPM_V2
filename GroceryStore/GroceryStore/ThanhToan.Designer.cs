@@ -58,13 +58,13 @@
             guna2ShadowPanel2.Controls.Add(lb_totalMoney);
             guna2ShadowPanel2.Controls.Add(lb_TongTien);
             guna2ShadowPanel2.FillColor = Color.White;
-            guna2ShadowPanel2.Location = new Point(0, -2);
+            guna2ShadowPanel2.Location = new Point(0, 0);
             guna2ShadowPanel2.Margin = new Padding(3, 4, 3, 4);
             guna2ShadowPanel2.Name = "guna2ShadowPanel2";
             guna2ShadowPanel2.Radius = 7;
             guna2ShadowPanel2.ShadowColor = SystemColors.Control;
             guna2ShadowPanel2.ShadowShift = 1;
-            guna2ShadowPanel2.Size = new Size(458, 332);
+            guna2ShadowPanel2.Size = new Size(458, 361);
             guna2ShadowPanel2.TabIndex = 0;
             // 
             // btn_Mua
@@ -91,7 +91,7 @@
             // 
             lb_pay.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lb_pay.ForeColor = Color.FromArgb(248, 9, 9);
-            lb_pay.Location = new Point(341, 154);
+            lb_pay.Location = new Point(341, 155);
             lb_pay.Name = "lb_pay";
             lb_pay.Size = new Size(91, 27);
             lb_pay.TabIndex = 7;
@@ -178,10 +178,9 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoSize = true;
             Controls.Add(guna2ShadowPanel2);
             Name = "ThanhToan";
-            Size = new Size(458, 335);
+            Size = new Size(458, 361);
             guna2ShadowPanel2.ResumeLayout(false);
             guna2ShadowPanel2.PerformLayout();
             ResumeLayout(false);

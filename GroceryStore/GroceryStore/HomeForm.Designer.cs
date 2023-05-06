@@ -564,7 +564,7 @@
             // 
             flowpanel_order_history.AutoScroll = true;
             flowpanel_order_history.BackColor = SystemColors.Control;
-            flowpanel_order_history.Location = new Point(6, 171);
+            flowpanel_order_history.Location = new Point(8, 181);
             flowpanel_order_history.Name = "flowpanel_order_history";
             flowpanel_order_history.Size = new Size(472, 501);
             flowpanel_order_history.TabIndex = 5;
@@ -602,7 +602,7 @@
             ThanhToan.Location = new Point(8, 397);
             ThanhToan.Margin = new Padding(0);
             ThanhToan.Name = "ThanhToan";
-            ThanhToan.Size = new Size(458, 443);
+            ThanhToan.Size = new Size(458, 361);
             ThanhToan.TabIndex = 0;
             ThanhToan.TienThanhToan = 0;
             ThanhToan.TienVoucher = 0;
@@ -755,7 +755,7 @@
             Controls.Add(panel1);
             Controls.Add(panel2);
             Margin = new Padding(3, 4, 3, 4);
-            MinimumSize = new Size(1232, 803);
+            MinimumSize = new Size(1232, 800);
             Name = "HomeForm";
             Text = "Circle K";
             Load += HomeForm_Load;
