@@ -89,13 +89,13 @@
             DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges51 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges52 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges47 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges48 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges49 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges50 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges55 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges56 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
@@ -151,9 +151,10 @@
             pn_mngClient = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             dgv_mngClient = new Guna.UI2.WinForms.Guna2DataGridView();
             pn_staticPage = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            dgv_staticByMonth = new Guna.UI2.WinForms.Guna2DataGridView();
+            panel6 = new Panel();
             dtp_choseTime = new Guna.UI2.WinForms.Guna2DateTimePicker();
             btn_printStatic = new Guna.UI2.WinForms.Guna2Button();
-            dgv_staticByMonth = new Guna.UI2.WinForms.Guna2DataGridView();
             pn_homepage = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             panel3 = new Panel();
             dgv_order = new Guna.UI2.WinForms.Guna2DataGridView();
@@ -168,7 +169,6 @@
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             lb_nameUser2 = new Label();
             pictureBox3 = new PictureBox();
-            panel6 = new Panel();
             pn_btn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pn_page.SuspendLayout();
@@ -187,6 +187,7 @@
             ((System.ComponentModel.ISupportInitialize)dgv_mngClient).BeginInit();
             pn_staticPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_staticByMonth).BeginInit();
+            panel6.SuspendLayout();
             pn_homepage.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_order).BeginInit();
@@ -196,7 +197,6 @@
             panel4.SuspendLayout();
             guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            panel6.SuspendLayout();
             SuspendLayout();
             // 
             // pn_btn
@@ -1083,46 +1083,6 @@
             pn_staticPage.TabIndex = 18;
             pn_staticPage.Visible = false;
             // 
-            // dtp_choseTime
-            // 
-            dtp_choseTime.BackColor = Color.White;
-            dtp_choseTime.BorderRadius = 10;
-            dtp_choseTime.Checked = true;
-            dtp_choseTime.CustomizableEdges = customizableEdges47;
-            dtp_choseTime.Dock = DockStyle.Right;
-            dtp_choseTime.FillColor = Color.FromArgb(248, 9, 9);
-            dtp_choseTime.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dtp_choseTime.ForeColor = Color.White;
-            dtp_choseTime.Format = DateTimePickerFormat.Custom;
-            dtp_choseTime.Location = new Point(730, 0);
-            dtp_choseTime.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
-            dtp_choseTime.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
-            dtp_choseTime.Name = "dtp_choseTime";
-            dtp_choseTime.ShadowDecoration.CustomizableEdges = customizableEdges48;
-            dtp_choseTime.Size = new Size(224, 55);
-            dtp_choseTime.TabIndex = 4;
-            dtp_choseTime.Value = new DateTime(2023, 5, 3, 14, 32, 17, 219);
-            // 
-            // btn_printStatic
-            // 
-            btn_printStatic.BackColor = Color.White;
-            btn_printStatic.BorderRadius = 10;
-            btn_printStatic.CustomizableEdges = customizableEdges49;
-            btn_printStatic.DisabledState.BorderColor = Color.DarkGray;
-            btn_printStatic.DisabledState.CustomBorderColor = Color.DarkGray;
-            btn_printStatic.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btn_printStatic.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btn_printStatic.Dock = DockStyle.Left;
-            btn_printStatic.FillColor = Color.FromArgb(248, 9, 9);
-            btn_printStatic.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_printStatic.ForeColor = Color.White;
-            btn_printStatic.Location = new Point(0, 0);
-            btn_printStatic.Name = "btn_printStatic";
-            btn_printStatic.ShadowDecoration.CustomizableEdges = customizableEdges50;
-            btn_printStatic.Size = new Size(225, 55);
-            btn_printStatic.TabIndex = 3;
-            btn_printStatic.Text = "In số liệu thống kê";
-            // 
             // dgv_staticByMonth
             // 
             dataGridViewCellStyle13.BackColor = Color.White;
@@ -1176,6 +1136,57 @@
             dgv_staticByMonth.ThemeStyle.RowsStyle.Height = 29;
             dgv_staticByMonth.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dgv_staticByMonth.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            // 
+            // panel6
+            // 
+            panel6.BackColor = Color.White;
+            panel6.Controls.Add(dtp_choseTime);
+            panel6.Controls.Add(btn_printStatic);
+            panel6.Dock = DockStyle.Top;
+            panel6.Location = new Point(20, 20);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(954, 55);
+            panel6.TabIndex = 5;
+            // 
+            // dtp_choseTime
+            // 
+            dtp_choseTime.BackColor = Color.White;
+            dtp_choseTime.BorderRadius = 10;
+            dtp_choseTime.Checked = true;
+            dtp_choseTime.CustomizableEdges = customizableEdges47;
+            dtp_choseTime.Dock = DockStyle.Right;
+            dtp_choseTime.FillColor = Color.FromArgb(248, 9, 9);
+            dtp_choseTime.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dtp_choseTime.ForeColor = Color.White;
+            dtp_choseTime.Format = DateTimePickerFormat.Custom;
+            dtp_choseTime.Location = new Point(730, 0);
+            dtp_choseTime.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            dtp_choseTime.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            dtp_choseTime.Name = "dtp_choseTime";
+            dtp_choseTime.ShadowDecoration.CustomizableEdges = customizableEdges48;
+            dtp_choseTime.Size = new Size(224, 55);
+            dtp_choseTime.TabIndex = 4;
+            dtp_choseTime.Value = new DateTime(2023, 5, 3, 14, 32, 17, 219);
+            // 
+            // btn_printStatic
+            // 
+            btn_printStatic.BackColor = Color.White;
+            btn_printStatic.BorderRadius = 10;
+            btn_printStatic.CustomizableEdges = customizableEdges49;
+            btn_printStatic.DisabledState.BorderColor = Color.DarkGray;
+            btn_printStatic.DisabledState.CustomBorderColor = Color.DarkGray;
+            btn_printStatic.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btn_printStatic.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btn_printStatic.Dock = DockStyle.Left;
+            btn_printStatic.FillColor = Color.FromArgb(248, 9, 9);
+            btn_printStatic.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_printStatic.ForeColor = Color.White;
+            btn_printStatic.Location = new Point(0, 0);
+            btn_printStatic.Name = "btn_printStatic";
+            btn_printStatic.ShadowDecoration.CustomizableEdges = customizableEdges50;
+            btn_printStatic.Size = new Size(225, 55);
+            btn_printStatic.TabIndex = 3;
+            btn_printStatic.Text = "In số liệu thống kê";
             // 
             // pn_homepage
             // 
@@ -1399,17 +1410,6 @@
             pictureBox3.TabIndex = 0;
             pictureBox3.TabStop = false;
             // 
-            // panel6
-            // 
-            panel6.BackColor = Color.White;
-            panel6.Controls.Add(dtp_choseTime);
-            panel6.Controls.Add(btn_printStatic);
-            panel6.Dock = DockStyle.Top;
-            panel6.Location = new Point(20, 20);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(954, 55);
-            panel6.TabIndex = 5;
-            // 
             // AdminForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -1439,6 +1439,7 @@
             ((System.ComponentModel.ISupportInitialize)dgv_mngClient).EndInit();
             pn_staticPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgv_staticByMonth).EndInit();
+            panel6.ResumeLayout(false);
             pn_homepage.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
@@ -1452,7 +1453,6 @@
             guna2Panel1.ResumeLayout(false);
             guna2Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            panel6.ResumeLayout(false);
             ResumeLayout(false);
         }
 
