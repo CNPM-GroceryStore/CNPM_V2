@@ -102,7 +102,7 @@ CREATE TABLE OrderHistory(
 	FOREIGN KEY (idUser) REFERENCES NhanVien(numberPhone)
 )
 
-GO
+GO	
 
 
 -- Tạo stored procedure để kiểm tra tài khoản đăng nhập
@@ -377,7 +377,8 @@ go
 create PROCEDURE getRecentOrder
 AS
 BEGIN
-	SELECT TOP 5 id as 'ID', price as 'Giá', amount as 'Số lượng', paymethod as 'Phương thức thanh toán', status as 'Trạng thái', paydate as 'Ngày thanh toán' FROM OrderHistory ORDER BY paydate
+	SELECT TOP 5 id as 'ID', price as 'Giá', amount as 'Số lượng', paymethod as 'Phương thức thanh toán', status as 'Trạng thái', paydate as 'Ngày thanh toán' 
+	FROM OrderHistory ORDER BY paydate DESC
 END
 go
 
@@ -492,7 +493,7 @@ BEGIN
 END
 go
 
--- procedure Check account user exist 
+-- procedure Check account user exist		
 create PROCEDURE checkAccount
 	@numberPhone varchar(255),
 	@password varchar(255)
@@ -603,14 +604,14 @@ END
 go
 
 --get orders by month
-CREATE PROCEDURE getOrdersByMonth
+CREATE PROCEDURE getOrdersByMonth	
 @month int
 AS 
 BEGIN
-	SELECT SUM(price) as 'Giá', SUM(amount) as 'Số lượng', paydate as 'Ngày thanh toán' 
-	FROM OrderHistory
-	WHERE MONTH(paydate) = @month
-	GROUP BY paydate
+	SELECT name as N'Nhân viên', SUM(price) as 'Tổng tiền', SUM(amount) as 'Số lượng', paydate as 'Ngày thanh toán' 
+	FROM OrderHistory, NhanVien
+	WHERE MONTH(paydate) = @month AND numberPhone = idUser
+	GROUP BY paydate, name
 END	
 GO
 
