@@ -109,7 +109,7 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Properties.Resources.logo_home;
+            pictureBox1.Image = Properties.Resources.logoCricleK2;
             pictureBox1.Location = new Point(6, 0);
             pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";

@@ -32,6 +32,7 @@
             panel1 = new Panel();
             pictureBox1 = new PictureBox();
             panel2 = new Panel();
+            lb_error = new Label();
             tb_address = new TextBox();
             panel8 = new Panel();
             label5 = new Label();
@@ -53,7 +54,6 @@
             lb_sdt = new Label();
             pictureBox2 = new PictureBox();
             errorRegister = new ErrorProvider(components);
-            lb_error = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
@@ -66,14 +66,16 @@
             panel1.BackColor = Color.White;
             panel1.Controls.Add(pictureBox1);
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(564, 730);
+            panel1.Size = new Size(645, 973);
             panel1.TabIndex = 0;
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Properties.Resources.logo;
-            pictureBox1.Location = new Point(20, 102);
+            pictureBox1.Image = Properties.Resources.logoCricleK;
+            pictureBox1.Location = new Point(23, 136);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(512, 512);
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -104,29 +106,42 @@
             panel2.Controls.Add(panel3);
             panel2.Controls.Add(lb_sdt);
             panel2.Controls.Add(pictureBox2);
-            panel2.Location = new Point(564, 0);
+            panel2.Location = new Point(645, 0);
+            panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(516, 730);
+            panel2.Size = new Size(590, 973);
             panel2.TabIndex = 1;
+            // 
+            // lb_error
+            // 
+            lb_error.AutoSize = true;
+            lb_error.Font = new Font("Courier New", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_error.ForeColor = Color.Red;
+            lb_error.Location = new Point(95, 799);
+            lb_error.Name = "lb_error";
+            lb_error.Size = new Size(0, 17);
+            lb_error.TabIndex = 29;
             // 
             // tb_address
             // 
             tb_address.BackColor = Color.White;
             tb_address.BorderStyle = BorderStyle.None;
             tb_address.Font = new Font("Courier New", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_address.Location = new Point(83, 411);
+            tb_address.Location = new Point(95, 548);
+            tb_address.Margin = new Padding(3, 4, 3, 4);
             tb_address.Multiline = true;
             tb_address.Name = "tb_address";
-            tb_address.Size = new Size(347, 25);
+            tb_address.Size = new Size(397, 33);
             tb_address.TabIndex = 28;
             tb_address.TextChanged += tb_address_TextChanged;
             // 
             // panel8
             // 
             panel8.BackColor = Color.FromArgb(248, 9, 9);
-            panel8.Location = new Point(83, 439);
+            panel8.Location = new Point(95, 585);
+            panel8.Margin = new Padding(3, 4, 3, 4);
             panel8.Name = "panel8";
-            panel8.Size = new Size(347, 1);
+            panel8.Size = new Size(397, 1);
             panel8.TabIndex = 27;
             // 
             // label5
@@ -134,9 +149,9 @@
             label5.AutoSize = true;
             label5.Font = new Font("Courier New", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label5.ForeColor = Color.FromArgb(248, 9, 9);
-            label5.Location = new Point(81, 379);
+            label5.Location = new Point(93, 505);
             label5.Name = "label5";
-            label5.Size = new Size(78, 18);
+            label5.Size = new Size(94, 22);
             label5.TabIndex = 26;
             label5.Text = "Địa chỉ";
             // 
@@ -151,9 +166,10 @@
             btn_register.FlatStyle = FlatStyle.Flat;
             btn_register.Font = new Font("Courier New", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             btn_register.ForeColor = Color.White;
-            btn_register.Location = new Point(81, 628);
+            btn_register.Location = new Point(93, 837);
+            btn_register.Margin = new Padding(3, 4, 3, 4);
             btn_register.Name = "btn_register";
-            btn_register.Size = new Size(347, 55);
+            btn_register.Size = new Size(397, 73);
             btn_register.TabIndex = 25;
             btn_register.Text = "Đăng kí";
             btn_register.TextColor = Color.White;
@@ -165,20 +181,22 @@
             tb_confirmPassword.BackColor = Color.White;
             tb_confirmPassword.BorderStyle = BorderStyle.None;
             tb_confirmPassword.Font = new Font("Courier New", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_confirmPassword.Location = new Point(83, 561);
+            tb_confirmPassword.Location = new Point(95, 748);
+            tb_confirmPassword.Margin = new Padding(3, 4, 3, 4);
             tb_confirmPassword.Multiline = true;
             tb_confirmPassword.Name = "tb_confirmPassword";
             tb_confirmPassword.PasswordChar = '*';
-            tb_confirmPassword.Size = new Size(347, 25);
+            tb_confirmPassword.Size = new Size(397, 33);
             tb_confirmPassword.TabIndex = 24;
             tb_confirmPassword.TextChanged += tb_confirmPassword_TextChanged;
             // 
             // panel7
             // 
             panel7.BackColor = Color.FromArgb(248, 9, 9);
-            panel7.Location = new Point(83, 589);
+            panel7.Location = new Point(95, 785);
+            panel7.Margin = new Padding(3, 4, 3, 4);
             panel7.Name = "panel7";
-            panel7.Size = new Size(347, 1);
+            panel7.Size = new Size(397, 1);
             panel7.TabIndex = 23;
             // 
             // label4
@@ -186,9 +204,9 @@
             label4.AutoSize = true;
             label4.Font = new Font("Courier New", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label4.ForeColor = Color.FromArgb(248, 9, 9);
-            label4.Location = new Point(81, 529);
+            label4.Location = new Point(93, 705);
             label4.Name = "label4";
-            label4.Size = new Size(178, 18);
+            label4.Size = new Size(214, 22);
             label4.TabIndex = 22;
             label4.Text = "Nhập lại mật khẩu";
             // 
@@ -197,20 +215,22 @@
             tb_password.BackColor = Color.White;
             tb_password.BorderStyle = BorderStyle.None;
             tb_password.Font = new Font("Courier New", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_password.Location = new Point(83, 485);
+            tb_password.Location = new Point(95, 647);
+            tb_password.Margin = new Padding(3, 4, 3, 4);
             tb_password.Multiline = true;
             tb_password.Name = "tb_password";
             tb_password.PasswordChar = '*';
-            tb_password.Size = new Size(347, 25);
+            tb_password.Size = new Size(397, 33);
             tb_password.TabIndex = 21;
             tb_password.TextChanged += tb_password_TextChanged;
             // 
             // panel6
             // 
             panel6.BackColor = Color.FromArgb(248, 9, 9);
-            panel6.Location = new Point(83, 513);
+            panel6.Location = new Point(95, 684);
+            panel6.Margin = new Padding(3, 4, 3, 4);
             panel6.Name = "panel6";
-            panel6.Size = new Size(347, 1);
+            panel6.Size = new Size(397, 1);
             panel6.TabIndex = 20;
             // 
             // label3
@@ -218,9 +238,9 @@
             label3.AutoSize = true;
             label3.Font = new Font("Courier New", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label3.ForeColor = Color.FromArgb(248, 9, 9);
-            label3.Location = new Point(81, 453);
+            label3.Location = new Point(93, 604);
             label3.Name = "label3";
-            label3.Size = new Size(138, 18);
+            label3.Size = new Size(166, 22);
             label3.TabIndex = 19;
             label3.Text = "Nhập mật khẩu";
             // 
@@ -229,19 +249,21 @@
             tb_name.BackColor = Color.White;
             tb_name.BorderStyle = BorderStyle.None;
             tb_name.Font = new Font("Courier New", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_name.Location = new Point(83, 330);
+            tb_name.Location = new Point(95, 440);
+            tb_name.Margin = new Padding(3, 4, 3, 4);
             tb_name.Multiline = true;
             tb_name.Name = "tb_name";
-            tb_name.Size = new Size(347, 25);
+            tb_name.Size = new Size(397, 33);
             tb_name.TabIndex = 18;
             tb_name.TextChanged += tb_name_TextChanged;
             // 
             // panel5
             // 
             panel5.BackColor = Color.FromArgb(248, 9, 9);
-            panel5.Location = new Point(83, 358);
+            panel5.Location = new Point(95, 477);
+            panel5.Margin = new Padding(3, 4, 3, 4);
             panel5.Name = "panel5";
-            panel5.Size = new Size(347, 1);
+            panel5.Size = new Size(397, 1);
             panel5.TabIndex = 17;
             // 
             // label2
@@ -249,9 +271,9 @@
             label2.AutoSize = true;
             label2.Font = new Font("Courier New", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label2.ForeColor = Color.FromArgb(248, 9, 9);
-            label2.Location = new Point(81, 298);
+            label2.Location = new Point(93, 397);
             label2.Name = "label2";
-            label2.Size = new Size(98, 18);
+            label2.Size = new Size(118, 22);
             label2.TabIndex = 16;
             label2.Text = "Họ và tên";
             // 
@@ -260,19 +282,21 @@
             tb_email.BackColor = Color.White;
             tb_email.BorderStyle = BorderStyle.None;
             tb_email.Font = new Font("Courier New", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_email.Location = new Point(83, 254);
+            tb_email.Location = new Point(95, 339);
+            tb_email.Margin = new Padding(3, 4, 3, 4);
             tb_email.Multiline = true;
             tb_email.Name = "tb_email";
-            tb_email.Size = new Size(347, 25);
+            tb_email.Size = new Size(397, 33);
             tb_email.TabIndex = 15;
             tb_email.TextChanged += tb_email_TextChanged;
             // 
             // panel4
             // 
             panel4.BackColor = Color.FromArgb(248, 9, 9);
-            panel4.Location = new Point(83, 282);
+            panel4.Location = new Point(95, 376);
+            panel4.Margin = new Padding(3, 4, 3, 4);
             panel4.Name = "panel4";
-            panel4.Size = new Size(347, 1);
+            panel4.Size = new Size(397, 1);
             panel4.TabIndex = 14;
             // 
             // label1
@@ -280,9 +304,9 @@
             label1.AutoSize = true;
             label1.Font = new Font("Courier New", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.FromArgb(248, 9, 9);
-            label1.Location = new Point(81, 222);
+            label1.Location = new Point(93, 296);
             label1.Name = "label1";
-            label1.Size = new Size(58, 18);
+            label1.Size = new Size(70, 22);
             label1.TabIndex = 13;
             label1.Text = "Email";
             // 
@@ -291,19 +315,21 @@
             tb_sdt.BackColor = Color.White;
             tb_sdt.BorderStyle = BorderStyle.None;
             tb_sdt.Font = new Font("Courier New", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_sdt.Location = new Point(83, 180);
+            tb_sdt.Location = new Point(95, 240);
+            tb_sdt.Margin = new Padding(3, 4, 3, 4);
             tb_sdt.Multiline = true;
             tb_sdt.Name = "tb_sdt";
-            tb_sdt.Size = new Size(347, 25);
+            tb_sdt.Size = new Size(397, 33);
             tb_sdt.TabIndex = 12;
             tb_sdt.TextChanged += tb_sdt_TextChanged;
             // 
             // panel3
             // 
             panel3.BackColor = Color.FromArgb(248, 9, 9);
-            panel3.Location = new Point(83, 208);
+            panel3.Location = new Point(95, 277);
+            panel3.Margin = new Padding(3, 4, 3, 4);
             panel3.Name = "panel3";
-            panel3.Size = new Size(347, 1);
+            panel3.Size = new Size(397, 1);
             panel3.TabIndex = 9;
             // 
             // lb_sdt
@@ -311,16 +337,17 @@
             lb_sdt.AutoSize = true;
             lb_sdt.Font = new Font("Courier New", 12F, FontStyle.Regular, GraphicsUnit.Point);
             lb_sdt.ForeColor = Color.FromArgb(248, 9, 9);
-            lb_sdt.Location = new Point(81, 148);
+            lb_sdt.Location = new Point(93, 197);
             lb_sdt.Name = "lb_sdt";
-            lb_sdt.Size = new Size(138, 18);
+            lb_sdt.Size = new Size(166, 22);
             lb_sdt.TabIndex = 8;
             lb_sdt.Text = "Số điện thoại";
             // 
             // pictureBox2
             // 
             pictureBox2.Image = Properties.Resources.signup;
-            pictureBox2.Location = new Point(81, 0);
+            pictureBox2.Location = new Point(93, 0);
+            pictureBox2.Margin = new Padding(3, 4, 3, 4);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(128, 128);
             pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -331,24 +358,15 @@
             // 
             errorRegister.ContainerControl = this;
             // 
-            // lb_error
-            // 
-            lb_error.AutoSize = true;
-            lb_error.Font = new Font("Courier New", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_error.ForeColor = Color.Red;
-            lb_error.Location = new Point(83, 599);
-            lb_error.Name = "lb_error";
-            lb_error.Size = new Size(0, 16);
-            lb_error.TabIndex = 29;
-            // 
             // RegisterForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1064, 691);
+            ClientSize = new Size(1216, 921);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            MinimumSize = new Size(1080, 730);
+            Margin = new Padding(3, 4, 3, 4);
+            MinimumSize = new Size(1232, 958);
             Name = "RegisterForm";
             Text = "Đăng kí";
             panel1.ResumeLayout(false);

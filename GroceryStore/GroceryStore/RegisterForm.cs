@@ -148,7 +148,7 @@ namespace GroceryStore
             }
             else
             {
-                if(Connect())
+                if (Connect())
                 {
                     MessageBox.Show("Đăng kí thành công");
                     this.Hide();
@@ -159,7 +159,7 @@ namespace GroceryStore
                 {
                     lb_error.Text = "Đăng kí thất bại, vui lòng kiểm tra lại thông tin.";
                 }
-                
+
             }
         }
 

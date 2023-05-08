@@ -59,7 +59,7 @@ namespace GroceryStore
 
         private void btn_login_Click(object sender, EventArgs e)
         {
-            if(tb_sdt.Text == "admin" && tb_password.Text == "admin")
+            if (tb_sdt.Text == "admin" && tb_password.Text == "admin")
             {
                 this.Hide();
                 AdminForm adminForm = new AdminForm();

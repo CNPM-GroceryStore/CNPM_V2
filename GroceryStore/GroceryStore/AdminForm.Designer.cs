@@ -426,11 +426,11 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Properties.Resources.logo_home;
-            pictureBox1.Location = new Point(36, 4);
+            pictureBox1.Image = Properties.Resources.logoCricleK3;
+            pictureBox1.Location = new Point(28, 4);
             pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(114, 133);
+            pictureBox1.Size = new Size(133, 133);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -471,6 +471,7 @@
             // 
             // dgv_mngStaff
             // 
+            dgv_mngStaff.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = Color.White;
             dgv_mngStaff.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -540,6 +541,7 @@
             // 
             // dgv_mgmProduct
             // 
+            dgv_mgmProduct.AllowUserToResizeRows = false;
             dataGridViewCellStyle4.BackColor = Color.White;
             dgv_mgmProduct.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -683,6 +685,7 @@
             // 
             // dgv_supplier
             // 
+            dgv_supplier.AllowUserToResizeRows = false;
             dataGridViewCellStyle7.BackColor = Color.White;
             dgv_supplier.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -751,6 +754,7 @@
             // 
             // dgv_mngClient
             // 
+            dgv_mngClient.AllowUserToResizeRows = false;
             dataGridViewCellStyle10.BackColor = Color.White;
             dgv_mngClient.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
             dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -821,6 +825,7 @@
             // 
             // dgv_staticByMonth
             // 
+            dgv_staticByMonth.AllowUserToResizeRows = false;
             dataGridViewCellStyle13.BackColor = Color.White;
             dgv_staticByMonth.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
             dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -943,6 +948,7 @@
             // 
             // dgv_orders
             // 
+            dgv_orders.AllowUserToResizeRows = false;
             dataGridViewCellStyle16.BackColor = Color.White;
             dgv_orders.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
             dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -1519,6 +1525,7 @@
             // 
             // dgv_order
             // 
+            dgv_order.AllowUserToResizeRows = false;
             dataGridViewCellStyle19.BackColor = Color.White;
             dgv_order.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle19;
             dataGridViewCellStyle20.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -1699,9 +1706,9 @@
             lb_nameUser2.ForeColor = Color.Black;
             lb_nameUser2.Location = new Point(94, 27);
             lb_nameUser2.Name = "lb_nameUser2";
-            lb_nameUser2.Size = new Size(92, 25);
+            lb_nameUser2.Size = new Size(69, 25);
             lb_nameUser2.TabIndex = 1;
-            lb_nameUser2.Text = "Hợp Kiên";
+            lb_nameUser2.Text = "Admin";
             // 
             // pictureBox3
             // 
