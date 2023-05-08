@@ -11,9 +11,9 @@ namespace DAO
     public class DAO_Staff
     {
         #region 1. show all info of staff
-        public DataTable showAllStaff()
+        public DataTable getAllStaff()
         {
-            string statement = "showAllStaff";
+            string statement = "getAllStaff";
             return DataProvider.Instance.ExecuteStoredProcedureSelect(statement);
         }
         #endregion

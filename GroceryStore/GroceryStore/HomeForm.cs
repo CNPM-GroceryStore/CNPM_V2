@@ -228,19 +228,6 @@ namespace GroceryStore
             }
         }
 
-        //Go to admin form
-        private void btn_settings_Click(object sender, EventArgs e)
-        {
-            Form adminForm = new AdminForm();
-            adminForm.Show();
-            this.Hide();
-        }
-
-
-
-        //Load product by name
-
-
         //add click event for btn in navigation
         //home page
         private void btn_home_Click(object sender, EventArgs e)
@@ -718,7 +705,7 @@ namespace GroceryStore
             g.DrawString("HÓA ĐƠN BÁN HÀNG", new Font("Arial", 18), brush, startX + 200, startY);
 
             // Vẽ thông tin khách hàng
-            if(user != null)
+            if (user != null)
             {
                 g.DrawString("Khách hàng: " + user.NameUser, font, brush, startX, startY + offset);
                 offset += 20;
@@ -726,7 +713,7 @@ namespace GroceryStore
 
             // Vẽ thông tin sản phẩm
             g.DrawString("Tên sản phẩm", boldFont, brush, startX + 50, startY + offset);
-            g.DrawString("Số lượng" , boldFont, brush, startX + 300, startY + offset);
+            g.DrawString("Số lượng", boldFont, brush, startX + 300, startY + offset);
             g.DrawString("Giá", boldFont, brush, startX + 450, startY + offset);
             g.DrawString("Thành tiền", boldFont, brush, startX + 550, startY + offset);
             offset += 20;

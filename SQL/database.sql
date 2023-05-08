@@ -624,7 +624,13 @@ BEGIN
 END
 GO
 
-
+--Get all staff
+CREATE PROCEDURE getAllStaff
+AS 
+BEGIN
+	SELECT numberPhone as N'Số điện thoại', Email, name as N'Họ tên', address as N'Địa chỉ' FROM NhanVien
+END 
+GO
 
 -- Thêm dữ liệu vào bảng NhanVien
 INSERT INTO NhanVien (numberPhone, Email, name, address, password)

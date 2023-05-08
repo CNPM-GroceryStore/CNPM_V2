@@ -191,7 +191,6 @@ namespace GroceryStore
                         mgmProductPage_Click(sender, e);
                     }
                     string filePath = @"..\\..\\..\\Resources\Product\" + currentRow.Cells[5].Value + "\\" + currentRow.Cells[4].Value;
-                    MessageBox.Show(filePath);
                     if (File.Exists(filePath)) // kiểm tra xem file có tồn tại không
                     {
                         File.Delete(filePath); // xóa file nếu tồn tại
@@ -261,7 +260,6 @@ namespace GroceryStore
             {
                 BUS_Product bUS_Product = new BUS_Product();
                 DTO_Product product = new DTO_Product(selectedProduct.IdProduct, name, amount, price, image, type, shipment, shelflife);
-                MessageBox.Show(product.NameProduct);
                 bUS_Product.updateProduct(product);
                 MessageBox.Show("Sửa sản phẩm thành công");
             }
@@ -346,7 +344,17 @@ namespace GroceryStore
 
         //------------------------------------------------------------------------------------------------------------
 
-        //Go to managing client page
+        //Go to managing staffs page
+        private void btn_mngStaff_Click(object sender, EventArgs e)
+        {
+            switchPage(sender, e, pn_mngStaff, btn_mngStaff, "Quản lí nhân viên");
+            BUS_Staff staffs = new BUS_Staff();
+            dgv_mngStaff.DataSource = staffs.getAllStaff();
+        }
+
+        //------------------------------------------------------------------------------------------------------------
+
+        //Go to managing clients page
         private void btn_mngClient_Click(object sender, EventArgs e)
         {
             switchPage(sender, e, pn_mngClient, btn_mngClient, "Quán lí khách hàng");
@@ -397,7 +405,6 @@ namespace GroceryStore
                 Row headerRow = new Row();
                 foreach (DataGridViewColumn column in dgv_staticByMonth.Columns)
                 {
-                    MessageBox.Show("column: " + column.HeaderText);
                     headerRow.AppendChild(new Cell(new CellValue(column.HeaderText)));
                 }
                 sheetData.AppendChild(headerRow);
@@ -408,9 +415,8 @@ namespace GroceryStore
                     Row dataRow = new Row();
                     foreach (DataGridViewCell cell in row.Cells)
                     {
-                        if(cell.Value != null)
+                        if (cell.Value != null)
                         {
-                            MessageBox.Show("Cell: " + cell.Value);
                             object value = cell.Value;
                             Cell cellObject;
                             if (value is DateTime)
@@ -419,7 +425,6 @@ namespace GroceryStore
                                 DateTime dateValue = (DateTime)value;
                                 // Chuyển đổi DateTime thành chuỗi với định dạng Excel mong đợi
                                 string stringValue = dateValue.ToString("MM/dd/yyyy");
-                                MessageBox.Show(stringValue);
                                 // Tạo đối tượng Cell với giá trị kiểu chuỗi
                                 cellObject = new Cell(new CellValue(stringValue));
                             }
@@ -438,7 +443,5 @@ namespace GroceryStore
                 worksheetPart.Worksheet.Save();
             }
         }
-
-
     }
 }
