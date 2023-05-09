@@ -146,8 +146,8 @@ GO
 CREATE PROCEDURE InsertNhanVien
     @numberPhone nvarchar(50),
     @Email nvarchar(50),
-    @HoTen nvarchar(50),
-    @DiaChi nvarchar(50),
+    @HoTen nvarchar(255),
+    @DiaChi nvarchar(255),
     @password nvarchar(50)
 AS
 BEGIN
@@ -450,7 +450,7 @@ go
 
 -- procedure create account for user 
 create PROCEDURE registerAccount
-@Phone varchar(255), @Email varchar(255), @Name varchar(255), @Address varchar(255), @Password varchar(255)
+@Phone varchar(255), @Email varchar(255), @Name nvarchar(255), @Address nvarchar(255), @Password varchar(255)
 AS
 BEGIN
 	INSERT INTO NhanVien (numberPhone, Email, name, address, password) VALUES ( @Phone , @Email , @Name , @Address , @Password )
