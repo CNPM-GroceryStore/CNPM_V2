@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class Supplier
+    public class DTO_Supplier
     {
         public string ID { get; set; }
         public string Name { get; set; }
@@ -14,7 +14,7 @@ namespace DTO
         public string Address { get; set; }
         public int TransactionNumber { get; set; }
 
-        public Supplier(string name, string phoneNumber, string address)
+        public DTO_Supplier(string name, string phoneNumber, string address)
         {
             Name = name;
             PhoneNumber = phoneNumber;

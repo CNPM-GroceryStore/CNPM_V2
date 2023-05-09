@@ -59,22 +59,15 @@
             btn_voucher = new Guna.UI2.WinForms.Guna2GradientTileButton();
             pn_choice = new Panel();
             guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            panel9 = new Panel();
+            tb_search = new TextBox();
+            btn_search = new PictureBox();
+            panel8 = new Panel();
+            label1 = new Label();
+            lb_nameUser1 = new Label();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             lb_nameUser2 = new Label();
             pictureBox3 = new PictureBox();
-            btn_search = new PictureBox();
-            tb_search = new TextBox();
-            lb_nameUser1 = new Label();
-            label1 = new Label();
-            panel2 = new Panel();
-            lbl_username = new MetroSet_UI.Controls.MetroSetLabel();
-            DiemTichLuy = new DiemTichLuy();
-            lb_phoBien = new Label();
-            lb_danhMucPhu = new Label();
-            pb_muiTen = new PictureBox();
-            lb_tatCa = new Label();
-            lb_chonDanhMuc = new Label();
-            flowLayout = new FlowLayoutPanel();
             flowpanel_order_history = new FlowLayoutPanel();
             panel3 = new Panel();
             flowLayoutItemOder = new FlowLayoutPanel();
@@ -90,14 +83,24 @@
             lb_oder = new Label();
             pictureBox7 = new PictureBox();
             pictureBox6 = new PictureBox();
+            panel2 = new Panel();
+            flowLayout = new FlowLayoutPanel();
+            panel7 = new Panel();
+            DiemTichLuy = new DiemTichLuy();
+            lbl_username = new MetroSet_UI.Controls.MetroSetLabel();
+            lb_phoBien = new Label();
+            lb_tatCa = new Label();
+            pb_muiTen = new PictureBox();
+            panel5 = new Panel();
+            panel6 = new Panel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             guna2ShadowPanel1.SuspendLayout();
+            panel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)btn_search).BeginInit();
+            panel8.SuspendLayout();
             guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)btn_search).BeginInit();
-            panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pb_muiTen).BeginInit();
             panel3.SuspendLayout();
             guna2Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox9).BeginInit();
@@ -105,6 +108,11 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
+            panel2.SuspendLayout();
+            panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pb_muiTen).BeginInit();
+            panel5.SuspendLayout();
+            panel6.SuspendLayout();
             SuspendLayout();
             // 
             // pictureBox1
@@ -328,70 +336,51 @@
             // 
             // guna2ShadowPanel1
             // 
-            guna2ShadowPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             guna2ShadowPanel1.BackColor = Color.Transparent;
+            guna2ShadowPanel1.Controls.Add(panel9);
+            guna2ShadowPanel1.Controls.Add(panel8);
             guna2ShadowPanel1.Controls.Add(guna2Panel1);
-            guna2ShadowPanel1.Controls.Add(btn_search);
-            guna2ShadowPanel1.Controls.Add(tb_search);
-            guna2ShadowPanel1.Controls.Add(lb_nameUser1);
-            guna2ShadowPanel1.Controls.Add(label1);
+            guna2ShadowPanel1.Dock = DockStyle.Top;
             guna2ShadowPanel1.FillColor = Color.White;
-            guna2ShadowPanel1.Location = new Point(161, 31);
+            guna2ShadowPanel1.Location = new Point(0, 0);
             guna2ShadowPanel1.Margin = new Padding(3, 4, 3, 4);
             guna2ShadowPanel1.Name = "guna2ShadowPanel1";
+            guna2ShadowPanel1.Padding = new Padding(20);
             guna2ShadowPanel1.Radius = 20;
             guna2ShadowPanel1.ShadowColor = Color.Black;
-            guna2ShadowPanel1.Size = new Size(998, 136);
+            guna2ShadowPanel1.Size = new Size(1087, 136);
             guna2ShadowPanel1.TabIndex = 6;
             // 
-            // guna2Panel1
+            // panel9
             // 
-            guna2Panel1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            guna2Panel1.AutoRoundedCorners = true;
-            guna2Panel1.BackColor = Color.White;
-            guna2Panel1.BorderColor = Color.FromArgb(248, 9, 9);
-            guna2Panel1.BorderRadius = 39;
-            guna2Panel1.BorderThickness = 1;
-            guna2Panel1.Controls.Add(lb_nameUser2);
-            guna2Panel1.Controls.Add(pictureBox3);
-            guna2Panel1.CustomBorderColor = Color.Red;
-            guna2Panel1.CustomizableEdges = customizableEdges15;
-            guna2Panel1.Location = new Point(758, 33);
-            guna2Panel1.Margin = new Padding(3, 4, 3, 4);
-            guna2Panel1.Name = "guna2Panel1";
-            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            guna2Panel1.Size = new Size(206, 80);
-            guna2Panel1.TabIndex = 10;
+            panel9.Controls.Add(tb_search);
+            panel9.Controls.Add(btn_search);
+            panel9.Dock = DockStyle.Fill;
+            panel9.Location = new Point(198, 20);
+            panel9.Name = "panel9";
+            panel9.Padding = new Padding(10);
+            panel9.Size = new Size(625, 96);
+            panel9.TabIndex = 12;
             // 
-            // lb_nameUser2
+            // tb_search
             // 
-            lb_nameUser2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lb_nameUser2.AutoSize = true;
-            lb_nameUser2.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_nameUser2.ForeColor = Color.Black;
-            lb_nameUser2.Location = new Point(81, 27);
-            lb_nameUser2.Name = "lb_nameUser2";
-            lb_nameUser2.Size = new Size(92, 25);
-            lb_nameUser2.TabIndex = 1;
-            lb_nameUser2.Text = "Hợp Kiên";
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            pictureBox3.Image = Properties.Resources.user2;
-            pictureBox3.Location = new Point(17, 11);
-            pictureBox3.Margin = new Padding(3, 4, 3, 4);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(53, 61);
-            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.TabIndex = 0;
-            pictureBox3.TabStop = false;
+            tb_search.Anchor = AnchorStyles.None;
+            tb_search.BackColor = Color.White;
+            tb_search.BorderStyle = BorderStyle.None;
+            tb_search.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_search.ForeColor = Color.Black;
+            tb_search.Location = new Point(248, 32);
+            tb_search.Margin = new Padding(3, 4, 3, 4);
+            tb_search.Name = "tb_search";
+            tb_search.PlaceholderText = "Tìm kiếm sản phẩm";
+            tb_search.Size = new Size(260, 25);
+            tb_search.TabIndex = 2;
             // 
             // btn_search
             // 
-            btn_search.Anchor = AnchorStyles.Top;
+            btn_search.Anchor = AnchorStyles.None;
             btn_search.Image = Properties.Resources.search;
-            btn_search.Location = new Point(359, 45);
+            btn_search.Location = new Point(210, 25);
             btn_search.Margin = new Padding(3, 4, 3, 4);
             btn_search.Name = "btn_search";
             btn_search.Size = new Size(32, 32);
@@ -400,163 +389,94 @@
             btn_search.TabStop = false;
             btn_search.Click += btn_search_Click;
             // 
-            // tb_search
+            // panel8
             // 
-            tb_search.Anchor = AnchorStyles.Top;
-            tb_search.BackColor = Color.White;
-            tb_search.BorderStyle = BorderStyle.None;
-            tb_search.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_search.ForeColor = Color.Black;
-            tb_search.Location = new Point(402, 52);
-            tb_search.Margin = new Padding(3, 4, 3, 4);
-            tb_search.Name = "tb_search";
-            tb_search.PlaceholderText = "Tìm kiếm sản phẩm";
-            tb_search.Size = new Size(171, 25);
-            tb_search.TabIndex = 2;
-            // 
-            // lb_nameUser1
-            // 
-            lb_nameUser1.AutoSize = true;
-            lb_nameUser1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_nameUser1.Location = new Point(73, 61);
-            lb_nameUser1.Name = "lb_nameUser1";
-            lb_nameUser1.Size = new Size(120, 32);
-            lb_nameUser1.TabIndex = 1;
-            lb_nameUser1.Text = "Hợp Kiên";
+            panel8.Controls.Add(label1);
+            panel8.Controls.Add(lb_nameUser1);
+            panel8.Dock = DockStyle.Left;
+            panel8.Location = new Point(20, 20);
+            panel8.Name = "panel8";
+            panel8.Size = new Size(178, 96);
+            panel8.TabIndex = 11;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(73, 33);
+            label1.Location = new Point(32, 16);
             label1.Name = "label1";
             label1.Size = new Size(91, 28);
             label1.TabIndex = 0;
             label1.Text = "Xin chào,";
             // 
-            // panel2
+            // lb_nameUser1
             // 
-            panel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel2.BackColor = SystemColors.Control;
-            panel2.Controls.Add(lbl_username);
-            panel2.Controls.Add(DiemTichLuy);
-            panel2.Controls.Add(lb_phoBien);
-            panel2.Controls.Add(lb_danhMucPhu);
-            panel2.Controls.Add(pb_muiTen);
-            panel2.Controls.Add(lb_tatCa);
-            panel2.Controls.Add(lb_chonDanhMuc);
-            panel2.Controls.Add(flowLayout);
-            panel2.Location = new Point(131, 171);
-            panel2.Margin = new Padding(3, 4, 3, 4);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(606, 675);
-            panel2.TabIndex = 7;
+            lb_nameUser1.AutoSize = true;
+            lb_nameUser1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_nameUser1.Location = new Point(32, 51);
+            lb_nameUser1.Name = "lb_nameUser1";
+            lb_nameUser1.Size = new Size(120, 32);
+            lb_nameUser1.TabIndex = 1;
+            lb_nameUser1.Text = "Hợp Kiên";
             // 
-            // lbl_username
+            // guna2Panel1
             // 
-            lbl_username.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            lbl_username.IsDerivedStyle = true;
-            lbl_username.Location = new Point(0, 0);
-            lbl_username.Name = "lbl_username";
-            lbl_username.Size = new Size(201, 36);
-            lbl_username.Style = MetroSet_UI.Enums.Style.Light;
-            lbl_username.StyleManager = null;
-            lbl_username.TabIndex = 7;
-            lbl_username.Text = "UserName";
-            lbl_username.ThemeAuthor = "Narwin";
-            lbl_username.ThemeName = "MetroLite";
-            lbl_username.Visible = false;
-            lbl_username.Click += lbl_username_Click;
+            guna2Panel1.AutoRoundedCorners = true;
+            guna2Panel1.BackColor = Color.White;
+            guna2Panel1.BorderColor = Color.FromArgb(248, 9, 9);
+            guna2Panel1.BorderRadius = 47;
+            guna2Panel1.BorderThickness = 1;
+            guna2Panel1.Controls.Add(lb_nameUser2);
+            guna2Panel1.Controls.Add(pictureBox3);
+            guna2Panel1.CustomBorderColor = Color.Red;
+            guna2Panel1.CustomizableEdges = customizableEdges15;
+            guna2Panel1.Dock = DockStyle.Right;
+            guna2Panel1.Location = new Point(823, 20);
+            guna2Panel1.Margin = new Padding(3, 4, 3, 4);
+            guna2Panel1.Name = "guna2Panel1";
+            guna2Panel1.Padding = new Padding(20);
+            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            guna2Panel1.Size = new Size(244, 96);
+            guna2Panel1.TabIndex = 10;
             // 
-            // DiemTichLuy
+            // lb_nameUser2
             // 
-            DiemTichLuy.BackColor = Color.Transparent;
-            DiemTichLuy.Location = new Point(421, 45);
-            DiemTichLuy.Name = "DiemTichLuy";
-            DiemTichLuy.Point = 0;
-            DiemTichLuy.Size = new Size(181, 23);
-            DiemTichLuy.TabIndex = 6;
-            DiemTichLuy.Visible = false;
+            lb_nameUser2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lb_nameUser2.AutoEllipsis = true;
+            lb_nameUser2.AutoSize = true;
+            lb_nameUser2.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_nameUser2.ForeColor = Color.Black;
+            lb_nameUser2.Location = new Point(79, 32);
+            lb_nameUser2.Name = "lb_nameUser2";
+            lb_nameUser2.Size = new Size(153, 25);
+            lb_nameUser2.TabIndex = 1;
+            lb_nameUser2.Text = "Nguyễn Hữu Tín";
             // 
-            // lb_phoBien
+            // pictureBox3
             // 
-            lb_phoBien.AutoSize = true;
-            lb_phoBien.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_phoBien.ForeColor = Color.Black;
-            lb_phoBien.Location = new Point(233, 40);
-            lb_phoBien.Name = "lb_phoBien";
-            lb_phoBien.Size = new Size(95, 28);
-            lb_phoBien.TabIndex = 4;
-            lb_phoBien.Text = "Phổ biến";
-            // 
-            // lb_danhMucPhu
-            // 
-            lb_danhMucPhu.AutoSize = true;
-            lb_danhMucPhu.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lb_danhMucPhu.ForeColor = Color.FromArgb(80, 77, 77);
-            lb_danhMucPhu.Location = new Point(233, 0);
-            lb_danhMucPhu.Name = "lb_danhMucPhu";
-            lb_danhMucPhu.Size = new Size(139, 28);
-            lb_danhMucPhu.TabIndex = 3;
-            lb_danhMucPhu.Text = "Danh mục phụ";
-            // 
-            // pb_muiTen
-            // 
-            pb_muiTen.Image = Properties.Resources.next;
-            pb_muiTen.Location = new Point(178, 40);
-            pb_muiTen.Margin = new Padding(3, 4, 3, 4);
-            pb_muiTen.Name = "pb_muiTen";
-            pb_muiTen.Size = new Size(23, 27);
-            pb_muiTen.SizeMode = PictureBoxSizeMode.Zoom;
-            pb_muiTen.TabIndex = 2;
-            pb_muiTen.TabStop = false;
-            // 
-            // lb_tatCa
-            // 
-            lb_tatCa.AutoSize = true;
-            lb_tatCa.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_tatCa.ForeColor = Color.Black;
-            lb_tatCa.Location = new Point(34, 40);
-            lb_tatCa.Name = "lb_tatCa";
-            lb_tatCa.Size = new Size(70, 28);
-            lb_tatCa.TabIndex = 1;
-            lb_tatCa.Text = "Tất cả";
-            // 
-            // lb_chonDanhMuc
-            // 
-            lb_chonDanhMuc.AutoSize = true;
-            lb_chonDanhMuc.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lb_chonDanhMuc.ForeColor = Color.FromArgb(80, 77, 77);
-            lb_chonDanhMuc.Location = new Point(34, 0);
-            lb_chonDanhMuc.Name = "lb_chonDanhMuc";
-            lb_chonDanhMuc.Size = new Size(149, 28);
-            lb_chonDanhMuc.TabIndex = 0;
-            lb_chonDanhMuc.Text = "Chọn danh mục";
-            // 
-            // flowLayout
-            // 
-            flowLayout.AutoScroll = true;
-            flowLayout.BackColor = SystemColors.Control;
-            flowLayout.Location = new Point(0, 75);
-            flowLayout.Margin = new Padding(3, 4, 3, 4);
-            flowLayout.Name = "flowLayout";
-            flowLayout.Size = new Size(603, 600);
-            flowLayout.TabIndex = 5;
-            flowLayout.Paint += flowLayout_Paint;
+            pictureBox3.Dock = DockStyle.Left;
+            pictureBox3.Image = Properties.Resources.user2;
+            pictureBox3.Location = new Point(20, 20);
+            pictureBox3.Margin = new Padding(3, 4, 3, 4);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(53, 56);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 0;
+            pictureBox3.TabStop = false;
             // 
             // flowpanel_order_history
             // 
             flowpanel_order_history.AutoScroll = true;
             flowpanel_order_history.BackColor = SystemColors.Control;
-            flowpanel_order_history.Location = new Point(8, 181);
+            flowpanel_order_history.Dock = DockStyle.Fill;
+            flowpanel_order_history.Location = new Point(0, 168);
             flowpanel_order_history.Name = "flowpanel_order_history";
-            flowpanel_order_history.Size = new Size(472, 501);
+            flowpanel_order_history.Size = new Size(478, 172);
             flowpanel_order_history.TabIndex = 5;
             flowpanel_order_history.Visible = false;
             // 
             // panel3
             // 
-            panel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             panel3.BackColor = SystemColors.Control;
             panel3.Controls.Add(flowpanel_order_history);
             panel3.Controls.Add(flowLayoutItemOder);
@@ -564,29 +484,32 @@
             panel3.Controls.Add(guna2Panel2);
             panel3.Controls.Add(cbb_payment);
             panel3.Controls.Add(panel4);
-            panel3.Location = new Point(738, 171);
+            panel3.Dock = DockStyle.Right;
+            panel3.Location = new Point(609, 0);
             panel3.Margin = new Padding(0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(478, 675);
+            panel3.Size = new Size(478, 709);
             panel3.TabIndex = 6;
             // 
             // flowLayoutItemOder
             // 
             flowLayoutItemOder.AutoScroll = true;
-            flowLayoutItemOder.Location = new Point(7, 181);
+            flowLayoutItemOder.Dock = DockStyle.Fill;
+            flowLayoutItemOder.Location = new Point(0, 168);
             flowLayoutItemOder.Margin = new Padding(3, 4, 3, 4);
             flowLayoutItemOder.Name = "flowLayoutItemOder";
-            flowLayoutItemOder.Size = new Size(469, 212);
+            flowLayoutItemOder.Size = new Size(478, 172);
             flowLayoutItemOder.TabIndex = 4;
             // 
             // ThanhToan
             // 
             ThanhToan.AutoSize = true;
             ThanhToan.DiemTichLuy = 0;
-            ThanhToan.Location = new Point(8, 397);
+            ThanhToan.Dock = DockStyle.Bottom;
+            ThanhToan.Location = new Point(0, 340);
             ThanhToan.Margin = new Padding(0);
             ThanhToan.Name = "ThanhToan";
-            ThanhToan.Size = new Size(458, 369);
+            ThanhToan.Size = new Size(478, 369);
             ThanhToan.TabIndex = 0;
             ThanhToan.TienThanhToan = 0;
             ThanhToan.TienVoucher = 0;
@@ -603,10 +526,11 @@
             guna2Panel2.Controls.Add(lb_paydate);
             guna2Panel2.Controls.Add(label6);
             guna2Panel2.CustomizableEdges = customizableEdges17;
-            guna2Panel2.Location = new Point(23, 91);
+            guna2Panel2.Dock = DockStyle.Top;
+            guna2Panel2.Location = new Point(0, 84);
             guna2Panel2.Name = "guna2Panel2";
             guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges18;
-            guna2Panel2.Size = new Size(433, 84);
+            guna2Panel2.Size = new Size(478, 84);
             guna2Panel2.TabIndex = 3;
             // 
             // pictureBox9
@@ -669,9 +593,10 @@
             panel4.Controls.Add(lb_oder);
             panel4.Controls.Add(pictureBox7);
             panel4.Controls.Add(pictureBox6);
+            panel4.Dock = DockStyle.Top;
             panel4.Location = new Point(0, 0);
             panel4.Name = "panel4";
-            panel4.Size = new Size(475, 84);
+            panel4.Size = new Size(478, 84);
             panel4.TabIndex = 0;
             // 
             // lb_history
@@ -728,33 +653,147 @@
             pictureBox6.TabIndex = 0;
             pictureBox6.TabStop = false;
             // 
+            // panel2
+            // 
+            panel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panel2.BackColor = SystemColors.Control;
+            panel2.Controls.Add(flowLayout);
+            panel2.Controls.Add(panel7);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(0, 0);
+            panel2.Margin = new Padding(3, 4, 3, 4);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(609, 709);
+            panel2.TabIndex = 7;
+            // 
+            // flowLayout
+            // 
+            flowLayout.AutoScroll = true;
+            flowLayout.BackColor = SystemColors.Control;
+            flowLayout.Dock = DockStyle.Fill;
+            flowLayout.Location = new Point(0, 75);
+            flowLayout.Margin = new Padding(3, 4, 3, 4);
+            flowLayout.Name = "flowLayout";
+            flowLayout.Size = new Size(609, 634);
+            flowLayout.TabIndex = 5;
+            flowLayout.Paint += flowLayout_Paint;
+            // 
+            // panel7
+            // 
+            panel7.Controls.Add(DiemTichLuy);
+            panel7.Controls.Add(lbl_username);
+            panel7.Controls.Add(lb_phoBien);
+            panel7.Controls.Add(lb_tatCa);
+            panel7.Controls.Add(pb_muiTen);
+            panel7.Dock = DockStyle.Top;
+            panel7.Location = new Point(0, 0);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(609, 75);
+            panel7.TabIndex = 8;
+            // 
+            // DiemTichLuy
+            // 
+            DiemTichLuy.BackColor = Color.Transparent;
+            DiemTichLuy.Location = new Point(412, 38);
+            DiemTichLuy.Name = "DiemTichLuy";
+            DiemTichLuy.Point = 0;
+            DiemTichLuy.Size = new Size(181, 23);
+            DiemTichLuy.TabIndex = 6;
+            DiemTichLuy.Visible = false;
+            // 
+            // lbl_username
+            // 
+            lbl_username.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            lbl_username.IsDerivedStyle = true;
+            lbl_username.Location = new Point(24, 6);
+            lbl_username.Name = "lbl_username";
+            lbl_username.Size = new Size(201, 29);
+            lbl_username.Style = MetroSet_UI.Enums.Style.Light;
+            lbl_username.StyleManager = null;
+            lbl_username.TabIndex = 7;
+            lbl_username.Text = "UserName";
+            lbl_username.ThemeAuthor = "Narwin";
+            lbl_username.ThemeName = "MetroLite";
+            lbl_username.Visible = false;
+            lbl_username.Click += lbl_username_Click;
+            // 
+            // lb_phoBien
+            // 
+            lb_phoBien.AutoSize = true;
+            lb_phoBien.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_phoBien.ForeColor = Color.Black;
+            lb_phoBien.Location = new Point(231, 33);
+            lb_phoBien.Name = "lb_phoBien";
+            lb_phoBien.Size = new Size(95, 28);
+            lb_phoBien.TabIndex = 4;
+            lb_phoBien.Text = "Phổ biến";
+            // 
+            // lb_tatCa
+            // 
+            lb_tatCa.AutoSize = true;
+            lb_tatCa.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_tatCa.ForeColor = Color.Black;
+            lb_tatCa.Location = new Point(24, 33);
+            lb_tatCa.Name = "lb_tatCa";
+            lb_tatCa.Size = new Size(70, 28);
+            lb_tatCa.TabIndex = 1;
+            lb_tatCa.Text = "Tất cả";
+            // 
+            // pb_muiTen
+            // 
+            pb_muiTen.Image = Properties.Resources.next;
+            pb_muiTen.Location = new Point(161, 34);
+            pb_muiTen.Margin = new Padding(3, 4, 3, 4);
+            pb_muiTen.Name = "pb_muiTen";
+            pb_muiTen.Size = new Size(23, 27);
+            pb_muiTen.SizeMode = PictureBoxSizeMode.Zoom;
+            pb_muiTen.TabIndex = 2;
+            pb_muiTen.TabStop = false;
+            // 
+            // panel5
+            // 
+            panel5.Controls.Add(panel6);
+            panel5.Controls.Add(guna2ShadowPanel1);
+            panel5.Dock = DockStyle.Fill;
+            panel5.Location = new Point(129, 0);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(1087, 845);
+            panel5.TabIndex = 7;
+            // 
+            // panel6
+            // 
+            panel6.Controls.Add(panel2);
+            panel6.Controls.Add(panel3);
+            panel6.Dock = DockStyle.Fill;
+            panel6.Location = new Point(0, 136);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(1087, 709);
+            panel6.TabIndex = 8;
+            // 
             // HomeForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(1216, 845);
-            Controls.Add(panel3);
-            Controls.Add(guna2ShadowPanel1);
+            Controls.Add(panel5);
             Controls.Add(panel1);
-            Controls.Add(panel2);
             Margin = new Padding(3, 4, 3, 4);
             MinimumSize = new Size(1232, 800);
             Name = "HomeForm";
             Text = "Circle K";
             Load += HomeForm_Load;
-            SizeChanged += HomeForm_SizeChanged;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             guna2ShadowPanel1.ResumeLayout(false);
-            guna2ShadowPanel1.PerformLayout();
+            panel9.ResumeLayout(false);
+            panel9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)btn_search).EndInit();
+            panel8.ResumeLayout(false);
+            panel8.PerformLayout();
             guna2Panel1.ResumeLayout(false);
             guna2Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)btn_search).EndInit();
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pb_muiTen).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             guna2Panel2.ResumeLayout(false);
@@ -765,6 +804,12 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
+            panel2.ResumeLayout(false);
+            panel7.ResumeLayout(false);
+            panel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pb_muiTen).EndInit();
+            panel5.ResumeLayout(false);
+            panel6.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -784,13 +829,6 @@
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Label lb_nameUser2;
         private PictureBox pictureBox3;
-        private Panel panel2;
-        private Label lb_chonDanhMuc;
-        private FlowLayoutPanel flowLayout;
-        private Label lb_phoBien;
-        private Label lb_danhMucPhu;
-        private PictureBox pb_muiTen;
-        private Label lb_tatCa;
         private Panel panel3;
         private Panel panel4;
         private PictureBox pictureBox6;
@@ -811,9 +849,19 @@
         private Guna.UI2.WinForms.Guna2GradientTileButton btn_voucher;
         private Guna.UI2.WinForms.Guna2Button btn_maCuaToi;
         private Guna.UI2.WinForms.Guna2Button btn_tatCa;
-        private DiemTichLuy DiemTichLuy;
         private ThanhToan ThanhToan;
         private FlowLayoutPanel flowpanel_order_history;
+        private Panel panel2;
+        private FlowLayoutPanel flowLayout;
+        private Panel panel7;
+        private DiemTichLuy DiemTichLuy;
         private MetroSet_UI.Controls.MetroSetLabel lbl_username;
+        private Label lb_phoBien;
+        private Label lb_tatCa;
+        private PictureBox pb_muiTen;
+        private Panel panel5;
+        private Panel panel6;
+        private Panel panel9;
+        private Panel panel8;
     }
 }

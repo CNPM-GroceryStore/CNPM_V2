@@ -140,8 +140,6 @@ namespace GroceryStore
             btn_tatCa.Visible = false;
             btn_maCuaToi.Visible = false;
             DiemTichLuy.Visible = false;
-            lb_chonDanhMuc.Visible = true;
-            lb_danhMucPhu.Visible = true;
             lb_tatCa.Visible = true;
             lb_phoBien.Visible = true;
             pb_muiTen.Visible = true;
@@ -179,8 +177,6 @@ namespace GroceryStore
             btn_tatCa.Visible = true;
             btn_maCuaToi.Visible = true;
             DiemTichLuy.Visible = true;
-            lb_chonDanhMuc.Visible = false;
-            lb_danhMucPhu.Visible = false;
             lb_tatCa.Visible = false;
             lb_phoBien.Visible = false;
             pb_muiTen.Visible = false;
@@ -232,8 +228,6 @@ namespace GroceryStore
         //home page
         private void btn_home_Click(object sender, EventArgs e)
         {
-            lb_chonDanhMuc.Visible = true;
-            lb_danhMucPhu.Visible = true;
             lb_tatCa.Visible = true;
             lb_phoBien.Visible = true;
             pb_muiTen.Visible = true;
@@ -471,24 +465,6 @@ namespace GroceryStore
             foreach (var item in orders)
             {
                 flowLayoutItemOder.Controls.Add(item);
-            }
-        }
-
-        //Responsive for homepage when change size of form
-        private void HomeForm_SizeChanged(object sender, EventArgs e)
-        {
-            if (this.Width > 1234 && this.Height > 892)
-            {
-                panel2.Size = new Size((int)(0.7 * this.Width), (int)(0.75 * this.Height));
-                flowLayout.Size = new Size((int)(0.67 * this.Width), (int)(0.68 * this.Height));
-                flowpanel_order_history.Size = new Size((int)(0.3 * this.Width), (int)(0.64 * this.Height));
-                //flowLayoutItemOder.Size = new Size((int)(0.3 * this.Width), (int)(0.32 * this.Height));
-            }
-            else
-            {
-                panel2.Size = new Size((int)(0.5 * this.Width), (int)(0.78 * this.Height));
-                flowLayout.Size = new Size((int)(0.5 * this.Width), (int)(0.68 * this.Height));
-                flowpanel_order_history.Size = new Size((int)(0.45 * this.Width), (int)(0.57 * this.Height));
             }
         }
 

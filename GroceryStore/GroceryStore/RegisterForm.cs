@@ -167,7 +167,7 @@ namespace GroceryStore
         //Check Account: if exist in DB, notice error, else notice successfully login
         private Boolean Connect()
         {
-            DTO_User user = new DTO_User(tb_sdt.Text, tb_email.Text, tb_name.Text, tb_address.Text, tb_password.Text);
+            DTO_User user = new DTO_User(tb_sdt.Text, tb_email.Text, tb_name.Text, tb_password.Text, tb_address.Text);
             BUS_User bUS = new BUS_User();
             if (!bUS.checkAccount(user))
             {

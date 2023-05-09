@@ -194,10 +194,7 @@ namespace GroceryStore
                     if (File.Exists(filePath)) // kiểm tra xem file có tồn tại không
                     {
                         File.Delete(filePath); // xóa file nếu tồn tại
-                        MessageBox.Show("Xóa trong folder");
                     }
-                    bUS_Product.deleteProduct(products[e.RowIndex]);
-                    mgmProductPage_Click(sender, e);
                 }
                 else if (dgv_mgmProduct.Columns[e.ColumnIndex].Name == "Sửa")
                 {
@@ -228,7 +225,7 @@ namespace GroceryStore
             string shipment = txb_shipment.Text;
             string supplier = cbb_supplier.Text;
 
-            string image = null;
+            string image = "";
             if (ptb_addImagePro.Image == null)
             {
                 image = selectedProduct.ImageProduct;
@@ -249,29 +246,31 @@ namespace GroceryStore
                 string savePath = @"..\\..\\..\\Resources\Product\" + cbb_addtype.Text + "\\" + fileName;
                 selectedImage.Save(savePath, System.Drawing.Imaging.ImageFormat.Jpeg);
             }
-            if (lb_titilePage.Text == "Thêm sản phẩm")
-            {
-                BUS_Product bUS_Product = new BUS_Product();
-                DTO_Product product = new DTO_Product(name, amount, price, image, type, shipment, shelflife, supplier);
-                bUS_Product.insertProduct(product);
-                MessageBox.Show("Thêm sản phẩm thành công");
-            }
-            else if (lb_titilePage.Text == "Sửa sản phẩm")
-            {
-                BUS_Product bUS_Product = new BUS_Product();
-                DTO_Product product = new DTO_Product(selectedProduct.IdProduct, name, amount, price, image, type, shipment, shelflife);
-                bUS_Product.updateProduct(product);
-                MessageBox.Show("Sửa sản phẩm thành công");
-            }
 
             string[] checkString = { name, type, shelflife, shipment, supplier, image };
             int[] checkInt = { amount, price };
             if (this.checkIntInput(checkInt) && this.checkStringInput(checkString))
             {
-
                 BUS_Product bUS_Product = new BUS_Product();
-                DTO_Product product = new DTO_Product(name, amount, price, image, type, shipment, shelflife, supplier);
-                bUS_Product.insertProduct(product);
+                if (lb_titilePage.Text == "Thêm sản phẩm")
+                {
+                    DTO_Product product = new DTO_Product(name, amount, price, image, type, shipment, shelflife, supplier);
+                    bUS_Product.insertProduct(product);
+                    MessageBox.Show("Thêm sản phẩm thành công");
+                    txb_addNamePro.Text = "";
+                    txb_addAmount.Text = "";
+                    txb_addPrice.Text = "";
+                    cbb_addtype.Text = "";
+                    txb_shipment.Text = "";
+                    cbb_supplier.Text = "";
+                    ptb_addImagePro.Image = null;
+                }
+                else if (lb_titilePage.Text == "Sửa sản phẩm")
+                {
+                    DTO_Product product = new DTO_Product(selectedProduct.IdProduct, name, amount, price, image, type, shipment, shelflife);
+                    bUS_Product.updateProduct(product);
+                    MessageBox.Show("Sửa sản phẩm thành công");
+                }
             }
             else
             {
