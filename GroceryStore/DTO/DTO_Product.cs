@@ -30,6 +30,19 @@ namespace DTO
             Shipment = shipment;
             Shelflife = shelflife;
         }
+
+        public DTO_Product(int idProduct, string nameProduct, int amount, int priceProduct, string imageProduct, string typeProduct, string shipment, string shelflife, string supplier)
+        {
+            IdProduct = idProduct;
+            NameProduct = nameProduct;
+            Amount = amount;
+            PriceProduct = priceProduct;
+            ImageProduct = imageProduct;
+            TypeProduct = typeProduct;
+            Shipment = shipment;
+            Shelflife = shelflife;
+            NameSupplier = supplier;
+        }
         public DTO_Product(string nameProduct, int priceProduct, string imageProduct, string typeProduct)
         {
             NameProduct = nameProduct;

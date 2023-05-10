@@ -185,10 +185,10 @@
             pn_total_month = new Guna.UI2.WinForms.Guna2GradientPanel();
             lb_turnover_month = new Label();
             label2 = new Label();
-            panel4 = new Panel();
+            pn_title = new Panel();
             lb_titilePage = new Label();
-            guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            lb_nameUser2 = new Label();
+            pn_adminName = new Guna.UI2.WinForms.Guna2Panel();
+            lb_adminName = new Label();
             pictureBox3 = new PictureBox();
             pn_btn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -240,8 +240,8 @@
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chart_turnover).BeginInit();
             pn_total_month.SuspendLayout();
-            panel4.SuspendLayout();
-            guna2Panel1.SuspendLayout();
+            pn_title.SuspendLayout();
+            pn_adminName.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
@@ -446,7 +446,7 @@
             pn_page.Controls.Add(pn_ordersInDate);
             pn_page.Controls.Add(pn_addProduct);
             pn_page.Controls.Add(pn_homepage);
-            pn_page.Controls.Add(panel4);
+            pn_page.Controls.Add(pn_title);
             pn_page.Dock = DockStyle.Fill;
             pn_page.Location = new Point(202, 0);
             pn_page.Name = "pn_page";
@@ -1655,16 +1655,16 @@
             label2.TabIndex = 0;
             label2.Text = "Tổng tháng";
             // 
-            // panel4
+            // pn_title
             // 
-            panel4.Controls.Add(lb_titilePage);
-            panel4.Controls.Add(guna2Panel1);
-            panel4.Dock = DockStyle.Top;
-            panel4.Location = new Point(10, 10);
-            panel4.Name = "panel4";
-            panel4.Padding = new Padding(10);
-            panel4.Size = new Size(994, 91);
-            panel4.TabIndex = 21;
+            pn_title.Controls.Add(lb_titilePage);
+            pn_title.Controls.Add(pn_adminName);
+            pn_title.Dock = DockStyle.Top;
+            pn_title.Location = new Point(10, 10);
+            pn_title.Name = "pn_title";
+            pn_title.Padding = new Padding(10);
+            pn_title.Size = new Size(994, 91);
+            pn_title.TabIndex = 21;
             // 
             // lb_titilePage
             // 
@@ -1678,37 +1678,39 @@
             lb_titilePage.TabIndex = 15;
             lb_titilePage.Text = "Trang chủ";
             // 
-            // guna2Panel1
+            // pn_adminName
             // 
-            guna2Panel1.AutoRoundedCorners = true;
-            guna2Panel1.BackColor = Color.FromArgb(248, 9, 9);
-            guna2Panel1.BorderColor = Color.Transparent;
-            guna2Panel1.BorderRadius = 34;
-            guna2Panel1.BorderThickness = 1;
-            guna2Panel1.Controls.Add(lb_nameUser2);
-            guna2Panel1.Controls.Add(pictureBox3);
-            guna2Panel1.CustomBorderColor = Color.FromArgb(248, 9, 9);
-            guna2Panel1.CustomizableEdges = customizableEdges61;
-            guna2Panel1.Dock = DockStyle.Right;
-            guna2Panel1.FillColor = Color.White;
-            guna2Panel1.Location = new Point(778, 10);
-            guna2Panel1.Margin = new Padding(3, 4, 3, 4);
-            guna2Panel1.Name = "guna2Panel1";
-            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges62;
-            guna2Panel1.Size = new Size(206, 71);
-            guna2Panel1.TabIndex = 14;
+            pn_adminName.AutoRoundedCorners = true;
+            pn_adminName.BackColor = Color.FromArgb(248, 9, 9);
+            pn_adminName.BorderColor = Color.Transparent;
+            pn_adminName.BorderRadius = 34;
+            pn_adminName.BorderThickness = 1;
+            pn_adminName.Controls.Add(lb_adminName);
+            pn_adminName.Controls.Add(pictureBox3);
+            pn_adminName.CustomBorderColor = Color.FromArgb(248, 9, 9);
+            pn_adminName.CustomizableEdges = customizableEdges61;
+            pn_adminName.Dock = DockStyle.Right;
+            pn_adminName.FillColor = Color.White;
+            pn_adminName.Location = new Point(778, 10);
+            pn_adminName.Margin = new Padding(3, 4, 3, 4);
+            pn_adminName.Name = "pn_adminName";
+            pn_adminName.ShadowDecoration.CustomizableEdges = customizableEdges62;
+            pn_adminName.Size = new Size(206, 71);
+            pn_adminName.TabIndex = 14;
+            pn_adminName.Click += pn_adminName_Click;
             // 
-            // lb_nameUser2
+            // lb_adminName
             // 
-            lb_nameUser2.AutoSize = true;
-            lb_nameUser2.BackColor = Color.White;
-            lb_nameUser2.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_nameUser2.ForeColor = Color.Black;
-            lb_nameUser2.Location = new Point(94, 27);
-            lb_nameUser2.Name = "lb_nameUser2";
-            lb_nameUser2.Size = new Size(69, 25);
-            lb_nameUser2.TabIndex = 1;
-            lb_nameUser2.Text = "Admin";
+            lb_adminName.AutoSize = true;
+            lb_adminName.BackColor = Color.White;
+            lb_adminName.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_adminName.ForeColor = Color.Black;
+            lb_adminName.Location = new Point(94, 27);
+            lb_adminName.Name = "lb_adminName";
+            lb_adminName.Size = new Size(69, 25);
+            lb_adminName.TabIndex = 1;
+            lb_adminName.Text = "Admin";
+            lb_adminName.Click += lb_adminName_Click;
             // 
             // pictureBox3
             // 
@@ -1792,10 +1794,10 @@
             ((System.ComponentModel.ISupportInitialize)chart_turnover).EndInit();
             pn_total_month.ResumeLayout(false);
             pn_total_month.PerformLayout();
-            panel4.ResumeLayout(false);
-            panel4.PerformLayout();
-            guna2Panel1.ResumeLayout(false);
-            guna2Panel1.PerformLayout();
+            pn_title.ResumeLayout(false);
+            pn_title.PerformLayout();
+            pn_adminName.ResumeLayout(false);
+            pn_adminName.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
         }
@@ -1814,8 +1816,8 @@
         private Panel pn_page;
         private Label lb_titilePage;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel pn_homepage;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
-        private Label lb_nameUser2;
+        private Guna.UI2.WinForms.Guna2Panel pn_adminName;
+        private Label lb_adminName;
         private PictureBox pictureBox3;
         private Panel panel3;
         private Guna.UI2.WinForms.Guna2DataGridView dgv_order;
@@ -1851,7 +1853,7 @@
         private Guna.UI2.WinForms.Guna2DataGridView dgv_mgmProduct;
         private Panel panel2;
         private Panel panel1;
-        private Panel panel4;
+        private Panel pn_title;
         private Panel panel6;
         private Guna.UI2.WinForms.Guna2GradientButton btn_mngStaff;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel pn_mngStaff;

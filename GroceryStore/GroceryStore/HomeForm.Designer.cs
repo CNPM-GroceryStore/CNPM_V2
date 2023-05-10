@@ -438,6 +438,7 @@
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges16;
             guna2Panel1.Size = new Size(244, 96);
             guna2Panel1.TabIndex = 10;
+            guna2Panel1.Click += pn_username2_Click;
             // 
             // lb_nameUser2
             // 
@@ -451,6 +452,7 @@
             lb_nameUser2.Size = new Size(153, 25);
             lb_nameUser2.TabIndex = 1;
             lb_nameUser2.Text = "Nguyễn Hữu Tín";
+            lb_nameUser2.Click += lb_nameUser2_Click;
             // 
             // pictureBox3
             // 

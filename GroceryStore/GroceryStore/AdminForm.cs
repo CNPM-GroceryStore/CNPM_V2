@@ -200,6 +200,8 @@ namespace GroceryStore
                 {
                     DataGridViewRow selectedRow = dgv_mgmProduct.CurrentRow;
                     selectedProduct = products[e.RowIndex];
+                    BUS_Product bUS_Product = new BUS_Product();
+                    selectedProduct.NameSupplier = bUS_Product.getNameSupplierById(selectedProduct.IdProduct);
                     switchPage(sender, e, pn_addProduct, btn_mgmProductPage, "Sửa sản phẩm");
                     txb_addNamePro.Text = selectedProduct.NameProduct;
                     txb_addPrice.Text = selectedProduct.PriceProduct.ToString();
@@ -207,6 +209,7 @@ namespace GroceryStore
                     dtp_addPro.Text = selectedProduct.Shelflife;
                     txb_shipment.Text = selectedProduct.Shipment;
                     txb_addAmount.Text = selectedProduct.Amount.ToString();
+                    cbb_supplier.Text = selectedProduct.NameSupplier;
                 }
 
             }
@@ -267,8 +270,9 @@ namespace GroceryStore
                 }
                 else if (lb_titilePage.Text == "Sửa sản phẩm")
                 {
-                    DTO_Product product = new DTO_Product(selectedProduct.IdProduct, name, amount, price, image, type, shipment, shelflife);
+                    DTO_Product product = new DTO_Product(selectedProduct.IdProduct, name, amount, price, image, type, shipment, shelflife, supplier);
                     bUS_Product.updateProduct(product);
+                    ptb_addImagePro.Image = null;
                     MessageBox.Show("Sửa sản phẩm thành công");
                 }
             }
@@ -375,7 +379,7 @@ namespace GroceryStore
         private void btn_printStatic_Click(object sender, EventArgs e)
         {
             // Tạo một đối tượng SpreadsheetDocument với tên tệp Excel mới
-            using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(@"..\\..\\..\\Resources\Excel\output.xlsx", SpreadsheetDocumentType.Workbook))
+            using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(@"..\\..\\..\\..\\..\\Excel\order_statistics.xlsx", SpreadsheetDocumentType.Workbook))
             {
                 // Tạo một WorkbookPart và thêm nó vào SpreadsheetDocument
                 WorkbookPart workbookPart = spreadsheetDocument.AddWorkbookPart();
@@ -440,6 +444,23 @@ namespace GroceryStore
 
                 // Lưu các thay đổi vào file Excel
                 worksheetPart.Worksheet.Save();
+                MessageBox.Show("Đã xuất excel thành công");
+            }
+        }
+
+        private void pn_adminName_Click(object sender, EventArgs e)
+        {
+            lb_adminName_Click(sender, e);
+        }
+
+        private void lb_adminName_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogSignOut = MessageBox.Show($"Bạn có muốn đăng xuất?", "Thông báo", MessageBoxButtons.YesNo);
+            if (dialogSignOut == DialogResult.Yes)
+            {
+                this.Close();
+                LoginForm loginForm = new LoginForm();
+                loginForm.Show();
             }
         }
     }

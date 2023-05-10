@@ -90,7 +90,7 @@ namespace GroceryStore
 
         private void lb_forgetPassword_Click_1(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
             //xử lý sự kiện forgot password
             MessageForm messageForm = new MessageForm(tb_sdt.Text);
             messageForm.Show();

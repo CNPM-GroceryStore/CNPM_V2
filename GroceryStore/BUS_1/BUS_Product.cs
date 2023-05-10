@@ -36,7 +36,7 @@ namespace GroceryStore.BUS
         }
         #endregion
 
-        #region 
+        #region 4. Check Amount 
         public bool checkAmount(int amount, int idProduct)
         {
             if (amount > dAO_Product.getAmount(idProduct))
@@ -51,6 +51,13 @@ namespace GroceryStore.BUS
         public void updateProduct(DTO_Product product)
         {
             dAO_Product.updateProduct(product);
+        }
+        #endregion
+
+        #region 6. Get Name Supplier By Id
+        public String getNameSupplierById(int id)
+        {
+            return dAO_Product.getNameSupplierById(new DTO_Product(id));
         }
         #endregion
     }

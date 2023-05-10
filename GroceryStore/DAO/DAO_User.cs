@@ -46,11 +46,8 @@ namespace DAO
         public DataTable loginAccount(DTO_User user)
         {
             DataTable dataTable = new DataTable();
-            if (checkAccount(user))
-            {
-                string statement = "loginAccount @numberPhone";
-                dataTable = DataProvider.Instance.ExecuteStoredProcedureSelect(statement, new object[] { user.IdUser});
-            }
+            string statement = "loginAccount @numberPhone";
+            dataTable = DataProvider.Instance.ExecuteStoredProcedureSelect(statement, new object[] { user.IdUser});
             return dataTable;
         }
         #endregion
@@ -58,8 +55,8 @@ namespace DAO
         #region 6. Check account
         public bool checkAccount(DTO_User user)
         {
-            string statement = "checkAccount @numberPhone @password";
-            int count = Convert.ToInt32(DataProvider.Instance.ExecuteStoredProcedureScalar(statement, new object[] { user.IdUser, user.PasswordUser}));
+            string statement = "checkAccount @numberPhone";
+            int count = Convert.ToInt32(DataProvider.Instance.ExecuteStoredProcedureScalar(statement, new object[] { user.IdUser}));
             if (count > 0)
             {
                 return true;
@@ -75,5 +72,7 @@ namespace DAO
             DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { idUser, point });
         }
         #endregion
+
+
     }
 }

@@ -277,6 +277,17 @@ BEGIN
 END
 go
 
+-- procedure get name supplier 
+create PROCEDURE getNameSupplierById
+	@idProduct int
+AS
+BEGIN
+    SELECT nameSupplier
+	FROM Product 
+	WHERE idProduct = @idProduct
+END
+go
+
 create PROCEDURE usp_ShowAllProductsAdmin
 AS
 BEGIN
@@ -413,17 +424,18 @@ go
 -- procedure Update product 
 create PROCEDURE updateProduct
 @idProduct varchar(255),
-@nameProduct varchar(255), 
+@nameProduct nvarchar(255), 
 @amountProduct INT,	
 @priceProduct int, 
 @imageProduct varchar(255), 
 @typeProduct varchar(255),
 @shipment varchar(255),
-@shelflife date
+@shelflife date,
+@nameSupplier nvarchar(255)
 AS
 BEGIN
 	UPDATE Product SET nameProduct = @nameProduct , amountProduct = @amountProduct ,priceProduct = @priceProduct , 
-	imageProduct = @imageProduct , typeProduct = @typeProduct , shipment = @shipment, shelflife = @shelflife
+	imageProduct = @imageProduct , typeProduct = @typeProduct , shipment = @shipment, shelflife = @shelflife, nameSupplier = @nameSupplier
 	WHERE idProduct = @idProduct
 END
 go
@@ -495,11 +507,10 @@ go
 
 -- procedure Check account user exist		
 create PROCEDURE checkAccount
-	@numberPhone varchar(255),
-	@password varchar(255)
+	@numberPhone varchar(255)
 AS
 BEGIN
-	SELECT COUNT(numberPhone) AS 'Tontai' FROM KhachHang WHERE numberPhone = @numberPhone and password = @password
+	SELECT COUNT(numberPhone) AS 'Tontai' FROM KhachHang WHERE numberPhone = @numberPhone
 END
 go
 

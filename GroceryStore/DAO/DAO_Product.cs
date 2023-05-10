@@ -31,8 +31,8 @@ namespace DAO
         #region 3. Update product
         public void updateProduct(DTO_Product product)
         {
-            string statement = "updateProduct @idProduct , @nameProduct , @amountProduct, @priceProduct , @imageProduct , @typeProduct , @shipment , @shelflife";
-            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { product.IdProduct.ToString(), product.NameProduct, product.Amount, product.PriceProduct, product.ImageProduct , product.TypeProduct, product.Shipment, DateTime.Parse(product.Shelflife)});
+            string statement = "updateProduct @idProduct , @nameProduct , @amountProduct, @priceProduct , @imageProduct , @typeProduct , @shipment , @shelflife, @nameSupplier";
+            DataProvider.Instance.ExecuteStoredProcedure(statement, new object[] { product.IdProduct.ToString(), product.NameProduct, product.Amount, product.PriceProduct, product.ImageProduct , product.TypeProduct, product.Shipment, DateTime.Parse(product.Shelflife), product.NameSupplier});
         }
         #endregion
 
@@ -66,5 +66,17 @@ namespace DAO
             DataProvider.Instance.ExecuteStoredProcedure(statement , new object[] { product.IdProduct, value });
         }
         #endregion
+
+        #region
+        public String getNameSupplierById(DTO_Product product)
+        {
+            string statement = "getNameSupplierById @idProduct";
+            DataTable res = DataProvider.Instance.ExecuteStoredProcedureSelect(statement, new object[] { product.IdProduct });
+            DataRow row = res.Rows[0];
+            string myValue = row[0].ToString();
+            return myValue;
+        }
+        #endregion
+
     }
 }

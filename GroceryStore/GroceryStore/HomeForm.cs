@@ -500,12 +500,8 @@ namespace GroceryStore
             int accumulatedPointsUser = user.AccumulatedPointsUser;
             if (accumulatedPointsUser > priceVoucher)
             {
-                MessageBox.Show(obj.IdVoucher.ToString());
                 DTO_MyVoucher myVoucher = new DTO_MyVoucher(user.IdUser, obj.IdVoucher);
                 BUS_MyVoucher bus_myVoucher = new BUS_MyVoucher();
-
-                MessageBox.Show(myVoucher.IdUser);
-                MessageBox.Show(myVoucher.IdMyVoucher.ToString());
                 if (user.AccumulatedPointsUser > obj.PriceVoucher)
                 {
                     bus_myVoucher.insertMyVoucher(myVoucher);
@@ -514,6 +510,7 @@ namespace GroceryStore
                     bus_user.updatePoint(user, user.AccumulatedPointsUser);
                     DiemTichLuy.Point = user.AccumulatedPointsUser;
                     //lb_soDiem.Text = user.AccumulatedPointsUser.ToString();
+                    MessageBox.Show("Đổi voucher thành công");
                 }
                 else
                 {
@@ -566,7 +563,7 @@ namespace GroceryStore
             loadformMyVoucher();
         }
 
-        private void ShowLoginDialog()
+        private bool ShowLoginDialog()
         {
             var inputForm = new Form();
             inputForm.Size = new Size(500, 200);
@@ -575,8 +572,6 @@ namespace GroceryStore
 
             var phoneLabel = new Label() { Left = 50, Top = 20, Text = "Số điện thoại:" };
             var phoneTextBox = new TextBox() { Left = 150, Top = 20, Width = 200 };
-            var passwordLabel = new Label() { Left = 50, Top = 50, Text = "Mật khẩu:" };
-            var passwordTextBox = new TextBox() { Left = 150, Top = 50, Width = 200 };
 
             var okButton = new Button() { Text = "OK", Left = 150, Width = 100, Top = 80, Height = 35 };
             okButton.Click += (sender, e) => { inputForm.DialogResult = DialogResult.OK; };
@@ -585,8 +580,6 @@ namespace GroceryStore
 
             inputForm.Controls.Add(phoneLabel);
             inputForm.Controls.Add(phoneTextBox);
-            inputForm.Controls.Add(passwordLabel);
-            inputForm.Controls.Add(passwordTextBox);
             inputForm.Controls.Add(okButton);
             inputForm.Controls.Add(cancelButton);
 
@@ -594,8 +587,7 @@ namespace GroceryStore
 
             if (result == DialogResult.OK)
             {
-                MessageBox.Show(phoneTextBox.Text);
-                user = new DTO_User(phoneTextBox.Text, passwordTextBox.Text);
+                user = new DTO_User(phoneTextBox.Text, "");
                 BUS_User bUS_User = new BUS_User();
                 if (bUS_User.checkAccount(user))
                 {
@@ -603,14 +595,16 @@ namespace GroceryStore
                     MessageBox.Show("Đăng nhập thành công");
                     btn_voucher.Visible = true;
                     btn_voucher.PerformClick();
+                    return true;
                 }
                 else
                 {
-                    MessageBox.Show("Sai tài khoản hoặc mật khẩu, vui lòng nhập lại!");
-                    //ShowLoginDialog();
+                    MessageBox.Show("Tài khoản không tồn tại, vui lòng nhập lại!");
+                    return ShowLoginDialog();
                 }
 
             }
+            return false;
         }
 
         private int ShowLoginDialogInputMoney()
@@ -756,8 +750,10 @@ namespace GroceryStore
                 dialogUser = MessageBox.Show($"Bạn có muốn dùng tài khoản thành viên?", "Thông báo", MessageBoxButtons.YesNo);
                 if (dialogUser == DialogResult.Yes)
                 {
-                    ShowLoginDialog();
-                    return;
+                    if (ShowLoginDialog() == true)
+                    {
+                        return;
+                    }
                 }
             }
 
@@ -877,6 +873,22 @@ namespace GroceryStore
                 lbl_username.Text = "Username";
                 lbl_username.Visible = false;
             }
+        }
+
+        private void lb_nameUser2_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogSignOut = MessageBox.Show($"Bạn có muốn đăng xuất?", "Thông báo", MessageBoxButtons.YesNo);
+            if (dialogSignOut == DialogResult.Yes)
+            {
+                this.Close();
+                LoginForm loginForm = new LoginForm();
+                loginForm.Show();
+            }
+        }
+
+        private void pn_username2_Click(object sender, EventArgs e)
+        {
+            lb_nameUser2_Click(sender, e);
         }
     }
 }
