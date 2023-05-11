@@ -67,16 +67,16 @@ namespace GroceryStore
             lb_titilePage.Text = titlePage;
             currPage.Visible = false;
 
+            currPage = nextPage;
+            currPage.Visible = true;
+
             currButton.FillColor = Color.White;
             currButton.FillColor2 = Color.White;
 
-            currPage = nextPage;
             currButton = nextButton;
-
 
             currButton.FillColor = ColorTranslator.FromHtml("#F80909");
             currButton.FillColor2 = ColorTranslator.FromHtml("#F80909");
-            currPage.Visible = true;
         }
 
         private void homepage_Click(object sender, EventArgs e)
@@ -260,13 +260,6 @@ namespace GroceryStore
                     DTO_Product product = new DTO_Product(name, amount, price, image, type, shipment, shelflife, supplier);
                     bUS_Product.insertProduct(product);
                     MessageBox.Show("Thêm sản phẩm thành công");
-                    txb_addNamePro.Text = "";
-                    txb_addAmount.Text = "";
-                    txb_addPrice.Text = "";
-                    cbb_addtype.Text = "";
-                    txb_shipment.Text = "";
-                    cbb_supplier.Text = "";
-                    ptb_addImagePro.Image = null;
                 }
                 else if (lb_titilePage.Text == "Sửa sản phẩm")
                 {
@@ -275,6 +268,13 @@ namespace GroceryStore
                     ptb_addImagePro.Image = null;
                     MessageBox.Show("Sửa sản phẩm thành công");
                 }
+                txb_addNamePro.Text = "";
+                txb_addAmount.Text = "";
+                txb_addPrice.Text = "";
+                cbb_addtype.Text = "";
+                txb_shipment.Text = "";
+                cbb_supplier.Text = "";
+                ptb_addImagePro.Image = null;
             }
             else
             {
