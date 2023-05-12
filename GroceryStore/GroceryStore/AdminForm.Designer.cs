@@ -282,7 +282,7 @@
             btn_mngStaff.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btn_mngStaff.Size = new Size(196, 53);
             btn_mngStaff.TabIndex = 14;
-            btn_mngStaff.Text = "Quản lí nhân viên";
+            btn_mngStaff.Text = "Quản lý nhân viên";
             btn_mngStaff.TextAlign = HorizontalAlignment.Left;
             btn_mngStaff.Click += btn_mngStaff_Click;
             // 
@@ -397,7 +397,7 @@
             btn_mgmProductPage.ShadowDecoration.CustomizableEdges = customizableEdges12;
             btn_mgmProductPage.Size = new Size(196, 53);
             btn_mgmProductPage.TabIndex = 8;
-            btn_mgmProductPage.Text = "Quản lí sản phẩm";
+            btn_mgmProductPage.Text = "Quản lý sản phẩm";
             btn_mgmProductPage.TextAlign = HorizontalAlignment.Left;
             btn_mgmProductPage.Click += mgmProductPage_Click;
             // 
@@ -420,7 +420,7 @@
             btn_mngClient.ShadowDecoration.CustomizableEdges = customizableEdges14;
             btn_mngClient.Size = new Size(196, 53);
             btn_mngClient.TabIndex = 6;
-            btn_mngClient.Text = "Quản lí khách hàng";
+            btn_mngClient.Text = "Quản lý khách hàng";
             btn_mngClient.TextAlign = HorizontalAlignment.Left;
             btn_mngClient.Click += btn_mngClient_Click;
             // 
@@ -895,6 +895,7 @@
             dtp_choseTime.BackColor = Color.White;
             dtp_choseTime.BorderRadius = 10;
             dtp_choseTime.Checked = true;
+            dtp_choseTime.CustomFormat = "MM/yyyy";
             dtp_choseTime.CustomizableEdges = customizableEdges27;
             dtp_choseTime.Dock = DockStyle.Right;
             dtp_choseTime.FillColor = Color.FromArgb(248, 9, 9);

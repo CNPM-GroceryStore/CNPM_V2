@@ -809,15 +809,11 @@ namespace GroceryStore
                     flowLayoutItemOder.Controls.Clear();
                     ThanhToan.clear();
                     user = null;
-                }
-                else
-                {
-                    status = "Chưa hoàn thành";
+                    DTO_OrderHistory orderHistoryItem = new DTO_OrderHistory(price, amount, paymethod, status, paydate);
+                    order.insertOrderHistory(staff, orderHistoryItem);
+                    btn_home.PerformClick();
                 }
 
-                DTO_OrderHistory orderHistoryItem = new DTO_OrderHistory(price, amount, paymethod, status, paydate);
-                order.insertOrderHistory(staff, orderHistoryItem);
-                btn_home.PerformClick();
             }
             else
             {

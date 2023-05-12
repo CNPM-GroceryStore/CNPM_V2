@@ -171,6 +171,7 @@ namespace GroceryStore
         private void btn_addProduct_Click(object sender, EventArgs e)
         {
             switchPage(sender, e, pn_addProduct, btn_mgmProductPage, "Thêm sản phẩm");
+            dtp_addPro.Value = DateTime.Now;
         }
 
         //Remove Product

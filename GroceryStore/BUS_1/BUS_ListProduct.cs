@@ -1,4 +1,5 @@
 ﻿using DAO;
+using DocumentFormat.OpenXml.Wordprocessing;
 using DTO;
 using System;
 using System.Collections.Generic;
@@ -46,13 +47,11 @@ namespace BUS
         #region 5. Get products by name
         public int getProductsByName(List<DTO_Product> list_products, List<DTO_Product> products, String name)
         {
-            name = name.ToLower();
-            name = Regex.Replace(name, @"\s+", " ");
+            name = this.convertVietnamese(name);
             String[] split_input = name.Split(' ');
             foreach (DTO_Product product in list_products)
             {
-                String namePro = Regex.Replace(product.NameProduct, @"\s+", " ");
-                namePro = namePro.ToLower();
+                String namePro = this.convertVietnamese(product.NameProduct);
                 if (namePro == name)
                 {
                     products.Add(product);
@@ -155,6 +154,22 @@ namespace BUS
         {
             DAO_ListProduct dAO_listProduct = new DAO_ListProduct();
             return dAO_listProduct.showAllProductAdmin();
+        }
+        #endregion
+
+        #region 11. convert Vietnamese
+        public string convertVietnamese(string str)
+        {
+            str = str.ToLower();
+            str = Regex.Replace(str, @"\s+", " ");
+            str = Regex.Replace(str, "[áàảãạăắằẳẵặâấầẩẫậ]", "a");
+            str = Regex.Replace(str, "[đ]", "d");
+            str = Regex.Replace(str, "[éèẻẽẹêếềểễệ]", "e");
+            str = Regex.Replace(str, "[íìỉĩị]", "i");
+            str = Regex.Replace(str, "[óòỏõọôốồổỗộơớờởỡợ]", "o");
+            str = Regex.Replace(str, "[úùủũụưứừửữự]", "u");
+            str = Regex.Replace(str, "[ýỳỷỹỵ]", "y");
+            return str;
         }
         #endregion
     }
