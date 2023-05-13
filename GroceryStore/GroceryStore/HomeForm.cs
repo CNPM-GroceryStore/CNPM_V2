@@ -631,7 +631,13 @@ namespace GroceryStore
 
             if (result == DialogResult.OK)
             {
-                return Convert.ToInt32(inputMoney.Text);
+                int res = Convert.ToInt32(inputMoney.Text);
+                if (res < ThanhToan.TienThanhToan)
+                {
+                    MessageBox.Show("Số tiền nhận không đủ!", "Thông báo");
+                    return ShowLoginDialogInputMoney();
+                }
+                return res;
             }
             return 0;
         }
@@ -724,6 +730,10 @@ namespace GroceryStore
             g.DrawString(sumNumber.ToString(), font, brush, startX + 300, startY + offset);
             g.DrawString(sumMoney.ToString(), font, brush, startX + 550, startY + offset);
             offset += 30;
+            // Vẽ thông tin voucher
+            g.DrawString("Tổng tiền Voucher:", boldFont, brush, startX, startY + offset);
+            g.DrawString("- " + ThanhToan.TienVoucher.ToString(), font, brush, startX + 550, startY + offset);
+            offset += 30;
             // Tiền nhận
             g.DrawString("Khách trả", boldFont, brush, startX, startY + offset);
             g.DrawString(amountReceived.ToString(), font, brush, startX + 550, startY + offset);
@@ -783,6 +793,11 @@ namespace GroceryStore
                         amountReceived = ShowLoginDialogInputMoney();
                         habitualAmount = amountReceived - ThanhToan.TienThanhToan;
                         MessageBox.Show("Số tiền thói: " + habitualAmount, "Thông báo");
+                    }
+                    else
+                    {
+                        amountReceived = ThanhToan.TienThanhToan;
+                        habitualAmount = 0;
                     }
                     status = "Hoàn thành";
                     if (user != null)
