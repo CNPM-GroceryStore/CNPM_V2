@@ -26,9 +26,9 @@ namespace GroceryStore
         private void tb_sdt_TextChanged(object sender, EventArgs e)
         {
             // Kiểm tra nếu tb_sdt chứa kí tự là chữ
-            if (!Regex.IsMatch(tb_sdt.Text, "[0-9]"))
+            if (!Regex.IsMatch(tb_sdt.Text, "^0[0-9]{9}$"))
             {
-                errorRegister.SetError(tb_sdt, "Số điện thoại bắt buộc phải là số");
+                errorRegister.SetError(tb_sdt, "Số điện thoại bắt buộc phải là số và bắt đầu từ 0");
             }
             else if (tb_sdt.Text.Length < 10 || tb_sdt.Text.Length > 10)
             {
