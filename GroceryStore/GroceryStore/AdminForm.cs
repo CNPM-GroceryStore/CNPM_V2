@@ -222,17 +222,27 @@ namespace GroceryStore
         private void btn_comfirm_Click(object sender, EventArgs e)
         {
             string name = txb_addNamePro.Text;
-            int amount = int.Parse(txb_addAmount.Text);
-            int price = int.Parse(txb_addPrice.Text);
+            int amount = 0;
+            int price = 0;
+            if (txb_addAmount.Text != "" && txb_addPrice.Text != "")
+            {
+                amount = int.Parse(txb_addAmount.Text);
+                price = int.Parse(txb_addPrice.Text);
+
+            }
             string type = cbb_addtype.Text;
             string shelflife = dtp_addPro.Value.ToString();
             string shipment = txb_shipment.Text;
             string supplier = cbb_supplier.Text;
 
             string image = "";
-            if (ptb_addImagePro.Image == null)
+            if (ptb_addImagePro.Image == null && selectedProduct != null)
             {
                 image = selectedProduct.ImageProduct;
+            }
+            else if (selectedImage == null)
+            {
+                MessageBox.Show("Bạn chưa chọn hình ảnh nào!");
             }
             else
             {
@@ -301,7 +311,7 @@ namespace GroceryStore
         {
             foreach (int i in lst_int)
             {
-                if (i == 0 || i == null)
+                if (i <= 0)
                 {
                     return false;
                 }
