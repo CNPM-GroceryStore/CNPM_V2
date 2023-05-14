@@ -26,6 +26,8 @@ using Workbook = DocumentFormat.OpenXml.Spreadsheet.Workbook;
 using Worksheet = DocumentFormat.OpenXml.Spreadsheet.Worksheet;
 using Sheets = DocumentFormat.OpenXml.Spreadsheet.Sheets;
 using Color = System.Drawing.Color;
+using DAO;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace GroceryStore
 {
@@ -53,6 +55,7 @@ namespace GroceryStore
         public void showRecentOrder(Object sender, EventArgs e)
         {
             DataTable table = bus_OrderHistory.getRecentOrder();
+            dgv_order.AllowUserToAddRows = false;
             dgv_order.DataSource = table;
         }
         //Show turnover: doanh thu
@@ -115,6 +118,7 @@ namespace GroceryStore
         {
             switchPage(sender, e, pn_ordersInDate, btn_ordersPage, "Đơn hàng");
             BUS_OrderHistory bUS_OrderHistory = new BUS_OrderHistory();
+            dgv_orders.AllowUserToAddRows = false;
             dgv_orders.DataSource = bUS_OrderHistory.getOrdersInDate();
         }
         //-----------------------------------------------------------------------------------------------------------------
@@ -124,6 +128,7 @@ namespace GroceryStore
         {
             switchPage(sender, e, pn_staticPage, btn_staticpage, "Thống kê đơn hàng");
             BUS_OrderHistory bUS_OrderHistory = new BUS_OrderHistory();
+            dgv_staticByMonth.AllowUserToAddRows = false;
             dgv_staticByMonth.DataSource = bUS_OrderHistory.getOrdersByMonth(dtp_choseTime.Value.Month);
         }
 
@@ -137,6 +142,7 @@ namespace GroceryStore
             dgv_mgmProduct.DataSource = null;
 
             // Remove any existing columns
+            dgv_mgmProduct.AllowUserToAddRows = false;
             dgv_mgmProduct.Columns.Clear();
             dgv_mgmProduct.ReadOnly = true;
 
@@ -363,6 +369,7 @@ namespace GroceryStore
         {
             switchPage(sender, e, pn_mngStaff, btn_mngStaff, "Quản lí nhân viên");
             BUS_Staff staffs = new BUS_Staff();
+            dgv_mngStaff.AllowUserToAddRows = false;
             dgv_mngStaff.DataSource = staffs.getAllStaff();
         }
 
@@ -373,6 +380,7 @@ namespace GroceryStore
         {
             switchPage(sender, e, pn_mngClient, btn_mngClient, "Quán lí khách hàng");
             BUS_User user = new BUS_User();
+            dgv_mngClient.AllowUserToAddRows = false;
             dgv_mngClient.DataSource = user.showAllUser();
         }
 
@@ -383,6 +391,7 @@ namespace GroceryStore
         {
             switchPage(sender, e, pn_supplier, btn_mngSupplier, "Nhà cung cấp");
             BUS_Supplier bUS_Supplier = new BUS_Supplier();
+            dgv_supplier.AllowUserToAddRows = false;
             dgv_supplier.DataSource = bUS_Supplier.getSupplier();
         }
 
