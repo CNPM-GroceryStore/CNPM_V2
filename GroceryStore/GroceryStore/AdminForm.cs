@@ -137,7 +137,7 @@ namespace GroceryStore
         //Go to managing product page
         private void mgmProductPage_Click(object sender, EventArgs e)
         {
-            switchPage(sender, e, pn_mgmProduct, btn_mgmProductPage, "Quản lý sản phẩm");
+            switchPage(sender, e, pn_mgmProduct, btn_mgmProductPage, "Quản lí sản phẩm");
             list_product.showAllProductAdmin(products);
             dgv_mgmProduct.DataSource = null;
 

@@ -420,7 +420,7 @@
             btn_mngClient.ShadowDecoration.CustomizableEdges = customizableEdges14;
             btn_mngClient.Size = new Size(196, 53);
             btn_mngClient.TabIndex = 6;
-            btn_mngClient.Text = "Quản lý khách hàng";
+            btn_mngClient.Text = "Quản lí khách hàng";
             btn_mngClient.TextAlign = HorizontalAlignment.Left;
             btn_mngClient.Click += btn_mngClient_Click;
             // 
