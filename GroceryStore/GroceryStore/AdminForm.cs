@@ -178,6 +178,8 @@ namespace GroceryStore
         {
             switchPage(sender, e, pn_addProduct, btn_mgmProductPage, "Thêm sản phẩm");
             dtp_addPro.Value = DateTime.Now;
+            cbb_addtype.SelectedIndex = 0;
+            cbb_supplier.SelectedIndex = 0;
         }
 
         //Remove Product
@@ -230,7 +232,7 @@ namespace GroceryStore
             string name = txb_addNamePro.Text;
             int amount = 0;
             int price = 0;
-            if (txb_addAmount.Text != "" && txb_addPrice.Text != "")
+            if (txb_addAmount.Text != "" && txb_addPrice.Text != "" && Regex.IsMatch(txb_addAmount.Text, "^[0-9]+$") && Regex.IsMatch(txb_addPrice.Text, "^[0-9]+$"))
             {
                 amount = int.Parse(txb_addAmount.Text);
                 price = int.Parse(txb_addPrice.Text);
@@ -250,7 +252,7 @@ namespace GroceryStore
             {
                 MessageBox.Show("Bạn chưa chọn hình ảnh nào!");
             }
-            else
+            else if (cbb_supplier.SelectedIndex != 0 && cbb_addtype.SelectedIndex != 0)
             {
                 StringBuilder sb = new StringBuilder();
                 foreach (char c in name.Normalize(NormalizationForm.FormD))
@@ -269,7 +271,7 @@ namespace GroceryStore
 
             string[] checkString = { name, type, shelflife, shipment, supplier, image };
             int[] checkInt = { amount, price };
-            if (this.checkIntInput(checkInt) && this.checkStringInput(checkString))
+            if (this.checkIntInput(checkInt) && this.checkStringInput(checkString) && cbb_supplier.SelectedIndex != 0 && cbb_addtype.SelectedIndex != 0)
             {
                 BUS_Product bUS_Product = new BUS_Product();
                 if (lb_titilePage.Text == "Thêm sản phẩm")
@@ -288,9 +290,9 @@ namespace GroceryStore
                 txb_addNamePro.Text = "";
                 txb_addAmount.Text = "";
                 txb_addPrice.Text = "";
-                cbb_addtype.Text = "";
+                cbb_addtype.SelectedIndex = 0;
                 txb_shipment.Text = "";
-                cbb_supplier.Text = "";
+                cbb_supplier.SelectedIndex = 0;
                 ptb_addImagePro.Image = null;
             }
             else

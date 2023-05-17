@@ -282,7 +282,7 @@
             btn_mngStaff.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btn_mngStaff.Size = new Size(196, 53);
             btn_mngStaff.TabIndex = 14;
-            btn_mngStaff.Text = "Quản lý nhân viên";
+            btn_mngStaff.Text = "Quản lí nhân viên";
             btn_mngStaff.TextAlign = HorizontalAlignment.Left;
             btn_mngStaff.Click += btn_mngStaff_Click;
             // 
@@ -397,7 +397,7 @@
             btn_mgmProductPage.ShadowDecoration.CustomizableEdges = customizableEdges12;
             btn_mgmProductPage.Size = new Size(196, 53);
             btn_mgmProductPage.TabIndex = 8;
-            btn_mgmProductPage.Text = "Quản lý sản phẩm";
+            btn_mgmProductPage.Text = "Quản lí sản phẩm";
             btn_mgmProductPage.TextAlign = HorizontalAlignment.Left;
             btn_mgmProductPage.Click += mgmProductPage_Click;
             // 
@@ -1198,7 +1198,7 @@
             cbb_addtype.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             cbb_addtype.ForeColor = Color.Black;
             cbb_addtype.ItemHeight = 30;
-            cbb_addtype.Items.AddRange(new object[] { "DA", "DU", "DAV", "DGD" });
+            cbb_addtype.Items.AddRange(new object[] { "Chọn loại", "DA", "DU", "DAV", "DGD" });
             cbb_addtype.Location = new Point(20, 69);
             cbb_addtype.Name = "cbb_addtype";
             cbb_addtype.ShadowDecoration.CustomizableEdges = customizableEdges42;
@@ -1218,7 +1218,7 @@
             cbb_supplier.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             cbb_supplier.ForeColor = Color.FromArgb(68, 88, 112);
             cbb_supplier.ItemHeight = 30;
-            cbb_supplier.Items.AddRange(new object[] { "Cocacola", "Oishi", "Pepsi", "NumberOne", "Circle K" });
+            cbb_supplier.Items.AddRange(new object[] { "Chọn nhà sản xuất", "Cocacola", "Oishi", "Pepsi", "NumberOne", "Circle K" });
             cbb_supplier.Location = new Point(20, 69);
             cbb_supplier.Name = "cbb_supplier";
             cbb_supplier.ShadowDecoration.CustomizableEdges = customizableEdges44;
